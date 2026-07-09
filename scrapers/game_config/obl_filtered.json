@@ -1,0 +1,6042 @@
+[
+  {
+    "row": 1,
+    "cells": [
+      {
+        "col": "Q",
+        "val": "Broń 1",
+        "formula": ""
+      },
+      {
+        "col": "Z",
+        "val": "Karty Broń 1",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 2,
+    "cells": [
+      {
+        "col": "C",
+        "val": "Wartość dla karty",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "ile",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": " akcję przeciwnika (skierowaną przeciw tobie)",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "Zniwecz ",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Zasięg",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "Trafienie",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "Dmg",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "jedną",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Wykonanie w turze",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Opis",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "Koszt w srebrnych monetach",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Ręce",
+        "formula": ""
+      },
+      {
+        "col": "Q",
+        "val": "kostki",
+        "formula": ""
+      },
+      {
+        "col": "R",
+        "val": "liczba",
+        "formula": ""
+      },
+      {
+        "col": "U",
+        "val": "akcje",
+        "formula": ""
+      },
+      {
+        "col": "V",
+        "val": "czy użyta?",
+        "formula": ""
+      },
+      {
+        "col": "Z",
+        "val": "Karta 1",
+        "formula": ""
+      },
+      {
+        "col": "AB",
+        "val": "Użyta",
+        "formula": ""
+      },
+      {
+        "col": "AC",
+        "val": "0",
+        "formula": "Ekwipunek!O20"
+      },
+      {
+        "col": "AD",
+        "val": "Karta 2",
+        "formula": ""
+      },
+      {
+        "col": "AF",
+        "val": "Użyta",
+        "formula": ""
+      },
+      {
+        "col": "AG",
+        "val": "0",
+        "formula": "Ekwipunek!S20"
+      },
+      {
+        "col": "AH",
+        "val": "Karta 3",
+        "formula": ""
+      },
+      {
+        "col": "AJ",
+        "val": "Użyta",
+        "formula": ""
+      },
+      {
+        "col": "AK",
+        "val": "0",
+        "formula": "Ekwipunek!W20"
+      },
+      {
+        "col": "AL",
+        "val": "Karta 4",
+        "formula": ""
+      },
+      {
+        "col": "AN",
+        "val": "Użyta",
+        "formula": ""
+      },
+      {
+        "col": "AO",
+        "val": "0",
+        "formula": "Ekwipunek!AA20"
+      }
+    ]
+  },
+  {
+    "row": 3,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Ręce",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "4",
+        "formula": "COUNT(C3:C6)"
+      },
+      {
+        "col": "E",
+        "val": "Prosty",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "0.5",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Zwykły, chamski atak",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Topór",
+        "formula": ""
+      },
+      {
+        "col": "Q",
+        "val": "0",
+        "formula": "OFFSET(_xlfn.XLOOKUP(Ekwipunek!H8,Obl!$B$3:$B$94,Obl!$C$3:$C$94),0,0,_xlfn.XLOOKUP(Ekwipunek!H8,Obl!$B$3:$B$94,$D$3:$D$94))"
+      },
+      {
+        "col": "R",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "T",
+        "val": "karta 1",
+        "formula": ""
+      },
+      {
+        "col": "U",
+        "val": "0.5",
+        "formula": "Ekwipunek!O27"
+      },
+      {
+        "col": "V",
+        "val": "0",
+        "formula": "Ekwipunek!O20"
+      },
+      {
+        "col": "W",
+        "val": "0",
+        "formula": "IF(V3=TRUE,U3,0)"
+      },
+      {
+        "col": "Z",
+        "val": "Wyrzucona kostka",
+        "formula": ""
+      },
+      {
+        "col": "AB",
+        "val": "0",
+        "formula": "Ekwipunek!N21"
+      },
+      {
+        "col": "AD",
+        "val": "Wyrzucona kostka",
+        "formula": ""
+      },
+      {
+        "col": "AF",
+        "val": "7",
+        "formula": "Ekwipunek!R21"
+      },
+      {
+        "col": "AH",
+        "val": "Wyrzucona kostka",
+        "formula": ""
+      },
+      {
+        "col": "AJ",
+        "val": "0",
+        "formula": "Ekwipunek!V21"
+      },
+      {
+        "col": "AL",
+        "val": "Wyrzucona kostka",
+        "formula": ""
+      },
+      {
+        "col": "AN",
+        "val": "0",
+        "formula": "Ekwipunek!Z21"
+      }
+    ]
+  },
+  {
+    "row": 4,
+    "cells": [
+      {
+        "col": "C",
+        "val": "3",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Sierpowy",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "0.5",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "str+dex",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Twój dex wlicza się do wyrzuconej kostki na trafienie (np. 17+3dex = kryt)",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Miecz",
+        "formula": ""
+      },
+      {
+        "col": "Q",
+        "val": "3",
+        "formula": null
+      },
+      {
+        "col": "R",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "T",
+        "val": "karta 2",
+        "formula": ""
+      },
+      {
+        "col": "U",
+        "val": null,
+        "formula": "Ekwipunek!S27"
+      },
+      {
+        "col": "V",
+        "val": "0",
+        "formula": "Ekwipunek!S20"
+      },
+      {
+        "col": "W",
+        "val": "0",
+        "formula": "IF(V4=TRUE,U4,0)"
+      },
+      {
+        "col": "Z",
+        "val": "Prosty",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),4)"
+      },
+      {
+        "col": "AD",
+        "val": "Sierpowy",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),4)"
+      },
+      {
+        "col": "AH",
+        "val": "Prosty",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),4)"
+      },
+      {
+        "col": "AL",
+        "val": "Prosty",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),4)"
+      }
+    ]
+  },
+  {
+    "row": 5,
+    "cells": [
+      {
+        "col": "C",
+        "val": "8",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Kontra",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "0.5",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "zawsze",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Wroga",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Zniwecz ",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Buzdygan",
+        "formula": ""
+      },
+      {
+        "col": "Q",
+        "val": "8",
+        "formula": null
+      },
+      {
+        "col": "R",
+        "val": "2",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 6,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Łokieto",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza/Soj",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Odepchnij wroga 5ft w wybranym kierunku (save: d20+str>13+str) || Advantage na kolejny atak w cel tego ataku",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Włócznia",
+        "formula": ""
+      },
+      {
+        "col": "Q",
+        "val": "10",
+        "formula": null
+      },
+      {
+        "col": "R",
+        "val": "3",
+        "formula": ""
+      },
+      {
+        "col": "T",
+        "val": "karta 3",
+        "formula": ""
+      },
+      {
+        "col": "U",
+        "val": null,
+        "formula": "Ekwipunek!W27"
+      },
+      {
+        "col": "V",
+        "val": "0",
+        "formula": "Ekwipunek!W20"
+      },
+      {
+        "col": "W",
+        "val": "0",
+        "formula": null
+      },
+      {
+        "col": "Z",
+        "val": "Zwykły, chamski atak",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),11)"
+      },
+      {
+        "col": "AD",
+        "val": "Twój dex wlicza się do wyrzuconej kostki na trafienie (np. 17+3dex = kryt)",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),11)"
+      },
+      {
+        "col": "AH",
+        "val": "Zwykły, chamski atak",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),11)"
+      },
+      {
+        "col": "AL",
+        "val": "Zwykły, chamski atak",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),11)"
+      }
+    ]
+  },
+  {
+    "row": 7,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Topór",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "3",
+        "formula": "COUNT(C7:C9)"
+      },
+      {
+        "col": "E",
+        "val": "Cios",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d6+str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Niszczysz drewnianą tarczę wroga || Dezaktywujesz do końca tury inne tarcze",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "6",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Miecz długi",
+        "formula": ""
+      },
+      {
+        "col": "R",
+        "val": "4",
+        "formula": ""
+      },
+      {
+        "col": "T",
+        "val": "karta 4",
+        "formula": ""
+      },
+      {
+        "col": "U",
+        "val": null,
+        "formula": "Ekwipunek!AA27"
+      },
+      {
+        "col": "V",
+        "val": "0",
+        "formula": "Ekwipunek!AA20"
+      },
+      {
+        "col": "W",
+        "val": "0",
+        "formula": null
+      }
+    ]
+  },
+  {
+    "row": 8,
+    "cells": [
+      {
+        "col": "C",
+        "val": "5",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Ogłuszacz",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d8+str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza/Wroga",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Wróg twojego rozmiaru traci cały ruch || Cel tego ataku otrzymuje -4 do rzutów wszystkimi kostkami (save: d20+str>13+str)",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Topór dwuręczny",
+        "formula": ""
+      },
+      {
+        "col": "R",
+        "val": "5",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 9,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Rąbanie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1.5",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d12+2xdex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d6+str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "4",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Otrzymujesz 10ft ruchu (tylko raz)",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Miecz dwuręczny",
+        "formula": ""
+      },
+      {
+        "col": "R",
+        "val": "6",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 10,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Miecz",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "5",
+        "formula": "COUNT(C10:C14)"
+      },
+      {
+        "col": "E",
+        "val": "Cięcie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d6+1/2(dex+str)",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza/Soj",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Zwykły atak",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "15",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Młot dwuręczny",
+        "formula": ""
+      },
+      {
+        "col": "R",
+        "val": "7",
+        "formula": ""
+      },
+      {
+        "col": "Z",
+        "val": "Dmg",
+        "formula": ""
+      },
+      {
+        "col": "AA",
+        "val": "str",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),8)"
+      },
+      {
+        "col": "AB",
+        "val": "Akcja",
+        "formula": ""
+      },
+      {
+        "col": "AC",
+        "val": "0.5",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),5)"
+      },
+      {
+        "col": "AD",
+        "val": "Dmg",
+        "formula": ""
+      },
+      {
+        "col": "AE",
+        "val": "str+dex",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),8)"
+      },
+      {
+        "col": "AF",
+        "val": "Akcja",
+        "formula": ""
+      },
+      {
+        "col": "AG",
+        "val": "0.5",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),5)"
+      },
+      {
+        "col": "AH",
+        "val": "Dmg",
+        "formula": ""
+      },
+      {
+        "col": "AI",
+        "val": "str",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),8)"
+      },
+      {
+        "col": "AJ",
+        "val": "Akcja",
+        "formula": ""
+      },
+      {
+        "col": "AK",
+        "val": "0.5",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),5)"
+      },
+      {
+        "col": "AL",
+        "val": "Dmg",
+        "formula": ""
+      },
+      {
+        "col": "AM",
+        "val": "str",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),8)"
+      },
+      {
+        "col": "AN",
+        "val": "Akcja",
+        "formula": ""
+      },
+      {
+        "col": "AO",
+        "val": "0.5",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),5)"
+      }
+    ]
+  },
+  {
+    "row": 11,
+    "cells": [
+      {
+        "col": "C",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Blok",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "0.5",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "X",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "X",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Wroga",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "jedną",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Włócznia długa",
+        "formula": ""
+      },
+      {
+        "col": "Z",
+        "val": "Trafienie",
+        "formula": ""
+      },
+      {
+        "col": "AA",
+        "val": "d20+dex",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),7)"
+      },
+      {
+        "col": "AB",
+        "val": "Ilośc celów",
+        "formula": ""
+      },
+      {
+        "col": "AC",
+        "val": "1",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),9)"
+      },
+      {
+        "col": "AD",
+        "val": "Trafienie",
+        "formula": ""
+      },
+      {
+        "col": "AE",
+        "val": "d20+dex",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),7)"
+      },
+      {
+        "col": "AF",
+        "val": "Ilośc celów",
+        "formula": ""
+      },
+      {
+        "col": "AG",
+        "val": "1",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),9)"
+      },
+      {
+        "col": "AH",
+        "val": "Trafienie",
+        "formula": ""
+      },
+      {
+        "col": "AI",
+        "val": "d20+dex",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),7)"
+      },
+      {
+        "col": "AJ",
+        "val": "Ilośc celów",
+        "formula": ""
+      },
+      {
+        "col": "AK",
+        "val": "1",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),9)"
+      },
+      {
+        "col": "AL",
+        "val": "Trafienie",
+        "formula": ""
+      },
+      {
+        "col": "AM",
+        "val": "d20+dex",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),7)"
+      },
+      {
+        "col": "AN",
+        "val": "Ilośc celów",
+        "formula": ""
+      },
+      {
+        "col": "AO",
+        "val": "1",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),9)"
+      }
+    ]
+  },
+  {
+    "row": 12,
+    "cells": [
+      {
+        "col": "C",
+        "val": "5",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Cios w plecy",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d6+1/2(dex+str)",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Sojusznika",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Zaatakuj sonsiadującego przeciwnika, po atakau sojusznika ",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Morning star dwuręczny",
+        "formula": ""
+      },
+      {
+        "col": "Z",
+        "val": "Zasięg",
+        "formula": ""
+      },
+      {
+        "col": "AA",
+        "val": "Mele",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),6)"
+      },
+      {
+        "col": "AB",
+        "val": "Tura",
+        "formula": ""
+      },
+      {
+        "col": "AC",
+        "val": "Gracza",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),10)"
+      },
+      {
+        "col": "AD",
+        "val": "Zasięg",
+        "formula": ""
+      },
+      {
+        "col": "AE",
+        "val": "Mele",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),6)"
+      },
+      {
+        "col": "AF",
+        "val": "Tura",
+        "formula": ""
+      },
+      {
+        "col": "AG",
+        "val": "Gracza",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),10)"
+      },
+      {
+        "col": "AH",
+        "val": "Zasięg",
+        "formula": ""
+      },
+      {
+        "col": "AI",
+        "val": "Mele",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),6)"
+      },
+      {
+        "col": "AJ",
+        "val": "Tura",
+        "formula": ""
+      },
+      {
+        "col": "AK",
+        "val": "Gracza",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),10)"
+      },
+      {
+        "col": "AL",
+        "val": "Zasięg",
+        "formula": ""
+      },
+      {
+        "col": "AM",
+        "val": "Mele",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),6)"
+      },
+      {
+        "col": "AN",
+        "val": "Tura",
+        "formula": ""
+      },
+      {
+        "col": "AO",
+        "val": "Gracza",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),10)"
+      }
+    ]
+  },
+  {
+    "row": 13,
+    "cells": [
+      {
+        "col": "C",
+        "val": "7",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Pchnięcie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "5ft",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+2xdex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d8+1/2(dex+str)",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza/Soj",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Doskakujesz 5ft a następnie wykonujesz atak",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Halabarda",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 14,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Rozbrojenie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "X",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "X",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Sojusznka/Wro",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Zniwecz jedną akcje przeciniwka || Rozbrój wroga (save: d20+dex>d20+dex wroga)",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Kusza ręczna",
+        "formula": ""
+      },
+      {
+        "col": "Z",
+        "val": "Karty Broń 2",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 15,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Buzdygan",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "3",
+        "formula": "COUNT(C15:C17)"
+      },
+      {
+        "col": "E",
+        "val": "Cios",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20-2+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "2xstr",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Advantage na kolejny atak przeciwko trafionemu przeciwnikowi o mniejszym str od ciebie",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "5",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Kusza ciężka",
+        "formula": ""
+      },
+      {
+        "col": "Z",
+        "val": "Karta 1",
+        "formula": ""
+      },
+      {
+        "col": "AB",
+        "val": "Użyta",
+        "formula": ""
+      },
+      {
+        "col": "AC",
+        "val": "0",
+        "formula": "Ekwipunek!O32"
+      },
+      {
+        "col": "AD",
+        "val": "Karta 2",
+        "formula": ""
+      },
+      {
+        "col": "AF",
+        "val": "Użyta",
+        "formula": ""
+      },
+      {
+        "col": "AG",
+        "val": "0",
+        "formula": "Ekwipunek!S32"
+      },
+      {
+        "col": "AH",
+        "val": "Karta 3",
+        "formula": ""
+      },
+      {
+        "col": "AJ",
+        "val": "Użyta",
+        "formula": ""
+      },
+      {
+        "col": "AK",
+        "val": "0",
+        "formula": "Ekwipunek!W32"
+      },
+      {
+        "col": "AL",
+        "val": "Karta 4",
+        "formula": ""
+      },
+      {
+        "col": "AN",
+        "val": "Użyta",
+        "formula": ""
+      },
+      {
+        "col": "AO",
+        "val": "0",
+        "formula": "Ekwipunek!AA32"
+      }
+    ]
+  },
+  {
+    "row": 16,
+    "cells": [
+      {
+        "col": "C",
+        "val": "5",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Obuch",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20-4+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "3xstr",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Odbierz turę przeciwnikowi o str mniejszym od ciebie",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Łuk krótki",
+        "formula": ""
+      },
+      {
+        "col": "Q",
+        "val": "Broń 2",
+        "formula": ""
+      },
+      {
+        "col": "Z",
+        "val": "Wyrzucona kostka",
+        "formula": ""
+      },
+      {
+        "col": "AB",
+        "val": "0",
+        "formula": "Ekwipunek!N33"
+      },
+      {
+        "col": "AD",
+        "val": "Wyrzucona kostka",
+        "formula": ""
+      },
+      {
+        "col": "AF",
+        "val": "0",
+        "formula": "Ekwipunek!R33"
+      },
+      {
+        "col": "AH",
+        "val": "Wyrzucona kostka",
+        "formula": ""
+      },
+      {
+        "col": "AJ",
+        "val": "0",
+        "formula": "Ekwipunek!V33"
+      },
+      {
+        "col": "AL",
+        "val": "Wyrzucona kostka",
+        "formula": ""
+      },
+      {
+        "col": "AN",
+        "val": "0",
+        "formula": "Ekwipunek!Z33"
+      }
+    ]
+  },
+  {
+    "row": 17,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Łamacz",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20-6+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "4xstr",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Advantage na wszystkie ataki przeciwko trafionemu przeciwnikowi o mniejszym str od ciebie || Jeżeli nie trafisz, przeciwnik zostaje trafiony \"Ciosem\"",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Łuk długi",
+        "formula": ""
+      },
+      {
+        "col": "Q",
+        "val": "kostki",
+        "formula": ""
+      },
+      {
+        "col": "R",
+        "val": "liczba",
+        "formula": ""
+      },
+      {
+        "col": "U",
+        "val": "akcje",
+        "formula": ""
+      },
+      {
+        "col": "V",
+        "val": "czy użyta?",
+        "formula": ""
+      },
+      {
+        "col": "Z",
+        "val": "Prosty",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),4)"
+      },
+      {
+        "col": "AD",
+        "val": "Prosty",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),4)"
+      },
+      {
+        "col": "AH",
+        "val": "Prosty",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),4)"
+      },
+      {
+        "col": "AL",
+        "val": "Prosty",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),4)"
+      }
+    ]
+  },
+  {
+    "row": 18,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Włócznia",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "3",
+        "formula": "COUNT(C18:C20)"
+      },
+      {
+        "col": "E",
+        "val": "Pchnięcia",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "5ft",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d4+str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "3",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza/Wroga",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "W trakcie swojej tury możesz wykonac tylko jeden atak || Możesz wykonać tylko jeden atak na przeciwnika pozostajacego w twojej strefie kontrolii || Odpychasz wroga o 5ft (d20+str>13+str)",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "5",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Samopał",
+        "formula": ""
+      },
+      {
+        "col": "Q",
+        "val": "0",
+        "formula": "OFFSET(_xlfn.XLOOKUP(Ekwipunek!H9,Obl!$B$3:$B$94,Obl!$C$3:$C$94),0,0,_xlfn.XLOOKUP(Ekwipunek!H9,Obl!$B$3:$B$94,$D$3:$D$94))"
+      },
+      {
+        "col": "R",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "T",
+        "val": "karta 1",
+        "formula": ""
+      },
+      {
+        "col": "U",
+        "val": "0.5",
+        "formula": "Ekwipunek!O39"
+      },
+      {
+        "col": "V",
+        "val": "0",
+        "formula": "Ekwipunek!O32"
+      },
+      {
+        "col": "W",
+        "val": "0",
+        "formula": "IF(V18=TRUE,U18,0)"
+      },
+      {
+        "col": "Z",
+        "val": "Zwykły, chamski atak",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$16,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),11)"
+      },
+      {
+        "col": "AD",
+        "val": "Zwykły, chamski atak",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$16,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),11)"
+      },
+      {
+        "col": "AH",
+        "val": "Zwykły, chamski atak",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$16,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),11)"
+      },
+      {
+        "col": "AL",
+        "val": "Zwykły, chamski atak",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$16,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),11)"
+      }
+    ]
+  },
+  {
+    "row": 19,
+    "cells": [
+      {
+        "col": "C",
+        "val": "5",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Ściana włóczni",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "5ft",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d4+str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "3",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Sojusznika",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Aktywój \"Pchnięcia\" po tym jak twój sojusznik aktywóje \"Pchnięcia\"",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Muszkiet",
+        "formula": ""
+      },
+      {
+        "col": "Q",
+        "val": "3",
+        "formula": null
+      },
+      {
+        "col": "R",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "T",
+        "val": "karta 2",
+        "formula": ""
+      },
+      {
+        "col": "U",
+        "val": null,
+        "formula": "Ekwipunek!S39"
+      },
+      {
+        "col": "V",
+        "val": "0",
+        "formula": "Ekwipunek!S32"
+      },
+      {
+        "col": "W",
+        "val": "0",
+        "formula": "IF(V19=TRUE,U19,0)"
+      }
+    ]
+  },
+  {
+    "row": 20,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Przygotowanie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Wszystkie pchnięcia do końca następnej tury zadają d4+2xstr",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Oszczep",
+        "formula": ""
+      },
+      {
+        "col": "Q",
+        "val": "8",
+        "formula": null
+      },
+      {
+        "col": "R",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "T",
+        "val": "karta 3",
+        "formula": ""
+      },
+      {
+        "col": "U",
+        "val": null,
+        "formula": "Ekwipunek!W39"
+      },
+      {
+        "col": "V",
+        "val": "0",
+        "formula": "Ekwipunek!W32"
+      },
+      {
+        "col": "W",
+        "val": "0",
+        "formula": null
+      }
+    ]
+  },
+  {
+    "row": 21,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Miecz długi",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "3",
+        "formula": "COUNT(C21:C23)"
+      },
+      {
+        "col": "E",
+        "val": "Cięcie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d6+dex+str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Nie możesz używać innej broni jednoręcznej||zadaje 50% dmg potworą (jeśli rzut ponirzej 16)",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "25",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Toporek do rzucania",
+        "formula": ""
+      },
+      {
+        "col": "Q",
+        "val": "10",
+        "formula": null
+      },
+      {
+        "col": "R",
+        "val": "3",
+        "formula": ""
+      },
+      {
+        "col": "T",
+        "val": "karta 4",
+        "formula": ""
+      },
+      {
+        "col": "U",
+        "val": null,
+        "formula": "Ekwipunek!AA39"
+      },
+      {
+        "col": "V",
+        "val": "0",
+        "formula": "Ekwipunek!AA32"
+      },
+      {
+        "col": "W",
+        "val": "0",
+        "formula": null
+      }
+    ]
+  },
+  {
+    "row": 22,
+    "cells": [
+      {
+        "col": "C",
+        "val": "5",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Kontry",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Wroga",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Gdy przeciwnik nie trafi ataku wymierzonego w ciebie lub gdy zablokujesz atak przeciwnika, użyj \"Cięcia\" na przeciwniku",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Noże do rzucania",
+        "formula": ""
+      },
+      {
+        "col": "R",
+        "val": "4",
+        "formula": ""
+      },
+      {
+        "col": "Z",
+        "val": "Dmg",
+        "formula": ""
+      },
+      {
+        "col": "AA",
+        "val": "str",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),8)"
+      },
+      {
+        "col": "AB",
+        "val": "Akcja",
+        "formula": ""
+      },
+      {
+        "col": "AC",
+        "val": "0.5",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),5)"
+      },
+      {
+        "col": "AD",
+        "val": "Dmg",
+        "formula": ""
+      },
+      {
+        "col": "AE",
+        "val": "str",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),8)"
+      },
+      {
+        "col": "AF",
+        "val": "Akcja",
+        "formula": ""
+      },
+      {
+        "col": "AG",
+        "val": "0.5",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),5)"
+      },
+      {
+        "col": "AH",
+        "val": "Dmg",
+        "formula": ""
+      },
+      {
+        "col": "AI",
+        "val": "str",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),8)"
+      },
+      {
+        "col": "AJ",
+        "val": "Akcja",
+        "formula": ""
+      },
+      {
+        "col": "AK",
+        "val": "0.5",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),5)"
+      },
+      {
+        "col": "AL",
+        "val": "Dmg",
+        "formula": ""
+      },
+      {
+        "col": "AM",
+        "val": "str",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),8)"
+      },
+      {
+        "col": "AN",
+        "val": "Akcja",
+        "formula": ""
+      },
+      {
+        "col": "AO",
+        "val": "0.5",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),5)"
+      }
+    ]
+  },
+  {
+    "row": 23,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Ścięcie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "2d6+dex+str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Rzuć d4, w przypadku, gdy wyrzucisz 4, zabij przeciwnika swojego rozmiaru lub zadaj 3xdmg przeciwnikowi większemu od siebie",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Tarcza okrągła (drewniana)",
+        "formula": ""
+      },
+      {
+        "col": "R",
+        "val": "5",
+        "formula": ""
+      },
+      {
+        "col": "Z",
+        "val": "Trafienie",
+        "formula": ""
+      },
+      {
+        "col": "AA",
+        "val": "d20+dex",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),7)"
+      },
+      {
+        "col": "AB",
+        "val": "Ilośc celów",
+        "formula": ""
+      },
+      {
+        "col": "AC",
+        "val": "1",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),9)"
+      },
+      {
+        "col": "AD",
+        "val": "Trafienie",
+        "formula": ""
+      },
+      {
+        "col": "AE",
+        "val": "d20+dex",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),7)"
+      },
+      {
+        "col": "AF",
+        "val": "Ilośc celów",
+        "formula": ""
+      },
+      {
+        "col": "AG",
+        "val": "1",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),9)"
+      },
+      {
+        "col": "AH",
+        "val": "Trafienie",
+        "formula": ""
+      },
+      {
+        "col": "AI",
+        "val": "d20+dex",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),7)"
+      },
+      {
+        "col": "AJ",
+        "val": "Ilośc celów",
+        "formula": ""
+      },
+      {
+        "col": "AK",
+        "val": "1",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),9)"
+      },
+      {
+        "col": "AL",
+        "val": "Trafienie",
+        "formula": ""
+      },
+      {
+        "col": "AM",
+        "val": "d20+dex",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),7)"
+      },
+      {
+        "col": "AN",
+        "val": "Ilośc celów",
+        "formula": ""
+      },
+      {
+        "col": "AO",
+        "val": "1",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),9)"
+      }
+    ]
+  },
+  {
+    "row": 24,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Topór dwuręczny",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "3",
+        "formula": "COUNT(C24:C26)"
+      },
+      {
+        "col": "E",
+        "val": "Ścięcie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d12+2xstr",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Jeżeli po tym gdy zadasz obrażenia przeciwnikowi, gdy zostanie mu mniej niż 8 życia, ten zostaje zabity || Niszczysz drewnianą tarczę wroga || Dezaktywujesz do końca tury inne tarcz",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "45",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Tarcza migdałowata (drewniana)",
+        "formula": ""
+      },
+      {
+        "col": "R",
+        "val": "6",
+        "formula": ""
+      },
+      {
+        "col": "Z",
+        "val": "Zasięg",
+        "formula": ""
+      },
+      {
+        "col": "AA",
+        "val": "Mele",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),6)"
+      },
+      {
+        "col": "AB",
+        "val": "Tura",
+        "formula": ""
+      },
+      {
+        "col": "AC",
+        "val": "Gracza",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),10)"
+      },
+      {
+        "col": "AD",
+        "val": "Zasięg",
+        "formula": ""
+      },
+      {
+        "col": "AE",
+        "val": "Mele",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),6)"
+      },
+      {
+        "col": "AF",
+        "val": "Tura",
+        "formula": ""
+      },
+      {
+        "col": "AG",
+        "val": "Gracza",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),10)"
+      },
+      {
+        "col": "AH",
+        "val": "Zasięg",
+        "formula": ""
+      },
+      {
+        "col": "AI",
+        "val": "Mele",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),6)"
+      },
+      {
+        "col": "AJ",
+        "val": "Tura",
+        "formula": ""
+      },
+      {
+        "col": "AK",
+        "val": "Gracza",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),10)"
+      },
+      {
+        "col": "AL",
+        "val": "Zasięg",
+        "formula": ""
+      },
+      {
+        "col": "AM",
+        "val": "Mele",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),6)"
+      },
+      {
+        "col": "AN",
+        "val": "Tura",
+        "formula": ""
+      },
+      {
+        "col": "AO",
+        "val": "Gracza",
+        "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),10)"
+      }
+    ]
+  },
+  {
+    "row": 25,
+    "cells": [
+      {
+        "col": "C",
+        "val": "5",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Siekacz ",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "3",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d12+2xdex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d6+2str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "sąsiedzi",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Jeżeli po tym gdy zadasz obrażenia przeciwnikowi, gdy zostanie mu mniej niż 6 życia, ten zostanie zabity",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Puklerz (drewniany)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 26,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Gilotyna",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "5ft",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d12+2xstr",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Ataku nie można zablokować || Jeżeli po tym gdy zadasz obrażenia przeciwnikowi, gdy zostanie mu mniej niż 20 życia, ten zostaje zabity",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Tarcza rzymska (drewniana)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 27,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Miecz dwuręczny",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "4",
+        "formula": "COUNT(C27:C30)"
+      },
+      {
+        "col": "E",
+        "val": "Pchnięcie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "2d6+(dex+str)",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "3 w rzędzie",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Potężny atak na wprost",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "60",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Tarcza okrągła (żelazna)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 28,
+    "cells": [
+      {
+        "col": "C",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Cięcie z zamachu",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele/5ft",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "2d6+(dex+str)",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "3 w łuku",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Potężny atak w łuku",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Tarcza migdałowata (żelazna)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 29,
+    "cells": [
+      {
+        "col": "C",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Bloki",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele/5ft",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "3",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Wroga",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Zniwecz jedną akcję sonsiadującego przeciwnika (save: d20+2xdex>rzut na trafienie wroga) || Możliwe 3 użycia",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Puklerz (żelazny)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 30,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Przygotowanie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Sojusznika/Wro",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Użyj dowolną kartę miecza dwóręcznego",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Tarcza rzymska (żelazna)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 31,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Młot dwuręczny",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "3",
+        "formula": "COUNT(C31:C33)"
+      },
+      {
+        "col": "E",
+        "val": "Uderzenie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "5ft",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+1/2dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d12+2xstr",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Przeciwnik zostaje przesunięty na koniec turn ordera (save: d20+str>15+2xstr) ",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "30",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 32,
+    "cells": [
+      {
+        "col": "C",
+        "val": "6",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Trzęsienei ziemi",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "3",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "5ft",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d12+2xstr",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracz",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Zniwecz akcję istot sonsiadujących z polem ataku (save: d20+str>15+2xstr) || Istoty na sonsiadujących polach otrzymuja d4+str dmg",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 33,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Miażdżący cios",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "2d12+4xstr",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracz",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Spraw, że sąsiedzi przeciwnika mogą go raz zaatakować za darmo (save: d20+str>15+2xstr) ",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 34,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Włócznia długa",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "3",
+        "formula": "COUNT(C34:C36)"
+      },
+      {
+        "col": "E",
+        "val": "Pchnięcia",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "10ft",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d8+2xstr",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "3",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza/Wroga",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "W trakcie swojej tury możesz wykonac tylko jeden atak || Możesz wykonać tylko jeden atak na przeciwnika pozostajacego w twojej strefie kontrolii || Odpychasz wroga o 5ft (d20+str>13+str)",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "20",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 35,
+    "cells": [
+      {
+        "col": "C",
+        "val": "5",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Ściana włóczni",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "10ft",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d8+2xstr",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "3",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Sojusznika",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Aktywój \"Pchnięcia\" po tym jak twój sojusznik aktywóje \"Pchnięcia\"",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 36,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Przygotowanie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Wszystkie pchnięcia do końca następnej tury zadają d8+3xstr",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 37,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Morning star dwuręczny",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "4",
+        "formula": "COUNT(C37:C40)"
+      },
+      {
+        "col": "E",
+        "val": "Zamachy",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "5ft",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d8+1,5str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Odpycha 5ft || Możesz przerzucić 2 kostki w trakcie używania tej karty",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "25",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 38,
+    "cells": [
+      {
+        "col": "C",
+        "val": "3",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Złapanie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "10ft",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d6+str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Przewracasz i przeciągasz istotę 10ft w wybranym kierunku nie oddalając jej od siebie (save: d20+str>16+2str)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 39,
+    "cells": [
+      {
+        "col": "C",
+        "val": "6",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Szybkie uderzenia",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1.5",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "5ft",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d8+1,5str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "3",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Możesz przerzucić 6 kostek w trakcie użwania tej karty",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 40,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Złapanie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1.5",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "5ft",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d8+1,5str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "6",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Sojusznika",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Gdy sojusznik zaatakuje przeciwnika, możesz wykonać \"Zamachy\" || Sojusznik otrzymuje możliwość przerzucenia jednej ze swoich kostek w trakcie ataku",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 41,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Halabarda",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "4",
+        "formula": "COUNT(C41:C44)"
+      },
+      {
+        "col": "E",
+        "val": "Pchnięcie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "5ft",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d4+2xstr",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "3",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza/Wroga",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "W trakcie swojej tury możesz wykonac tylko jeden atak || Możesz wykonać tylko jeden atak na przeciwnika pozostajacego w twojej strefie kontrolii || Odpychasz wroga o 5ft (d20+str>13+2xstr)",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "75",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 42,
+    "cells": [
+      {
+        "col": "C",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Wbicie szpikulca",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "5ft",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+1/2dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d10+2xstr",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Przeciwnik zostaje przesunięty na koniec turn ordera (save: d20+str>15+2xstr) ",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 43,
+    "cells": [
+      {
+        "col": "C",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Przycągnięcie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "10ft",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+1/2dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d6+2xstr",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Przyciągasz istotę 10ft w wybranym kierunku (save: d20+str>16+2str)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 44,
+    "cells": [
+      {
+        "col": "C",
+        "val": "3",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Zamach toporem",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "5ft",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+1dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d8+2xstr",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Jeżeli po tym gdy zadasz obrażenia przeciwnikowi, gdy zostanie mu mniej niż 6 życia, ten zostaje zabity",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 45,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Kusza ręczna",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "4",
+        "formula": "COUNT(C45:C48)"
+      },
+      {
+        "col": "E",
+        "val": "Strzał",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "40/200",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d10+4",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Zwykły strzał (1 bełt)",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "25",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 46,
+    "cells": [
+      {
+        "col": "C",
+        "val": "4",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Strzał w brzuch",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "40/200",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+2xdex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d10+4",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Przebij mu żołądek (1 bełt)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 47,
+    "cells": [
+      {
+        "col": "C",
+        "val": "7",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Strzał w stópki",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "40/200",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d8+2",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Przeciwnik nie może się ruszyć w tej turze (1 bełt)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 48,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Strzał w głowę",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "40/200",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+1/2xdex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "2d10+8",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Z tego się nie pozbiera (1 bełt)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 49,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Kusza ciężka",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "4",
+        "formula": "COUNT(C49:C52)"
+      },
+      {
+        "col": "E",
+        "val": "Strzał",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "3",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "80/400",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "2d10+8",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Zwykly strzał (1 bełt)",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "80",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 50,
+    "cells": [
+      {
+        "col": "C",
+        "val": "4",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Przyczajenie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "80/400",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "2d10+8",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Wroga",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Gdy wróg pojawi się w twoim polu widzenie możesz wykonać \"Strzał\" (1 bełt)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 51,
+    "cells": [
+      {
+        "col": "C",
+        "val": "8",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Strzał przebijający",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "3",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "80/400",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+1/2dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "2d8+4",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "2 w rzędzie",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Strzał ale nie tylko cel dostanie  (1 bełt)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 52,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Strzał w głowę",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "3",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "80/400",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "3d10+12",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Twój dex wlicza się do wyrzuconej kostki na trafienie (np. 17+3dex = kryt)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 53,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Łuk krótki",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "3",
+        "formula": "COUNT(C53:C55)"
+      },
+      {
+        "col": "E",
+        "val": "Strzał",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "40/200",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d8+1/2str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "po udanym trafieniu w przeciwnika możesz otrzymać adv na kolejne trafienia w tego przeciwnika lub adv na dmg na tego przeciwnika w tej turze (1 strzała)",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "65",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 54,
+    "cells": [
+      {
+        "col": "C",
+        "val": "7",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Szybkie strzały",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1.5",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "30/200",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+1/2dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d6+1/2str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "3",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "po udanym trafieniu w przeciwnika możesz otrzymać adv na kolejne trafienia w tego przeciwnika lub adv na dmg na tego przeciwnika w tej turze (3 strzału)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 55,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Deszcz strzał",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "120",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d4+1/2str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "5 pól",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Istoty na wybranych pięciu sonsiadujących plach jeżeli nie uda im się save throw, otrzymują obrażenia krytyczne (save: d20+dex>14+dex) (8 strzał) ",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 56,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Łuk długi",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "3",
+        "formula": "COUNT(C56:C58)"
+      },
+      {
+        "col": "E",
+        "val": "Strzał",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "60/400",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d8+str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Twój dex wlicza się do wyrzuconej kostki na trafienie (np. 17+3dex = kryt) (1 strzała)",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "100",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 57,
+    "cells": [
+      {
+        "col": "C",
+        "val": "5",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Celny strzał",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "80/400",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+d4+2dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d8+1,5str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Twój dex wlicza się do wyrzuconej kostki na trafienie (np. 17+3dex = kryt) (1 strzała)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 58,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Strzał w oko",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "120/400",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "2d20+2d8+2dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d8+2str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Twój dex wlicza się do wyrzuconej kostki na trafienie (np. 17+3dex = kryt) || Jeżeli twój wynik na trafienie będzie większy niż 40, zadaj 4x obrażenia (1 strzała)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 59,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Samopał",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "3",
+        "formula": "COUNT(C59:C61)"
+      },
+      {
+        "col": "E",
+        "val": "Strzał",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "30/50",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d12+d4+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "3d6+6",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Zwykły strzał (1 kula)",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "150",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 60,
+    "cells": [
+      {
+        "col": "C",
+        "val": "5",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Kartacz",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "15",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "2d6+3",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "3 w łuku",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Istoty otrzymują obrażenia, jeżeli nie uda im się save throw (save: d20+str>16) (1 kula)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 61,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Strzał w łeb ",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+4dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "3d6+6",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Jeżeli trafisz, obrażenia są podwajane (1 kula)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 62,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Muszkiet",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "2",
+        "formula": "COUNT(C62:C63)"
+      },
+      {
+        "col": "E",
+        "val": "Strzał",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "30/120",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d12+d4+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "8d6+12",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Zwykły strzał (1 kula)",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "300",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 63,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Kulka w łeb",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "60/120",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "2d12+2xdex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "10d6+12",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Zwykły strzał, ale celniejszy (1 kula)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 64,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Oszczep",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "3",
+        "formula": "COUNT(C64:C66)"
+      },
+      {
+        "col": "E",
+        "val": "Rzut/pchnięcie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "15/30/Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d8+str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Zmniejsza ruch wroga o 15ft, w następnej turze",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "5",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 65,
+    "cells": [
+      {
+        "col": "C",
+        "val": "5",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Przebicie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "15/Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d8+str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "2 w rzędzie",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Potężne pchnięcie lub rzut z bliska w przeciwnika",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 66,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Szybki rzut",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "15/30",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d8+str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Wroga",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Wykonaj atak gdy przeciwnik wejdzie w zasięg twojego rzutu || Zmniejsza ruch wroga o 15ft, w tej turze",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 67,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Toporek do rzucania",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "3",
+        "formula": "COUNT(C67:C69)"
+      },
+      {
+        "col": "E",
+        "val": "Rzut/zamach",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "0.75",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "20/40/Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d4+1/2str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Zwykły atak toporkiem",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "4",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 68,
+    "cells": [
+      {
+        "col": "C",
+        "val": "5",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Szybkie ataki",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1.5",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "20/40/Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d4+1/2str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "2",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Otrzymujesz dwie karty \"Rzutu/zamachu\"",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 69,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Sieczka",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1.5",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+2xdex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d4+str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "6",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Wykonujesz ataki w wroga, do momentu w którym któryś z nich nie trafi lub gdy wykonasz ich 6",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 70,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Noże do rzucania",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "3",
+        "formula": "COUNT(C70:C72)"
+      },
+      {
+        "col": "E",
+        "val": "Rzut/Pchnięcie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "25/50/Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d4+1/2dex",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Zwykły atak sztyletem",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "3",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 71,
+    "cells": [
+      {
+        "col": "C",
+        "val": "5",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Szybkie ataki",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "25/50/Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d4+1/2dex",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "3",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Otrzymujesz 3 karty \"Rzutu/Pchnięcia\"",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 72,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Nawałnica ostrzy",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1.5",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "25/50",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d4",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "X",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Możesz wykonać rzuty wszsytkimi wyjętymi przez ciebie nożami",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 73,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Tarcza okrągła (drewniana)",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "3",
+        "formula": "COUNT(C73:C75)"
+      },
+      {
+        "col": "E",
+        "val": "Blok/Pchnięcie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d6+str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza/Wroga",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+4<dmg wroga --> tarcza zostaje niszczona)",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "5",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 74,
+    "cells": [
+      {
+        "col": "C",
+        "val": "5",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Pozycja obronna",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza/Soj",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Możesz zablokować 2 ataki wroga (d20+4<dmg wroga --> tarcza zostaje niszczona)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 75,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Szarża",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d6+2xstr",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Otrzymuejsz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 76,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Tarcza migdałowata (drewniana)",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "3",
+        "formula": "COUNT(C76:C78)"
+      },
+      {
+        "col": "E",
+        "val": "Blok/Pchnięcie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d4+str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza/Wroga",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+6<dmg wroga --> tarcza zostaje niszczona)",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "5",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 77,
+    "cells": [
+      {
+        "col": "C",
+        "val": "5",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Pozycja obronna",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza/Soj",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Możesz zablokować 2 ataki wroga wymierzone w ciebie lub sojusznika (d20+6<dmg wroga --> tarcza zostaje niszczona)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 78,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Szarża",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d4+2xstr",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Otrzymuejsz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 79,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Puklerz (drewniany)",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "2",
+        "formula": "COUNT(C79:C80)"
+      },
+      {
+        "col": "E",
+        "val": "Blok/Cios",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d4+2xstr",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza/Wroga",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+12<dmg wroga --> tarcza zostaje niszczona)",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "3",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 80,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Mistrz uników",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Do końca walki otrzymuejsz +2ac",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 81,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Tarcza rzymska (drewniana)",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "3",
+        "formula": "COUNT(C81:C83)"
+      },
+      {
+        "col": "E",
+        "val": "Blok/Cios",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d4+1/2str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza/Wroga",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+8<dmg wroga --> tarcza zostaje niszczona)",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "10",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 82,
+    "cells": [
+      {
+        "col": "C",
+        "val": "6",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Drewniana ściana",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza/Soj",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Możesz zablokować 3 ataki wroga wymierzone w ciebie lub sojusznika (d20+8<dmg wroga --> tarcza zostaje niszczona)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 83,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Nieporuszalny obiekt",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Możesz zablokować wszystke ataki wroga wymierzone w ciebie (d20+8<dmg wroga --> tarcza zostaje niszczona) || Wróg nie może wyjść z twojej strefy kontrolii ",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 84,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Tarcza okrągła (żelana)",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "3",
+        "formula": "COUNT(C84:C86)"
+      },
+      {
+        "col": "E",
+        "val": "Blok/Pchnięcie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d6+str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza/Wroga",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+8<dmg wroga --> tarcza zostaje niszczona)",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "50",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 85,
+    "cells": [
+      {
+        "col": "C",
+        "val": "5",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Pozycja obronna",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza/Soj",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Możesz zablokować 2 ataki wroga (d20+8<dmg wroga --> tarcza zostaje niszczona)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 86,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Szarża",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d6+2xstr",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Otrzymuejsz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 87,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Tarcza migdałowata (żelazna)",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "3",
+        "formula": "COUNT(C87:C89)"
+      },
+      {
+        "col": "E",
+        "val": "Blok/Pchnięcie",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d4+str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza/Wroga",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+12<dmg wroga --> tarcza zostaje niszczona)",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "50",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 88,
+    "cells": [
+      {
+        "col": "C",
+        "val": "5",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Pozycja obronna",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza/Soj",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Możesz zablokować 2 ataki wroga (d20+12<dmg wroga --> tarcza zostaje niszczona)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 89,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Szarża",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d4+2xstr",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Otrzymuejsz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 90,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Puklerz (żelazny)",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "2",
+        "formula": "COUNT(C90:C91)"
+      },
+      {
+        "col": "E",
+        "val": "Blok/Cios",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d4+2xstr",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza/Wroga",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+16<dmg wroga --> tarcza zostaje niszczona)",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "30",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 91,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Mistrz uników",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Do końca walki otrzymuejsz +2ac",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 92,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Tarcza rzymska (żelazna)",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "3",
+        "formula": "COUNT(C92:C94)"
+      },
+      {
+        "col": "E",
+        "val": "Blok/Cios",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Mele",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "d20+dex",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "d4+1/2str",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza/Wroga",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+12<dmg wroga --> tarcza zostaje niszczona)",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "100",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 93,
+    "cells": [
+      {
+        "col": "C",
+        "val": "5",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Drewniana ściana",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza/Soj",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Możesz zablokować 3 ataki wroga wymierzone w ciebie lub sojusznika (d20+12<dmg wroga --> tarcza zostaje niszczona)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 94,
+    "cells": [
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Nieporuszalny obiekt",
+        "formula": ""
+      },
+      {
+        "col": "F",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "K",
+        "val": "Gracza",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Możesz zablokować wszystke ataki wroga wymierzone w ciebie (d20+12<dmg wroga --> tarcza zostaje niszczona) || Wróg nie może wyjść z twojej strefy kontrolii ",
+        "formula": ""
+      }
+    ]
+  }
+]

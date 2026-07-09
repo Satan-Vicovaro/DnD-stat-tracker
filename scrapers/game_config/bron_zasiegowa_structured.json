@@ -1,0 +1,409 @@
+[
+  {
+    "name": "Oszczep",
+    "cost_silver": "5",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Rzut/pchnięcie",
+        "action_cost": "1",
+        "range": "15/30/Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d8+str",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Zmniejsza ruch wroga o 15ft, w następnej turze"
+      },
+      {
+        "card_value": "5",
+        "action_name": "Przebicie",
+        "action_cost": "1",
+        "range": "15/Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d8+str",
+        "targets": "2 w rzędzie",
+        "turn_execution": "Gracza",
+        "description": "Potężne pchnięcie lub rzut z bliska w przeciwnika"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Szybki rzut",
+        "action_cost": "0",
+        "range": "15/30",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d8+str",
+        "targets": "1",
+        "turn_execution": "Wroga",
+        "description": "Wykonaj atak gdy przeciwnik wejdzie w zasięg twojego rzutu || Zmniejsza ruch wroga o 15ft, w tej turze"
+      }
+    ]
+  },
+  {
+    "name": "Toporek do rzucania",
+    "cost_silver": "4",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Rzut/zamach",
+        "action_cost": "0.75",
+        "range": "20/40/Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d4+1/2str",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Zwykły atak toporkiem"
+      },
+      {
+        "card_value": "5",
+        "action_name": "Szybkie ataki",
+        "action_cost": "1.5",
+        "range": "20/40/Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d4+1/2str",
+        "targets": "2",
+        "turn_execution": "Gracza",
+        "description": "Otrzymujesz dwie karty \"Rzutu/zamachu\""
+      },
+      {
+        "card_value": "10",
+        "action_name": "Sieczka",
+        "action_cost": "1.5",
+        "range": "Mele",
+        "hit_roll": "d20+2xdex",
+        "damage_roll": "d4+str",
+        "targets": "6",
+        "turn_execution": "Gracza",
+        "description": "Wykonujesz ataki w wroga, do momentu w którym któryś z nich nie trafi lub gdy wykonasz ich 6"
+      }
+    ]
+  },
+  {
+    "name": "Noże do rzucania",
+    "cost_silver": "3",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Rzut/Pchnięcie",
+        "action_cost": "0",
+        "range": "25/50/Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d4+1/2dex",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Zwykły atak sztyletem"
+      },
+      {
+        "card_value": "5",
+        "action_name": "Szybkie ataki",
+        "action_cost": "1",
+        "range": "25/50/Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d4+1/2dex",
+        "targets": "3",
+        "turn_execution": "Gracza",
+        "description": "Otrzymujesz 3 karty \"Rzutu/Pchnięcia\""
+      },
+      {
+        "card_value": "10",
+        "action_name": "Nawałnica ostrzy",
+        "action_cost": "1.5",
+        "range": "25/50",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d4",
+        "targets": "X",
+        "turn_execution": "Gracza",
+        "description": "Możesz wykonać rzuty wszsytkimi wyjętymi przez ciebie nożami"
+      }
+    ]
+  },
+  {
+    "name": "Kusza ręczna",
+    "cost_silver": "25",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Strzał",
+        "action_cost": "2",
+        "range": "40/200",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d10+4",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Zwykły strzał (1 bełt)"
+      },
+      {
+        "card_value": "4",
+        "action_name": "Strzał w brzuch",
+        "action_cost": "2",
+        "range": "40/200",
+        "hit_roll": "d20+2xdex",
+        "damage_roll": "d10+4",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Przebij mu żołądek (1 bełt)"
+      },
+      {
+        "card_value": "7",
+        "action_name": "Strzał w stópki",
+        "action_cost": "2",
+        "range": "40/200",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d8+2",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Przeciwnik nie może się ruszyć w tej turze (1 bełt)"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Strzał w głowę",
+        "action_cost": "2",
+        "range": "40/200",
+        "hit_roll": "d20+1/2xdex",
+        "damage_roll": "2d10+8",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Z tego się nie pozbiera (1 bełt)"
+      }
+    ]
+  },
+  {
+    "name": "Kusza ciężka",
+    "cost_silver": "80",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Strzał",
+        "action_cost": "3",
+        "range": "80/400",
+        "hit_roll": "d20+dex",
+        "damage_roll": "2d10+8",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Zwykly strzał (1 bełt)"
+      },
+      {
+        "card_value": "4",
+        "action_name": "Przyczajenie",
+        "action_cost": "2",
+        "range": "80/400",
+        "hit_roll": "d20+dex",
+        "damage_roll": "2d10+8",
+        "targets": "1",
+        "turn_execution": "Wroga",
+        "description": "Gdy wróg pojawi się w twoim polu widzenie możesz wykonać \"Strzał\" (1 bełt)"
+      },
+      {
+        "card_value": "8",
+        "action_name": "Strzał przebijający",
+        "action_cost": "3",
+        "range": "80/400",
+        "hit_roll": "d20+1/2dex",
+        "damage_roll": "2d8+4",
+        "targets": "2 w rzędzie",
+        "turn_execution": "Gracza",
+        "description": "Strzał ale nie tylko cel dostanie  (1 bełt)"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Strzał w głowę",
+        "action_cost": "3",
+        "range": "80/400",
+        "hit_roll": "d20+dex",
+        "damage_roll": "3d10+12",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Twój dex wlicza się do wyrzuconej kostki na trafienie (np. 17+3dex = kryt)"
+      }
+    ]
+  },
+  {
+    "name": "bełt",
+    "cost_silver": "1",
+    "actions": []
+  },
+  {
+    "name": "bełt ciężki",
+    "cost_silver": "6",
+    "actions": []
+  },
+  {
+    "name": "płonący bełt",
+    "cost_silver": "4",
+    "actions": []
+  },
+  {
+    "name": "Łuk krótki",
+    "cost_silver": "65",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Strzał",
+        "action_cost": "1",
+        "range": "40/200",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d8+1/2str",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "po udanym trafieniu w przeciwnika możesz otrzymać adv na kolejne trafienia w tego przeciwnika lub adv na dmg na tego przeciwnika w tej turze (1 strzała)"
+      },
+      {
+        "card_value": "7",
+        "action_name": "Szybkie strzały",
+        "action_cost": "1.5",
+        "range": "30/200",
+        "hit_roll": "d20+1/2dex",
+        "damage_roll": "d6+1/2str",
+        "targets": "3",
+        "turn_execution": "Gracza",
+        "description": "po udanym trafieniu w przeciwnika możesz otrzymać adv na kolejne trafienia w tego przeciwnika lub adv na dmg na tego przeciwnika w tej turze (3 strzału)"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Deszcz strzał",
+        "action_cost": "2",
+        "range": "120",
+        "hit_roll": "",
+        "damage_roll": "d4+1/2str",
+        "targets": "5 pól",
+        "turn_execution": "Gracza",
+        "description": "Istoty na wybranych pięciu sonsiadujących plach jeżeli nie uda im się save throw, otrzymują obrażenia krytyczne (save: d20+dex>14+dex) (8 strzał)"
+      }
+    ]
+  },
+  {
+    "name": "Łuk długi",
+    "cost_silver": "100",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Strzał",
+        "action_cost": "2",
+        "range": "60/400",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d8+str",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Twój dex wlicza się do wyrzuconej kostki na trafienie (np. 17+3dex = kryt) (1 strzała)"
+      },
+      {
+        "card_value": "5",
+        "action_name": "Celny strzał",
+        "action_cost": "2",
+        "range": "80/400",
+        "hit_roll": "d20+d4+2dex",
+        "damage_roll": "d8+1,5str",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Twój dex wlicza się do wyrzuconej kostki na trafienie (np. 17+3dex = kryt) (1 strzała)"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Strzał w oko",
+        "action_cost": "2",
+        "range": "120/400",
+        "hit_roll": "2d20+2d8+2dex",
+        "damage_roll": "d8+2str",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Twój dex wlicza się do wyrzuconej kostki na trafienie (np. 17+3dex = kryt) || Jeżeli twój wynik na trafienie będzie większy niż 40, zadaj 4x obrażenia (1 strzała)"
+      }
+    ]
+  },
+  {
+    "name": "strzała",
+    "cost_silver": "1",
+    "actions": []
+  },
+  {
+    "name": "strzała giętka",
+    "cost_silver": "3",
+    "actions": []
+  },
+  {
+    "name": "płonąca strzała",
+    "cost_silver": "4",
+    "actions": []
+  },
+  {
+    "name": "Samopał",
+    "cost_silver": "150",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Strzał",
+        "action_cost": "1",
+        "range": "30/50",
+        "hit_roll": "d12+d4+dex",
+        "damage_roll": "3d6+6",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Zwykły strzał (1 kula)"
+      },
+      {
+        "card_value": "5",
+        "action_name": "Kartacz",
+        "action_cost": "1",
+        "range": "15",
+        "hit_roll": "",
+        "damage_roll": "2d6+3",
+        "targets": "3 w łuku",
+        "turn_execution": "Gracza",
+        "description": "Istoty otrzymują obrażenia, jeżeli nie uda im się save throw (save: d20+str>16) (1 kula)"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Strzał w łeb",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "d20+4dex",
+        "damage_roll": "3d6+6",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Jeżeli trafisz, obrażenia są podwajane (1 kula)"
+      }
+    ]
+  },
+  {
+    "name": "Muszkiet",
+    "cost_silver": "300",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Strzał",
+        "action_cost": "2",
+        "range": "30/120",
+        "hit_roll": "d12+d4+dex",
+        "damage_roll": "8d6+12",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Zwykły strzał (1 kula)"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Kulka w łeb",
+        "action_cost": "2",
+        "range": "60/120",
+        "hit_roll": "2d12+2xdex",
+        "damage_roll": "10d6+12",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Zwykły strzał, ale celniejszy (1 kula)"
+      }
+    ]
+  },
+  {
+    "name": "kula",
+    "cost_silver": "5",
+    "actions": []
+  },
+  {
+    "name": "amunicja rozbijająca",
+    "cost_silver": "10",
+    "actions": []
+  },
+  {
+    "name": "amunicja przeciwpancerna",
+    "cost_silver": "20",
+    "actions": []
+  }
+]
