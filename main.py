@@ -1,41 +1,30 @@
+import sys
+import logging
 import eel
-from models import Character
 
-# Initialize Eel and point it to the 'web' folder
-eel.init("web")
+# Configure basic logging for better debugging and structure
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logger = logging.getLogger(__name__)
 
-# Create our main character instance
-hero = Character(name="Kajzer", level=1)
-# Initialize some basic stats so they show up on the UI
-hero.stats.base_str = 5
-hero.stats.base_dex = 5
-hero.stats.base_wis = 5
-hero.stats.base_cha = 5
+# Import API endpoints so Eel registers them
+import api
 
+def main():
+    """Main application entry point."""
+    logger.info("Initializing Eel application...")
+    eel.init("web")
 
-@eel.expose
-def get_character():
-    """
-    Returns a dictionary of character data.
-    """
-    return {
-        "name": hero.name,
-        "level": hero.level,
-        "hp": hero.current_hp,
-        "max_hp": hero.max_hp,
-        "defense": hero.defense,
-        "ap": hero.max_action_points,
-        "stamina": hero.max_stamina,
-        "stats": {
-            "str": hero.stats.str,
-            "dex": hero.stats.dex,
-            "wis": hero.stats.wis,
-            "cha": hero.stats.cha,
-        },
-    }
+    try:
+        logger.info("Starting UI window...")
+        # Start the app. It opens index.html in a native-looking window.
+        eel.start("index.html", size=(800, 600))
+    except (SystemExit, KeyboardInterrupt):
+        logger.info("Application closing gracefully.")
+        sys.exit(0)
+    except Exception as e:
+        logger.error(f"Unexpected error: {e}", exc_info=True)
+        sys.exit(1)
 
 
 if __name__ == "__main__":
-    print("Starting Eel App...")
-    # Start the app. It opens index.html in a native-looking window.
-    eel.start("index.html", size=(800, 600))
+    main()
