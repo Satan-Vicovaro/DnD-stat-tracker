@@ -3,6 +3,51 @@ from dataclasses import dataclass, field
 from typing import List, Optional, Dict
 import json
 import os
+from abc import ABC, abstractmethod
+
+@dataclass
+class Modifier:
+    source: str
+    stat_name: str
+    value: float
+    mod_type: str = "ADD"
+
+class ModifierProvider(ABC):
+    @abstractmethod
+    def get_modifiers(self, character=None) -> List[Modifier]:
+        pass
+
+class StatManager:
+    def __init__(self, character):
+        self.character = character
+        self.providers: List[ModifierProvider] = []
+        
+    def add_provider(self, provider: ModifierProvider):
+        if provider not in self.providers:
+            self.providers.append(provider)
+            
+    def get_stat_breakdown(self, stat_name: str, base_value: float = 0.0) -> Dict:
+        modifiers = []
+        for provider in self.providers:
+            modifiers.extend([m for m in provider.get_modifiers(self.character) if m.stat_name == stat_name])
+            
+        aggregated = {}
+        for mod in modifiers:
+            if mod.source not in aggregated:
+                aggregated[mod.source] = 0.0
+            aggregated[mod.source] += mod.value
+            
+        breakdown = [
+            {"source": source, "value": round(val, 2)} 
+            for source, val in aggregated.items() if round(val, 2) != 0
+        ]
+        
+        total = base_value + sum(item["value"] for item in breakdown)
+        
+        return {
+            "total": round(total, 2) if total % 1 != 0 else int(total),
+            "breakdown": breakdown
+        }
 
 @dataclass
 class ArmorType:
@@ -16,7 +61,7 @@ class ArmorType:
         return self.quantity * self.space_per_fragment
 
 @dataclass
-class ArmorState:
+class ArmorState(ModifierProvider):
     max_space: int = 24
     types: Dict[str, ArmorType] = field(default_factory=dict)
 
@@ -27,6 +72,36 @@ class ArmorState:
     @property
     def remaining_space(self) -> int:
         return self.max_space - self.total_used_space
+
+    def get_modifiers(self, character=None) -> List[Modifier]:
+        mods = []
+        level_div = (character.level / 2.0) if character and character.level > 0 else 0.5
+        level_mult = (character.level / 2.0) if character else 0.5
+        
+        for name, armor in self.types.items():
+            if armor.quantity > 0:
+                source_name = f"Zbroja: {name}"
+                
+                hp = armor.effects.get("hp_per_fragment", 0.0) * armor.quantity
+                if hp != 0:
+                    mods.append(Modifier(source_name, "max_hp", hp))
+                
+                def_pen = armor.effects.get("defense_penalty", 0.0) * armor.quantity
+                if def_pen != 0:
+                    mods.append(Modifier(source_name, "defense", -(def_pen / level_div)))
+                    
+                ap_pen = armor.effects.get("ap_penalty", 0.0) * armor.quantity
+                if ap_pen != 0:
+                    mods.append(Modifier(source_name, "ap", -(ap_pen / level_div)))
+                    
+                stam_pen = armor.effects.get("stamina_penalty", 0.0) * armor.quantity
+                if stam_pen != 0:
+                    mods.append(Modifier(source_name, "stamina", -(stam_pen * level_mult)))
+                    
+                move_pen = armor.effects.get("movement_penalty", 0.0) * armor.quantity
+                if move_pen != 0:
+                    mods.append(Modifier(source_name, "movement", -move_pen))
+        return mods
 
 def load_armor_config(file_path: str = 'config/armor_config.json') -> ArmorState:
     state = ArmorState()
@@ -103,12 +178,46 @@ class CharacterStats:
         return self.base_cha + self.mod_cha
 
 
+class CharacterBaseProvider(ModifierProvider):
+    def get_modifiers(self, character) -> List[Modifier]:
+        mods = []
+        # max_hp
+        mods.append(Modifier("Baza", "max_hp", 10))
+        mods.append(Modifier("Poziom", "max_hp", (character.level - 1) * 2))
+        mods.append(Modifier("Siła", "max_hp", character.stats.str * 3))
+        
+        # defense
+        mods.append(Modifier("Baza", "defense", 10))
+        mods.append(Modifier("Poziom", "defense", (character.level - 1) * 0.8))
+        mods.append(Modifier("Zręczność", "defense", character.stats.dex))
+        
+        # ap
+        mods.append(Modifier("Baza", "ap", 1))
+        mods.append(Modifier("Poziom", "ap", character.level * 0.5 - 0.5))
+        mods.append(Modifier("Zręczność", "ap", character.stats.dex * 0.5))
+        
+        # stamina
+        mods.append(Modifier("Baza", "stamina", 1))
+        mods.append(Modifier("Poziom", "stamina", (character.level - 1) * 0.25))
+        mods.append(Modifier("Charyzma", "stamina", character.stats.cha * 0.25))
+        
+        # movement
+        mods.append(Modifier("Baza", "movement", 30))
+        
+        return mods
+
+
 class Character:
     def __init__(self, name: str, level: int = 1):
         self.name = name
         self.level = level
         self.stats = CharacterStats()
         self.armor_state = load_armor_config()
+        
+        self.stat_manager = StatManager(self)
+        self.base_provider = CharacterBaseProvider()
+        self.stat_manager.add_provider(self.base_provider)
+        self.stat_manager.add_provider(self.armor_state)
         
         # Combat State
         self.damage_taken_physical: int = 0
@@ -138,10 +247,7 @@ class Character:
 
     @property
     def max_hp(self) -> int:
-        # Base 10 + (LVL-1)*2 + STR*3
-        base = 10 + (self.level - 1) * 2 + (self.stats.str * 3)
-        armor_bonus = sum(t.quantity * t.effects.get("hp_per_fragment", 0) for t in self.armor_state.types.values())
-        return int(base + armor_bonus)
+        return int(self.stat_manager.get_stat_breakdown("max_hp")["total"])
         
     @property
     def current_hp(self) -> int:
@@ -149,31 +255,19 @@ class Character:
 
     @property
     def defense(self) -> float:
-        # Base 10 + (LVL-1)*0.8 + DEX
-        base = 10 + (self.level - 1) * 0.8 + self.stats.dex
-        level_div = (self.level / 2.0) if self.level > 0 else 0.5
-        armor_penalty = sum(t.quantity * t.effects.get("defense_penalty", 0.0) for t in self.armor_state.types.values())
-        return base - (armor_penalty / level_div)
+        return self.stat_manager.get_stat_breakdown("defense")["total"]
 
     @property
     def max_action_points(self) -> float:
-        # Base 1 + (LVL*0.5 - 0.5) + DEX*0.5
-        base = 1 + (self.level * 0.5 - 0.5) + (self.stats.dex * 0.5)
-        level_div = (self.level / 2.0) if self.level > 0 else 0.5
-        armor_penalty = sum(t.quantity * t.effects.get("ap_penalty", 0.0) for t in self.armor_state.types.values())
-        return base - (armor_penalty / level_div)
+        return self.stat_manager.get_stat_breakdown("ap")["total"]
         
     @property
     def max_stamina(self) -> float:
-        # Base 1 + (LVL-1)*0.25 + CHA*0.25 (Rounded down or up based on rules, keeping raw float for now)
-        base = 1 + (self.level - 1) * 0.25 + (self.stats.cha * 0.25)
-        level_mult = (self.level / 2.0)
-        armor_penalty = sum(t.quantity * t.effects.get("stamina_penalty", 0.0) for t in self.armor_state.types.values())
-        return base - (armor_penalty * level_mult)
+        return self.stat_manager.get_stat_breakdown("stamina")["total"]
         
     @property
     def movement(self) -> int:
-        return self.base_movement  # Modifiers to be added based on armor/items
+        return int(self.stat_manager.get_stat_breakdown("movement")["total"])
         
     @property
     def max_inventory_space(self) -> float:

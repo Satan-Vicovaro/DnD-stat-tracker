@@ -27,3 +27,9 @@ def modify_armor_quantity(armor_name: str, delta: int):
     """API endpoint to modify armor fragments."""
     game_engine.modify_armor_quantity(armor_name, delta)
     return game_engine.get_character_view_model()
+
+@eel.expose
+def modify_level(delta: int):
+    """API endpoint to modify the character level."""
+    game_engine.modify_level(delta)
+    return game_engine.get_character_view_model()

@@ -24,11 +24,13 @@ class GameEngine:
         return {
             "name": self.hero.name,
             "level": self.hero.level,
+            "unspent_stat_points": self.hero.unspent_stat_points,
             "hp": self.hero.current_hp,
-            "max_hp": self.hero.max_hp,
-            "defense": self.hero.defense,
-            "ap": self.hero.max_action_points,
-            "stamina": self.hero.max_stamina,
+            "max_hp": self.hero.stat_manager.get_stat_breakdown("max_hp"),
+            "defense": self.hero.stat_manager.get_stat_breakdown("defense"),
+            "ap": self.hero.stat_manager.get_stat_breakdown("ap"),
+            "stamina": self.hero.stat_manager.get_stat_breakdown("stamina"),
+            "movement": self.hero.stat_manager.get_stat_breakdown("movement"),
             "stats": {
                 "str": self.hero.stats.str,
                 "dex": self.hero.stats.dex,
@@ -79,12 +81,32 @@ class GameEngine:
         self.hero.name = new_name
         logger.info(f"Hero name updated to: {new_name}")
 
+    def modify_level(self, delta: int) -> bool:
+        """Modifies character level by delta, minimum 1."""
+        if self.hero.level + delta < 1:
+            return False
+        self.hero.level += delta
+        logger.info(f"Hero level changed to {self.hero.level}")
+        return True
+
     def modify_stat(self, stat_name: str, delta: int):
         stat_attr = f"base_{stat_name}"
         if hasattr(self.hero.stats, stat_attr):
             current = getattr(self.hero.stats, stat_attr)
+            
+            # Prevent lowering below 0
+            if delta < 0 and current + delta < 0:
+                return False
+                
+            # Check if we have unspent points for additions
+            if delta > 0 and self.hero.unspent_stat_points < delta:
+                logger.warning("Not enough unspent stat points.")
+                return False
+                
             setattr(self.hero.stats, stat_attr, current + delta)
             logger.info(f"Hero stat {stat_name} modified by {delta}")
+            return True
+        return False
 
 
 # Singleton instance exported for use by APIs

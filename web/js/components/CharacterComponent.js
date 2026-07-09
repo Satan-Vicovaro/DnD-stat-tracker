@@ -22,12 +22,22 @@ export class CharacterComponent {
     }
 
     bindEvents() {
+        const container = document.getElementById(this.containerId);
+        
         // Name input
         this.nameInput = document.getElementById("char-name");
         this.nameInput.addEventListener("change", (e) => this.updateName(e.target.value));
 
+        // Level modifiers (+ and - buttons)
+        const lvlButtons = container.querySelectorAll("[data-action='modify-level']");
+        lvlButtons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                const delta = parseInt(btn.getAttribute("data-delta"));
+                this.modifyLevel(delta);
+            });
+        });
+
         // Stat modifiers (+ and - buttons)
-        const container = document.getElementById(this.containerId);
         const statButtons = container.querySelectorAll("[data-action='modify-stat']");
         
         statButtons.forEach(btn => {
@@ -49,14 +59,41 @@ export class CharacterComponent {
         this.render(char);
     }
 
+    async modifyLevel(delta) {
+        let char = await eel.modify_level(delta)();
+        this.render(char);
+    }
+
     render(char) {
         this.nameInput.value = char.name;
         document.getElementById("char-level").innerText = char.level;
+        document.getElementById("unspent-points").innerText = char.unspent_stat_points;
 
-        document.getElementById("char-hp").innerText = `${char.hp} / ${char.max_hp}`;
-        document.getElementById("char-def").innerText = Number.isInteger(char.defense) ? char.defense : char.defense.toFixed(1);
-        document.getElementById("char-ap").innerText = Number.isInteger(char.ap) ? char.ap : char.ap.toFixed(1);
-        document.getElementById("char-stam").innerText = Number.isInteger(char.stamina) ? char.stamina : char.stamina.toFixed(1);
+        // Render main numbers
+        document.getElementById("char-hp").innerText = `${char.hp} / ${char.max_hp.total}`;
+        document.getElementById("char-def").innerText = Number.isInteger(char.defense.total) ? char.defense.total : char.defense.total.toFixed(1);
+        document.getElementById("char-ap").innerText = Number.isInteger(char.ap.total) ? char.ap.total : char.ap.total.toFixed(1);
+        document.getElementById("char-stam").innerText = Number.isInteger(char.stamina.total) ? char.stamina.total : char.stamina.total.toFixed(1);
+        document.getElementById("char-move").innerText = char.movement.total;
+
+        // Helper to render breakdown tooltips
+        const renderBreakdown = (containerId, breakdownArray) => {
+            const container = document.getElementById(containerId);
+            container.innerHTML = breakdownArray.map(item => {
+                const colorClass = item.value >= 0 ? "text-emerald-400" : "text-rose-400";
+                const sign = item.value > 0 ? "+" : "";
+                return `<li class="flex justify-between">
+                          <span class="text-gray-400">${item.source}</span>
+                          <span class="${colorClass} font-semibold">${sign}${item.value}</span>
+                        </li>`;
+            }).join('');
+        };
+
+        renderBreakdown("breakdown-hp", char.max_hp.breakdown);
+        renderBreakdown("breakdown-def", char.defense.breakdown);
+        renderBreakdown("breakdown-ap", char.ap.breakdown);
+        renderBreakdown("breakdown-stam", char.stamina.breakdown);
+        renderBreakdown("breakdown-move", char.movement.breakdown);
 
         document.getElementById("stat-str").innerText = char.stats.str;
         document.getElementById("stat-dex").innerText = char.stats.dex;
