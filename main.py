@@ -9,6 +9,7 @@ logger = logging.getLogger(__name__)
 # Import API endpoints so Eel registers them
 import api
 
+
 def main():
     """Main application entry point."""
     logger.info("Initializing Eel application...")
@@ -17,7 +18,7 @@ def main():
     try:
         logger.info("Starting UI window...")
         # Start the app. It opens index.html in a native-looking window.
-        eel.start("index.html", size=(800, 600))
+        eel.start("index.html", size=(1920, 1080))
     except (SystemExit, KeyboardInterrupt):
         logger.info("Application closing gracefully.")
         sys.exit(0)

@@ -1,6 +1,49 @@
 import math
 from dataclasses import dataclass, field
 from typing import List, Optional, Dict
+import json
+import os
+
+@dataclass
+class ArmorType:
+    name: str
+    space_per_fragment: int
+    effects: Dict[str, float] = field(default_factory=dict)
+    quantity: int = 0
+
+    @property
+    def used_space(self) -> int:
+        return self.quantity * self.space_per_fragment
+
+@dataclass
+class ArmorState:
+    max_space: int = 24
+    types: Dict[str, ArmorType] = field(default_factory=dict)
+
+    @property
+    def total_used_space(self) -> int:
+        return sum(t.used_space for t in self.types.values())
+
+    @property
+    def remaining_space(self) -> int:
+        return self.max_space - self.total_used_space
+
+def load_armor_config(file_path: str = 'config/armor_config.json') -> ArmorState:
+    state = ArmorState()
+    if not os.path.exists(file_path):
+        return state
+        
+    with open(file_path, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+        
+    state.max_space = data.get("max_space", 24)
+    for name, info in data.get("types", {}).items():
+        state.types[name] = ArmorType(
+            name=name, 
+            space_per_fragment=info.get("space_per_fragment", 0),
+            effects=info.get("effects", {})
+        )
+    return state
 
 @dataclass
 class ActionCard:
@@ -65,6 +108,7 @@ class Character:
         self.name = name
         self.level = level
         self.stats = CharacterStats()
+        self.armor_state = load_armor_config()
         
         # Combat State
         self.damage_taken_physical: int = 0
@@ -95,7 +139,9 @@ class Character:
     @property
     def max_hp(self) -> int:
         # Base 10 + (LVL-1)*2 + STR*3
-        return 10 + (self.level - 1) * 2 + (self.stats.str * 3)
+        base = 10 + (self.level - 1) * 2 + (self.stats.str * 3)
+        armor_bonus = sum(t.quantity * t.effects.get("hp_per_fragment", 0) for t in self.armor_state.types.values())
+        return int(base + armor_bonus)
         
     @property
     def current_hp(self) -> int:
@@ -104,17 +150,26 @@ class Character:
     @property
     def defense(self) -> float:
         # Base 10 + (LVL-1)*0.8 + DEX
-        return 10 + (self.level - 1) * 0.8 + self.stats.dex
+        base = 10 + (self.level - 1) * 0.8 + self.stats.dex
+        level_div = (self.level / 2.0) if self.level > 0 else 0.5
+        armor_penalty = sum(t.quantity * t.effects.get("defense_penalty", 0.0) for t in self.armor_state.types.values())
+        return base - (armor_penalty / level_div)
 
     @property
     def max_action_points(self) -> float:
         # Base 1 + (LVL*0.5 - 0.5) + DEX*0.5
-        return 1 + (self.level * 0.5 - 0.5) + (self.stats.dex * 0.5)
+        base = 1 + (self.level * 0.5 - 0.5) + (self.stats.dex * 0.5)
+        level_div = (self.level / 2.0) if self.level > 0 else 0.5
+        armor_penalty = sum(t.quantity * t.effects.get("ap_penalty", 0.0) for t in self.armor_state.types.values())
+        return base - (armor_penalty / level_div)
         
     @property
     def max_stamina(self) -> float:
         # Base 1 + (LVL-1)*0.25 + CHA*0.25 (Rounded down or up based on rules, keeping raw float for now)
-        return 1 + (self.level - 1) * 0.25 + (self.stats.cha * 0.25)
+        base = 1 + (self.level - 1) * 0.25 + (self.stats.cha * 0.25)
+        level_mult = (self.level / 2.0)
+        armor_penalty = sum(t.quantity * t.effects.get("stamina_penalty", 0.0) for t in self.armor_state.types.values())
+        return base - (armor_penalty * level_mult)
         
     @property
     def movement(self) -> int:

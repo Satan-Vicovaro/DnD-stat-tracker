@@ -1,0 +1,45 @@
+{
+  "max_space": 24,
+  "types": {
+    "Skórzana": {
+      "space_per_fragment": 8,
+      "effects": {
+        "hp_per_fragment": 5,
+        "defense_penalty": 0,
+        "ap_penalty": 0,
+        "stamina_penalty": 0,
+        "movement_penalty": 0
+      }
+    },
+    "Półpłytowa": {
+      "space_per_fragment": 6,
+      "effects": {
+        "hp_per_fragment": 5,
+        "defense_penalty": 0.2,
+        "ap_penalty": 0.1,
+        "stamina_penalty": 0.25,
+        "movement_penalty": 1.0
+      }
+    },
+    "Płytowa": {
+      "space_per_fragment": 4,
+      "effects": {
+        "hp_per_fragment": 5,
+        "defense_penalty": 0.5,
+        "ap_penalty": 0.2,
+        "stamina_penalty": 0.5,
+        "movement_penalty": 1.5
+      }
+    },
+    "Stalowa": {
+      "space_per_fragment": 4,
+      "effects": {
+        "hp_per_fragment": 5,
+        "defense_penalty": 1.0,
+        "ap_penalty": 0.4,
+        "stamina_penalty": 0.5,
+        "movement_penalty": 2.0
+      }
+    }
+  }
+}

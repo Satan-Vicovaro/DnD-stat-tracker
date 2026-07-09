@@ -3,6 +3,7 @@ from models import Character
 
 logger = logging.getLogger(__name__)
 
+
 class GameEngine:
     """Core game engine managing state, rules, and logic."""
 
@@ -34,7 +35,45 @@ class GameEngine:
                 "wis": self.hero.stats.wis,
                 "cha": self.hero.stats.cha,
             },
+            "armor": {
+                "max_space": self.hero.armor_state.max_space,
+                "total_used_space": self.hero.armor_state.total_used_space,
+                "remaining_space": self.hero.armor_state.remaining_space,
+                "types": [
+                    {
+                        "name": t.name,
+                        "quantity": t.quantity,
+                        "space_per_fragment": t.space_per_fragment,
+                        "used_space": t.used_space,
+                    }
+                    for t in self.hero.armor_state.types.values()
+                ],
+            },
         }
+
+    def modify_armor_quantity(self, armor_name: str, delta: int) -> bool:
+        """Modifies armor quantity, checking space bounds. Returns True if successful."""
+        if armor_name not in self.hero.armor_state.types:
+            return False
+
+        armor_type = self.hero.armor_state.types[armor_name]
+
+        # Don't go below 0
+        if delta < 0 and armor_type.quantity + delta < 0:
+            return False
+
+        # Check max space constraint for additions
+        if delta > 0:
+            space_required = delta * armor_type.space_per_fragment
+            if self.hero.armor_state.remaining_space - space_required < 0:
+                logger.warning(f"Cannot equip {delta} {armor_name}: Not enough space.")
+                return False
+
+        armor_type.quantity += delta
+        logger.info(
+            f"Armor {armor_name} quantity changed by {delta}. New total: {armor_type.quantity}"
+        )
+        return True
 
     def update_name(self, new_name: str):
         self.hero.name = new_name
@@ -46,6 +85,7 @@ class GameEngine:
             current = getattr(self.hero.stats, stat_attr)
             setattr(self.hero.stats, stat_attr, current + delta)
             logger.info(f"Hero stat {stat_name} modified by {delta}")
+
 
 # Singleton instance exported for use by APIs
 game_engine = GameEngine()

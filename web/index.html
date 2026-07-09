@@ -9,11 +9,18 @@
     <!-- Include Eel JS bridge -->
     <script type="text/javascript" src="/eel.js"></script>
   </head>
-  <body class="bg-gray-900 text-gray-100 h-screen p-8 flex justify-center items-start font-sans selection:bg-indigo-500/30">
+  <body class="bg-gray-900 text-gray-100 min-h-screen p-8 font-sans selection:bg-indigo-500/30">
     
-    <!-- Character View Component will be dynamically loaded here -->
-    <div id="character-view-container">
-      <div class="text-center text-gray-500 mt-20 animate-pulse">Loading Application...</div>
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+        <!-- Character View Component -->
+        <div id="character-view-container">
+          <div class="text-center text-gray-500 mt-20 animate-pulse">Loading Character...</div>
+        </div>
+        
+        <!-- Armor View Component -->
+        <div id="armor-view-container">
+          <div class="text-center text-gray-500 mt-20 animate-pulse">Loading Armor Config...</div>
+        </div>
     </div>
 
     <!-- Main App Script -->

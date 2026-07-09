@@ -11,6 +11,11 @@ export class CharacterComponent {
 
         this.bindEvents();
 
+        // Listen for external updates (e.g., from ArmorComponent)
+        window.addEventListener('characterUpdated', (e) => {
+            this.render(e.detail);
+        });
+
         // Load initial data from backend
         let char = await eel.get_character()();
         this.render(char);
