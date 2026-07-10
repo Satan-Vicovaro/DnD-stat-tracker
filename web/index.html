@@ -33,6 +33,21 @@
           Cofnij
         </button>
 
+        <!-- Load Saves button -->
+        <button
+          id="btn-load-saves"
+          title="Wczytaj zapisaną grę"
+          class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold
+                 bg-indigo-900/40 text-indigo-300 border border-indigo-500/50
+                 transition-all duration-150 select-none cursor-pointer
+                 hover:bg-indigo-800/60 hover:text-white active:scale-95 ml-2"
+        >
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/>
+          </svg>
+          Wczytaj
+        </button>
+
         <!-- Redo button -->
         <button
           id="btn-redo"
@@ -52,7 +67,7 @@
         </button>
 
         <!-- Shortcut hints -->
-        <span class="text-gray-600 text-xs font-mono select-none">Ctrl+Z / Ctrl+Y</span>
+        <span class="text-gray-600 text-xs font-mono select-none">Ctrl+Z / Ctrl+Y | Ctrl+S Zapisz</span>
 
         <div class="flex-1"></div>
 
@@ -100,6 +115,7 @@
     <!-- Modals -->
     <div id="payment-modal-container"></div>
     <div id="item-editor-modal-container"></div>
+    <div id="saveload-modal-container"></div>
 
     <!-- Main App Script -->
     <script type="module" src="/js/app.js"></script>

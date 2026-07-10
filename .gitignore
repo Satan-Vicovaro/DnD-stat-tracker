@@ -1,3 +1,5 @@
 .venv
 __pycache__
 .idea
+quick_save.json
+saves

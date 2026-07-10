@@ -5,6 +5,7 @@ import { EconomyComponent } from './components/EconomyComponent.js';
 import { PaymentModal } from './components/PaymentModal.js';
 import { ItemEditorModal } from './components/ItemEditorModal.js';
 import { InventoryComponent } from './components/InventoryComponent.js';
+import { SaveLoadModal } from './components/SaveLoadModal.js';
 
 // ─── Undo / Redo Manager ─────────────────────────────────────────────────────
 
@@ -62,6 +63,9 @@ window.onload = async () => {
     window.itemEditorModal = new ItemEditorModal("item-editor-modal-container");
     await window.itemEditorModal.init();
 
+    window.saveLoadModal = new SaveLoadModal("saveload-modal-container");
+    await window.saveLoadModal.init();
+
     // Initialize the Character View Component
     const characterView = new CharacterComponent("character-view-container");
     characterView.init();
@@ -94,6 +98,10 @@ window.onload = async () => {
     undoManager.undoBtn.addEventListener('click', () => undoManager.performUndo());
     undoManager.redoBtn.addEventListener('click', () => undoManager.performRedo());
 
+    document.getElementById('btn-load-saves').addEventListener('click', () => {
+      window.saveLoadModal.open();
+    });
+
     // Keyboard shortcuts
     document.addEventListener('keydown', (e) => {
       if (undoManager._inTextField()) return;
@@ -109,6 +117,19 @@ window.onload = async () => {
       if ((e.ctrlKey || e.metaKey) && (e.key === 'y' || (e.key === 'z' && e.shiftKey))) {
         e.preventDefault();
         undoManager.performRedo();
+        return;
+      }
+
+      // Ctrl+S → Save
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+        (async () => {
+          const filename = await eel.create_named_save()();
+          if (filename) {
+            undoManager._showToast('Zapisano!', 'text-blue-400');
+          }
+        })();
+        return;
       }
     });
 
