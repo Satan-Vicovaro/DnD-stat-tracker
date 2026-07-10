@@ -8,6 +8,7 @@ export class ItemEditorModal {
     this.actions = [];
     this.willPay = false; // If true, process payment inline
     this.characterData = null;
+    this.originalName = "";
   }
 
   async init() {
@@ -17,6 +18,14 @@ export class ItemEditorModal {
     this.bindEvents();
   }
 
+  /** Shows/hides the Weapon-actions and Armor-details sections based on item type. */
+  _applyTypeVisibility(type) {
+    const actionsSection = document.getElementById('item-editor-actions-section');
+    const armorSection = document.getElementById('item-editor-armor-section');
+    actionsSection.classList.toggle('hidden', type !== 'Weapon');
+    armorSection.classList.toggle('hidden', type !== 'Armor');
+  }
+
   bindEvents() {
     document.getElementById('item-editor-modal-close').addEventListener('click', () => this.close());
     document.getElementById('item-editor-btn-cancel').addEventListener('click', () => this.close());
@@ -24,6 +33,18 @@ export class ItemEditorModal {
     document.getElementById('btn-add-modifier').addEventListener('click', () => {
       this.modifiers.push({ stat_name: 'max_hp', value: 1 });
       this.renderModifiers();
+    });
+
+    document.getElementById('btn-add-action').addEventListener('click', () => {
+      this.actions.push({
+        action_name: 'Nowa Akcja', action_cost: 1, card_value: 0,
+        range_str: '', hit_roll: '', damage_roll: '', description: ''
+      });
+      this.renderActions();
+    });
+
+    document.getElementById('item-editor-type').addEventListener('change', (e) => {
+      this._applyTypeVisibility(e.target.value);
     });
 
     document.getElementById('btn-item-buy').addEventListener('click', (e) => {
@@ -61,6 +82,7 @@ export class ItemEditorModal {
     this.modifiers = [];
     this.actions = [];
     this.willPay = false;
+    this.originalName = "";
 
     this.characterData = await eel.get_character()();
 
@@ -72,6 +94,11 @@ export class ItemEditorModal {
     document.getElementById('item-editor-type').value = "Misc";
     document.getElementById('item-editor-desc').value = "";
     document.getElementById('item-editor-space').value = "0";
+    document.getElementById('item-editor-actions-section').classList.add('hidden');
+    document.getElementById('item-editor-armor-section').classList.add('hidden');
+    document.getElementById('item-editor-armor-effect').value = "";
+    document.getElementById('item-editor-armor-uses').value = "";
+    document.getElementById('item-editor-armor-cost-type').value = "";
 
     // Reset payment fields
     document.getElementById('item-editor-gold').value = "0";
@@ -93,6 +120,7 @@ export class ItemEditorModal {
   async openEdit(index, itemData) {
     this.mode = 'edit';
     this.editIndex = index;
+    this.originalName = itemData.name || "";
     this.modifiers = JSON.parse(JSON.stringify(itemData.modifiers || []));
     this.actions = JSON.parse(JSON.stringify(itemData.actions || []));
     this.willPay = false;
@@ -107,8 +135,15 @@ export class ItemEditorModal {
     document.getElementById('item-editor-type').value = itemData.item_type || "Misc";
     document.getElementById('item-editor-desc').value = itemData.description || "";
     document.getElementById('item-editor-space').value = itemData.space_taken || "0";
+    
+    document.getElementById('item-editor-armor-effect').value = itemData.effect_value || "";
+    document.getElementById('item-editor-armor-uses').value = itemData.uses_durability || "";
+    document.getElementById('item-editor-armor-cost-type').value = itemData.cost_type || "";
+
+    this._applyTypeVisibility(itemData.item_type || 'Misc');
 
     this.renderModifiers();
+    this.renderActions();
     this.validatePayment();
     this.show();
   }
@@ -152,6 +187,69 @@ export class ItemEditorModal {
       el.addEventListener('click', (e) => {
         this.modifiers.splice(e.target.dataset.idx, 1);
         this.renderModifiers();
+      });
+    });
+  }
+
+  renderActions() {
+    const list = document.getElementById('item-editor-actions-list');
+
+    if (this.actions.length === 0) {
+      list.innerHTML = `<div class="text-gray-500 text-xs italic text-center py-2">Brak zdefiniowanych akcji</div>`;
+      return;
+    }
+
+    list.innerHTML = this.actions.map((act, i) => `
+      <div class="bg-gray-800 p-3 rounded border border-gray-600 shadow-sm relative">
+        <button class="act-del absolute top-2 right-2 text-red-400 hover:text-red-300 px-1 font-bold" data-idx="${i}">✕</button>
+        <div class="grid grid-cols-2 gap-2 mb-2 pr-6">
+          <div class="flex flex-col">
+            <label class="text-[10px] text-gray-400 uppercase font-bold">Nazwa</label>
+            <input type="text" class="act-val bg-gray-700 text-white text-xs rounded px-2 py-1 outline-none focus:border-indigo-500 border border-transparent" data-idx="${i}" data-field="action_name" value="${act.action_name || ''}">
+          </div>
+          <div class="flex flex-col">
+            <label class="text-[10px] text-emerald-400 uppercase font-bold">Koszt (AP)</label>
+            <input type="number" step="0.5" min="0" class="act-val bg-gray-700 text-white text-xs rounded px-2 py-1 outline-none border border-emerald-500/30" data-idx="${i}" data-field="action_cost" value="${act.action_cost || 0}">
+          </div>
+        </div>
+        <div class="grid grid-cols-4 gap-2 mb-2">
+          <div class="flex flex-col">
+            <label class="text-[10px] text-slate-400 uppercase font-bold">Odp</label>
+            <input type="number" class="act-val bg-gray-700 text-white text-xs rounded px-2 py-1 outline-none border border-transparent" data-idx="${i}" data-field="card_value" value="${act.card_value || 0}">
+          </div>
+          <div class="flex flex-col">
+            <label class="text-[10px] text-slate-400 uppercase font-bold">Zasięg</label>
+            <input type="text" class="act-val bg-gray-700 text-white text-xs rounded px-2 py-1 outline-none border border-transparent" data-idx="${i}" data-field="range_str" value="${act.range_str || ''}">
+          </div>
+          <div class="flex flex-col">
+            <label class="text-[10px] text-amber-400 uppercase font-bold">Hit Roll</label>
+            <input type="text" class="act-val bg-gray-700 text-white text-xs rounded px-2 py-1 outline-none border border-transparent" data-idx="${i}" data-field="hit_roll" value="${act.hit_roll || ''}">
+          </div>
+          <div class="flex flex-col">
+            <label class="text-[10px] text-rose-400 uppercase font-bold">Dmg Roll</label>
+            <input type="text" class="act-val bg-gray-700 text-white text-xs rounded px-2 py-1 outline-none border border-transparent" data-idx="${i}" data-field="damage_roll" value="${act.damage_roll || ''}">
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <label class="text-[10px] text-gray-400 uppercase font-bold">Opis</label>
+          <input type="text" class="act-val bg-gray-700 text-white text-xs rounded px-2 py-1 outline-none border border-transparent" data-idx="${i}" data-field="description" value="${act.description || ''}">
+        </div>
+      </div>
+    `).join('');
+
+    list.querySelectorAll('.act-val').forEach(el => {
+      el.addEventListener('input', (e) => {
+        const idx = e.target.dataset.idx;
+        const field = e.target.dataset.field;
+        let val = e.target.value;
+        if (e.target.type === 'number') val = parseFloat(val) || 0;
+        this.actions[idx][field] = val;
+      });
+    });
+    list.querySelectorAll('.act-del').forEach(el => {
+      el.addEventListener('click', (e) => {
+        this.actions.splice(e.target.dataset.idx, 1);
+        this.renderActions();
       });
     });
   }
@@ -201,14 +299,22 @@ export class ItemEditorModal {
   async handleSave() {
     if (this.willPay && !this.validatePayment()) return;
 
+    let inputName = document.getElementById('item-editor-name').value.trim();
+    if (!inputName) {
+      inputName = this.mode === 'edit' ? this.originalName : "Nowy Przedmiot";
+    }
+
     const itemData = {
-      name: document.getElementById('item-editor-name').value || "Nowy Przedmiot",
+      name: inputName,
       item_type: document.getElementById('item-editor-type').value,
       description: document.getElementById('item-editor-desc').value,
       space_taken: parseFloat(document.getElementById('item-editor-space').value) || 0.0,
       location: "BACKPACK", // Default to backpack for new items
       modifiers: this.modifiers,
-      actions: this.actions
+      actions: this.actions,
+      effect_value: document.getElementById('item-editor-armor-effect').value,
+      uses_durability: document.getElementById('item-editor-armor-uses').value,
+      cost_type: document.getElementById('item-editor-armor-cost-type').value
     };
 
     if (this.mode === 'edit') {

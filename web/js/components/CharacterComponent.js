@@ -56,18 +56,18 @@ export class CharacterComponent {
   }
 
   async updateName(newName) {
-    let char = await eel.update_name(newName)();
-    this.render(char);
+    const char = await eel.update_name(newName)();
+    document.dispatchEvent(new CustomEvent('characterUpdated', { detail: char }));
   }
 
   async modifyStat(statName, delta) {
-    let char = await eel.modify_stat(statName, delta)();
-    this.render(char);
+    const char = await eel.modify_stat(statName, delta)();
+    document.dispatchEvent(new CustomEvent('characterUpdated', { detail: char }));
   }
 
   async modifyLevel(delta) {
-    let char = await eel.modify_level(delta)();
-    this.render(char);
+    const char = await eel.modify_level(delta)();
+    document.dispatchEvent(new CustomEvent('characterUpdated', { detail: char }));
   }
 
   render(char) {

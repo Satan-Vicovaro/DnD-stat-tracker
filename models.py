@@ -6,6 +6,7 @@ import os
 from abc import ABC, abstractmethod
 from enum import Enum
 
+
 @dataclass
 class Modifier:
     source: str
@@ -143,7 +144,10 @@ class ActionCard:
 class ItemLocation(str, Enum):
     EQUIPPED = "EQUIPPED"
     BACKPACK = "BACKPACK"
+    BACK = "BACK"
+    QUIVER = "QUIVER"
     WAGON = "WAGON"
+
 
 @dataclass
 class Item:
@@ -231,6 +235,7 @@ class CharacterBaseProvider(ModifierProvider):
 
         return mods
 
+
 class ItemModifierProvider(ModifierProvider):
     def get_modifiers(self, character) -> List[Modifier]:
         mods = []
@@ -251,7 +256,7 @@ class Character:
         self.base_provider = CharacterBaseProvider()
         self.stat_manager.add_provider(self.base_provider)
         self.stat_manager.add_provider(self.armor_state)
-        
+
         self.item_provider = ItemModifierProvider()
         self.stat_manager.add_provider(self.item_provider)
 
@@ -306,26 +311,115 @@ class Character:
         return int(self.stat_manager.get_stat_breakdown("movement")["total"])
 
     @property
-    def max_inventory_space(self) -> float:
-        # Base is 20, can be expanded with items
-        base_space = 20.0
-        for item in self.inventory:
-            if item.location in (ItemLocation.BACKPACK, ItemLocation.EQUIPPED):
-                if item.name == "Ubrania z kieszeniami" or item.name == "Pasek z mocowaniem":
-                    base_space += 10.0
-        return base_space
+    def inventory_space(self) -> Dict[str, Dict[str, float]]:
+        has_quiver = False
+        quiver_item = None
+        has_pocket_clothes = False
+        pocket_clothes_item = None
+        has_attachment_belt = False
+        attachment_belt_item = None
+        backpack_bonus = 0.0
+        best_backpack_item = None
 
-    @property
-    def current_inventory_space(self) -> float:
-        used_space = 0.0
+        # Pass 1: Identify items that provide space bonuses
         for item in self.inventory:
-            if item.location in (ItemLocation.BACKPACK, ItemLocation.EQUIPPED):
-                used_space += item.space_taken
+            name_lower = item.name.lower()
+            loc = item.location
+
+            if (
+                name_lower in ("kołczan", "kolczan")
+                and loc == ItemLocation.QUIVER
+                and not has_quiver
+            ):
+                has_quiver = True
+                quiver_item = item
+            elif (
+                name_lower in ("ubranie z kieszeniami", "ubrania z kieszeniami")
+                and loc == ItemLocation.EQUIPPED
+                and not has_pocket_clothes
+            ):
+                has_pocket_clothes = True
+                pocket_clothes_item = item
+            elif (
+                name_lower == "pasek z mocowaniem"
+                and loc == ItemLocation.EQUIPPED
+                and not has_attachment_belt
+            ):
+                has_attachment_belt = True
+                attachment_belt_item = item
+            elif name_lower == "plecak" and loc == ItemLocation.BACKPACK:
+                if 10.0 > backpack_bonus:
+                    backpack_bonus = 10.0
+                    best_backpack_item = item
+            elif (
+                name_lower in ("plecak podróżnika", "plecak podroznika")
+                and loc == ItemLocation.BACKPACK
+            ):
+                if 20.0 > backpack_bonus:
+                    backpack_bonus = 20.0
+                    best_backpack_item = item
+
+        # Pass 2: Calculate used space, skipping the items that provide the bonuses
+        used_quick = 0.0
+        used_backpack = 0.0
+        used_back = 0.0
+        used_quiver = 0.0
+
+        exempt_items = {
+            id(quiver_item) if quiver_item else None,
+            id(pocket_clothes_item) if pocket_clothes_item else None,
+            id(attachment_belt_item) if attachment_belt_item else None,
+            id(best_backpack_item) if best_backpack_item else None,
+        }
+
+        for item in self.inventory:
+            if id(item) in exempt_items:
+                continue
+
+            if item.location == ItemLocation.EQUIPPED:
+                used_quick += item.space_taken
+            elif item.location == ItemLocation.BACKPACK:
+                used_backpack += item.space_taken
+            elif item.location == ItemLocation.BACK:
+                used_back += item.space_taken
+            elif item.location == ItemLocation.QUIVER:
+                used_quiver += item.space_taken
 
         # Coin weight: Złote*0.005 + Srebrne*0.004 + Miedziane*0.01
-        coin_weight = (self.gold * 0.005) + (self.silver * 0.004) + (self.copper * 0.01)
+        used_backpack += (self.gold * 0.005) + (self.silver * 0.004) + (self.copper * 0.01)
 
-        return used_space + coin_weight
+        # Calculate max capacities
+        max_quick = 20.0 + (self.stats.str * 2.0)
+        if has_pocket_clothes:
+            max_quick += 10.0
+        if has_attachment_belt:
+            max_quick += 10.0
+
+        max_backpack = 10.0 + (self.max_stamina * 4.0) + backpack_bonus
+        max_back = 20.0
+        max_quiver = 10.0 if has_quiver else 0.0
+
+        active_containers = {}
+        if quiver_item:
+            active_containers[id(quiver_item)] = 10.0
+        if pocket_clothes_item:
+            active_containers[id(pocket_clothes_item)] = 10.0
+        if attachment_belt_item:
+            active_containers[id(attachment_belt_item)] = 10.0
+        if best_backpack_item:
+            active_containers[id(best_backpack_item)] = backpack_bonus
+
+        return {
+            "quick": {"used": round(used_quick, 2), "max": round(max_quick, 2)},
+            "backpack": {"used": round(used_backpack, 2), "max": round(max_backpack, 2)},
+            "back": {"used": round(used_back, 2), "max": round(max_back, 2)},
+            "quiver": {
+                "used": round(used_quiver, 2),
+                "max": round(max_quiver, 2),
+                "visible": has_quiver,
+            },
+            "active_containers": active_containers,
+        }
 
     # --- Actions ---
 

@@ -43,33 +43,53 @@ export class InventoryComponent {
   render() {
     if (!this.characterData) return;
 
-    // Render Space Bar
-    const space = this.characterData.inventory_space;
-    if (space) {
-      const spaceText = document.getElementById('inventory-space-text');
-      const spaceBar = document.getElementById('inventory-space-bar');
+    const spaces = this.characterData.inventory_space;
+    if (spaces) {
+      // Helper to update a space bar
+      const updateBar = (idPrefix, spaceData, colorClass) => {
+        const spaceText = document.getElementById(`inventory-space-${idPrefix}-text`);
+        const spaceBar = document.getElementById(`inventory-space-${idPrefix}-bar`);
+        if (!spaceText || !spaceBar) return;
+        
+        spaceText.innerText = `${spaceData.used.toFixed(1)} / ${spaceData.max.toFixed(1)}`;
+        const pct = Math.min(100, Math.max(0, (spaceData.used / (spaceData.max || 1)) * 100));
+        spaceBar.style.width = `${pct}%`;
+        
+        // Remove existing colors
+        spaceBar.className = `h-2 rounded-full transition-all duration-500`;
+        spaceText.className = `font-mono text-sm font-bold`;
 
-      spaceText.innerText = `${space.used.toFixed(1)} / ${space.max.toFixed(1)}`;
+        if (spaceData.used > spaceData.max) {
+          spaceBar.classList.add('bg-red-500');
+          spaceText.classList.add('text-red-500');
+        } else {
+          spaceBar.classList.add(`bg-${colorClass}`);
+          spaceText.classList.add('text-white');
+        }
+      };
 
-      const pct = Math.min(100, Math.max(0, (space.used / space.max) * 100));
-      spaceBar.style.width = `${pct}%`;
-
-      if (space.used > space.max) {
-        spaceBar.classList.replace('bg-indigo-500', 'bg-red-500');
-        spaceText.classList.replace('text-white', 'text-red-500');
+      updateBar('quick', spaces.quick, 'emerald-500');
+      updateBar('backpack', spaces.backpack, 'indigo-500');
+      updateBar('back', spaces.back, 'blue-500');
+      
+      const quiverSection = document.getElementById('section-quiver');
+      if (spaces.quiver && spaces.quiver.visible) {
+        quiverSection.classList.remove('hidden');
+        updateBar('quiver', spaces.quiver, 'rose-500');
       } else {
-        spaceBar.classList.replace('bg-red-500', 'bg-indigo-500');
-        spaceText.classList.replace('text-red-500', 'text-white');
+        quiverSection.classList.add('hidden');
       }
     }
 
     // Render Lists
     const eqList = document.getElementById('inventory-list-equipped');
     const bpList = document.getElementById('inventory-list-backpack');
+    const backList = document.getElementById('inventory-list-back');
+    const quiverList = document.getElementById('inventory-list-quiver');
     const wgList = document.getElementById('inventory-list-wagon');
 
-    let eqHtml = "", bpHtml = "", wgHtml = "";
-    let eqCount = 0, bpCount = 0, wgCount = 0;
+    let eqHtml = "", bpHtml = "", backHtml = "", quiverHtml = "", wgHtml = "";
+    let eqCount = 0, bpCount = 0, backCount = 0, quiverCount = 0, wgCount = 0;
 
     const inventory = this.characterData.inventory || [];
 
@@ -77,16 +97,22 @@ export class InventoryComponent {
       const itemHtml = this.renderItemCard(item, index);
       if (item.location === "EQUIPPED") { eqHtml += itemHtml; eqCount++; }
       else if (item.location === "BACKPACK") { bpHtml += itemHtml; bpCount++; }
+      else if (item.location === "BACK") { backHtml += itemHtml; backCount++; }
+      else if (item.location === "QUIVER") { quiverHtml += itemHtml; quiverCount++; }
       else if (item.location === "WAGON") { wgHtml += itemHtml; wgCount++; }
     });
 
-    eqList.innerHTML = eqHtml;
-    bpList.innerHTML = bpHtml;
-    wgList.innerHTML = wgHtml;
+    if (eqList) eqList.innerHTML = eqHtml;
+    if (bpList) bpList.innerHTML = bpHtml;
+    if (backList) backList.innerHTML = backHtml;
+    if (quiverList) quiverList.innerHTML = quiverHtml;
+    if (wgList) wgList.innerHTML = wgHtml;
 
-    document.getElementById('inventory-empty-equipped').classList.toggle('hidden', eqCount > 0);
-    document.getElementById('inventory-empty-backpack').classList.toggle('hidden', bpCount > 0);
-    document.getElementById('inventory-empty-wagon').classList.toggle('hidden', wgCount > 0);
+    document.getElementById('inventory-empty-equipped')?.classList.toggle('hidden', eqCount > 0);
+    document.getElementById('inventory-empty-backpack')?.classList.toggle('hidden', bpCount > 0);
+    document.getElementById('inventory-empty-back')?.classList.toggle('hidden', backCount > 0);
+    document.getElementById('inventory-empty-quiver')?.classList.toggle('hidden', quiverCount > 0);
+    document.getElementById('inventory-empty-wagon')?.classList.toggle('hidden', wgCount > 0);
 
     // Bind item actions (Move, Edit, Drop)
     this.bindItemActions();
@@ -101,25 +127,38 @@ export class InventoryComponent {
     }
 
     const typeColor = item.item_type === "Weapon" ? "text-rose-400" : (item.item_type === "Armor" ? "text-emerald-400" : "text-gray-400");
+    const nameLower = (item.name || "").toLowerCase();
+
+    // Active Container logic
+    const isActive = item.is_active_container;
+    const borderClass = isActive ? "border-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.4)]" : "border-gray-700 shadow-sm";
+    const spaceText = isActive ? `<span class="text-amber-400 font-bold">Daje miejsce: ${item.granted_space}</span>` : `<span class="text-gray-500">Masa: ${item.space_taken}</span>`;
+    const activeBadge = isActive ? `<span class="bg-amber-900/80 text-amber-300 text-[9px] px-1.5 py-0.5 rounded border border-amber-500/50">AKTYWNE POJEMNOŚĆ</span>` : "";
+
+    const showQuiverOption = this.characterData.inventory_space?.quiver?.visible || item.location === "QUIVER" || nameLower === "kołczan" || nameLower === "kolczan";
 
     return `
-      <div class="bg-gray-800 rounded p-3 border border-gray-700 shadow-sm relative group/card">
+      <div class="bg-gray-800 rounded p-3 border ${borderClass} relative group/card transition-colors">
         <div class="flex justify-between items-start">
           <div class="flex-1 pr-2">
             <h4 class="font-bold text-white leading-tight">${item.name}</h4>
-            <div class="text-[10px] font-bold uppercase tracking-wider ${typeColor} mb-1">${item.item_type} &bull; <span class="text-gray-500">Masa: ${item.space_taken}</span></div>
+            <div class="text-[10px] font-bold uppercase tracking-wider ${typeColor} mb-1 flex items-center flex-wrap gap-1">
+                <span>${item.item_type}</span> <span class="text-gray-500">&bull;</span> ${spaceText} ${activeBadge}
+            </div>
             ${item.description ? `<p class="text-xs text-gray-400 italic mt-1 line-clamp-2">${item.description}</p>` : ''}
             ${modsHtml}
           </div>
         </div>
         
         <!-- Hover actions overlay -->
-        <div class="absolute inset-0 bg-gray-900/95 rounded flex flex-col justify-center items-center opacity-0 group-hover/card:opacity-100 transition-opacity p-2 gap-2">
+        <div class="absolute inset-0 bg-gray-900/95 rounded flex flex-col justify-center items-center opacity-0 group-hover/card:opacity-100 transition-opacity p-2 gap-2 z-10">
           
           <select data-action="move" data-index="${index}" class="bg-gray-800 text-xs text-white border border-gray-600 rounded px-2 py-1 focus:outline-none w-full max-w-[150px]">
-            <option value="EQUIPPED" ${item.location === "EQUIPPED" ? "selected" : ""}>Założone</option>
-            <option value="BACKPACK" ${item.location === "BACKPACK" ? "selected" : ""}>Do Plecaka</option>
-            <option value="WAGON" ${item.location === "WAGON" ? "selected" : ""}>Do Wozu</option>
+            <option value="EQUIPPED" ${item.location === "EQUIPPED" ? "selected" : ""}>Podręczne</option>
+            <option value="BACKPACK" ${item.location === "BACKPACK" ? "selected" : ""}>Plecak</option>
+            <option value="BACK" ${item.location === "BACK" ? "selected" : ""}>Plecy</option>
+            ${showQuiverOption ? `<option value="QUIVER" ${item.location === "QUIVER" ? "selected" : ""}>Kołczan</option>` : ''}
+            <option value="WAGON" ${item.location === "WAGON" ? "selected" : ""}>Wóz</option>
           </select>
           
           <div class="flex gap-2 w-full max-w-[150px] justify-between">

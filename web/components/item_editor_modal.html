@@ -65,6 +65,39 @@
         </div>
       </div>
 
+      <!-- Actions (for Weapons only) -->
+      <div id="item-editor-actions-section" class="hidden space-y-4 bg-gray-900 p-4 rounded border border-gray-700">
+        <div class="flex justify-between items-center mb-2">
+          <h3 class="text-rose-400 font-bold uppercase text-xs tracking-wider">3. Akcje / Ataki (Broń)</h3>
+          <button id="btn-add-action" class="text-xs bg-rose-600 hover:bg-rose-500 text-white px-2 py-1 rounded transition-colors">+ Dodaj Akcję</button>
+        </div>
+        <div id="item-editor-actions-list" class="space-y-3">
+          <!-- Actions will be injected here -->
+        </div>
+      </div>
+
+      <!-- Armor Properties (for Armor only) -->
+      <div id="item-editor-armor-section" class="hidden space-y-4 bg-gray-900 p-4 rounded border border-gray-700">
+        <h3 class="text-fuchsia-400 font-bold uppercase text-xs tracking-wider mb-2">3. Właściwości Zbroi</h3>
+        <div class="grid grid-cols-3 gap-4">
+          <div class="col-span-3 md:col-span-1">
+            <label class="block text-gray-400 text-xs font-bold mb-1">Wartość efektu</label>
+            <input type="text" id="item-editor-armor-effect"
+              class="w-full bg-gray-800 border border-gray-600 text-white rounded px-3 py-2 focus:outline-none focus:border-indigo-500" placeholder="np. Obrona -1">
+          </div>
+          <div class="col-span-3 md:col-span-1">
+            <label class="block text-gray-400 text-xs font-bold mb-1">Wytrzymałość (Użycia)</label>
+            <input type="text" id="item-editor-armor-uses"
+              class="w-full bg-gray-800 border border-gray-600 text-white rounded px-3 py-2 focus:outline-none focus:border-indigo-500" placeholder="np. 5">
+          </div>
+          <div class="col-span-3 md:col-span-1">
+            <label class="block text-gray-400 text-xs font-bold mb-1">Kategoria</label>
+            <input type="text" id="item-editor-armor-cost-type"
+              class="w-full bg-gray-800 border border-gray-600 text-white rounded px-3 py-2 focus:outline-none focus:border-indigo-500" placeholder="np. Lekka">
+          </div>
+        </div>
+      </div>
+
       <!-- Payment Section (Hidden by default) -->
       <div id="item-editor-payment-section" class="hidden space-y-4 bg-gray-900 p-4 rounded border border-yellow-600/30">
         <h3 class="text-yellow-500 font-bold uppercase text-xs tracking-wider mb-2">3. Koszt (Płatność z sakiewki)</h3>

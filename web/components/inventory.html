@@ -12,46 +12,83 @@
     </div>
   </div>
 
-  <!-- Space Bar -->
-  <div class="mb-8 bg-gray-900 rounded-lg p-4 border border-gray-700 shadow-inner">
-    <div class="flex justify-between items-end mb-2">
-      <span class="text-gray-400 font-bold uppercase tracking-wider text-sm">Zajmowane miejsce</span>
-      <span id="inventory-space-text" class="text-white font-mono text-lg font-bold">0 / 20</span>
-    </div>
-    <div class="w-full bg-gray-700 rounded-full h-3">
-      <div id="inventory-space-bar" class="bg-indigo-500 h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
-    </div>
-  </div>
-
   <!-- Sections Container -->
   <div class="flex flex-col gap-6">
     
-    <!-- Equipped -->
-    <div class="bg-gray-900/50 rounded-xl border border-emerald-900/50 p-4 min-h-[300px]">
-      <h3 class="text-emerald-400 font-bold uppercase tracking-wider mb-4 border-b border-emerald-900/50 pb-2 flex items-center">
-        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-        Założone (Wyposażenie)
-      </h3>
+    <!-- Equipped (Miejsce Podręczne) -->
+    <div class="bg-gray-900/50 rounded-xl border border-emerald-900/50 p-4 min-h-[150px]">
+      <div class="flex justify-between items-center mb-2">
+        <h3 class="text-emerald-400 font-bold uppercase tracking-wider flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          Miejsce Podręczne (Założone - 0 akcji)
+        </h3>
+        <span id="inventory-space-quick-text" class="text-white font-mono text-sm font-bold">0 / 0</span>
+      </div>
+      <div class="w-full bg-gray-700 rounded-full h-2 mb-4">
+        <div id="inventory-space-quick-bar" class="bg-emerald-500 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+      </div>
       <div id="inventory-list-equipped" class="space-y-3">
         <!-- Items go here -->
       </div>
-      <div id="inventory-empty-equipped" class="text-center text-gray-500 text-sm mt-8 hidden italic">Brak założonych przedmiotów</div>
+      <div id="inventory-empty-equipped" class="text-center text-gray-500 text-sm mt-4 hidden italic">Brak założonych przedmiotów</div>
     </div>
 
-    <!-- Backpack -->
-    <div class="bg-gray-900/50 rounded-xl border border-indigo-900/50 p-4 min-h-[300px]">
-      <h3 class="text-indigo-400 font-bold uppercase tracking-wider mb-4 border-b border-indigo-900/50 pb-2 flex items-center">
-        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-        W plecaku
-      </h3>
+    <!-- Backpack (Miejsce Niepodręczne) -->
+    <div class="bg-gray-900/50 rounded-xl border border-indigo-900/50 p-4 min-h-[150px]">
+      <div class="flex justify-between items-center mb-2">
+        <h3 class="text-indigo-400 font-bold uppercase tracking-wider flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+          Miejsce Niepodręczne (Plecak - 2 akcje)
+        </h3>
+        <span id="inventory-space-backpack-text" class="text-white font-mono text-sm font-bold">0 / 0</span>
+      </div>
+      <div class="w-full bg-gray-700 rounded-full h-2 mb-4">
+        <div id="inventory-space-backpack-bar" class="bg-indigo-500 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+      </div>
       <div id="inventory-list-backpack" class="space-y-3">
         <!-- Items go here -->
       </div>
-      <div id="inventory-empty-backpack" class="text-center text-gray-500 text-sm mt-8 hidden italic">Plecak jest pusty</div>
+      <div id="inventory-empty-backpack" class="text-center text-gray-500 text-sm mt-4 hidden italic">Plecak jest pusty</div>
+    </div>
+
+    <!-- Back (Plecy) -->
+    <div class="bg-gray-900/50 rounded-xl border border-blue-900/50 p-4 min-h-[100px]">
+      <div class="flex justify-between items-center mb-2">
+        <h3 class="text-blue-400 font-bold uppercase tracking-wider flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+          Plecy (1 akcja)
+        </h3>
+        <span id="inventory-space-back-text" class="text-white font-mono text-sm font-bold">0 / 0</span>
+      </div>
+      <div class="w-full bg-gray-700 rounded-full h-2 mb-4">
+        <div id="inventory-space-back-bar" class="bg-blue-500 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+      </div>
+      <div id="inventory-list-back" class="space-y-3">
+        <!-- Items go here -->
+      </div>
+      <div id="inventory-empty-back" class="text-center text-gray-500 text-sm mt-4 hidden italic">Pusto</div>
+    </div>
+
+    <!-- Quiver (Kołczan) -->
+    <div id="section-quiver" class="bg-gray-900/50 rounded-xl border border-rose-900/50 p-4 min-h-[100px] hidden">
+      <div class="flex justify-between items-center mb-2">
+        <h3 class="text-rose-400 font-bold uppercase tracking-wider flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          Kołczan (0 akcji)
+        </h3>
+        <span id="inventory-space-quiver-text" class="text-white font-mono text-sm font-bold">0 / 0</span>
+      </div>
+      <div class="w-full bg-gray-700 rounded-full h-2 mb-4">
+        <div id="inventory-space-quiver-bar" class="bg-rose-500 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+      </div>
+      <div id="inventory-list-quiver" class="space-y-3">
+        <!-- Items go here -->
+      </div>
+      <div id="inventory-empty-quiver" class="text-center text-gray-500 text-sm mt-4 hidden italic">Pusto</div>
     </div>
 
     <!-- Wagon / Stashed -->
-    <div class="bg-gray-900/50 rounded-xl border border-amber-900/50 p-4 min-h-[300px]">
+    <div class="bg-gray-900/50 rounded-xl border border-amber-900/50 p-4 min-h-[150px]">
       <h3 class="text-amber-500 font-bold uppercase tracking-wider mb-4 border-b border-amber-900/50 pb-2 flex items-center">
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
         W wozie / Schowek
@@ -59,7 +96,7 @@
       <div id="inventory-list-wagon" class="space-y-3">
         <!-- Items go here -->
       </div>
-      <div id="inventory-empty-wagon" class="text-center text-gray-500 text-sm mt-8 hidden italic">Schowek jest pusty</div>
+      <div id="inventory-empty-wagon" class="text-center text-gray-500 text-sm mt-4 hidden italic">Schowek jest pusty</div>
     </div>
 
   </div>

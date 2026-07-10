@@ -69,3 +69,20 @@ def get_shop_items():
     """API endpoint for frontend to fetch shop items."""
     logger.info("Frontend requested shop items.")
     return game_engine.get_shop_data()
+
+@eel.expose
+def undo():
+    """API endpoint to undo the last state mutation."""
+    game_engine.undo()
+    return game_engine.get_character_view_model()
+
+@eel.expose
+def redo():
+    """API endpoint to redo the last undone mutation."""
+    game_engine.redo()
+    return game_engine.get_character_view_model()
+
+@eel.expose
+def can_undo():
+    """API endpoint to check whether undo is available."""
+    return game_engine.can_undo()
