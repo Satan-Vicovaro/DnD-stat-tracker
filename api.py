@@ -81,6 +81,20 @@ def apply_damage(damage_type: str, amount: int):
     return game_engine.get_character_view_model()
 
 @eel.expose
+def adjust_health(amount: int):
+    """API endpoint to manually add or remove base health."""
+    game_engine.adjust_health(amount)
+    game_engine.save()
+    return game_engine.get_character_view_model()
+
+@eel.expose
+def adjust_armor_health(amount: int):
+    """API endpoint to manually repair or damage armor."""
+    game_engine.adjust_armor_health(amount)
+    game_engine.save()
+    return game_engine.get_character_view_model()
+
+@eel.expose
 def get_shop_items():
     """API endpoint for frontend to fetch shop items."""
     logger.info("Frontend requested shop items.")

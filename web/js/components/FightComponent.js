@@ -39,27 +39,58 @@ export class FightComponent {
       btnApply.classList.add('bg-rose-400');
       setTimeout(() => btnApply.classList.remove('bg-rose-400'), 200);
     });
+
+    // Manual Adjustments - Base Health
+    document.getElementById('btn-heal-health').addEventListener('click', async () => {
+        const amt = parseInt(document.getElementById('fight-manual-health-amount').value) || 0;
+        if (amt > 0) {
+            this.characterData = await eel.adjust_health(amt)();
+            document.dispatchEvent(new CustomEvent('characterUpdated', { detail: this.characterData }));
+        }
+    });
+    document.getElementById('btn-damage-health').addEventListener('click', async () => {
+        const amt = parseInt(document.getElementById('fight-manual-health-amount').value) || 0;
+        if (amt > 0) {
+            this.characterData = await eel.adjust_health(-amt)();
+            document.dispatchEvent(new CustomEvent('characterUpdated', { detail: this.characterData }));
+        }
+    });
+
+    // Manual Adjustments - Armor Health
+    document.getElementById('btn-heal-armor').addEventListener('click', async () => {
+        const amt = parseInt(document.getElementById('fight-manual-armor-amount').value) || 0;
+        if (amt > 0) {
+            this.characterData = await eel.adjust_armor_health(amt)();
+            document.dispatchEvent(new CustomEvent('characterUpdated', { detail: this.characterData }));
+        }
+    });
+    document.getElementById('btn-damage-armor').addEventListener('click', async () => {
+        const amt = parseInt(document.getElementById('fight-manual-armor-amount').value) || 0;
+        if (amt > 0) {
+            this.characterData = await eel.adjust_armor_health(-amt)();
+            document.dispatchEvent(new CustomEvent('characterUpdated', { detail: this.characterData }));
+        }
+    });
   }
 
   render() {
     if (!this.characterData) return;
 
     // 1. Render Health Bars
-    const split = this.characterData.health_split;
+    const char = this.characterData;
+    const split = char.health_split;
     if (split) {
-      // Armor
-      const armorText = document.getElementById('fight-armor-hp-text');
+      // Render Base HP
+      document.getElementById('fight-base-hp-text').innerText = `${split.base_current_hp} / ${split.base_max_hp}`;
+      const hpPct = split.base_max_hp > 0 ? (split.base_current_hp / split.base_max_hp) * 100 : 0;
+      document.getElementById('fight-base-hp-bar').style.width = `${Math.max(0, hpPct)}%`;
+      
+      // Render Armor HP (Shield)
       const armorBar = document.getElementById('fight-armor-hp-bar');
-      armorText.innerText = `${split.armor_current_hp} / ${split.armor_max_hp}`;
+      document.getElementById('fight-armor-hp-value').innerText = `${split.armor_current_hp} / ${split.armor_max_hp}`;
       const armorPct = split.armor_max_hp > 0 ? (split.armor_current_hp / split.armor_max_hp) * 100 : 0;
       armorBar.style.width = `${armorPct}%`;
 
-      // Base Health
-      const baseText = document.getElementById('fight-base-hp-text');
-      const baseBar = document.getElementById('fight-base-hp-bar');
-      baseText.innerText = `${split.base_current_hp} / ${split.base_max_hp}`;
-      const basePct = split.base_max_hp > 0 ? (split.base_current_hp / split.base_max_hp) * 100 : 0;
-      baseBar.style.width = `${basePct}%`;
 
       // Mitigation Badge
       const mitigationBadge = document.getElementById('fight-mitigation-badge');

@@ -88,10 +88,6 @@ class ArmorState(ModifierProvider):
             if armor.quantity > 0:
                 source_name = f"Zbroja: {name}"
 
-                hp = armor.effects.get("hp_per_fragment", 0.0) * armor.quantity
-                if hp != 0:
-                    mods.append(Modifier(source_name, "max_hp", hp))
-
                 def_pen = armor.effects.get("defense_penalty", 0.0) * armor.quantity
                 if def_pen != 0:
                     mods.append(Modifier(source_name, "defense", -(def_pen / level_div)))
@@ -292,7 +288,7 @@ class Character:
 
     @property
     def current_hp(self) -> int:
-        return self.max_hp - (self.damage_taken_physical + self.damage_taken_magical)
+        return self.max_hp - self.damage_taken_magical
 
     @property
     def defense(self) -> float:

@@ -8,25 +8,25 @@
 
     <!-- Health Bars -->
     <div class="flex flex-col gap-4">
-      <!-- Armor Health -->
-      <div>
-        <div class="flex justify-between items-end mb-1">
-          <span class="text-sm font-bold text-gray-400">Pancerz (Odbiera rany fizyczne)</span>
-          <span class="font-mono text-sm font-bold text-slate-400" id="fight-armor-hp-text">0 / 0</span>
-        </div>
-        <div class="w-full bg-gray-700/50 rounded-full h-3 overflow-hidden shadow-inner border border-gray-600/50">
-          <div id="fight-armor-hp-bar" class="bg-slate-500 h-3 rounded-full transition-all duration-500" style="width: 0%;"></div>
-        </div>
-      </div>
-
       <!-- Base Health -->
       <div>
         <div class="flex justify-between items-end mb-1">
-          <span class="text-sm font-bold text-gray-400">Zdrowie Bohatera</span>
-          <span class="font-mono text-sm font-bold text-emerald-400" id="fight-base-hp-text">0 / 0</span>
+          <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Zdrowie Bohatera</span>
+          <span id="fight-base-hp-text" class="text-xl font-black text-emerald-500 font-mono">100/100</span>
         </div>
         <div class="w-full bg-gray-700/50 rounded-full h-4 overflow-hidden shadow-inner border border-gray-600/50">
           <div id="fight-base-hp-bar" class="bg-emerald-500 h-4 rounded-full transition-all duration-500" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Armor Health -->
+      <div>
+        <div class="flex justify-between items-end mb-1">
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Pancerz (Tarcza)</span>
+          <span class="font-mono text-xl font-bold text-slate-400" id="fight-armor-hp-value">0 / 0</span>
+        </div>
+        <div class="w-full bg-gray-700/50 rounded-full h-3 overflow-hidden shadow-inner border border-gray-600/50">
+          <div id="fight-armor-hp-bar" class="bg-slate-500 h-3 rounded-full transition-all duration-500" style="width: 0%;"></div>
         </div>
       </div>
     </div>
@@ -67,6 +67,35 @@
       <button id="btn-apply-damage" class="mt-2 w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-3 rounded-lg shadow-[0_0_15px_rgba(225,29,72,0.4)] transition-all active:scale-95">
         Zadaj Obrażenia
       </button>
+    </div>
+
+    <hr class="border-gray-700">
+
+    <!-- Manual Adjustments Panel -->
+    <div class="bg-gray-900/50 p-4 rounded-lg border border-gray-700 flex flex-col gap-4">
+      <h4 class="text-sm font-bold text-gray-400 uppercase tracking-wider mb-1 flex items-center gap-2">
+        <span>⚙</span> Ręczne Modyfikacje (BHP / Pancerz)
+      </h4>
+      
+      <!-- Base Health Adjust -->
+      <div class="flex items-center justify-between gap-4">
+        <span class="text-xs font-bold text-emerald-400">Zdrowie (Tylko Bazowe)</span>
+        <div class="flex items-center gap-2">
+          <input type="number" id="fight-manual-health-amount" value="1" min="1" class="w-16 bg-gray-800 text-white font-mono text-center text-sm p-2 rounded border border-gray-600 focus:border-emerald-500 focus:outline-none">
+          <button id="btn-heal-health" class="w-8 h-8 rounded bg-gray-700 hover:bg-emerald-500/80 text-white font-bold transition-colors">+</button>
+          <button id="btn-damage-health" class="w-8 h-8 rounded bg-gray-700 hover:bg-rose-500/80 text-white font-bold transition-colors">-</button>
+        </div>
+      </div>
+
+      <!-- Armor Adjust -->
+      <div class="flex items-center justify-between gap-4">
+        <span class="text-xs font-bold text-slate-400">Pancerz</span>
+        <div class="flex items-center gap-2">
+          <input type="number" id="fight-manual-armor-amount" value="1" min="1" class="w-16 bg-gray-800 text-white font-mono text-center text-sm p-2 rounded border border-gray-600 focus:border-slate-500 focus:outline-none">
+          <button id="btn-heal-armor" class="w-8 h-8 rounded bg-gray-700 hover:bg-emerald-500/80 text-white font-bold transition-colors">+</button>
+          <button id="btn-damage-armor" class="w-8 h-8 rounded bg-gray-700 hover:bg-rose-500/80 text-white font-bold transition-colors">-</button>
+        </div>
+      </div>
     </div>
 
   </div>

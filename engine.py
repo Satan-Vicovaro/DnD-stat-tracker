@@ -9,15 +9,15 @@ from serializer import build_item, serialize, deserialize
 logger = logging.getLogger(__name__)
 
 _AUTOSAVE_PATH = "data/quick_save.json"
-_SAVES_DIR     = "data/saves"
+_SAVES_DIR = "data/saves"
 
 
 class GameEngine:
     """Core game engine — state, rules, and persistence orchestration."""
 
     def __init__(self):
-        self._history: list[Character] = []   # undo stack
-        self._future:  list[Character] = []   # redo stack
+        self._history: list[Character] = []  # undo stack
+        self._future: list[Character] = []  # redo stack
         self._max_history: int = 20
 
         if os.path.exists(_AUTOSAVE_PATH):
@@ -25,9 +25,7 @@ class GameEngine:
                 with open(_AUTOSAVE_PATH, "r", encoding="utf-8") as f:
                     data = json.load(f)
                 self.hero = deserialize(data)
-                logger.info(
-                    f"Loaded autosave: {self.hero.name} level {self.hero.level}"
-                )
+                logger.info(f"Loaded autosave: {self.hero.name} level {self.hero.level}")
             except Exception as e:
                 logger.error(f"Failed to load autosave ({e}) — starting fresh")
                 self.hero = self._create_starting_character()
@@ -64,9 +62,7 @@ class GameEngine:
             return False
         self._future.append(copy.deepcopy(self.hero))
         self.hero = self._history.pop()
-        logger.info(
-            f"Undo. History: {len(self._history)}, Future: {len(self._future)}"
-        )
+        logger.info(f"Undo. History: {len(self._history)}, Future: {len(self._future)}")
         return True
 
     def redo(self) -> bool:
@@ -75,9 +71,7 @@ class GameEngine:
             return False
         self._history.append(copy.deepcopy(self.hero))
         self.hero = self._future.pop()
-        logger.info(
-            f"Redo. History: {len(self._history)}, Future: {len(self._future)}"
-        )
+        logger.info(f"Redo. History: {len(self._history)}, Future: {len(self._future)}")
         return True
 
     def can_undo(self) -> bool:
@@ -103,6 +97,7 @@ class GameEngine:
     def create_named_save(self) -> str:
         """Write a timestamped manual save to data/saves/. Returns filename."""
         from datetime import datetime
+
         os.makedirs(_SAVES_DIR, exist_ok=True)
         filename = datetime.now().strftime("%Y-%m-%dT%H-%M-%S") + ".json"
         path = os.path.join(_SAVES_DIR, filename)
@@ -127,12 +122,14 @@ class GameEngine:
             try:
                 with open(path, "r", encoding="utf-8") as f:
                     data = json.load(f)
-                result.append({
-                    "filename":  filename,
-                    "timestamp": data.get("timestamp", filename),
-                    "hero_name": data.get("name", "?"),
-                    "level":     data.get("level", 0),
-                })
+                result.append(
+                    {
+                        "filename": filename,
+                        "timestamp": data.get("timestamp", filename),
+                        "hero_name": data.get("name", "?"),
+                        "level": data.get("level", 0),
+                    }
+                )
             except Exception as e:
                 logger.warning(f"Skipping unreadable save {filename}: {e}")
         return result
@@ -165,19 +162,17 @@ class GameEngine:
     def get_character_view_model(self) -> dict:
         """Returns the character data formatted for the frontend."""
         from dataclasses import asdict
-        
+
         armor_max_hp = 0
         for name, armor in self.hero.armor_state.types.items():
             if armor.quantity > 0:
                 hp = armor.effects.get("hp_per_fragment", 0.0) * armor.quantity
                 armor_max_hp += hp
-                
+
         base_max_hp = self.hero.max_hp - armor_max_hp
-        
+
         current_armor_hp = max(0, armor_max_hp - self.hero.damage_taken_physical)
-        overflow_physical_damage = max(0, self.hero.damage_taken_physical - armor_max_hp)
-        
-        current_base_hp = base_max_hp - self.hero.damage_taken_magical - overflow_physical_damage
+        current_base_hp = base_max_hp - self.hero.damage_taken_magical
 
         broken_fragments = self.hero.damage_taken_physical // 5
         current_mitigation = self.get_current_mitigation()
@@ -190,27 +185,27 @@ class GameEngine:
             "total_max_hp": self.hero.max_hp,
             "total_current_hp": current_base_hp + current_armor_hp,
             "current_mitigation": current_mitigation,
-            "broken_fragments": broken_fragments
+            "broken_fragments": broken_fragments,
         }
 
         damage_left = self.hero.damage_taken_physical
         damaged_space = 0
         intact_space = 0
-        
+
         armor_types_view = []
-        
+
         order = ["Stalowa", "Płytowa", "Półpłytowa", "Skórzana"]
         all_types = self.hero.armor_state.types
-        
+
         for name in order + [n for n in all_types.keys() if n not in order]:
             t = all_types.get(name)
             if not t:
                 continue
-                
+
             hp_per_fragment = t.effects.get("hp_per_fragment", 0.0)
             max_hp = t.quantity * hp_per_fragment
             current_hp = 0
-            
+
             if t.quantity > 0:
                 if damage_left >= max_hp:
                     current_hp = 0
@@ -222,19 +217,21 @@ class GameEngine:
                         broken_frags = int(damage_left // hp_per_fragment)
                         t_damaged_space = broken_frags * t.space_per_fragment
                         damaged_space += t_damaged_space
-                        intact_space += (t.used_space - t_damaged_space)
+                        intact_space += t.used_space - t_damaged_space
                     else:
                         intact_space += t.used_space
                     damage_left = 0
-            
-            armor_types_view.append({
-                "name": t.name,
-                "quantity": t.quantity,
-                "space_per_fragment": t.space_per_fragment,
-                "used_space": t.used_space,
-                "max_hp": int(max_hp),
-                "current_hp": int(current_hp)
-            })
+
+            armor_types_view.append(
+                {
+                    "name": t.name,
+                    "quantity": t.quantity,
+                    "space_per_fragment": t.space_per_fragment,
+                    "used_space": t.used_space,
+                    "max_hp": int(max_hp),
+                    "current_hp": int(current_hp),
+                }
+            )
 
         view_model = {
             "name": self.hero.name,
@@ -270,9 +267,7 @@ class GameEngine:
             "inventory": [],
         }
 
-        active_containers = view_model["inventory_space"].get(
-            "active_containers", {}
-        )
+        active_containers = view_model["inventory_space"].get("active_containers", {})
         for item in self.hero.inventory:
             item_dict = asdict(item)
             item_id = id(item)
@@ -291,18 +286,20 @@ class GameEngine:
 
     def add_item_to_inventory(self, item_dict: dict, payment: dict) -> bool:
         """Validate payment, deduct it, and add the item to inventory."""
-        gold_cost   = int(payment.get("gold",   0))
+        gold_cost = int(payment.get("gold", 0))
         silver_cost = int(payment.get("silver", 0))
         copper_cost = int(payment.get("copper", 0))
 
-        if (self.hero.gold   < gold_cost or
-                self.hero.silver < silver_cost or
-                self.hero.copper < copper_cost):
+        if (
+            self.hero.gold < gold_cost
+            or self.hero.silver < silver_cost
+            or self.hero.copper < copper_cost
+        ):
             logger.warning("Insufficient funds for custom payment.")
             return False
 
         self._snapshot()
-        self.hero.gold   -= gold_cost
+        self.hero.gold -= gold_cost
         self.hero.silver -= silver_cost
         self.hero.copper -= copper_cost
 
@@ -338,15 +335,21 @@ class GameEngine:
         if delta > 0:
             space_required = delta * armor_type.space_per_fragment
             if self.hero.armor_state.remaining_space - space_required < 0:
-                logger.warning(
-                    f"Cannot equip {delta} {armor_name}: Not enough space."
-                )
+                logger.warning(f"Cannot equip {delta} {armor_name}: Not enough space.")
                 return False
         self._snapshot()
         armor_type.quantity += delta
+
+        # Clamp physical damage so unequipping broken armor doesn't leave lingering ghost damage
+        armor_max_hp = sum(
+            t.quantity * t.effects.get("hp_per_fragment", 0.0)
+            for t in self.hero.armor_state.types.values()
+        )
+        if self.hero.damage_taken_physical > armor_max_hp:
+            self.hero.damage_taken_physical = int(armor_max_hp)
+
         logger.info(
-            f"Armor {armor_name} qty changed by {delta}. "
-            f"New total: {armor_type.quantity}"
+            f"Armor {armor_name} qty changed by {delta}. " f"New total: {armor_type.quantity}"
         )
         return True
 
@@ -358,10 +361,7 @@ class GameEngine:
             return False
         self._snapshot()
         setattr(self.hero, currency_type, current + delta)
-        logger.info(
-            f"Money {currency_type} changed by {delta}. "
-            f"New total: {current + delta}"
-        )
+        logger.info(f"Money {currency_type} changed by {delta}. " f"New total: {current + delta}")
         return True
 
     def set_money(self, currency_type: str, value: int) -> bool:
@@ -408,7 +408,7 @@ class GameEngine:
         qty_pol = self.hero.armor_state.types.get("Półpłytowa")
         qty_ply = self.hero.armor_state.types.get("Płytowa")
         qty_stal = self.hero.armor_state.types.get("Stalowa")
-        
+
         pol_q = qty_pol.quantity if qty_pol else 0
         ply_q = qty_ply.quantity if qty_ply else 0
         stal_q = qty_stal.quantity if qty_stal else 0
@@ -416,7 +416,7 @@ class GameEngine:
         effective_stal = 0
         effective_ply = 0
         effective_pol = 0
-        
+
         for name, orig_q in [("Stalowa", stal_q), ("Płytowa", ply_q), ("Półpłytowa", pol_q)]:
             if destroyed_left > 0:
                 if orig_q >= destroyed_left:
@@ -427,7 +427,7 @@ class GameEngine:
                     destroyed_left -= orig_q
             else:
                 eff_q = orig_q
-                
+
             if name == "Stalowa":
                 effective_stal = eff_q
             elif name == "Płytowa":
@@ -443,12 +443,28 @@ class GameEngine:
             return False
 
         self._snapshot()
-        
+
         if damage_type == "physical":
             mitigation = self.get_current_mitigation()
             effective_damage = max(0, amount - mitigation)
-            self.hero.damage_taken_physical += effective_damage
-            logger.info(f"Physical damage: {amount}, Mitigation: {mitigation}, Effective: {effective_damage}")
+
+            armor_max_hp = sum(
+                t.quantity * t.effects.get("hp_per_fragment", 0.0)
+                for t in self.hero.armor_state.types.values()
+            )
+            current_armor_hp = max(0, armor_max_hp - self.hero.damage_taken_physical)
+
+            damage_to_armor = min(effective_damage, current_armor_hp)
+            self.hero.damage_taken_physical += damage_to_armor
+            logger.info(f"damage to armor: {damage_to_armor}")
+            damage_to_health = effective_damage - damage_to_armor
+            logger.info(f"damage to health: {damage_to_health}")
+            if damage_to_health > 0:
+                self.hero.damage_taken_magical += damage_to_health
+
+            logger.info(
+                f"Physical damage: {amount}, Mitigation: {mitigation}, Armor hit: {damage_to_armor}, Health hit: {damage_to_health}"
+            )
         elif damage_type == "magical":
             self.hero.damage_taken_magical += amount
             logger.info(f"Magical damage: {amount}")
@@ -457,14 +473,48 @@ class GameEngine:
 
         return True
 
+    def adjust_health(self, amount: int) -> bool:
+        """Manually adjust base health. Positive amount = heal, Negative = damage."""
+        if amount == 0:
+            return False
+        self._snapshot()
+        if amount > 0:
+            heal = min(amount, self.hero.damage_taken_magical)
+            self.hero.damage_taken_magical -= heal
+            logger.info(f"Healed base health by {heal}")
+        else:
+            self.hero.damage_taken_magical += abs(amount)
+            logger.info(f"Damaged base health by {abs(amount)}")
+        return True
+
+    def adjust_armor_health(self, amount: int) -> bool:
+        """Manually adjust armor health. Positive amount = repair, Negative = damage."""
+        if amount == 0:
+            return False
+        self._snapshot()
+        if amount > 0:
+            repair = min(amount, self.hero.damage_taken_physical)
+            self.hero.damage_taken_physical -= repair
+            logger.info(f"Repaired armor by {repair}")
+        else:
+            armor_max_hp = sum(
+                t.quantity * t.effects.get("hp_per_fragment", 0.0)
+                for t in self.hero.armor_state.types.values()
+            )
+            current_armor_hp = max(0, armor_max_hp - self.hero.damage_taken_physical)
+            damage = min(abs(amount), current_armor_hp)
+            self.hero.damage_taken_physical += damage
+            logger.info(f"Damaged armor by {damage}")
+        return True
+
     def get_shop_data(self) -> dict:
         shop_dir = "config/shop"
         categories = {
-            "Broń biała":      "bron_biala_structured.json",
-            "Broń zasięgowa":  "bron_zasiegowa_structured.json",
-            "Tarcze":          "tarcze_structured.json",
-            "Zbroje":          "zbroje_structured.json",
-            "Różne":           "rozne_structured.json",
+            "Broń biała": "bron_biala_structured.json",
+            "Broń zasięgowa": "bron_zasiegowa_structured.json",
+            "Tarcze": "tarcze_structured.json",
+            "Zbroje": "zbroje_structured.json",
+            "Różne": "rozne_structured.json",
         }
         shop_data = {}
         for category, filename in categories.items():
