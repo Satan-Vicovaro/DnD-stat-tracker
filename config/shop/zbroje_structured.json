@@ -1,0 +1,50 @@
+[
+  {
+    "name": "zbroja skórzana",
+    "space_taken": "15",
+    "effect_value": "5",
+    "cost_type": "",
+    "uses_durability": "4",
+    "cost_silver": ""
+  },
+  {
+    "name": "zbroja półpłytowa",
+    "space_taken": "30",
+    "effect_value": "5",
+    "cost_type": "Życie",
+    "uses_durability": "6",
+    "cost_silver": "2"
+  },
+  {
+    "name": "zbroja płytowa",
+    "space_taken": "50",
+    "effect_value": "5",
+    "cost_type": "Maksymalna ilość zakupień",
+    "uses_durability": "8",
+    "cost_silver": "4"
+  },
+  {
+    "name": "zbroja płytowa (stalowa)",
+    "space_taken": "X",
+    "effect_value": "5",
+    "cost_type": "Ilość redukowanych obrażeń",
+    "uses_durability": "8",
+    "cost_silver": "6"
+  },
+  {
+    "name": "narzędzia lekkie zbroje",
+    "space_taken": "50",
+    "effect_value": "1h",
+    "cost_type": "naprawia 10 życia zbroii (posiada 4 użycia)",
+    "uses_durability": "użycia/10",
+    "cost_silver": ""
+  },
+  {
+    "name": "narzędzia ciężkie zbroje",
+    "space_taken": "100",
+    "effect_value": "1h",
+    "cost_type": "naprawia 10 życia zbroii (posiada 8 użyć)",
+    "uses_durability": "użycia/10",
+    "cost_silver": ""
+  }
+]

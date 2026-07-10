@@ -1,5 +1,7 @@
 import logging
+import os, json
 from models import Character
+
 
 logger = logging.getLogger(__name__)
 
@@ -107,6 +109,30 @@ class GameEngine:
             logger.info(f"Hero stat {stat_name} modified by {delta}")
             return True
         return False
+
+    def get_shop_data(self) -> dict:
+
+        shop_dir = "config/shop"
+        categories = {
+            "Broń biała": "bron_biala_structured.json",
+            "Broń zasięgowa": "bron_zasiegowa_structured.json",
+            "Tarcze": "tarcze_structured.json",
+            "Zbroje": "zbroje_structured.json",
+            "Różne": "rozne_structured.json",
+        }
+        shop_data = {}
+        for category, filename in categories.items():
+            path = os.path.join(shop_dir, filename)
+            if os.path.exists(path):
+                try:
+                    with open(path, "r", encoding="utf-8") as f:
+                        shop_data[category] = json.load(f)
+                except Exception as e:
+                    logger.error(f"Error loading {filename}: {e}")
+                    shop_data[category] = []
+            else:
+                shop_data[category] = []
+        return shop_data
 
 
 # Singleton instance exported for use by APIs

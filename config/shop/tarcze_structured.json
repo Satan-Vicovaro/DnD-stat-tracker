@@ -1,0 +1,292 @@
+[
+  {
+    "name": "Tarcza okrągła (drewniana)",
+    "cost_silver": "5",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Blok/Pchnięcie",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d6+str",
+        "targets": "1",
+        "turn_execution": "Gracza/Wroga",
+        "description": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+4<dmg wroga --> tarcza zostaje niszczona)"
+      },
+      {
+        "card_value": "5",
+        "action_name": "Pozycja obronna",
+        "action_cost": "1",
+        "range": "",
+        "hit_roll": "",
+        "damage_roll": "",
+        "targets": "",
+        "turn_execution": "Gracza/Soj",
+        "description": "Możesz zablokować 2 ataki wroga (d20+4<dmg wroga --> tarcza zostaje niszczona)"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Szarża",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d6+2xstr",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Otrzymuejsz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera"
+      }
+    ]
+  },
+  {
+    "name": "Tarcza migdałowata (drewniana)",
+    "cost_silver": "5",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Blok/Pchnięcie",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d4+str",
+        "targets": "1",
+        "turn_execution": "Gracza/Wroga",
+        "description": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+6<dmg wroga --> tarcza zostaje niszczona)"
+      },
+      {
+        "card_value": "5",
+        "action_name": "Pozycja obronna",
+        "action_cost": "1",
+        "range": "",
+        "hit_roll": "",
+        "damage_roll": "",
+        "targets": "",
+        "turn_execution": "Gracza/Soj",
+        "description": "Możesz zablokować 2 ataki wroga wymierzone w ciebie lub sojusznika (d20+6<dmg wroga --> tarcza zostaje niszczona)"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Szarża",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d4+2xstr",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Otrzymuejsz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera"
+      }
+    ]
+  },
+  {
+    "name": "Puklerz (drewniany)",
+    "cost_silver": "3",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Blok/Cios",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d4+2xstr",
+        "targets": "1",
+        "turn_execution": "Gracza/Wroga",
+        "description": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+12<dmg wroga --> tarcza zostaje niszczona)"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Mistrz uników",
+        "action_cost": "1",
+        "range": "",
+        "hit_roll": "",
+        "damage_roll": "",
+        "targets": "",
+        "turn_execution": "Gracza",
+        "description": "Do końca walki otrzymuejsz +2ac"
+      }
+    ]
+  },
+  {
+    "name": "Tarcza rzymska (drewniana)",
+    "cost_silver": "10",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Blok/Cios",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d4+1/2str",
+        "targets": "1",
+        "turn_execution": "Gracza/Wroga",
+        "description": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+8<dmg wroga --> tarcza zostaje niszczona)"
+      },
+      {
+        "card_value": "6",
+        "action_name": "Drewniana ściana",
+        "action_cost": "1",
+        "range": "",
+        "hit_roll": "",
+        "damage_roll": "",
+        "targets": "",
+        "turn_execution": "Gracza/Soj",
+        "description": "Możesz zablokować 3 ataki wroga wymierzone w ciebie lub sojusznika (d20+8<dmg wroga --> tarcza zostaje niszczona)"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Nieporuszalny obiekt",
+        "action_cost": "1",
+        "range": "",
+        "hit_roll": "",
+        "damage_roll": "",
+        "targets": "",
+        "turn_execution": "Gracza",
+        "description": "Możesz zablokować wszystke ataki wroga wymierzone w ciebie (d20+8<dmg wroga --> tarcza zostaje niszczona) || Wróg nie może wyjść z twojej strefy kontrolii"
+      }
+    ]
+  },
+  {
+    "name": "Tarcza okrągła (żelana)",
+    "cost_silver": "50",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Blok/Pchnięcie",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d6+str",
+        "targets": "1",
+        "turn_execution": "Gracza/Wroga",
+        "description": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+8<dmg wroga --> tarcza zostaje niszczona)"
+      },
+      {
+        "card_value": "5",
+        "action_name": "Pozycja obronna",
+        "action_cost": "1",
+        "range": "",
+        "hit_roll": "",
+        "damage_roll": "",
+        "targets": "",
+        "turn_execution": "Gracza/Soj",
+        "description": "Możesz zablokować 2 ataki wroga (d20+8<dmg wroga --> tarcza zostaje niszczona)"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Szarża",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d6+2xstr",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Otrzymuejsz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera"
+      }
+    ]
+  },
+  {
+    "name": "Tarcza migdałowata (żelazna)",
+    "cost_silver": "50",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Blok/Pchnięcie",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d4+str",
+        "targets": "1",
+        "turn_execution": "Gracza/Wroga",
+        "description": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+12<dmg wroga --> tarcza zostaje niszczona)"
+      },
+      {
+        "card_value": "5",
+        "action_name": "Pozycja obronna",
+        "action_cost": "1",
+        "range": "",
+        "hit_roll": "",
+        "damage_roll": "",
+        "targets": "",
+        "turn_execution": "Gracza/Soj",
+        "description": "Możesz zablokować 2 ataki wroga (d20+12<dmg wroga --> tarcza zostaje niszczona)"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Szarża",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d4+2xstr",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Otrzymuejsz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera"
+      }
+    ]
+  },
+  {
+    "name": "Puklerz (żelazny)",
+    "cost_silver": "30",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Blok/Cios",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d4+2xstr",
+        "targets": "1",
+        "turn_execution": "Gracza/Wroga",
+        "description": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+16<dmg wroga --> tarcza zostaje niszczona)"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Mistrz uników",
+        "action_cost": "1",
+        "range": "",
+        "hit_roll": "",
+        "damage_roll": "",
+        "targets": "",
+        "turn_execution": "Gracza",
+        "description": "Do końca walki otrzymuejsz +2ac"
+      }
+    ]
+  },
+  {
+    "name": "Tarcza rzymska (żelazna)",
+    "cost_silver": "100",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Blok/Cios",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d4+1/2str",
+        "targets": "1",
+        "turn_execution": "Gracza/Wroga",
+        "description": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+12<dmg wroga --> tarcza zostaje niszczona)"
+      },
+      {
+        "card_value": "5",
+        "action_name": "Drewniana ściana",
+        "action_cost": "1",
+        "range": "",
+        "hit_roll": "",
+        "damage_roll": "",
+        "targets": "",
+        "turn_execution": "Gracza/Soj",
+        "description": "Możesz zablokować 3 ataki wroga wymierzone w ciebie lub sojusznika (d20+12<dmg wroga --> tarcza zostaje niszczona)"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Nieporuszalny obiekt",
+        "action_cost": "1",
+        "range": "",
+        "hit_roll": "",
+        "damage_roll": "",
+        "targets": "",
+        "turn_execution": "Gracza",
+        "description": "Możesz zablokować wszystke ataki wroga wymierzone w ciebie (d20+12<dmg wroga --> tarcza zostaje niszczona) || Wróg nie może wyjść z twojej strefy kontrolii"
+      }
+    ]
+  }
+]

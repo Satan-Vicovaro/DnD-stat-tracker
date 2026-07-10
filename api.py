@@ -33,3 +33,9 @@ def modify_level(delta: int):
     """API endpoint to modify the character level."""
     game_engine.modify_level(delta)
     return game_engine.get_character_view_model()
+
+@eel.expose
+def get_shop_items():
+    """API endpoint for frontend to fetch shop items."""
+    logger.info("Frontend requested shop items.")
+    return game_engine.get_shop_data()

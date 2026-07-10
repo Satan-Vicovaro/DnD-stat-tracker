@@ -1,0 +1,4458 @@
+{
+  "Q1": {
+    "value": "Broń 1",
+    "formula": ""
+  },
+  "Z1": {
+    "value": "Karty Broń 1",
+    "formula": ""
+  },
+  "C2": {
+    "value": "Wartość dla karty",
+    "formula": ""
+  },
+  "D2": {
+    "value": "ile",
+    "formula": ""
+  },
+  "E2": {
+    "value": "akcję przeciwnika (skierowaną przeciw tobie)",
+    "formula": ""
+  },
+  "F2": {
+    "value": "Zniwecz",
+    "formula": ""
+  },
+  "G2": {
+    "value": "Zasięg",
+    "formula": ""
+  },
+  "H2": {
+    "value": "Trafienie",
+    "formula": ""
+  },
+  "I2": {
+    "value": "Dmg",
+    "formula": ""
+  },
+  "J2": {
+    "value": "jedną",
+    "formula": ""
+  },
+  "K2": {
+    "value": "Wykonanie w turze",
+    "formula": ""
+  },
+  "L2": {
+    "value": "Opis",
+    "formula": ""
+  },
+  "M2": {
+    "value": "Koszt w srebrnych monetach",
+    "formula": ""
+  },
+  "O2": {
+    "value": "Ręce",
+    "formula": ""
+  },
+  "Q2": {
+    "value": "kostki",
+    "formula": ""
+  },
+  "R2": {
+    "value": "liczba",
+    "formula": ""
+  },
+  "U2": {
+    "value": "akcje",
+    "formula": ""
+  },
+  "V2": {
+    "value": "czy użyta?",
+    "formula": ""
+  },
+  "Z2": {
+    "value": "Karta 1",
+    "formula": ""
+  },
+  "AB2": {
+    "value": "Użyta",
+    "formula": ""
+  },
+  "AC2": {
+    "value": "0",
+    "formula": "Ekwipunek!O20"
+  },
+  "AD2": {
+    "value": "Karta 2",
+    "formula": ""
+  },
+  "AF2": {
+    "value": "Użyta",
+    "formula": ""
+  },
+  "AG2": {
+    "value": "0",
+    "formula": "Ekwipunek!S20"
+  },
+  "AH2": {
+    "value": "Karta 3",
+    "formula": ""
+  },
+  "AJ2": {
+    "value": "Użyta",
+    "formula": ""
+  },
+  "AK2": {
+    "value": "0",
+    "formula": "Ekwipunek!W20"
+  },
+  "AL2": {
+    "value": "Karta 4",
+    "formula": ""
+  },
+  "AN2": {
+    "value": "Użyta",
+    "formula": ""
+  },
+  "AO2": {
+    "value": "0",
+    "formula": "Ekwipunek!AA20"
+  },
+  "B3": {
+    "value": "Ręce",
+    "formula": ""
+  },
+  "C3": {
+    "value": "0",
+    "formula": ""
+  },
+  "D3": {
+    "value": "4",
+    "formula": "COUNT(C3:C6)"
+  },
+  "E3": {
+    "value": "Prosty",
+    "formula": ""
+  },
+  "F3": {
+    "value": "0.5",
+    "formula": ""
+  },
+  "G3": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H3": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I3": {
+    "value": "str",
+    "formula": ""
+  },
+  "J3": {
+    "value": "1",
+    "formula": ""
+  },
+  "K3": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L3": {
+    "value": "Zwykły, chamski atak",
+    "formula": ""
+  },
+  "O3": {
+    "value": "Topór",
+    "formula": ""
+  },
+  "Q3": {
+    "value": "0",
+    "formula": "OFFSET(_xlfn.XLOOKUP(Ekwipunek!H8,Obl!$B$3:$B$94,Obl!$C$3:$C$94),0,0,_xlfn.XLOOKUP(Ekwipunek!H8,Obl!$B$3:$B$94,$D$3:$D$94))"
+  },
+  "R3": {
+    "value": "0",
+    "formula": ""
+  },
+  "T3": {
+    "value": "karta 1",
+    "formula": ""
+  },
+  "U3": {
+    "value": "0.5",
+    "formula": "Ekwipunek!O27"
+  },
+  "V3": {
+    "value": "0",
+    "formula": "Ekwipunek!O20"
+  },
+  "W3": {
+    "value": "0",
+    "formula": "IF(V3=TRUE,U3,0)"
+  },
+  "Z3": {
+    "value": "Wyrzucona kostka",
+    "formula": ""
+  },
+  "AB3": {
+    "value": "0",
+    "formula": "Ekwipunek!N21"
+  },
+  "AD3": {
+    "value": "Wyrzucona kostka",
+    "formula": ""
+  },
+  "AF3": {
+    "value": "7",
+    "formula": "Ekwipunek!R21"
+  },
+  "AH3": {
+    "value": "Wyrzucona kostka",
+    "formula": ""
+  },
+  "AJ3": {
+    "value": "0",
+    "formula": "Ekwipunek!V21"
+  },
+  "AL3": {
+    "value": "Wyrzucona kostka",
+    "formula": ""
+  },
+  "AN3": {
+    "value": "0",
+    "formula": "Ekwipunek!Z21"
+  },
+  "C4": {
+    "value": "3",
+    "formula": ""
+  },
+  "E4": {
+    "value": "Sierpowy",
+    "formula": ""
+  },
+  "F4": {
+    "value": "0.5",
+    "formula": ""
+  },
+  "G4": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H4": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I4": {
+    "value": "str+dex",
+    "formula": ""
+  },
+  "J4": {
+    "value": "1",
+    "formula": ""
+  },
+  "K4": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L4": {
+    "value": "Twój dex wlicza się do wyrzuconej kostki na trafienie (np. 17+3dex = kryt)",
+    "formula": ""
+  },
+  "O4": {
+    "value": "Miecz",
+    "formula": ""
+  },
+  "Q4": {
+    "value": "3",
+    "formula": ""
+  },
+  "R4": {
+    "value": "1",
+    "formula": ""
+  },
+  "T4": {
+    "value": "karta 2",
+    "formula": ""
+  },
+  "U4": {
+    "value": "",
+    "formula": "Ekwipunek!S27"
+  },
+  "V4": {
+    "value": "0",
+    "formula": "Ekwipunek!S20"
+  },
+  "W4": {
+    "value": "0",
+    "formula": "IF(V4=TRUE,U4,0)"
+  },
+  "Z4": {
+    "value": "Prosty",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),4)"
+  },
+  "AD4": {
+    "value": "Sierpowy",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),4)"
+  },
+  "AH4": {
+    "value": "Prosty",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),4)"
+  },
+  "AL4": {
+    "value": "Prosty",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),4)"
+  },
+  "C5": {
+    "value": "8",
+    "formula": ""
+  },
+  "E5": {
+    "value": "Kontra",
+    "formula": ""
+  },
+  "F5": {
+    "value": "0.5",
+    "formula": ""
+  },
+  "G5": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H5": {
+    "value": "zawsze",
+    "formula": ""
+  },
+  "I5": {
+    "value": "str",
+    "formula": ""
+  },
+  "J5": {
+    "value": "1",
+    "formula": ""
+  },
+  "K5": {
+    "value": "Wroga",
+    "formula": ""
+  },
+  "L5": {
+    "value": "Zniwecz",
+    "formula": ""
+  },
+  "O5": {
+    "value": "Buzdygan",
+    "formula": ""
+  },
+  "Q5": {
+    "value": "8",
+    "formula": ""
+  },
+  "R5": {
+    "value": "2",
+    "formula": ""
+  },
+  "C6": {
+    "value": "10",
+    "formula": ""
+  },
+  "E6": {
+    "value": "Łokieto",
+    "formula": ""
+  },
+  "F6": {
+    "value": "1",
+    "formula": ""
+  },
+  "G6": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H6": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I6": {
+    "value": "str",
+    "formula": ""
+  },
+  "J6": {
+    "value": "1",
+    "formula": ""
+  },
+  "K6": {
+    "value": "Gracza/Soj",
+    "formula": ""
+  },
+  "L6": {
+    "value": "Odepchnij wroga 5ft w wybranym kierunku (save: d20+str>13+str) || Advantage na kolejny atak w cel tego ataku",
+    "formula": ""
+  },
+  "O6": {
+    "value": "Włócznia",
+    "formula": ""
+  },
+  "Q6": {
+    "value": "10",
+    "formula": ""
+  },
+  "R6": {
+    "value": "3",
+    "formula": ""
+  },
+  "T6": {
+    "value": "karta 3",
+    "formula": ""
+  },
+  "U6": {
+    "value": "",
+    "formula": "Ekwipunek!W27"
+  },
+  "V6": {
+    "value": "0",
+    "formula": "Ekwipunek!W20"
+  },
+  "W6": {
+    "value": "0",
+    "formula": ""
+  },
+  "Z6": {
+    "value": "Zwykły, chamski atak",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),11)"
+  },
+  "AD6": {
+    "value": "Twój dex wlicza się do wyrzuconej kostki na trafienie (np. 17+3dex = kryt)",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),11)"
+  },
+  "AH6": {
+    "value": "Zwykły, chamski atak",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),11)"
+  },
+  "AL6": {
+    "value": "Zwykły, chamski atak",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),11)"
+  },
+  "B7": {
+    "value": "Topór",
+    "formula": ""
+  },
+  "C7": {
+    "value": "0",
+    "formula": ""
+  },
+  "D7": {
+    "value": "3",
+    "formula": "COUNT(C7:C9)"
+  },
+  "E7": {
+    "value": "Cios",
+    "formula": ""
+  },
+  "F7": {
+    "value": "1",
+    "formula": ""
+  },
+  "G7": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H7": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I7": {
+    "value": "d6+str",
+    "formula": ""
+  },
+  "J7": {
+    "value": "1",
+    "formula": ""
+  },
+  "K7": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L7": {
+    "value": "Niszczysz drewnianą tarczę wroga || Dezaktywujesz do końca tury inne tarcze",
+    "formula": ""
+  },
+  "M7": {
+    "value": "6",
+    "formula": ""
+  },
+  "O7": {
+    "value": "Miecz długi",
+    "formula": ""
+  },
+  "R7": {
+    "value": "4",
+    "formula": ""
+  },
+  "T7": {
+    "value": "karta 4",
+    "formula": ""
+  },
+  "U7": {
+    "value": "",
+    "formula": "Ekwipunek!AA27"
+  },
+  "V7": {
+    "value": "0",
+    "formula": "Ekwipunek!AA20"
+  },
+  "W7": {
+    "value": "0",
+    "formula": ""
+  },
+  "C8": {
+    "value": "5",
+    "formula": ""
+  },
+  "E8": {
+    "value": "Ogłuszacz",
+    "formula": ""
+  },
+  "F8": {
+    "value": "1",
+    "formula": ""
+  },
+  "G8": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H8": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I8": {
+    "value": "d8+str",
+    "formula": ""
+  },
+  "J8": {
+    "value": "1",
+    "formula": ""
+  },
+  "K8": {
+    "value": "Gracza/Wroga",
+    "formula": ""
+  },
+  "L8": {
+    "value": "Wróg twojego rozmiaru traci cały ruch || Cel tego ataku otrzymuje -4 do rzutów wszystkimi kostkami (save: d20+str>13+str)",
+    "formula": ""
+  },
+  "O8": {
+    "value": "Topór dwuręczny",
+    "formula": ""
+  },
+  "R8": {
+    "value": "5",
+    "formula": ""
+  },
+  "C9": {
+    "value": "10",
+    "formula": ""
+  },
+  "E9": {
+    "value": "Rąbanie",
+    "formula": ""
+  },
+  "F9": {
+    "value": "1.5",
+    "formula": ""
+  },
+  "G9": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H9": {
+    "value": "d12+2xdex",
+    "formula": ""
+  },
+  "I9": {
+    "value": "d6+str",
+    "formula": ""
+  },
+  "J9": {
+    "value": "4",
+    "formula": ""
+  },
+  "K9": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L9": {
+    "value": "Otrzymujesz 10ft ruchu (tylko raz)",
+    "formula": ""
+  },
+  "O9": {
+    "value": "Miecz dwuręczny",
+    "formula": ""
+  },
+  "R9": {
+    "value": "6",
+    "formula": ""
+  },
+  "B10": {
+    "value": "Miecz",
+    "formula": ""
+  },
+  "C10": {
+    "value": "0",
+    "formula": ""
+  },
+  "D10": {
+    "value": "5",
+    "formula": "COUNT(C10:C14)"
+  },
+  "E10": {
+    "value": "Cięcie",
+    "formula": ""
+  },
+  "F10": {
+    "value": "1",
+    "formula": ""
+  },
+  "G10": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H10": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I10": {
+    "value": "d6+1/2(dex+str)",
+    "formula": ""
+  },
+  "J10": {
+    "value": "1",
+    "formula": ""
+  },
+  "K10": {
+    "value": "Gracza/Soj",
+    "formula": ""
+  },
+  "L10": {
+    "value": "Zwykły atak",
+    "formula": ""
+  },
+  "M10": {
+    "value": "15",
+    "formula": ""
+  },
+  "O10": {
+    "value": "Młot dwuręczny",
+    "formula": ""
+  },
+  "R10": {
+    "value": "7",
+    "formula": ""
+  },
+  "Z10": {
+    "value": "Dmg",
+    "formula": ""
+  },
+  "AA10": {
+    "value": "str",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),8)"
+  },
+  "AB10": {
+    "value": "Akcja",
+    "formula": ""
+  },
+  "AC10": {
+    "value": "0.5",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),5)"
+  },
+  "AD10": {
+    "value": "Dmg",
+    "formula": ""
+  },
+  "AE10": {
+    "value": "str+dex",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),8)"
+  },
+  "AF10": {
+    "value": "Akcja",
+    "formula": ""
+  },
+  "AG10": {
+    "value": "0.5",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),5)"
+  },
+  "AH10": {
+    "value": "Dmg",
+    "formula": ""
+  },
+  "AI10": {
+    "value": "str",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),8)"
+  },
+  "AJ10": {
+    "value": "Akcja",
+    "formula": ""
+  },
+  "AK10": {
+    "value": "0.5",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),5)"
+  },
+  "AL10": {
+    "value": "Dmg",
+    "formula": ""
+  },
+  "AM10": {
+    "value": "str",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),8)"
+  },
+  "AN10": {
+    "value": "Akcja",
+    "formula": ""
+  },
+  "AO10": {
+    "value": "0.5",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),5)"
+  },
+  "C11": {
+    "value": "2",
+    "formula": ""
+  },
+  "E11": {
+    "value": "Blok",
+    "formula": ""
+  },
+  "F11": {
+    "value": "0.5",
+    "formula": ""
+  },
+  "G11": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H11": {
+    "value": "X",
+    "formula": ""
+  },
+  "I11": {
+    "value": "X",
+    "formula": ""
+  },
+  "J11": {
+    "value": "1",
+    "formula": ""
+  },
+  "K11": {
+    "value": "Wroga",
+    "formula": ""
+  },
+  "L11": {
+    "value": "jedną",
+    "formula": ""
+  },
+  "O11": {
+    "value": "Włócznia długa",
+    "formula": ""
+  },
+  "Z11": {
+    "value": "Trafienie",
+    "formula": ""
+  },
+  "AA11": {
+    "value": "d20+dex",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),7)"
+  },
+  "AB11": {
+    "value": "Ilośc celów",
+    "formula": ""
+  },
+  "AC11": {
+    "value": "1",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),9)"
+  },
+  "AD11": {
+    "value": "Trafienie",
+    "formula": ""
+  },
+  "AE11": {
+    "value": "d20+dex",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),7)"
+  },
+  "AF11": {
+    "value": "Ilośc celów",
+    "formula": ""
+  },
+  "AG11": {
+    "value": "1",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),9)"
+  },
+  "AH11": {
+    "value": "Trafienie",
+    "formula": ""
+  },
+  "AI11": {
+    "value": "d20+dex",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),7)"
+  },
+  "AJ11": {
+    "value": "Ilośc celów",
+    "formula": ""
+  },
+  "AK11": {
+    "value": "1",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),9)"
+  },
+  "AL11": {
+    "value": "Trafienie",
+    "formula": ""
+  },
+  "AM11": {
+    "value": "d20+dex",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),7)"
+  },
+  "AN11": {
+    "value": "Ilośc celów",
+    "formula": ""
+  },
+  "AO11": {
+    "value": "1",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),9)"
+  },
+  "C12": {
+    "value": "5",
+    "formula": ""
+  },
+  "E12": {
+    "value": "Cios w plecy",
+    "formula": ""
+  },
+  "F12": {
+    "value": "0",
+    "formula": ""
+  },
+  "G12": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H12": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I12": {
+    "value": "d6+1/2(dex+str)",
+    "formula": ""
+  },
+  "J12": {
+    "value": "1",
+    "formula": ""
+  },
+  "K12": {
+    "value": "Sojusznika",
+    "formula": ""
+  },
+  "L12": {
+    "value": "Zaatakuj sonsiadującego przeciwnika, po atakau sojusznika",
+    "formula": ""
+  },
+  "O12": {
+    "value": "Morning star dwuręczny",
+    "formula": ""
+  },
+  "Z12": {
+    "value": "Zasięg",
+    "formula": ""
+  },
+  "AA12": {
+    "value": "Mele",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),6)"
+  },
+  "AB12": {
+    "value": "Tura",
+    "formula": ""
+  },
+  "AC12": {
+    "value": "Gracza",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),10)"
+  },
+  "AD12": {
+    "value": "Zasięg",
+    "formula": ""
+  },
+  "AE12": {
+    "value": "Mele",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),6)"
+  },
+  "AF12": {
+    "value": "Tura",
+    "formula": ""
+  },
+  "AG12": {
+    "value": "Gracza",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),10)"
+  },
+  "AH12": {
+    "value": "Zasięg",
+    "formula": ""
+  },
+  "AI12": {
+    "value": "Mele",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),6)"
+  },
+  "AJ12": {
+    "value": "Tura",
+    "formula": ""
+  },
+  "AK12": {
+    "value": "Gracza",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),10)"
+  },
+  "AL12": {
+    "value": "Zasięg",
+    "formula": ""
+  },
+  "AM12": {
+    "value": "Mele",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),6)"
+  },
+  "AN12": {
+    "value": "Tura",
+    "formula": ""
+  },
+  "AO12": {
+    "value": "Gracza",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$8,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$3,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),10)"
+  },
+  "C13": {
+    "value": "7",
+    "formula": ""
+  },
+  "E13": {
+    "value": "Pchnięcie",
+    "formula": ""
+  },
+  "F13": {
+    "value": "1",
+    "formula": ""
+  },
+  "G13": {
+    "value": "5ft",
+    "formula": ""
+  },
+  "H13": {
+    "value": "d20+2xdex",
+    "formula": ""
+  },
+  "I13": {
+    "value": "d8+1/2(dex+str)",
+    "formula": ""
+  },
+  "J13": {
+    "value": "1",
+    "formula": ""
+  },
+  "K13": {
+    "value": "Gracza/Soj",
+    "formula": ""
+  },
+  "L13": {
+    "value": "Doskakujesz 5ft a następnie wykonujesz atak",
+    "formula": ""
+  },
+  "O13": {
+    "value": "Halabarda",
+    "formula": ""
+  },
+  "C14": {
+    "value": "10",
+    "formula": ""
+  },
+  "E14": {
+    "value": "Rozbrojenie",
+    "formula": ""
+  },
+  "F14": {
+    "value": "1",
+    "formula": ""
+  },
+  "G14": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H14": {
+    "value": "X",
+    "formula": ""
+  },
+  "I14": {
+    "value": "X",
+    "formula": ""
+  },
+  "J14": {
+    "value": "1",
+    "formula": ""
+  },
+  "K14": {
+    "value": "Sojusznka/Wro",
+    "formula": ""
+  },
+  "L14": {
+    "value": "Zniwecz jedną akcje przeciniwka || Rozbrój wroga (save: d20+dex>d20+dex wroga)",
+    "formula": ""
+  },
+  "O14": {
+    "value": "Kusza ręczna",
+    "formula": ""
+  },
+  "Z14": {
+    "value": "Karty Broń 2",
+    "formula": ""
+  },
+  "B15": {
+    "value": "Buzdygan",
+    "formula": ""
+  },
+  "C15": {
+    "value": "0",
+    "formula": ""
+  },
+  "D15": {
+    "value": "3",
+    "formula": "COUNT(C15:C17)"
+  },
+  "E15": {
+    "value": "Cios",
+    "formula": ""
+  },
+  "F15": {
+    "value": "1",
+    "formula": ""
+  },
+  "G15": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H15": {
+    "value": "d20-2+dex",
+    "formula": ""
+  },
+  "I15": {
+    "value": "2xstr",
+    "formula": ""
+  },
+  "J15": {
+    "value": "1",
+    "formula": ""
+  },
+  "K15": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L15": {
+    "value": "Advantage na kolejny atak przeciwko trafionemu przeciwnikowi o mniejszym str od ciebie",
+    "formula": ""
+  },
+  "M15": {
+    "value": "5",
+    "formula": ""
+  },
+  "O15": {
+    "value": "Kusza ciężka",
+    "formula": ""
+  },
+  "Z15": {
+    "value": "Karta 1",
+    "formula": ""
+  },
+  "AB15": {
+    "value": "Użyta",
+    "formula": ""
+  },
+  "AC15": {
+    "value": "0",
+    "formula": "Ekwipunek!O32"
+  },
+  "AD15": {
+    "value": "Karta 2",
+    "formula": ""
+  },
+  "AF15": {
+    "value": "Użyta",
+    "formula": ""
+  },
+  "AG15": {
+    "value": "0",
+    "formula": "Ekwipunek!S32"
+  },
+  "AH15": {
+    "value": "Karta 3",
+    "formula": ""
+  },
+  "AJ15": {
+    "value": "Użyta",
+    "formula": ""
+  },
+  "AK15": {
+    "value": "0",
+    "formula": "Ekwipunek!W32"
+  },
+  "AL15": {
+    "value": "Karta 4",
+    "formula": ""
+  },
+  "AN15": {
+    "value": "Użyta",
+    "formula": ""
+  },
+  "AO15": {
+    "value": "0",
+    "formula": "Ekwipunek!AA32"
+  },
+  "C16": {
+    "value": "5",
+    "formula": ""
+  },
+  "E16": {
+    "value": "Obuch",
+    "formula": ""
+  },
+  "F16": {
+    "value": "1",
+    "formula": ""
+  },
+  "G16": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H16": {
+    "value": "d20-4+dex",
+    "formula": ""
+  },
+  "I16": {
+    "value": "3xstr",
+    "formula": ""
+  },
+  "J16": {
+    "value": "1",
+    "formula": ""
+  },
+  "K16": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L16": {
+    "value": "Odbierz turę przeciwnikowi o str mniejszym od ciebie",
+    "formula": ""
+  },
+  "O16": {
+    "value": "Łuk krótki",
+    "formula": ""
+  },
+  "Q16": {
+    "value": "Broń 2",
+    "formula": ""
+  },
+  "Z16": {
+    "value": "Wyrzucona kostka",
+    "formula": ""
+  },
+  "AB16": {
+    "value": "0",
+    "formula": "Ekwipunek!N33"
+  },
+  "AD16": {
+    "value": "Wyrzucona kostka",
+    "formula": ""
+  },
+  "AF16": {
+    "value": "0",
+    "formula": "Ekwipunek!R33"
+  },
+  "AH16": {
+    "value": "Wyrzucona kostka",
+    "formula": ""
+  },
+  "AJ16": {
+    "value": "0",
+    "formula": "Ekwipunek!V33"
+  },
+  "AL16": {
+    "value": "Wyrzucona kostka",
+    "formula": ""
+  },
+  "AN16": {
+    "value": "0",
+    "formula": "Ekwipunek!Z33"
+  },
+  "C17": {
+    "value": "10",
+    "formula": ""
+  },
+  "E17": {
+    "value": "Łamacz",
+    "formula": ""
+  },
+  "F17": {
+    "value": "1",
+    "formula": ""
+  },
+  "G17": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H17": {
+    "value": "d20-6+dex",
+    "formula": ""
+  },
+  "I17": {
+    "value": "4xstr",
+    "formula": ""
+  },
+  "J17": {
+    "value": "1",
+    "formula": ""
+  },
+  "K17": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L17": {
+    "value": "Advantage na wszystkie ataki przeciwko trafionemu przeciwnikowi o mniejszym str od ciebie || Jeżeli nie trafisz, przeciwnik zostaje trafiony \"Ciosem\"",
+    "formula": ""
+  },
+  "O17": {
+    "value": "Łuk długi",
+    "formula": ""
+  },
+  "Q17": {
+    "value": "kostki",
+    "formula": ""
+  },
+  "R17": {
+    "value": "liczba",
+    "formula": ""
+  },
+  "U17": {
+    "value": "akcje",
+    "formula": ""
+  },
+  "V17": {
+    "value": "czy użyta?",
+    "formula": ""
+  },
+  "Z17": {
+    "value": "Prosty",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),4)"
+  },
+  "AD17": {
+    "value": "Prosty",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),4)"
+  },
+  "AH17": {
+    "value": "Prosty",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),4)"
+  },
+  "AL17": {
+    "value": "Prosty",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),4)"
+  },
+  "B18": {
+    "value": "Włócznia",
+    "formula": ""
+  },
+  "C18": {
+    "value": "0",
+    "formula": ""
+  },
+  "D18": {
+    "value": "3",
+    "formula": "COUNT(C18:C20)"
+  },
+  "E18": {
+    "value": "Pchnięcia",
+    "formula": ""
+  },
+  "F18": {
+    "value": "2",
+    "formula": ""
+  },
+  "G18": {
+    "value": "5ft",
+    "formula": ""
+  },
+  "H18": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I18": {
+    "value": "d4+str",
+    "formula": ""
+  },
+  "J18": {
+    "value": "3",
+    "formula": ""
+  },
+  "K18": {
+    "value": "Gracza/Wroga",
+    "formula": ""
+  },
+  "L18": {
+    "value": "W trakcie swojej tury możesz wykonac tylko jeden atak || Możesz wykonać tylko jeden atak na przeciwnika pozostajacego w twojej strefie kontrolii || Odpychasz wroga o 5ft (d20+str>13+str)",
+    "formula": ""
+  },
+  "M18": {
+    "value": "5",
+    "formula": ""
+  },
+  "O18": {
+    "value": "Samopał",
+    "formula": ""
+  },
+  "Q18": {
+    "value": "0",
+    "formula": "OFFSET(_xlfn.XLOOKUP(Ekwipunek!H9,Obl!$B$3:$B$94,Obl!$C$3:$C$94),0,0,_xlfn.XLOOKUP(Ekwipunek!H9,Obl!$B$3:$B$94,$D$3:$D$94))"
+  },
+  "R18": {
+    "value": "0",
+    "formula": ""
+  },
+  "T18": {
+    "value": "karta 1",
+    "formula": ""
+  },
+  "U18": {
+    "value": "0.5",
+    "formula": "Ekwipunek!O39"
+  },
+  "V18": {
+    "value": "0",
+    "formula": "Ekwipunek!O32"
+  },
+  "W18": {
+    "value": "0",
+    "formula": "IF(V18=TRUE,U18,0)"
+  },
+  "Z18": {
+    "value": "Zwykły, chamski atak",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$16,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),11)"
+  },
+  "AD18": {
+    "value": "Zwykły, chamski atak",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$16,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),11)"
+  },
+  "AH18": {
+    "value": "Zwykły, chamski atak",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$16,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),11)"
+  },
+  "AL18": {
+    "value": "Zwykły, chamski atak",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$16,Obl!$Q$3:$Q$10,Obl!$R$3:$R$10,,-1),11)"
+  },
+  "C19": {
+    "value": "5",
+    "formula": ""
+  },
+  "E19": {
+    "value": "Ściana włóczni",
+    "formula": ""
+  },
+  "F19": {
+    "value": "1",
+    "formula": ""
+  },
+  "G19": {
+    "value": "5ft",
+    "formula": ""
+  },
+  "H19": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I19": {
+    "value": "d4+str",
+    "formula": ""
+  },
+  "J19": {
+    "value": "3",
+    "formula": ""
+  },
+  "K19": {
+    "value": "Sojusznika",
+    "formula": ""
+  },
+  "L19": {
+    "value": "Aktywój \"Pchnięcia\" po tym jak twój sojusznik aktywóje \"Pchnięcia\"",
+    "formula": ""
+  },
+  "O19": {
+    "value": "Muszkiet",
+    "formula": ""
+  },
+  "Q19": {
+    "value": "3",
+    "formula": ""
+  },
+  "R19": {
+    "value": "1",
+    "formula": ""
+  },
+  "T19": {
+    "value": "karta 2",
+    "formula": ""
+  },
+  "U19": {
+    "value": "",
+    "formula": "Ekwipunek!S39"
+  },
+  "V19": {
+    "value": "0",
+    "formula": "Ekwipunek!S32"
+  },
+  "W19": {
+    "value": "0",
+    "formula": "IF(V19=TRUE,U19,0)"
+  },
+  "C20": {
+    "value": "10",
+    "formula": ""
+  },
+  "E20": {
+    "value": "Przygotowanie",
+    "formula": ""
+  },
+  "F20": {
+    "value": "0",
+    "formula": ""
+  },
+  "K20": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L20": {
+    "value": "Wszystkie pchnięcia do końca następnej tury zadają d4+2xstr",
+    "formula": ""
+  },
+  "O20": {
+    "value": "Oszczep",
+    "formula": ""
+  },
+  "Q20": {
+    "value": "8",
+    "formula": ""
+  },
+  "R20": {
+    "value": "2",
+    "formula": ""
+  },
+  "T20": {
+    "value": "karta 3",
+    "formula": ""
+  },
+  "U20": {
+    "value": "",
+    "formula": "Ekwipunek!W39"
+  },
+  "V20": {
+    "value": "0",
+    "formula": "Ekwipunek!W32"
+  },
+  "W20": {
+    "value": "0",
+    "formula": ""
+  },
+  "B21": {
+    "value": "Miecz długi",
+    "formula": ""
+  },
+  "C21": {
+    "value": "0",
+    "formula": ""
+  },
+  "D21": {
+    "value": "3",
+    "formula": "COUNT(C21:C23)"
+  },
+  "E21": {
+    "value": "Cięcie",
+    "formula": ""
+  },
+  "F21": {
+    "value": "1",
+    "formula": ""
+  },
+  "G21": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H21": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I21": {
+    "value": "d6+dex+str",
+    "formula": ""
+  },
+  "J21": {
+    "value": "1",
+    "formula": ""
+  },
+  "K21": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L21": {
+    "value": "Nie możesz używać innej broni jednoręcznej||zadaje 50% dmg potworą (jeśli rzut ponirzej 16)",
+    "formula": ""
+  },
+  "M21": {
+    "value": "25",
+    "formula": ""
+  },
+  "O21": {
+    "value": "Toporek do rzucania",
+    "formula": ""
+  },
+  "Q21": {
+    "value": "10",
+    "formula": ""
+  },
+  "R21": {
+    "value": "3",
+    "formula": ""
+  },
+  "T21": {
+    "value": "karta 4",
+    "formula": ""
+  },
+  "U21": {
+    "value": "",
+    "formula": "Ekwipunek!AA39"
+  },
+  "V21": {
+    "value": "0",
+    "formula": "Ekwipunek!AA32"
+  },
+  "W21": {
+    "value": "0",
+    "formula": ""
+  },
+  "C22": {
+    "value": "5",
+    "formula": ""
+  },
+  "E22": {
+    "value": "Kontry",
+    "formula": ""
+  },
+  "F22": {
+    "value": "1",
+    "formula": ""
+  },
+  "G22": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "K22": {
+    "value": "Wroga",
+    "formula": ""
+  },
+  "L22": {
+    "value": "Gdy przeciwnik nie trafi ataku wymierzonego w ciebie lub gdy zablokujesz atak przeciwnika, użyj \"Cięcia\" na przeciwniku",
+    "formula": ""
+  },
+  "O22": {
+    "value": "Noże do rzucania",
+    "formula": ""
+  },
+  "R22": {
+    "value": "4",
+    "formula": ""
+  },
+  "Z22": {
+    "value": "Dmg",
+    "formula": ""
+  },
+  "AA22": {
+    "value": "str",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),8)"
+  },
+  "AB22": {
+    "value": "Akcja",
+    "formula": ""
+  },
+  "AC22": {
+    "value": "0.5",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),5)"
+  },
+  "AD22": {
+    "value": "Dmg",
+    "formula": ""
+  },
+  "AE22": {
+    "value": "str",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),8)"
+  },
+  "AF22": {
+    "value": "Akcja",
+    "formula": ""
+  },
+  "AG22": {
+    "value": "0.5",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),5)"
+  },
+  "AH22": {
+    "value": "Dmg",
+    "formula": ""
+  },
+  "AI22": {
+    "value": "str",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),8)"
+  },
+  "AJ22": {
+    "value": "Akcja",
+    "formula": ""
+  },
+  "AK22": {
+    "value": "0.5",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),5)"
+  },
+  "AL22": {
+    "value": "Dmg",
+    "formula": ""
+  },
+  "AM22": {
+    "value": "str",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),8)"
+  },
+  "AN22": {
+    "value": "Akcja",
+    "formula": ""
+  },
+  "AO22": {
+    "value": "0.5",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),5)"
+  },
+  "C23": {
+    "value": "10",
+    "formula": ""
+  },
+  "E23": {
+    "value": "Ścięcie",
+    "formula": ""
+  },
+  "F23": {
+    "value": "1",
+    "formula": ""
+  },
+  "G23": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H23": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I23": {
+    "value": "2d6+dex+str",
+    "formula": ""
+  },
+  "J23": {
+    "value": "1",
+    "formula": ""
+  },
+  "K23": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L23": {
+    "value": "Rzuć d4, w przypadku, gdy wyrzucisz 4, zabij przeciwnika swojego rozmiaru lub zadaj 3xdmg przeciwnikowi większemu od siebie",
+    "formula": ""
+  },
+  "O23": {
+    "value": "Tarcza okrągła (drewniana)",
+    "formula": ""
+  },
+  "R23": {
+    "value": "5",
+    "formula": ""
+  },
+  "Z23": {
+    "value": "Trafienie",
+    "formula": ""
+  },
+  "AA23": {
+    "value": "d20+dex",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),7)"
+  },
+  "AB23": {
+    "value": "Ilośc celów",
+    "formula": ""
+  },
+  "AC23": {
+    "value": "1",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),9)"
+  },
+  "AD23": {
+    "value": "Trafienie",
+    "formula": ""
+  },
+  "AE23": {
+    "value": "d20+dex",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),7)"
+  },
+  "AF23": {
+    "value": "Ilośc celów",
+    "formula": ""
+  },
+  "AG23": {
+    "value": "1",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),9)"
+  },
+  "AH23": {
+    "value": "Trafienie",
+    "formula": ""
+  },
+  "AI23": {
+    "value": "d20+dex",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),7)"
+  },
+  "AJ23": {
+    "value": "Ilośc celów",
+    "formula": ""
+  },
+  "AK23": {
+    "value": "1",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),9)"
+  },
+  "AL23": {
+    "value": "Trafienie",
+    "formula": ""
+  },
+  "AM23": {
+    "value": "d20+dex",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),7)"
+  },
+  "AN23": {
+    "value": "Ilośc celów",
+    "formula": ""
+  },
+  "AO23": {
+    "value": "1",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),9)"
+  },
+  "B24": {
+    "value": "Topór dwuręczny",
+    "formula": ""
+  },
+  "C24": {
+    "value": "0",
+    "formula": ""
+  },
+  "D24": {
+    "value": "3",
+    "formula": "COUNT(C24:C26)"
+  },
+  "E24": {
+    "value": "Ścięcie",
+    "formula": ""
+  },
+  "F24": {
+    "value": "2",
+    "formula": ""
+  },
+  "G24": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H24": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I24": {
+    "value": "d12+2xstr",
+    "formula": ""
+  },
+  "J24": {
+    "value": "1",
+    "formula": ""
+  },
+  "K24": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L24": {
+    "value": "Jeżeli po tym gdy zadasz obrażenia przeciwnikowi, gdy zostanie mu mniej niż 8 życia, ten zostaje zabity || Niszczysz drewnianą tarczę wroga || Dezaktywujesz do końca tury inne tarcz",
+    "formula": ""
+  },
+  "M24": {
+    "value": "45",
+    "formula": ""
+  },
+  "O24": {
+    "value": "Tarcza migdałowata (drewniana)",
+    "formula": ""
+  },
+  "R24": {
+    "value": "6",
+    "formula": ""
+  },
+  "Z24": {
+    "value": "Zasięg",
+    "formula": ""
+  },
+  "AA24": {
+    "value": "Mele",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),6)"
+  },
+  "AB24": {
+    "value": "Tura",
+    "formula": ""
+  },
+  "AC24": {
+    "value": "Gracza",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AB$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),10)"
+  },
+  "AD24": {
+    "value": "Zasięg",
+    "formula": ""
+  },
+  "AE24": {
+    "value": "Mele",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),6)"
+  },
+  "AF24": {
+    "value": "Tura",
+    "formula": ""
+  },
+  "AG24": {
+    "value": "Gracza",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AF$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),10)"
+  },
+  "AH24": {
+    "value": "Zasięg",
+    "formula": ""
+  },
+  "AI24": {
+    "value": "Mele",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),6)"
+  },
+  "AJ24": {
+    "value": "Tura",
+    "formula": ""
+  },
+  "AK24": {
+    "value": "Gracza",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AJ$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),10)"
+  },
+  "AL24": {
+    "value": "Zasięg",
+    "formula": ""
+  },
+  "AM24": {
+    "value": "Mele",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),6)"
+  },
+  "AN24": {
+    "value": "Tura",
+    "formula": ""
+  },
+  "AO24": {
+    "value": "Gracza",
+    "formula": "INDEX($B$3:$M$94,MATCH(Ekwipunek!$H$9,Obl!$B$3:$B$94,0)+_xlfn.XLOOKUP(AN$16,Obl!$Q$18:$Q$24,Obl!$R$18:$R$24,,-1),10)"
+  },
+  "C25": {
+    "value": "5",
+    "formula": ""
+  },
+  "E25": {
+    "value": "Siekacz",
+    "formula": ""
+  },
+  "F25": {
+    "value": "3",
+    "formula": ""
+  },
+  "G25": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H25": {
+    "value": "d12+2xdex",
+    "formula": ""
+  },
+  "I25": {
+    "value": "d6+2str",
+    "formula": ""
+  },
+  "J25": {
+    "value": "sąsiedzi",
+    "formula": ""
+  },
+  "K25": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L25": {
+    "value": "Jeżeli po tym gdy zadasz obrażenia przeciwnikowi, gdy zostanie mu mniej niż 6 życia, ten zostanie zabity",
+    "formula": ""
+  },
+  "O25": {
+    "value": "Puklerz (drewniany)",
+    "formula": ""
+  },
+  "C26": {
+    "value": "10",
+    "formula": ""
+  },
+  "E26": {
+    "value": "Gilotyna",
+    "formula": ""
+  },
+  "F26": {
+    "value": "2",
+    "formula": ""
+  },
+  "G26": {
+    "value": "5ft",
+    "formula": ""
+  },
+  "H26": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I26": {
+    "value": "d12+2xstr",
+    "formula": ""
+  },
+  "J26": {
+    "value": "1",
+    "formula": ""
+  },
+  "K26": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L26": {
+    "value": "Ataku nie można zablokować || Jeżeli po tym gdy zadasz obrażenia przeciwnikowi, gdy zostanie mu mniej niż 20 życia, ten zostaje zabity",
+    "formula": ""
+  },
+  "O26": {
+    "value": "Tarcza rzymska (drewniana)",
+    "formula": ""
+  },
+  "B27": {
+    "value": "Miecz dwuręczny",
+    "formula": ""
+  },
+  "C27": {
+    "value": "0",
+    "formula": ""
+  },
+  "D27": {
+    "value": "4",
+    "formula": "COUNT(C27:C30)"
+  },
+  "E27": {
+    "value": "Pchnięcie",
+    "formula": ""
+  },
+  "F27": {
+    "value": "2",
+    "formula": ""
+  },
+  "G27": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H27": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I27": {
+    "value": "2d6+(dex+str)",
+    "formula": ""
+  },
+  "J27": {
+    "value": "3 w rzędzie",
+    "formula": ""
+  },
+  "K27": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L27": {
+    "value": "Potężny atak na wprost",
+    "formula": ""
+  },
+  "M27": {
+    "value": "60",
+    "formula": ""
+  },
+  "O27": {
+    "value": "Tarcza okrągła (żelazna)",
+    "formula": ""
+  },
+  "C28": {
+    "value": "1",
+    "formula": ""
+  },
+  "E28": {
+    "value": "Cięcie z zamachu",
+    "formula": ""
+  },
+  "F28": {
+    "value": "2",
+    "formula": ""
+  },
+  "G28": {
+    "value": "Mele/5ft",
+    "formula": ""
+  },
+  "H28": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I28": {
+    "value": "2d6+(dex+str)",
+    "formula": ""
+  },
+  "J28": {
+    "value": "3 w łuku",
+    "formula": ""
+  },
+  "K28": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L28": {
+    "value": "Potężny atak w łuku",
+    "formula": ""
+  },
+  "O28": {
+    "value": "Tarcza migdałowata (żelazna)",
+    "formula": ""
+  },
+  "C29": {
+    "value": "2",
+    "formula": ""
+  },
+  "E29": {
+    "value": "Bloki",
+    "formula": ""
+  },
+  "F29": {
+    "value": "1",
+    "formula": ""
+  },
+  "G29": {
+    "value": "Mele/5ft",
+    "formula": ""
+  },
+  "J29": {
+    "value": "3",
+    "formula": ""
+  },
+  "K29": {
+    "value": "Wroga",
+    "formula": ""
+  },
+  "L29": {
+    "value": "Zniwecz jedną akcję sonsiadującego przeciwnika (save: d20+2xdex>rzut na trafienie wroga) || Możliwe 3 użycia",
+    "formula": ""
+  },
+  "O29": {
+    "value": "Puklerz (żelazny)",
+    "formula": ""
+  },
+  "C30": {
+    "value": "10",
+    "formula": ""
+  },
+  "E30": {
+    "value": "Przygotowanie",
+    "formula": ""
+  },
+  "F30": {
+    "value": "1",
+    "formula": ""
+  },
+  "K30": {
+    "value": "Sojusznika/Wro",
+    "formula": ""
+  },
+  "L30": {
+    "value": "Użyj dowolną kartę miecza dwóręcznego",
+    "formula": ""
+  },
+  "O30": {
+    "value": "Tarcza rzymska (żelazna)",
+    "formula": ""
+  },
+  "B31": {
+    "value": "Młot dwuręczny",
+    "formula": ""
+  },
+  "C31": {
+    "value": "0",
+    "formula": ""
+  },
+  "D31": {
+    "value": "3",
+    "formula": "COUNT(C31:C33)"
+  },
+  "E31": {
+    "value": "Uderzenie",
+    "formula": ""
+  },
+  "F31": {
+    "value": "2",
+    "formula": ""
+  },
+  "G31": {
+    "value": "5ft",
+    "formula": ""
+  },
+  "H31": {
+    "value": "d20+1/2dex",
+    "formula": ""
+  },
+  "I31": {
+    "value": "d12+2xstr",
+    "formula": ""
+  },
+  "J31": {
+    "value": "1",
+    "formula": ""
+  },
+  "K31": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L31": {
+    "value": "Przeciwnik zostaje przesunięty na koniec turn ordera (save: d20+str>15+2xstr)",
+    "formula": ""
+  },
+  "M31": {
+    "value": "30",
+    "formula": ""
+  },
+  "C32": {
+    "value": "6",
+    "formula": ""
+  },
+  "E32": {
+    "value": "Trzęsienei ziemi",
+    "formula": ""
+  },
+  "F32": {
+    "value": "3",
+    "formula": ""
+  },
+  "G32": {
+    "value": "5ft",
+    "formula": ""
+  },
+  "H32": {
+    "value": "d20",
+    "formula": ""
+  },
+  "I32": {
+    "value": "d12+2xstr",
+    "formula": ""
+  },
+  "J32": {
+    "value": "1",
+    "formula": ""
+  },
+  "K32": {
+    "value": "Gracz",
+    "formula": ""
+  },
+  "L32": {
+    "value": "Zniwecz akcję istot sonsiadujących z polem ataku (save: d20+str>15+2xstr) || Istoty na sonsiadujących polach otrzymuja d4+str dmg",
+    "formula": ""
+  },
+  "C33": {
+    "value": "10",
+    "formula": ""
+  },
+  "E33": {
+    "value": "Miażdżący cios",
+    "formula": ""
+  },
+  "F33": {
+    "value": "2",
+    "formula": ""
+  },
+  "G33": {
+    "value": "mele",
+    "formula": ""
+  },
+  "H33": {
+    "value": "d20",
+    "formula": ""
+  },
+  "I33": {
+    "value": "2d12+4xstr",
+    "formula": ""
+  },
+  "J33": {
+    "value": "1",
+    "formula": ""
+  },
+  "K33": {
+    "value": "Gracz",
+    "formula": ""
+  },
+  "L33": {
+    "value": "Spraw, że sąsiedzi przeciwnika mogą go raz zaatakować za darmo (save: d20+str>15+2xstr)",
+    "formula": ""
+  },
+  "B34": {
+    "value": "Włócznia długa",
+    "formula": ""
+  },
+  "C34": {
+    "value": "0",
+    "formula": ""
+  },
+  "D34": {
+    "value": "3",
+    "formula": "COUNT(C34:C36)"
+  },
+  "E34": {
+    "value": "Pchnięcia",
+    "formula": ""
+  },
+  "F34": {
+    "value": "2",
+    "formula": ""
+  },
+  "G34": {
+    "value": "10ft",
+    "formula": ""
+  },
+  "H34": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I34": {
+    "value": "d8+2xstr",
+    "formula": ""
+  },
+  "J34": {
+    "value": "3",
+    "formula": ""
+  },
+  "K34": {
+    "value": "Gracza/Wroga",
+    "formula": ""
+  },
+  "L34": {
+    "value": "W trakcie swojej tury możesz wykonac tylko jeden atak || Możesz wykonać tylko jeden atak na przeciwnika pozostajacego w twojej strefie kontrolii || Odpychasz wroga o 5ft (d20+str>13+str)",
+    "formula": ""
+  },
+  "M34": {
+    "value": "20",
+    "formula": ""
+  },
+  "C35": {
+    "value": "5",
+    "formula": ""
+  },
+  "E35": {
+    "value": "Ściana włóczni",
+    "formula": ""
+  },
+  "F35": {
+    "value": "1",
+    "formula": ""
+  },
+  "G35": {
+    "value": "10ft",
+    "formula": ""
+  },
+  "H35": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I35": {
+    "value": "d8+2xstr",
+    "formula": ""
+  },
+  "J35": {
+    "value": "3",
+    "formula": ""
+  },
+  "K35": {
+    "value": "Sojusznika",
+    "formula": ""
+  },
+  "L35": {
+    "value": "Aktywój \"Pchnięcia\" po tym jak twój sojusznik aktywóje \"Pchnięcia\"",
+    "formula": ""
+  },
+  "C36": {
+    "value": "10",
+    "formula": ""
+  },
+  "E36": {
+    "value": "Przygotowanie",
+    "formula": ""
+  },
+  "F36": {
+    "value": "0",
+    "formula": ""
+  },
+  "K36": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L36": {
+    "value": "Wszystkie pchnięcia do końca następnej tury zadają d8+3xstr",
+    "formula": ""
+  },
+  "B37": {
+    "value": "Morning star dwuręczny",
+    "formula": ""
+  },
+  "C37": {
+    "value": "0",
+    "formula": ""
+  },
+  "D37": {
+    "value": "4",
+    "formula": "COUNT(C37:C40)"
+  },
+  "E37": {
+    "value": "Zamachy",
+    "formula": ""
+  },
+  "F37": {
+    "value": "1",
+    "formula": ""
+  },
+  "G37": {
+    "value": "5ft",
+    "formula": ""
+  },
+  "H37": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I37": {
+    "value": "d8+1,5str",
+    "formula": ""
+  },
+  "J37": {
+    "value": "2",
+    "formula": ""
+  },
+  "K37": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L37": {
+    "value": "Odpycha 5ft || Możesz przerzucić 2 kostki w trakcie używania tej karty",
+    "formula": ""
+  },
+  "M37": {
+    "value": "25",
+    "formula": ""
+  },
+  "C38": {
+    "value": "3",
+    "formula": ""
+  },
+  "E38": {
+    "value": "Złapanie",
+    "formula": ""
+  },
+  "F38": {
+    "value": "1",
+    "formula": ""
+  },
+  "G38": {
+    "value": "10ft",
+    "formula": ""
+  },
+  "H38": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I38": {
+    "value": "d6+str",
+    "formula": ""
+  },
+  "J38": {
+    "value": "1",
+    "formula": ""
+  },
+  "K38": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L38": {
+    "value": "Przewracasz i przeciągasz istotę 10ft w wybranym kierunku nie oddalając jej od siebie (save: d20+str>16+2str)",
+    "formula": ""
+  },
+  "C39": {
+    "value": "6",
+    "formula": ""
+  },
+  "E39": {
+    "value": "Szybkie uderzenia",
+    "formula": ""
+  },
+  "F39": {
+    "value": "1.5",
+    "formula": ""
+  },
+  "G39": {
+    "value": "5ft",
+    "formula": ""
+  },
+  "H39": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I39": {
+    "value": "d8+1,5str",
+    "formula": ""
+  },
+  "J39": {
+    "value": "3",
+    "formula": ""
+  },
+  "K39": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L39": {
+    "value": "Możesz przerzucić 6 kostek w trakcie użwania tej karty",
+    "formula": ""
+  },
+  "C40": {
+    "value": "10",
+    "formula": ""
+  },
+  "E40": {
+    "value": "Złapanie",
+    "formula": ""
+  },
+  "F40": {
+    "value": "1.5",
+    "formula": ""
+  },
+  "G40": {
+    "value": "5ft",
+    "formula": ""
+  },
+  "H40": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I40": {
+    "value": "d8+1,5str",
+    "formula": ""
+  },
+  "J40": {
+    "value": "6",
+    "formula": ""
+  },
+  "K40": {
+    "value": "Sojusznika",
+    "formula": ""
+  },
+  "L40": {
+    "value": "Gdy sojusznik zaatakuje przeciwnika, możesz wykonać \"Zamachy\" || Sojusznik otrzymuje możliwość przerzucenia jednej ze swoich kostek w trakcie ataku",
+    "formula": ""
+  },
+  "B41": {
+    "value": "Halabarda",
+    "formula": ""
+  },
+  "C41": {
+    "value": "0",
+    "formula": ""
+  },
+  "D41": {
+    "value": "4",
+    "formula": "COUNT(C41:C44)"
+  },
+  "E41": {
+    "value": "Pchnięcie",
+    "formula": ""
+  },
+  "F41": {
+    "value": "2",
+    "formula": ""
+  },
+  "G41": {
+    "value": "5ft",
+    "formula": ""
+  },
+  "H41": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I41": {
+    "value": "d4+2xstr",
+    "formula": ""
+  },
+  "J41": {
+    "value": "3",
+    "formula": ""
+  },
+  "K41": {
+    "value": "Gracza/Wroga",
+    "formula": ""
+  },
+  "L41": {
+    "value": "W trakcie swojej tury możesz wykonac tylko jeden atak || Możesz wykonać tylko jeden atak na przeciwnika pozostajacego w twojej strefie kontrolii || Odpychasz wroga o 5ft (d20+str>13+2xstr)",
+    "formula": ""
+  },
+  "M41": {
+    "value": "75",
+    "formula": ""
+  },
+  "C42": {
+    "value": "1",
+    "formula": ""
+  },
+  "E42": {
+    "value": "Wbicie szpikulca",
+    "formula": ""
+  },
+  "F42": {
+    "value": "2",
+    "formula": ""
+  },
+  "G42": {
+    "value": "5ft",
+    "formula": ""
+  },
+  "H42": {
+    "value": "d20+1/2dex",
+    "formula": ""
+  },
+  "I42": {
+    "value": "d10+2xstr",
+    "formula": ""
+  },
+  "J42": {
+    "value": "1",
+    "formula": ""
+  },
+  "K42": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L42": {
+    "value": "Przeciwnik zostaje przesunięty na koniec turn ordera (save: d20+str>15+2xstr)",
+    "formula": ""
+  },
+  "C43": {
+    "value": "2",
+    "formula": ""
+  },
+  "E43": {
+    "value": "Przycągnięcie",
+    "formula": ""
+  },
+  "F43": {
+    "value": "2",
+    "formula": ""
+  },
+  "G43": {
+    "value": "10ft",
+    "formula": ""
+  },
+  "H43": {
+    "value": "d20+1/2dex",
+    "formula": ""
+  },
+  "I43": {
+    "value": "d6+2xstr",
+    "formula": ""
+  },
+  "J43": {
+    "value": "1",
+    "formula": ""
+  },
+  "K43": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L43": {
+    "value": "Przyciągasz istotę 10ft w wybranym kierunku (save: d20+str>16+2str)",
+    "formula": ""
+  },
+  "C44": {
+    "value": "3",
+    "formula": ""
+  },
+  "E44": {
+    "value": "Zamach toporem",
+    "formula": ""
+  },
+  "F44": {
+    "value": "2",
+    "formula": ""
+  },
+  "G44": {
+    "value": "5ft",
+    "formula": ""
+  },
+  "H44": {
+    "value": "d20+1dex",
+    "formula": ""
+  },
+  "I44": {
+    "value": "d8+2xstr",
+    "formula": ""
+  },
+  "J44": {
+    "value": "1",
+    "formula": ""
+  },
+  "K44": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L44": {
+    "value": "Jeżeli po tym gdy zadasz obrażenia przeciwnikowi, gdy zostanie mu mniej niż 6 życia, ten zostaje zabity",
+    "formula": ""
+  },
+  "B45": {
+    "value": "Kusza ręczna",
+    "formula": ""
+  },
+  "C45": {
+    "value": "0",
+    "formula": ""
+  },
+  "D45": {
+    "value": "4",
+    "formula": "COUNT(C45:C48)"
+  },
+  "E45": {
+    "value": "Strzał",
+    "formula": ""
+  },
+  "F45": {
+    "value": "2",
+    "formula": ""
+  },
+  "G45": {
+    "value": "40/200",
+    "formula": ""
+  },
+  "H45": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I45": {
+    "value": "d10+4",
+    "formula": ""
+  },
+  "J45": {
+    "value": "1",
+    "formula": ""
+  },
+  "K45": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L45": {
+    "value": "Zwykły strzał (1 bełt)",
+    "formula": ""
+  },
+  "M45": {
+    "value": "25",
+    "formula": ""
+  },
+  "C46": {
+    "value": "4",
+    "formula": ""
+  },
+  "E46": {
+    "value": "Strzał w brzuch",
+    "formula": ""
+  },
+  "F46": {
+    "value": "2",
+    "formula": ""
+  },
+  "G46": {
+    "value": "40/200",
+    "formula": ""
+  },
+  "H46": {
+    "value": "d20+2xdex",
+    "formula": ""
+  },
+  "I46": {
+    "value": "d10+4",
+    "formula": ""
+  },
+  "J46": {
+    "value": "1",
+    "formula": ""
+  },
+  "K46": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L46": {
+    "value": "Przebij mu żołądek (1 bełt)",
+    "formula": ""
+  },
+  "C47": {
+    "value": "7",
+    "formula": ""
+  },
+  "E47": {
+    "value": "Strzał w stópki",
+    "formula": ""
+  },
+  "F47": {
+    "value": "2",
+    "formula": ""
+  },
+  "G47": {
+    "value": "40/200",
+    "formula": ""
+  },
+  "H47": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I47": {
+    "value": "d8+2",
+    "formula": ""
+  },
+  "J47": {
+    "value": "1",
+    "formula": ""
+  },
+  "K47": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L47": {
+    "value": "Przeciwnik nie może się ruszyć w tej turze (1 bełt)",
+    "formula": ""
+  },
+  "C48": {
+    "value": "10",
+    "formula": ""
+  },
+  "E48": {
+    "value": "Strzał w głowę",
+    "formula": ""
+  },
+  "F48": {
+    "value": "2",
+    "formula": ""
+  },
+  "G48": {
+    "value": "40/200",
+    "formula": ""
+  },
+  "H48": {
+    "value": "d20+1/2xdex",
+    "formula": ""
+  },
+  "I48": {
+    "value": "2d10+8",
+    "formula": ""
+  },
+  "J48": {
+    "value": "1",
+    "formula": ""
+  },
+  "K48": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L48": {
+    "value": "Z tego się nie pozbiera (1 bełt)",
+    "formula": ""
+  },
+  "B49": {
+    "value": "Kusza ciężka",
+    "formula": ""
+  },
+  "C49": {
+    "value": "0",
+    "formula": ""
+  },
+  "D49": {
+    "value": "4",
+    "formula": "COUNT(C49:C52)"
+  },
+  "E49": {
+    "value": "Strzał",
+    "formula": ""
+  },
+  "F49": {
+    "value": "3",
+    "formula": ""
+  },
+  "G49": {
+    "value": "80/400",
+    "formula": ""
+  },
+  "H49": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I49": {
+    "value": "2d10+8",
+    "formula": ""
+  },
+  "J49": {
+    "value": "1",
+    "formula": ""
+  },
+  "K49": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L49": {
+    "value": "Zwykly strzał (1 bełt)",
+    "formula": ""
+  },
+  "M49": {
+    "value": "80",
+    "formula": ""
+  },
+  "C50": {
+    "value": "4",
+    "formula": ""
+  },
+  "E50": {
+    "value": "Przyczajenie",
+    "formula": ""
+  },
+  "F50": {
+    "value": "2",
+    "formula": ""
+  },
+  "G50": {
+    "value": "80/400",
+    "formula": ""
+  },
+  "H50": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I50": {
+    "value": "2d10+8",
+    "formula": ""
+  },
+  "J50": {
+    "value": "1",
+    "formula": ""
+  },
+  "K50": {
+    "value": "Wroga",
+    "formula": ""
+  },
+  "L50": {
+    "value": "Gdy wróg pojawi się w twoim polu widzenie możesz wykonać \"Strzał\" (1 bełt)",
+    "formula": ""
+  },
+  "C51": {
+    "value": "8",
+    "formula": ""
+  },
+  "E51": {
+    "value": "Strzał przebijający",
+    "formula": ""
+  },
+  "F51": {
+    "value": "3",
+    "formula": ""
+  },
+  "G51": {
+    "value": "80/400",
+    "formula": ""
+  },
+  "H51": {
+    "value": "d20+1/2dex",
+    "formula": ""
+  },
+  "I51": {
+    "value": "2d8+4",
+    "formula": ""
+  },
+  "J51": {
+    "value": "2 w rzędzie",
+    "formula": ""
+  },
+  "K51": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L51": {
+    "value": "Strzał ale nie tylko cel dostanie  (1 bełt)",
+    "formula": ""
+  },
+  "C52": {
+    "value": "10",
+    "formula": ""
+  },
+  "E52": {
+    "value": "Strzał w głowę",
+    "formula": ""
+  },
+  "F52": {
+    "value": "3",
+    "formula": ""
+  },
+  "G52": {
+    "value": "80/400",
+    "formula": ""
+  },
+  "H52": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I52": {
+    "value": "3d10+12",
+    "formula": ""
+  },
+  "J52": {
+    "value": "1",
+    "formula": ""
+  },
+  "K52": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L52": {
+    "value": "Twój dex wlicza się do wyrzuconej kostki na trafienie (np. 17+3dex = kryt)",
+    "formula": ""
+  },
+  "B53": {
+    "value": "Łuk krótki",
+    "formula": ""
+  },
+  "C53": {
+    "value": "0",
+    "formula": ""
+  },
+  "D53": {
+    "value": "3",
+    "formula": "COUNT(C53:C55)"
+  },
+  "E53": {
+    "value": "Strzał",
+    "formula": ""
+  },
+  "F53": {
+    "value": "1",
+    "formula": ""
+  },
+  "G53": {
+    "value": "40/200",
+    "formula": ""
+  },
+  "H53": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I53": {
+    "value": "d8+1/2str",
+    "formula": ""
+  },
+  "J53": {
+    "value": "1",
+    "formula": ""
+  },
+  "K53": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L53": {
+    "value": "po udanym trafieniu w przeciwnika możesz otrzymać adv na kolejne trafienia w tego przeciwnika lub adv na dmg na tego przeciwnika w tej turze (1 strzała)",
+    "formula": ""
+  },
+  "M53": {
+    "value": "65",
+    "formula": ""
+  },
+  "C54": {
+    "value": "7",
+    "formula": ""
+  },
+  "E54": {
+    "value": "Szybkie strzały",
+    "formula": ""
+  },
+  "F54": {
+    "value": "1.5",
+    "formula": ""
+  },
+  "G54": {
+    "value": "30/200",
+    "formula": ""
+  },
+  "H54": {
+    "value": "d20+1/2dex",
+    "formula": ""
+  },
+  "I54": {
+    "value": "d6+1/2str",
+    "formula": ""
+  },
+  "J54": {
+    "value": "3",
+    "formula": ""
+  },
+  "K54": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L54": {
+    "value": "po udanym trafieniu w przeciwnika możesz otrzymać adv na kolejne trafienia w tego przeciwnika lub adv na dmg na tego przeciwnika w tej turze (3 strzału)",
+    "formula": ""
+  },
+  "C55": {
+    "value": "10",
+    "formula": ""
+  },
+  "E55": {
+    "value": "Deszcz strzał",
+    "formula": ""
+  },
+  "F55": {
+    "value": "2",
+    "formula": ""
+  },
+  "G55": {
+    "value": "120",
+    "formula": ""
+  },
+  "I55": {
+    "value": "d4+1/2str",
+    "formula": ""
+  },
+  "J55": {
+    "value": "5 pól",
+    "formula": ""
+  },
+  "K55": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L55": {
+    "value": "Istoty na wybranych pięciu sonsiadujących plach jeżeli nie uda im się save throw, otrzymują obrażenia krytyczne (save: d20+dex>14+dex) (8 strzał)",
+    "formula": ""
+  },
+  "B56": {
+    "value": "Łuk długi",
+    "formula": ""
+  },
+  "C56": {
+    "value": "0",
+    "formula": ""
+  },
+  "D56": {
+    "value": "3",
+    "formula": "COUNT(C56:C58)"
+  },
+  "E56": {
+    "value": "Strzał",
+    "formula": ""
+  },
+  "F56": {
+    "value": "2",
+    "formula": ""
+  },
+  "G56": {
+    "value": "60/400",
+    "formula": ""
+  },
+  "H56": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I56": {
+    "value": "d8+str",
+    "formula": ""
+  },
+  "J56": {
+    "value": "1",
+    "formula": ""
+  },
+  "K56": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L56": {
+    "value": "Twój dex wlicza się do wyrzuconej kostki na trafienie (np. 17+3dex = kryt) (1 strzała)",
+    "formula": ""
+  },
+  "M56": {
+    "value": "100",
+    "formula": ""
+  },
+  "C57": {
+    "value": "5",
+    "formula": ""
+  },
+  "E57": {
+    "value": "Celny strzał",
+    "formula": ""
+  },
+  "F57": {
+    "value": "2",
+    "formula": ""
+  },
+  "G57": {
+    "value": "80/400",
+    "formula": ""
+  },
+  "H57": {
+    "value": "d20+d4+2dex",
+    "formula": ""
+  },
+  "I57": {
+    "value": "d8+1,5str",
+    "formula": ""
+  },
+  "J57": {
+    "value": "1",
+    "formula": ""
+  },
+  "K57": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L57": {
+    "value": "Twój dex wlicza się do wyrzuconej kostki na trafienie (np. 17+3dex = kryt) (1 strzała)",
+    "formula": ""
+  },
+  "C58": {
+    "value": "10",
+    "formula": ""
+  },
+  "E58": {
+    "value": "Strzał w oko",
+    "formula": ""
+  },
+  "F58": {
+    "value": "2",
+    "formula": ""
+  },
+  "G58": {
+    "value": "120/400",
+    "formula": ""
+  },
+  "H58": {
+    "value": "2d20+2d8+2dex",
+    "formula": ""
+  },
+  "I58": {
+    "value": "d8+2str",
+    "formula": ""
+  },
+  "J58": {
+    "value": "1",
+    "formula": ""
+  },
+  "K58": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L58": {
+    "value": "Twój dex wlicza się do wyrzuconej kostki na trafienie (np. 17+3dex = kryt) || Jeżeli twój wynik na trafienie będzie większy niż 40, zadaj 4x obrażenia (1 strzała)",
+    "formula": ""
+  },
+  "B59": {
+    "value": "Samopał",
+    "formula": ""
+  },
+  "C59": {
+    "value": "0",
+    "formula": ""
+  },
+  "D59": {
+    "value": "3",
+    "formula": "COUNT(C59:C61)"
+  },
+  "E59": {
+    "value": "Strzał",
+    "formula": ""
+  },
+  "F59": {
+    "value": "1",
+    "formula": ""
+  },
+  "G59": {
+    "value": "30/50",
+    "formula": ""
+  },
+  "H59": {
+    "value": "d12+d4+dex",
+    "formula": ""
+  },
+  "I59": {
+    "value": "3d6+6",
+    "formula": ""
+  },
+  "J59": {
+    "value": "1",
+    "formula": ""
+  },
+  "K59": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L59": {
+    "value": "Zwykły strzał (1 kula)",
+    "formula": ""
+  },
+  "M59": {
+    "value": "150",
+    "formula": ""
+  },
+  "C60": {
+    "value": "5",
+    "formula": ""
+  },
+  "E60": {
+    "value": "Kartacz",
+    "formula": ""
+  },
+  "F60": {
+    "value": "1",
+    "formula": ""
+  },
+  "G60": {
+    "value": "15",
+    "formula": ""
+  },
+  "I60": {
+    "value": "2d6+3",
+    "formula": ""
+  },
+  "J60": {
+    "value": "3 w łuku",
+    "formula": ""
+  },
+  "K60": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L60": {
+    "value": "Istoty otrzymują obrażenia, jeżeli nie uda im się save throw (save: d20+str>16) (1 kula)",
+    "formula": ""
+  },
+  "C61": {
+    "value": "10",
+    "formula": ""
+  },
+  "E61": {
+    "value": "Strzał w łeb",
+    "formula": ""
+  },
+  "F61": {
+    "value": "1",
+    "formula": ""
+  },
+  "G61": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H61": {
+    "value": "d20+4dex",
+    "formula": ""
+  },
+  "I61": {
+    "value": "3d6+6",
+    "formula": ""
+  },
+  "J61": {
+    "value": "1",
+    "formula": ""
+  },
+  "K61": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L61": {
+    "value": "Jeżeli trafisz, obrażenia są podwajane (1 kula)",
+    "formula": ""
+  },
+  "B62": {
+    "value": "Muszkiet",
+    "formula": ""
+  },
+  "C62": {
+    "value": "0",
+    "formula": ""
+  },
+  "D62": {
+    "value": "2",
+    "formula": "COUNT(C62:C63)"
+  },
+  "E62": {
+    "value": "Strzał",
+    "formula": ""
+  },
+  "F62": {
+    "value": "2",
+    "formula": ""
+  },
+  "G62": {
+    "value": "30/120",
+    "formula": ""
+  },
+  "H62": {
+    "value": "d12+d4+dex",
+    "formula": ""
+  },
+  "I62": {
+    "value": "8d6+12",
+    "formula": ""
+  },
+  "J62": {
+    "value": "1",
+    "formula": ""
+  },
+  "K62": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L62": {
+    "value": "Zwykły strzał (1 kula)",
+    "formula": ""
+  },
+  "M62": {
+    "value": "300",
+    "formula": ""
+  },
+  "C63": {
+    "value": "10",
+    "formula": ""
+  },
+  "E63": {
+    "value": "Kulka w łeb",
+    "formula": ""
+  },
+  "F63": {
+    "value": "2",
+    "formula": ""
+  },
+  "G63": {
+    "value": "60/120",
+    "formula": ""
+  },
+  "H63": {
+    "value": "2d12+2xdex",
+    "formula": ""
+  },
+  "I63": {
+    "value": "10d6+12",
+    "formula": ""
+  },
+  "J63": {
+    "value": "1",
+    "formula": ""
+  },
+  "K63": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L63": {
+    "value": "Zwykły strzał, ale celniejszy (1 kula)",
+    "formula": ""
+  },
+  "B64": {
+    "value": "Oszczep",
+    "formula": ""
+  },
+  "C64": {
+    "value": "0",
+    "formula": ""
+  },
+  "D64": {
+    "value": "3",
+    "formula": "COUNT(C64:C66)"
+  },
+  "E64": {
+    "value": "Rzut/pchnięcie",
+    "formula": ""
+  },
+  "F64": {
+    "value": "1",
+    "formula": ""
+  },
+  "G64": {
+    "value": "15/30/Mele",
+    "formula": ""
+  },
+  "H64": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I64": {
+    "value": "d8+str",
+    "formula": ""
+  },
+  "J64": {
+    "value": "1",
+    "formula": ""
+  },
+  "K64": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L64": {
+    "value": "Zmniejsza ruch wroga o 15ft, w następnej turze",
+    "formula": ""
+  },
+  "M64": {
+    "value": "5",
+    "formula": ""
+  },
+  "C65": {
+    "value": "5",
+    "formula": ""
+  },
+  "E65": {
+    "value": "Przebicie",
+    "formula": ""
+  },
+  "F65": {
+    "value": "1",
+    "formula": ""
+  },
+  "G65": {
+    "value": "15/Mele",
+    "formula": ""
+  },
+  "H65": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I65": {
+    "value": "d8+str",
+    "formula": ""
+  },
+  "J65": {
+    "value": "2 w rzędzie",
+    "formula": ""
+  },
+  "K65": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L65": {
+    "value": "Potężne pchnięcie lub rzut z bliska w przeciwnika",
+    "formula": ""
+  },
+  "C66": {
+    "value": "10",
+    "formula": ""
+  },
+  "E66": {
+    "value": "Szybki rzut",
+    "formula": ""
+  },
+  "F66": {
+    "value": "0",
+    "formula": ""
+  },
+  "G66": {
+    "value": "15/30",
+    "formula": ""
+  },
+  "H66": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I66": {
+    "value": "d8+str",
+    "formula": ""
+  },
+  "J66": {
+    "value": "1",
+    "formula": ""
+  },
+  "K66": {
+    "value": "Wroga",
+    "formula": ""
+  },
+  "L66": {
+    "value": "Wykonaj atak gdy przeciwnik wejdzie w zasięg twojego rzutu || Zmniejsza ruch wroga o 15ft, w tej turze",
+    "formula": ""
+  },
+  "B67": {
+    "value": "Toporek do rzucania",
+    "formula": ""
+  },
+  "C67": {
+    "value": "0",
+    "formula": ""
+  },
+  "D67": {
+    "value": "3",
+    "formula": "COUNT(C67:C69)"
+  },
+  "E67": {
+    "value": "Rzut/zamach",
+    "formula": ""
+  },
+  "F67": {
+    "value": "0.75",
+    "formula": ""
+  },
+  "G67": {
+    "value": "20/40/Mele",
+    "formula": ""
+  },
+  "H67": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I67": {
+    "value": "d4+1/2str",
+    "formula": ""
+  },
+  "J67": {
+    "value": "1",
+    "formula": ""
+  },
+  "K67": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L67": {
+    "value": "Zwykły atak toporkiem",
+    "formula": ""
+  },
+  "M67": {
+    "value": "4",
+    "formula": ""
+  },
+  "C68": {
+    "value": "5",
+    "formula": ""
+  },
+  "E68": {
+    "value": "Szybkie ataki",
+    "formula": ""
+  },
+  "F68": {
+    "value": "1.5",
+    "formula": ""
+  },
+  "G68": {
+    "value": "20/40/Mele",
+    "formula": ""
+  },
+  "H68": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I68": {
+    "value": "d4+1/2str",
+    "formula": ""
+  },
+  "J68": {
+    "value": "2",
+    "formula": ""
+  },
+  "K68": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L68": {
+    "value": "Otrzymujesz dwie karty \"Rzutu/zamachu\"",
+    "formula": ""
+  },
+  "C69": {
+    "value": "10",
+    "formula": ""
+  },
+  "E69": {
+    "value": "Sieczka",
+    "formula": ""
+  },
+  "F69": {
+    "value": "1.5",
+    "formula": ""
+  },
+  "G69": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H69": {
+    "value": "d20+2xdex",
+    "formula": ""
+  },
+  "I69": {
+    "value": "d4+str",
+    "formula": ""
+  },
+  "J69": {
+    "value": "6",
+    "formula": ""
+  },
+  "K69": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L69": {
+    "value": "Wykonujesz ataki w wroga, do momentu w którym któryś z nich nie trafi lub gdy wykonasz ich 6",
+    "formula": ""
+  },
+  "B70": {
+    "value": "Noże do rzucania",
+    "formula": ""
+  },
+  "C70": {
+    "value": "0",
+    "formula": ""
+  },
+  "D70": {
+    "value": "3",
+    "formula": "COUNT(C70:C72)"
+  },
+  "E70": {
+    "value": "Rzut/Pchnięcie",
+    "formula": ""
+  },
+  "F70": {
+    "value": "0",
+    "formula": ""
+  },
+  "G70": {
+    "value": "25/50/Mele",
+    "formula": ""
+  },
+  "H70": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I70": {
+    "value": "d4+1/2dex",
+    "formula": ""
+  },
+  "J70": {
+    "value": "1",
+    "formula": ""
+  },
+  "K70": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L70": {
+    "value": "Zwykły atak sztyletem",
+    "formula": ""
+  },
+  "M70": {
+    "value": "3",
+    "formula": ""
+  },
+  "C71": {
+    "value": "5",
+    "formula": ""
+  },
+  "E71": {
+    "value": "Szybkie ataki",
+    "formula": ""
+  },
+  "F71": {
+    "value": "1",
+    "formula": ""
+  },
+  "G71": {
+    "value": "25/50/Mele",
+    "formula": ""
+  },
+  "H71": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I71": {
+    "value": "d4+1/2dex",
+    "formula": ""
+  },
+  "J71": {
+    "value": "3",
+    "formula": ""
+  },
+  "K71": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L71": {
+    "value": "Otrzymujesz 3 karty \"Rzutu/Pchnięcia\"",
+    "formula": ""
+  },
+  "C72": {
+    "value": "10",
+    "formula": ""
+  },
+  "E72": {
+    "value": "Nawałnica ostrzy",
+    "formula": ""
+  },
+  "F72": {
+    "value": "1.5",
+    "formula": ""
+  },
+  "G72": {
+    "value": "25/50",
+    "formula": ""
+  },
+  "H72": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I72": {
+    "value": "d4",
+    "formula": ""
+  },
+  "J72": {
+    "value": "X",
+    "formula": ""
+  },
+  "K72": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L72": {
+    "value": "Możesz wykonać rzuty wszsytkimi wyjętymi przez ciebie nożami",
+    "formula": ""
+  },
+  "B73": {
+    "value": "Tarcza okrągła (drewniana)",
+    "formula": ""
+  },
+  "C73": {
+    "value": "0",
+    "formula": ""
+  },
+  "D73": {
+    "value": "3",
+    "formula": "COUNT(C73:C75)"
+  },
+  "E73": {
+    "value": "Blok/Pchnięcie",
+    "formula": ""
+  },
+  "F73": {
+    "value": "1",
+    "formula": ""
+  },
+  "G73": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H73": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I73": {
+    "value": "d6+str",
+    "formula": ""
+  },
+  "J73": {
+    "value": "1",
+    "formula": ""
+  },
+  "K73": {
+    "value": "Gracza/Wroga",
+    "formula": ""
+  },
+  "L73": {
+    "value": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+4<dmg wroga --> tarcza zostaje niszczona)",
+    "formula": ""
+  },
+  "M73": {
+    "value": "5",
+    "formula": ""
+  },
+  "C74": {
+    "value": "5",
+    "formula": ""
+  },
+  "E74": {
+    "value": "Pozycja obronna",
+    "formula": ""
+  },
+  "F74": {
+    "value": "1",
+    "formula": ""
+  },
+  "K74": {
+    "value": "Gracza/Soj",
+    "formula": ""
+  },
+  "L74": {
+    "value": "Możesz zablokować 2 ataki wroga (d20+4<dmg wroga --> tarcza zostaje niszczona)",
+    "formula": ""
+  },
+  "C75": {
+    "value": "10",
+    "formula": ""
+  },
+  "E75": {
+    "value": "Szarża",
+    "formula": ""
+  },
+  "F75": {
+    "value": "1",
+    "formula": ""
+  },
+  "G75": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H75": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I75": {
+    "value": "d6+2xstr",
+    "formula": ""
+  },
+  "J75": {
+    "value": "1",
+    "formula": ""
+  },
+  "K75": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L75": {
+    "value": "Otrzymuejsz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera",
+    "formula": ""
+  },
+  "B76": {
+    "value": "Tarcza migdałowata (drewniana)",
+    "formula": ""
+  },
+  "C76": {
+    "value": "0",
+    "formula": ""
+  },
+  "D76": {
+    "value": "3",
+    "formula": "COUNT(C76:C78)"
+  },
+  "E76": {
+    "value": "Blok/Pchnięcie",
+    "formula": ""
+  },
+  "F76": {
+    "value": "1",
+    "formula": ""
+  },
+  "G76": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H76": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I76": {
+    "value": "d4+str",
+    "formula": ""
+  },
+  "J76": {
+    "value": "1",
+    "formula": ""
+  },
+  "K76": {
+    "value": "Gracza/Wroga",
+    "formula": ""
+  },
+  "L76": {
+    "value": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+6<dmg wroga --> tarcza zostaje niszczona)",
+    "formula": ""
+  },
+  "M76": {
+    "value": "5",
+    "formula": ""
+  },
+  "C77": {
+    "value": "5",
+    "formula": ""
+  },
+  "E77": {
+    "value": "Pozycja obronna",
+    "formula": ""
+  },
+  "F77": {
+    "value": "1",
+    "formula": ""
+  },
+  "K77": {
+    "value": "Gracza/Soj",
+    "formula": ""
+  },
+  "L77": {
+    "value": "Możesz zablokować 2 ataki wroga wymierzone w ciebie lub sojusznika (d20+6<dmg wroga --> tarcza zostaje niszczona)",
+    "formula": ""
+  },
+  "C78": {
+    "value": "10",
+    "formula": ""
+  },
+  "E78": {
+    "value": "Szarża",
+    "formula": ""
+  },
+  "F78": {
+    "value": "1",
+    "formula": ""
+  },
+  "G78": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H78": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I78": {
+    "value": "d4+2xstr",
+    "formula": ""
+  },
+  "J78": {
+    "value": "1",
+    "formula": ""
+  },
+  "K78": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L78": {
+    "value": "Otrzymuejsz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera",
+    "formula": ""
+  },
+  "B79": {
+    "value": "Puklerz (drewniany)",
+    "formula": ""
+  },
+  "C79": {
+    "value": "0",
+    "formula": ""
+  },
+  "D79": {
+    "value": "2",
+    "formula": "COUNT(C79:C80)"
+  },
+  "E79": {
+    "value": "Blok/Cios",
+    "formula": ""
+  },
+  "F79": {
+    "value": "1",
+    "formula": ""
+  },
+  "G79": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H79": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I79": {
+    "value": "d4+2xstr",
+    "formula": ""
+  },
+  "J79": {
+    "value": "1",
+    "formula": ""
+  },
+  "K79": {
+    "value": "Gracza/Wroga",
+    "formula": ""
+  },
+  "L79": {
+    "value": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+12<dmg wroga --> tarcza zostaje niszczona)",
+    "formula": ""
+  },
+  "M79": {
+    "value": "3",
+    "formula": ""
+  },
+  "C80": {
+    "value": "10",
+    "formula": ""
+  },
+  "E80": {
+    "value": "Mistrz uników",
+    "formula": ""
+  },
+  "F80": {
+    "value": "1",
+    "formula": ""
+  },
+  "K80": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L80": {
+    "value": "Do końca walki otrzymuejsz +2ac",
+    "formula": ""
+  },
+  "B81": {
+    "value": "Tarcza rzymska (drewniana)",
+    "formula": ""
+  },
+  "C81": {
+    "value": "0",
+    "formula": ""
+  },
+  "D81": {
+    "value": "3",
+    "formula": "COUNT(C81:C83)"
+  },
+  "E81": {
+    "value": "Blok/Cios",
+    "formula": ""
+  },
+  "F81": {
+    "value": "1",
+    "formula": ""
+  },
+  "G81": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H81": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I81": {
+    "value": "d4+1/2str",
+    "formula": ""
+  },
+  "J81": {
+    "value": "1",
+    "formula": ""
+  },
+  "K81": {
+    "value": "Gracza/Wroga",
+    "formula": ""
+  },
+  "L81": {
+    "value": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+8<dmg wroga --> tarcza zostaje niszczona)",
+    "formula": ""
+  },
+  "M81": {
+    "value": "10",
+    "formula": ""
+  },
+  "C82": {
+    "value": "6",
+    "formula": ""
+  },
+  "E82": {
+    "value": "Drewniana ściana",
+    "formula": ""
+  },
+  "F82": {
+    "value": "1",
+    "formula": ""
+  },
+  "K82": {
+    "value": "Gracza/Soj",
+    "formula": ""
+  },
+  "L82": {
+    "value": "Możesz zablokować 3 ataki wroga wymierzone w ciebie lub sojusznika (d20+8<dmg wroga --> tarcza zostaje niszczona)",
+    "formula": ""
+  },
+  "C83": {
+    "value": "10",
+    "formula": ""
+  },
+  "E83": {
+    "value": "Nieporuszalny obiekt",
+    "formula": ""
+  },
+  "F83": {
+    "value": "1",
+    "formula": ""
+  },
+  "K83": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L83": {
+    "value": "Możesz zablokować wszystke ataki wroga wymierzone w ciebie (d20+8<dmg wroga --> tarcza zostaje niszczona) || Wróg nie może wyjść z twojej strefy kontrolii",
+    "formula": ""
+  },
+  "B84": {
+    "value": "Tarcza okrągła (żelana)",
+    "formula": ""
+  },
+  "C84": {
+    "value": "0",
+    "formula": ""
+  },
+  "D84": {
+    "value": "3",
+    "formula": "COUNT(C84:C86)"
+  },
+  "E84": {
+    "value": "Blok/Pchnięcie",
+    "formula": ""
+  },
+  "F84": {
+    "value": "1",
+    "formula": ""
+  },
+  "G84": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H84": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I84": {
+    "value": "d6+str",
+    "formula": ""
+  },
+  "J84": {
+    "value": "1",
+    "formula": ""
+  },
+  "K84": {
+    "value": "Gracza/Wroga",
+    "formula": ""
+  },
+  "L84": {
+    "value": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+8<dmg wroga --> tarcza zostaje niszczona)",
+    "formula": ""
+  },
+  "M84": {
+    "value": "50",
+    "formula": ""
+  },
+  "C85": {
+    "value": "5",
+    "formula": ""
+  },
+  "E85": {
+    "value": "Pozycja obronna",
+    "formula": ""
+  },
+  "F85": {
+    "value": "1",
+    "formula": ""
+  },
+  "K85": {
+    "value": "Gracza/Soj",
+    "formula": ""
+  },
+  "L85": {
+    "value": "Możesz zablokować 2 ataki wroga (d20+8<dmg wroga --> tarcza zostaje niszczona)",
+    "formula": ""
+  },
+  "C86": {
+    "value": "10",
+    "formula": ""
+  },
+  "E86": {
+    "value": "Szarża",
+    "formula": ""
+  },
+  "F86": {
+    "value": "1",
+    "formula": ""
+  },
+  "G86": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H86": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I86": {
+    "value": "d6+2xstr",
+    "formula": ""
+  },
+  "J86": {
+    "value": "1",
+    "formula": ""
+  },
+  "K86": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L86": {
+    "value": "Otrzymuejsz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera",
+    "formula": ""
+  },
+  "B87": {
+    "value": "Tarcza migdałowata (żelazna)",
+    "formula": ""
+  },
+  "C87": {
+    "value": "0",
+    "formula": ""
+  },
+  "D87": {
+    "value": "3",
+    "formula": "COUNT(C87:C89)"
+  },
+  "E87": {
+    "value": "Blok/Pchnięcie",
+    "formula": ""
+  },
+  "F87": {
+    "value": "1",
+    "formula": ""
+  },
+  "G87": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H87": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I87": {
+    "value": "d4+str",
+    "formula": ""
+  },
+  "J87": {
+    "value": "1",
+    "formula": ""
+  },
+  "K87": {
+    "value": "Gracza/Wroga",
+    "formula": ""
+  },
+  "L87": {
+    "value": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+12<dmg wroga --> tarcza zostaje niszczona)",
+    "formula": ""
+  },
+  "M87": {
+    "value": "50",
+    "formula": ""
+  },
+  "C88": {
+    "value": "5",
+    "formula": ""
+  },
+  "E88": {
+    "value": "Pozycja obronna",
+    "formula": ""
+  },
+  "F88": {
+    "value": "1",
+    "formula": ""
+  },
+  "K88": {
+    "value": "Gracza/Soj",
+    "formula": ""
+  },
+  "L88": {
+    "value": "Możesz zablokować 2 ataki wroga (d20+12<dmg wroga --> tarcza zostaje niszczona)",
+    "formula": ""
+  },
+  "C89": {
+    "value": "10",
+    "formula": ""
+  },
+  "E89": {
+    "value": "Szarża",
+    "formula": ""
+  },
+  "F89": {
+    "value": "1",
+    "formula": ""
+  },
+  "G89": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H89": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I89": {
+    "value": "d4+2xstr",
+    "formula": ""
+  },
+  "J89": {
+    "value": "1",
+    "formula": ""
+  },
+  "K89": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L89": {
+    "value": "Otrzymuejsz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera",
+    "formula": ""
+  },
+  "B90": {
+    "value": "Puklerz (żelazny)",
+    "formula": ""
+  },
+  "C90": {
+    "value": "0",
+    "formula": ""
+  },
+  "D90": {
+    "value": "2",
+    "formula": "COUNT(C90:C91)"
+  },
+  "E90": {
+    "value": "Blok/Cios",
+    "formula": ""
+  },
+  "F90": {
+    "value": "1",
+    "formula": ""
+  },
+  "G90": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H90": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I90": {
+    "value": "d4+2xstr",
+    "formula": ""
+  },
+  "J90": {
+    "value": "1",
+    "formula": ""
+  },
+  "K90": {
+    "value": "Gracza/Wroga",
+    "formula": ""
+  },
+  "L90": {
+    "value": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+16<dmg wroga --> tarcza zostaje niszczona)",
+    "formula": ""
+  },
+  "M90": {
+    "value": "30",
+    "formula": ""
+  },
+  "C91": {
+    "value": "10",
+    "formula": ""
+  },
+  "E91": {
+    "value": "Mistrz uników",
+    "formula": ""
+  },
+  "F91": {
+    "value": "1",
+    "formula": ""
+  },
+  "K91": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L91": {
+    "value": "Do końca walki otrzymuejsz +2ac",
+    "formula": ""
+  },
+  "B92": {
+    "value": "Tarcza rzymska (żelazna)",
+    "formula": ""
+  },
+  "C92": {
+    "value": "0",
+    "formula": ""
+  },
+  "D92": {
+    "value": "3",
+    "formula": "COUNT(C92:C94)"
+  },
+  "E92": {
+    "value": "Blok/Cios",
+    "formula": ""
+  },
+  "F92": {
+    "value": "1",
+    "formula": ""
+  },
+  "G92": {
+    "value": "Mele",
+    "formula": ""
+  },
+  "H92": {
+    "value": "d20+dex",
+    "formula": ""
+  },
+  "I92": {
+    "value": "d4+1/2str",
+    "formula": ""
+  },
+  "J92": {
+    "value": "1",
+    "formula": ""
+  },
+  "K92": {
+    "value": "Gracza/Wroga",
+    "formula": ""
+  },
+  "L92": {
+    "value": "Możesz dokonać ataku lub zablokować jeden atak wroga (d20+12<dmg wroga --> tarcza zostaje niszczona)",
+    "formula": ""
+  },
+  "M92": {
+    "value": "100",
+    "formula": ""
+  },
+  "C93": {
+    "value": "5",
+    "formula": ""
+  },
+  "E93": {
+    "value": "Drewniana ściana",
+    "formula": ""
+  },
+  "F93": {
+    "value": "1",
+    "formula": ""
+  },
+  "K93": {
+    "value": "Gracza/Soj",
+    "formula": ""
+  },
+  "L93": {
+    "value": "Możesz zablokować 3 ataki wroga wymierzone w ciebie lub sojusznika (d20+12<dmg wroga --> tarcza zostaje niszczona)",
+    "formula": ""
+  },
+  "C94": {
+    "value": "10",
+    "formula": ""
+  },
+  "E94": {
+    "value": "Nieporuszalny obiekt",
+    "formula": ""
+  },
+  "F94": {
+    "value": "1",
+    "formula": ""
+  },
+  "K94": {
+    "value": "Gracza",
+    "formula": ""
+  },
+  "L94": {
+    "value": "Możesz zablokować wszystke ataki wroga wymierzone w ciebie (d20+12<dmg wroga --> tarcza zostaje niszczona) || Wróg nie może wyjść z twojej strefy kontrolii",
+    "formula": ""
+  }
+}

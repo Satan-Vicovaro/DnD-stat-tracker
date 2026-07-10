@@ -1,0 +1,142 @@
+[
+  {
+    "name": "Wpływ na parametry",
+    "quantity_or_cost": "20",
+    "action_cost": "raz dziennie",
+    "description": "leczy max hp po krótkim odpoczynku",
+    "space_taken": "2/10"
+  },
+  {
+    "name": "Obrona -0,4 || Akcje -0,2 || Wytrwałość -0,125 || Ruch -1",
+    "quantity_or_cost": "4",
+    "action_cost": "10min",
+    "description": "można go użyć raz po każdej walce, leczy d4 dmg za każde 10 życia postaci+wis (działa tylko na obrażenia zadane w walce po której zostanie użyte)",
+    "space_taken": "1/10"
+  },
+  {
+    "name": "Obrona -1 || Akcje -0,4 || Wytrwałość -0,25 || Ruch -1,5",
+    "quantity_or_cost": "1",
+    "action_cost": "",
+    "description": "woda, jedzenie. Liny, pochodnie, (w razie potrzeby dopisać) (zużywasz 1 dziennie + na różne akcje)",
+    "space_taken": "1/10"
+  },
+  {
+    "name": "Zaopatrzenie",
+    "quantity_or_cost": "~30",
+    "action_cost": "5 akcji",
+    "description": "różnie",
+    "space_taken": "2/10"
+  },
+  {
+    "name": "Leki",
+    "quantity_or_cost": "~100",
+    "action_cost": "5 akcji",
+    "description": "różnie",
+    "space_taken": "2,5/10"
+  },
+  {
+    "name": "Opatrunek",
+    "quantity_or_cost": "~400",
+    "action_cost": "5 akcji",
+    "description": "różnie",
+    "space_taken": "3/10"
+  },
+  {
+    "name": "Woda święcona",
+    "quantity_or_cost": "~5",
+    "action_cost": "",
+    "description": "wyglądasz jak chłop || możesz nosić jeden zestaw bez kary do miesjca w eq",
+    "space_taken": "5/10"
+  },
+  {
+    "name": "Mała mikstura",
+    "quantity_or_cost": "~50",
+    "action_cost": "",
+    "description": "wyglądasz jak mieszczanin || możesz nosić jeden zestaw bez kary do miesjca w eq",
+    "space_taken": "5/10"
+  },
+  {
+    "name": "Średnia mikstrura",
+    "quantity_or_cost": "~500",
+    "action_cost": "",
+    "description": "wyglądasz jak szlachcic || możesz nosić jeden zestaw bez kary do miesjca w eq",
+    "space_taken": "5/10"
+  },
+  {
+    "name": "Duża mikstura",
+    "quantity_or_cost": "4",
+    "action_cost": "",
+    "description": "może utrzymać do 20 strzał/bełtów || możecie nosić jeden przy sobie i jednen w eq nie używając miejsca",
+    "space_taken": "1 lub 5/10"
+  },
+  {
+    "name": "Plecak",
+    "quantity_or_cost": "10",
+    "action_cost": "",
+    "description": "dodaje 1 miesjce w ekwipuku || możesz nosić jeden bez kary do miesjca w eq",
+    "space_taken": "5 lub 10/10"
+  },
+  {
+    "name": "Plecak podróżnika",
+    "quantity_or_cost": "40",
+    "action_cost": "",
+    "description": "dodaje 2 miesjce w ekwipuku || możesz nosić jeden bez kary do miesjca w eq",
+    "space_taken": "7,5 lub 20/10"
+  },
+  {
+    "name": "Ubrania chłopskie",
+    "quantity_or_cost": "koszt+20%",
+    "action_cost": "",
+    "description": "dodają +1/2 miesjca w eq || miejsce staje się miejscem podręczym o ile nie nosisz zbroii || możesz nosić jeden zestaw bez kary do miesjca w eq",
+    "space_taken": "5/10"
+  },
+  {
+    "name": "Pasek z mocowaniem",
+    "quantity_or_cost": "4/20/100",
+    "action_cost": "",
+    "description": "dodają +1/2 miesjca podręcznego || możesz nosić jeden zestaw bez kary do miesjca w eq",
+    "space_taken": "2/10"
+  },
+  {
+    "name": "Ubrania mieszczańskie",
+    "quantity_or_cost": "50",
+    "action_cost": "1h",
+    "description": "naprawia 10 życia zbroii (posiada 4 użycia)",
+    "space_taken": "użycia/10"
+  },
+  {
+    "name": "Ubrania szlacheckie",
+    "quantity_or_cost": "100",
+    "action_cost": "1h",
+    "description": "naprawia 15 życia zbroii (posiada 6 użyć)",
+    "space_taken": "użycia/10"
+  },
+  {
+    "name": "Wpływ na parametry",
+    "quantity_or_cost": "1",
+    "action_cost": "",
+    "description": "woda, jedzenie. Liny, pochodnie, (w razie potrzeby dopisać) (zużywasz 1 dziennie + na różne akcje)",
+    "space_taken": "1/10"
+  },
+  {
+    "name": "Kołczan",
+    "quantity_or_cost": "~10",
+    "action_cost": "",
+    "description": "posiada 8 miejsca",
+    "space_taken": "1/10"
+  },
+  {
+    "name": "Ubranie z kieszeniami",
+    "quantity_or_cost": "~100",
+    "action_cost": "",
+    "description": "posiada 32 miejsc",
+    "space_taken": "2/10"
+  },
+  {
+    "name": "Narzędzia lekkie zbroje",
+    "quantity_or_cost": "~1000",
+    "action_cost": "",
+    "description": "posiada 128 miejsc",
+    "space_taken": "3/10"
+  }
+]

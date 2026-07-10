@@ -1,0 +1,536 @@
+[
+  {
+    "weapon_name": "Ręce",
+    "cost_silver": null,
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Prosty",
+        "action_cost": "0.5",
+        "range": "Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "str",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Zwykły, chamski atak"
+      },
+      {
+        "card_value": "3",
+        "action_name": "Sierpowy",
+        "action_cost": "0.5",
+        "range": "Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "str+dex",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Twój dex wlicza się do wyrzuconej kostki na trafienie (np. 17+3dex = kryt)"
+      },
+      {
+        "card_value": "8",
+        "action_name": "Kontra",
+        "action_cost": "0.5",
+        "range": "Mele",
+        "hit_roll": "zawsze",
+        "damage_roll": "str",
+        "targets": "1",
+        "turn_execution": "Wroga",
+        "description": "Zniwecz"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Łokieto",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "str",
+        "targets": "1",
+        "turn_execution": "Gracza/Soj",
+        "description": "Odepchnij wroga 5ft w wybranym kierunku (save: d20+str>13+str) || Advantage na kolejny atak w cel tego ataku"
+      }
+    ]
+  },
+  {
+    "weapon_name": "Topór",
+    "cost_silver": "6",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Cios",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d6+str",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Niszczysz drewnianą tarczę wroga || Dezaktywujesz do końca tury inne tarcze"
+      },
+      {
+        "card_value": "5",
+        "action_name": "Ogłuszacz",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d8+str",
+        "targets": "1",
+        "turn_execution": "Gracza/Wroga",
+        "description": "Wróg twojego rozmiaru traci cały ruch || Cel tego ataku otrzymuje -4 do rzutów wszystkimi kostkami (save: d20+str>13+str)"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Rąbanie",
+        "action_cost": "1.5",
+        "range": "Mele",
+        "hit_roll": "d12+2xdex",
+        "damage_roll": "d6+str",
+        "targets": "4",
+        "turn_execution": "Gracza",
+        "description": "Otrzymujesz 10ft ruchu (tylko raz)"
+      }
+    ]
+  },
+  {
+    "weapon_name": "Miecz",
+    "cost_silver": "15",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Cięcie",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d6+1/2(dex+str)",
+        "targets": "1",
+        "turn_execution": "Gracza/Soj",
+        "description": "Zwykły atak"
+      },
+      {
+        "card_value": "2",
+        "action_name": "Blok",
+        "action_cost": "0.5",
+        "range": "Mele",
+        "hit_roll": "X",
+        "damage_roll": "X",
+        "targets": "1",
+        "turn_execution": "Wroga",
+        "description": "jedną"
+      },
+      {
+        "card_value": "5",
+        "action_name": "Cios w plecy",
+        "action_cost": "0",
+        "range": "Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d6+1/2(dex+str)",
+        "targets": "1",
+        "turn_execution": "Sojusznika",
+        "description": "Zaatakuj sonsiadującego przeciwnika, po atakau sojusznika"
+      },
+      {
+        "card_value": "7",
+        "action_name": "Pchnięcie",
+        "action_cost": "1",
+        "range": "5ft",
+        "hit_roll": "d20+2xdex",
+        "damage_roll": "d8+1/2(dex+str)",
+        "targets": "1",
+        "turn_execution": "Gracza/Soj",
+        "description": "Doskakujesz 5ft a następnie wykonujesz atak"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Rozbrojenie",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "X",
+        "damage_roll": "X",
+        "targets": "1",
+        "turn_execution": "Sojusznka/Wro",
+        "description": "Zniwecz jedną akcje przeciniwka || Rozbrój wroga (save: d20+dex>d20+dex wroga)"
+      }
+    ]
+  },
+  {
+    "weapon_name": "Buzdygan",
+    "cost_silver": "5",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Cios",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "d20-2+dex",
+        "damage_roll": "2xstr",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Advantage na kolejny atak przeciwko trafionemu przeciwnikowi o mniejszym str od ciebie"
+      },
+      {
+        "card_value": "5",
+        "action_name": "Obuch",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "d20-4+dex",
+        "damage_roll": "3xstr",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Odbierz turę przeciwnikowi o str mniejszym od ciebie"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Łamacz",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "d20-6+dex",
+        "damage_roll": "4xstr",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Advantage na wszystkie ataki przeciwko trafionemu przeciwnikowi o mniejszym str od ciebie || Jeżeli nie trafisz, przeciwnik zostaje trafiony \"Ciosem\""
+      }
+    ]
+  },
+  {
+    "weapon_name": "Włócznia",
+    "cost_silver": "5",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Pchnięcia",
+        "action_cost": "2",
+        "range": "5ft",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d4+str",
+        "targets": "3",
+        "turn_execution": "Gracza/Wroga",
+        "description": "W trakcie swojej tury możesz wykonac tylko jeden atak || Możesz wykonać tylko jeden atak na przeciwnika pozostajacego w twojej strefie kontrolii || Odpychasz wroga o 5ft (d20+str>13+str)"
+      },
+      {
+        "card_value": "5",
+        "action_name": "Ściana włóczni",
+        "action_cost": "1",
+        "range": "5ft",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d4+str",
+        "targets": "3",
+        "turn_execution": "Sojusznika",
+        "description": "Aktywój \"Pchnięcia\" po tym jak twój sojusznik aktywóje \"Pchnięcia\""
+      },
+      {
+        "card_value": "10",
+        "action_name": "Przygotowanie",
+        "action_cost": "0",
+        "range": "",
+        "hit_roll": "",
+        "damage_roll": "",
+        "targets": "",
+        "turn_execution": "Gracza",
+        "description": "Wszystkie pchnięcia do końca następnej tury zadają d4+2xstr"
+      }
+    ]
+  },
+  {
+    "weapon_name": "Miecz długi",
+    "cost_silver": "25",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Cięcie",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d6+dex+str",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Nie możesz używać innej broni jednoręcznej||zadaje 50% dmg potworą (jeśli rzut ponirzej 16)"
+      },
+      {
+        "card_value": "5",
+        "action_name": "Kontry",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "",
+        "damage_roll": "",
+        "targets": "",
+        "turn_execution": "Wroga",
+        "description": "Gdy przeciwnik nie trafi ataku wymierzonego w ciebie lub gdy zablokujesz atak przeciwnika, użyj \"Cięcia\" na przeciwniku"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Ścięcie",
+        "action_cost": "1",
+        "range": "Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "2d6+dex+str",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Rzuć d4, w przypadku, gdy wyrzucisz 4, zabij przeciwnika swojego rozmiaru lub zadaj 3xdmg przeciwnikowi większemu od siebie"
+      }
+    ]
+  },
+  {
+    "weapon_name": "Topór dwuręczny",
+    "cost_silver": "45",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Ścięcie",
+        "action_cost": "2",
+        "range": "Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d12+2xstr",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Jeżeli po tym gdy zadasz obrażenia przeciwnikowi, gdy zostanie mu mniej niż 8 życia, ten zostaje zabity || Niszczysz drewnianą tarczę wroga || Dezaktywujesz do końca tury inne tarcz"
+      },
+      {
+        "card_value": "5",
+        "action_name": "Siekacz",
+        "action_cost": "3",
+        "range": "Mele",
+        "hit_roll": "d12+2xdex",
+        "damage_roll": "d6+2str",
+        "targets": "sąsiedzi",
+        "turn_execution": "Gracza",
+        "description": "Jeżeli po tym gdy zadasz obrażenia przeciwnikowi, gdy zostanie mu mniej niż 6 życia, ten zostanie zabity"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Gilotyna",
+        "action_cost": "2",
+        "range": "5ft",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d12+2xstr",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Ataku nie można zablokować || Jeżeli po tym gdy zadasz obrażenia przeciwnikowi, gdy zostanie mu mniej niż 20 życia, ten zostaje zabity"
+      }
+    ]
+  },
+  {
+    "weapon_name": "Miecz dwuręczny",
+    "cost_silver": "60",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Pchnięcie",
+        "action_cost": "2",
+        "range": "Mele",
+        "hit_roll": "d20+dex",
+        "damage_roll": "2d6+(dex+str)",
+        "targets": "3 w rzędzie",
+        "turn_execution": "Gracza",
+        "description": "Potężny atak na wprost"
+      },
+      {
+        "card_value": "1",
+        "action_name": "Cięcie z zamachu",
+        "action_cost": "2",
+        "range": "Mele/5ft",
+        "hit_roll": "d20+dex",
+        "damage_roll": "2d6+(dex+str)",
+        "targets": "3 w łuku",
+        "turn_execution": "Gracza",
+        "description": "Potężny atak w łuku"
+      },
+      {
+        "card_value": "2",
+        "action_name": "Bloki",
+        "action_cost": "1",
+        "range": "Mele/5ft",
+        "hit_roll": "",
+        "damage_roll": "",
+        "targets": "3",
+        "turn_execution": "Wroga",
+        "description": "Zniwecz jedną akcję sonsiadującego przeciwnika (save: d20+2xdex>rzut na trafienie wroga) || Możliwe 3 użycia"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Przygotowanie",
+        "action_cost": "1",
+        "range": "",
+        "hit_roll": "",
+        "damage_roll": "",
+        "targets": "",
+        "turn_execution": "Sojusznika/Wro",
+        "description": "Użyj dowolną kartę miecza dwóręcznego"
+      }
+    ]
+  },
+  {
+    "weapon_name": "Młot dwuręczny",
+    "cost_silver": "30",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Uderzenie",
+        "action_cost": "2",
+        "range": "5ft",
+        "hit_roll": "d20+1/2dex",
+        "damage_roll": "d12+2xstr",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Przeciwnik zostaje przesunięty na koniec turn ordera (save: d20+str>15+2xstr)"
+      },
+      {
+        "card_value": "6",
+        "action_name": "Trzęsienei ziemi",
+        "action_cost": "3",
+        "range": "5ft",
+        "hit_roll": "d20",
+        "damage_roll": "d12+2xstr",
+        "targets": "1",
+        "turn_execution": "Gracz",
+        "description": "Zniwecz akcję istot sonsiadujących z polem ataku (save: d20+str>15+2xstr) || Istoty na sonsiadujących polach otrzymuja d4+str dmg"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Miażdżący cios",
+        "action_cost": "2",
+        "range": "mele",
+        "hit_roll": "d20",
+        "damage_roll": "2d12+4xstr",
+        "targets": "1",
+        "turn_execution": "Gracz",
+        "description": "Spraw, że sąsiedzi przeciwnika mogą go raz zaatakować za darmo (save: d20+str>15+2xstr)"
+      }
+    ]
+  },
+  {
+    "weapon_name": "Włócznia długa",
+    "cost_silver": "20",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Pchnięcia",
+        "action_cost": "2",
+        "range": "10ft",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d8+2xstr",
+        "targets": "3",
+        "turn_execution": "Gracza/Wroga",
+        "description": "W trakcie swojej tury możesz wykonac tylko jeden atak || Możesz wykonać tylko jeden atak na przeciwnika pozostajacego w twojej strefie kontrolii || Odpychasz wroga o 5ft (d20+str>13+str)"
+      },
+      {
+        "card_value": "5",
+        "action_name": "Ściana włóczni",
+        "action_cost": "1",
+        "range": "10ft",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d8+2xstr",
+        "targets": "3",
+        "turn_execution": "Sojusznika",
+        "description": "Aktywój \"Pchnięcia\" po tym jak twój sojusznik aktywóje \"Pchnięcia\""
+      },
+      {
+        "card_value": "10",
+        "action_name": "Przygotowanie",
+        "action_cost": "0",
+        "range": "",
+        "hit_roll": "",
+        "damage_roll": "",
+        "targets": "",
+        "turn_execution": "Gracza",
+        "description": "Wszystkie pchnięcia do końca następnej tury zadają d8+3xstr"
+      }
+    ]
+  },
+  {
+    "weapon_name": "Morning star dwu.",
+    "cost_silver": "25",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Zamachy",
+        "action_cost": "1",
+        "range": "5ft",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d8+1,5str",
+        "targets": "2",
+        "turn_execution": "Gracza",
+        "description": "Odpycha 5ft || Możesz przerzucić 2 kostki w trakcie używania tej karty"
+      },
+      {
+        "card_value": "3",
+        "action_name": "Złapanie",
+        "action_cost": "1",
+        "range": "10ft",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d6+str",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Przewracasz i przeciągasz istotę 10ft w wybranym kierunku nie oddalając jej od siebie (save: d20+str>16+2str)"
+      },
+      {
+        "card_value": "6",
+        "action_name": "Szybkie uderzenia",
+        "action_cost": "1.5",
+        "range": "5ft",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d8+1,5str",
+        "targets": "3",
+        "turn_execution": "Gracza",
+        "description": "Możesz przerzucić 6 kostek w trakcie użwania tej karty"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Złapanie",
+        "action_cost": "1.5",
+        "range": "5ft",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d8+1,5str",
+        "targets": "6",
+        "turn_execution": "Sojusznika",
+        "description": "Gdy sojusznik zaatakuje przeciwnika, możesz wykonać \"Zamachy\" || Sojusznik otrzymuje możliwość przerzucenia jednej ze swoich kostek w trakcie ataku"
+      }
+    ]
+  },
+  {
+    "weapon_name": "Halabarda",
+    "cost_silver": "75",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Pchnięcie",
+        "action_cost": "2",
+        "range": "5ft",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d4+2xstr",
+        "targets": "3",
+        "turn_execution": "Gracza/Wroga",
+        "description": "W trakcie swojej tury możesz wykonac tylko jeden atak || Możesz wykonać tylko jeden atak na przeciwnika pozostajacego w twojej strefie kontrolii || Odpychasz wroga o 5ft (d20+str>13+2xstr)"
+      },
+      {
+        "card_value": "1",
+        "action_name": "Wbicie szpikulca",
+        "action_cost": "2",
+        "range": "5ft",
+        "hit_roll": "d20+1/2dex",
+        "damage_roll": "d10+2xstr",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Przeciwnik zostaje przesunięty na koniec turn ordera (save: d20+str>15+2xstr)"
+      },
+      {
+        "card_value": "2",
+        "action_name": "Przycągnięcie",
+        "action_cost": "2",
+        "range": "10ft",
+        "hit_roll": "d20+1/2dex",
+        "damage_roll": "d6+2xstr",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Przyciągasz istotę 10ft w wybranym kierunku (save: d20+str>16+2str)"
+      },
+      {
+        "card_value": "3",
+        "action_name": "Zamach toporem",
+        "action_cost": "2",
+        "range": "5ft",
+        "hit_roll": "d20+1dex",
+        "damage_roll": "d8+2xstr",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Jeżeli po tym gdy zadasz obrażenia przeciwnikowi, gdy zostanie mu mniej niż 6 życia, ten zostaje zabity"
+      }
+    ]
+  }
+]

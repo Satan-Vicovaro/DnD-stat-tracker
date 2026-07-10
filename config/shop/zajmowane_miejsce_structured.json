@@ -1,0 +1,218 @@
+[
+  {
+    "name": "Wpływ na parametry",
+    "space_taken": "1"
+  },
+  {
+    "name": "Ręce",
+    "space_taken": "0"
+  },
+  {
+    "name": "Narzędzia ciężkie zbroje",
+    "space_taken": "5*użycia/10"
+  },
+  {
+    "name": "Obrona -0,4 || Akcje -0,2 || Wytrwałość -0,125 || Ruch -1",
+    "space_taken": "2"
+  },
+  {
+    "name": "Topór",
+    "space_taken": "10"
+  },
+  {
+    "name": "Mały kamień magiczny",
+    "space_taken": "2,5*użyć/10"
+  },
+  {
+    "name": "Obrona -1 || Akcje -0,4 || Wytrwałość -0,25 || Ruch -1,5",
+    "space_taken": "1"
+  },
+  {
+    "name": "Miecz",
+    "space_taken": "7,5"
+  },
+  {
+    "name": "Obrona -2 || Akcje -0,8 || Wytrwałość -0,25 || Ruch -2",
+    "space_taken": "2"
+  },
+  {
+    "name": "Buzdygan",
+    "space_taken": "7,5"
+  },
+  {
+    "name": "Ubrania mieszczańskie",
+    "space_taken": "użycia/10"
+  },
+  {
+    "name": "Zaopatrzenie",
+    "space_taken": "2"
+  },
+  {
+    "name": "Włócznia",
+    "space_taken": "10"
+  },
+  {
+    "name": "Ubrania szlacheckie",
+    "space_taken": "użycia/10"
+  },
+  {
+    "name": "Leki",
+    "space_taken": "2,5"
+  },
+  {
+    "name": "Miecz długi",
+    "space_taken": "10"
+  },
+  {
+    "name": "Opatrunek",
+    "space_taken": "3"
+  },
+  {
+    "name": "Topór dwuręczny",
+    "space_taken": "20"
+  },
+  {
+    "name": "Miecz dwuręczny",
+    "space_taken": "20"
+  },
+  {
+    "name": "Woda święcona",
+    "space_taken": "5"
+  },
+  {
+    "name": "Młot dwuręczny",
+    "space_taken": "20"
+  },
+  {
+    "name": "Mała mikstura",
+    "space_taken": "5"
+  },
+  {
+    "name": "Włócznia długa",
+    "space_taken": "20"
+  },
+  {
+    "name": "Średnia mikstrura",
+    "space_taken": "5"
+  },
+  {
+    "name": "Morning star dwuręczny",
+    "space_taken": "20"
+  },
+  {
+    "name": "Halabarda",
+    "space_taken": "20"
+  },
+  {
+    "name": "Duża mikstura",
+    "space_taken": "1 lub 5/10"
+  },
+  {
+    "name": "Kusza ręczna",
+    "space_taken": "7,5"
+  },
+  {
+    "name": "Plecak",
+    "space_taken": "5 lub 10/10"
+  },
+  {
+    "name": "Kusza ciężka",
+    "space_taken": "20"
+  },
+  {
+    "name": "Plecak podróżnika",
+    "space_taken": "7,5 lub 20/10"
+  },
+  {
+    "name": "Łuk krótki",
+    "space_taken": "7,5"
+  },
+  {
+    "name": "Ubrania chłopskie",
+    "space_taken": "5/10"
+  },
+  {
+    "name": "Łuk długi",
+    "space_taken": "20"
+  },
+  {
+    "name": "Pasek z mocowaniem",
+    "space_taken": "2/10"
+  },
+  {
+    "name": "Samopał",
+    "space_taken": "10"
+  },
+  {
+    "name": "Muszkiet",
+    "space_taken": "20"
+  },
+  {
+    "name": "Ubrania mieszczańskie",
+    "space_taken": "użycia/10"
+  },
+  {
+    "name": "Oszczep",
+    "space_taken": "5"
+  },
+  {
+    "name": "Ubrania szlacheckie",
+    "space_taken": "użycia/10"
+  },
+  {
+    "name": "Toporek do rzucania",
+    "space_taken": "3,3"
+  },
+  {
+    "name": "Wpływ na parametry",
+    "space_taken": "1/10"
+  },
+  {
+    "name": "Noże do rzucania",
+    "space_taken": "2,5"
+  },
+  {
+    "name": "Tarcza okrągła (drewniana)",
+    "space_taken": "7,5"
+  },
+  {
+    "name": "Kołczan",
+    "space_taken": "1/10"
+  },
+  {
+    "name": "Tarcza migdałowata (drewniana)",
+    "space_taken": "10"
+  },
+  {
+    "name": "Ubranie z kieszeniami",
+    "space_taken": "2/10"
+  },
+  {
+    "name": "Puklerz (drewniany)",
+    "space_taken": "5"
+  },
+  {
+    "name": "Narzędzia lekkie zbroje",
+    "space_taken": "3/10"
+  },
+  {
+    "name": "Tarcza rzymska (drewniana)",
+    "space_taken": "10"
+  },
+  {
+    "name": "Tarcza okrągła (żelazna)",
+    "space_taken": "7,5"
+  },
+  {
+    "name": "Tarcza migdałowata (żelazna)",
+    "space_taken": "10"
+  },
+  {
+    "name": "Puklerz (żelazny)",
+    "space_taken": "5"
+  },
+  {
+    "name": "Tarcza rzymska (żelazna)",
+    "space_taken": "10"
+  }
+]
