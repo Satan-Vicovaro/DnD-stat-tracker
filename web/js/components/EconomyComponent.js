@@ -11,6 +11,12 @@ export class EconomyComponent {
     const html = await response.text();
     document.getElementById(this.containerId).innerHTML = html;
 
+    // Listen for external updates
+    document.addEventListener('characterUpdated', (e) => {
+      this.characterData = e.detail;
+      this.render();
+    });
+
     // Fetch initial data
     await this.fetchData();
     this.bindEvents();

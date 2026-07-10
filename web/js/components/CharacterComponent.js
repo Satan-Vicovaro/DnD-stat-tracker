@@ -12,7 +12,7 @@ export class CharacterComponent {
     this.bindEvents();
 
     // Listen for external updates (e.g., from ArmorComponent)
-    window.addEventListener("characterUpdated", (e) => {
+    document.addEventListener("characterUpdated", (e) => {
       this.render(e.detail);
     });
 

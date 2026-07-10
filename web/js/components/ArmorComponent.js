@@ -8,6 +8,11 @@ export class ArmorComponent {
         const html = await response.text();
         document.getElementById(this.containerId).innerHTML = html;
 
+        // Listen for external updates
+        document.addEventListener('characterUpdated', (e) => {
+            this.render(e.detail);
+        });
+
         // Since this component might render before or after CharacterComponent, 
         // we can share state by just fetching the current state.
         let char = await eel.get_character()();
@@ -20,7 +25,7 @@ export class ArmorComponent {
         
         // Broadcast an event or directly update character component since they share the same data model.
         // For simplicity, we can trigger a custom event that CharacterComponent listens to.
-        window.dispatchEvent(new CustomEvent('characterUpdated', { detail: char }));
+        document.dispatchEvent(new CustomEvent('characterUpdated', { detail: char }));
     }
 
     render(char) {
