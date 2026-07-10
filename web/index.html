@@ -79,7 +79,19 @@
       </div>
     </div>
 
-    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+    <!-- ─── Tabs Navigation ─────────────────────────────────────────────────── -->
+    <div class="max-w-7xl mx-auto mb-8">
+      <nav class="flex space-x-4 border-b border-gray-700" aria-label="Tabs" id="main-tabs">
+        <button data-target="tab-content-character" class="tab-btn bg-gray-800 text-white px-4 py-2 rounded-t-lg border-t border-l border-r border-gray-700 font-bold focus:outline-none transition-colors">Postać</button>
+        <button data-target="tab-content-items" class="tab-btn bg-transparent text-gray-400 hover:text-gray-300 hover:bg-gray-800/50 px-4 py-2 rounded-t-lg font-semibold focus:outline-none transition-colors">Przedmioty</button>
+        <button data-target="tab-content-shop" class="tab-btn bg-transparent text-gray-400 hover:text-gray-300 hover:bg-gray-800/50 px-4 py-2 rounded-t-lg font-semibold focus:outline-none transition-colors">Sklep</button>
+        <button data-target="tab-content-fight" class="tab-btn bg-transparent text-gray-400 hover:text-gray-300 hover:bg-gray-800/50 px-4 py-2 rounded-t-lg font-semibold focus:outline-none transition-colors flex items-center gap-2"><span class="text-rose-500">⚔</span> Walka</button>
+      </nav>
+    </div>
+
+    <!-- ─── Tab Content ─────────────────────────────────────────────────────── -->
+    <div id="tab-content-character" class="tab-pane max-w-7xl mx-auto block">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         <!-- Character View Component -->
         <div id="character-view-container">
           <div class="text-center text-gray-500 mt-20 animate-pulse">Loading Character...</div>
@@ -89,27 +101,44 @@
         <div id="armor-view-container">
           <div class="text-center text-gray-500 mt-20 animate-pulse">Loading Armor Config...</div>
         </div>
+      </div>
     </div>
 
-    <!-- Economy View Component -->
-    <div class="max-w-5xl mx-auto mt-8">
-        <div id="economy-view-container">
+    <div id="tab-content-items" class="tab-pane max-w-7xl mx-auto hidden">
+      <!-- Economy View Component (Items) -->
+      <div class="max-w-5xl mx-auto mb-8">
+        <div id="economy-view-container-items">
           <div class="text-center text-gray-500 mt-10 animate-pulse">Loading Economy...</div>
         </div>
-    </div>
-
-    <!-- Inventory View Component -->
-    <div class="max-w-7xl mx-auto mt-12">
+      </div>
+      <!-- Inventory View Component -->
+      <div>
         <div id="inventory-view-container">
           <div class="text-center text-gray-500 mt-20 animate-pulse">Loading Inventory...</div>
         </div>
+      </div>
     </div>
 
-    <!-- Shop View Component -->
-    <div class="max-w-7xl mx-auto mt-12">
+    <div id="tab-content-shop" class="tab-pane max-w-7xl mx-auto hidden">
+      <!-- Economy View Component (Shop) -->
+      <div class="max-w-5xl mx-auto mb-8">
+        <div id="economy-view-container-shop">
+          <div class="text-center text-gray-500 mt-10 animate-pulse">Loading Economy...</div>
+        </div>
+      </div>
+      <!-- Shop View Component -->
+      <div>
         <div id="shop-view-container">
           <div class="text-center text-gray-500 mt-20 animate-pulse">Loading Shop...</div>
         </div>
+      </div>
+    </div>
+
+    <div id="tab-content-fight" class="tab-pane max-w-7xl mx-auto hidden">
+      <div class="bg-gray-800 rounded-xl shadow-lg border-2 border-gray-700 p-6 text-center">
+        <h2 class="text-2xl font-extrabold text-white mb-4">Walka - W przygotowaniu</h2>
+        <p class="text-gray-400">Tutaj pojawią się akcje broni i szybki podgląd statusu.</p>
+      </div>
     </div>
 
     <!-- Modals -->

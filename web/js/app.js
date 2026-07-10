@@ -74,9 +74,12 @@ window.onload = async () => {
     const armorView = new ArmorComponent("armor-view-container");
     armorView.init();
 
-    // Initialize the Economy View Component
-    const economyView = new EconomyComponent("economy-view-container");
-    economyView.init();
+    // Initialize the Economy View Components for both tabs
+    const economyViewItems = new EconomyComponent("economy-view-container-items");
+    economyViewItems.init();
+
+    const economyViewShop = new EconomyComponent("economy-view-container-shop");
+    economyViewShop.init();
 
     // Initialize the Inventory View Component
     const inventoryView = new InventoryComponent("inventory-view-container");
@@ -136,4 +139,30 @@ window.onload = async () => {
     // Seed initial button state from backend
     const initData = await eel.get_character()();
     undoManager.sync(initData);
+
+    // ─── Tab Switching Logic ──────────────────────────────────────────────────
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Reset all tabs
+        tabBtns.forEach(b => {
+          b.classList.remove('bg-gray-800', 'text-white', 'border-t', 'border-l', 'border-r', 'border-gray-700');
+          b.classList.add('bg-transparent', 'text-gray-400');
+        });
+        tabPanes.forEach(p => {
+          p.classList.remove('block');
+          p.classList.add('hidden');
+        });
+
+        // Set active tab
+        btn.classList.remove('bg-transparent', 'text-gray-400');
+        btn.classList.add('bg-gray-800', 'text-white', 'border-t', 'border-l', 'border-r', 'border-gray-700');
+        
+        const targetId = btn.getAttribute('data-target');
+        document.getElementById(targetId).classList.remove('hidden');
+        document.getElementById(targetId).classList.add('block');
+      });
+    });
 };

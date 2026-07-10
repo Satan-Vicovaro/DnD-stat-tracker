@@ -29,21 +29,26 @@ export class EconomyComponent {
 
   bindEvents() {
     const attachHandlers = (currency) => {
+      const container = document.getElementById(this.containerId);
+      if (!container) return;
+
       // +/- buttons
-      document.getElementById(`btn-${currency}-inc`).addEventListener("click", () => this.modifyMoney(currency, 1));
-      document.getElementById(`btn-${currency}-dec`).addEventListener("click", () => this.modifyMoney(currency, -1));
+      container.querySelector(`.btn-${currency}-inc`).addEventListener("click", () => this.modifyMoney(currency, 1));
+      container.querySelector(`.btn-${currency}-dec`).addEventListener("click", () => this.modifyMoney(currency, -1));
       
       // Direct input editing
-      const inputEl = document.getElementById(`economy-${currency}`);
-      inputEl.addEventListener("change", (e) => {
-        const newVal = parseInt(e.target.value);
-        if (!isNaN(newVal) && newVal >= 0) {
-          this.setMoney(currency, newVal);
-        } else {
-          // Revert to valid value if invalid input
-          this.render();
-        }
-      });
+      const inputEl = container.querySelector(`.economy-input-${currency}`);
+      if (inputEl) {
+        inputEl.addEventListener("change", (e) => {
+          const newVal = parseInt(e.target.value);
+          if (!isNaN(newVal) && newVal >= 0) {
+            this.setMoney(currency, newVal);
+          } else {
+            // Revert to valid value if invalid input
+            this.render();
+          }
+        });
+      }
     };
 
     attachHandlers("gold");
@@ -67,9 +72,16 @@ export class EconomyComponent {
     if (!this.characterData || !this.characterData.economy) return;
     
     const { gold, silver, copper } = this.characterData.economy;
+    const container = document.getElementById(this.containerId);
+    if (!container) return;
     
-    document.getElementById("economy-gold").value = gold;
-    document.getElementById("economy-silver").value = silver;
-    document.getElementById("economy-copper").value = copper;
+    const goldInput = container.querySelector(".economy-input-gold");
+    if (goldInput) goldInput.value = gold;
+
+    const silverInput = container.querySelector(".economy-input-silver");
+    if (silverInput) silverInput.value = silver;
+
+    const copperInput = container.querySelector(".economy-input-copper");
+    if (copperInput) copperInput.value = copper;
   }
 }
