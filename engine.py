@@ -165,11 +165,83 @@ class GameEngine:
     def get_character_view_model(self) -> dict:
         """Returns the character data formatted for the frontend."""
         from dataclasses import asdict
+        
+        armor_max_hp = 0
+        for name, armor in self.hero.armor_state.types.items():
+            if armor.quantity > 0:
+                hp = armor.effects.get("hp_per_fragment", 0.0) * armor.quantity
+                armor_max_hp += hp
+                
+        base_max_hp = self.hero.max_hp - armor_max_hp
+        
+        current_armor_hp = max(0, armor_max_hp - self.hero.damage_taken_physical)
+        overflow_physical_damage = max(0, self.hero.damage_taken_physical - armor_max_hp)
+        
+        current_base_hp = base_max_hp - self.hero.damage_taken_magical - overflow_physical_damage
+
+        broken_fragments = self.hero.damage_taken_physical // 5
+        current_mitigation = self.get_current_mitigation()
+
+        health_split = {
+            "armor_max_hp": armor_max_hp,
+            "armor_current_hp": current_armor_hp,
+            "base_max_hp": base_max_hp,
+            "base_current_hp": current_base_hp,
+            "total_max_hp": self.hero.max_hp,
+            "total_current_hp": current_base_hp + current_armor_hp,
+            "current_mitigation": current_mitigation,
+            "broken_fragments": broken_fragments
+        }
+
+        damage_left = self.hero.damage_taken_physical
+        damaged_space = 0
+        intact_space = 0
+        
+        armor_types_view = []
+        
+        order = ["Stalowa", "Płytowa", "Półpłytowa", "Skórzana"]
+        all_types = self.hero.armor_state.types
+        
+        for name in order + [n for n in all_types.keys() if n not in order]:
+            t = all_types.get(name)
+            if not t:
+                continue
+                
+            hp_per_fragment = t.effects.get("hp_per_fragment", 0.0)
+            max_hp = t.quantity * hp_per_fragment
+            current_hp = 0
+            
+            if t.quantity > 0:
+                if damage_left >= max_hp:
+                    current_hp = 0
+                    damage_left -= max_hp
+                    damaged_space += t.used_space
+                else:
+                    current_hp = max_hp - damage_left
+                    if hp_per_fragment > 0:
+                        broken_frags = int(damage_left // hp_per_fragment)
+                        t_damaged_space = broken_frags * t.space_per_fragment
+                        damaged_space += t_damaged_space
+                        intact_space += (t.used_space - t_damaged_space)
+                    else:
+                        intact_space += t.used_space
+                    damage_left = 0
+            
+            armor_types_view.append({
+                "name": t.name,
+                "quantity": t.quantity,
+                "space_per_fragment": t.space_per_fragment,
+                "used_space": t.used_space,
+                "max_hp": int(max_hp),
+                "current_hp": int(current_hp)
+            })
+
         view_model = {
             "name": self.hero.name,
             "level": self.hero.level,
             "unspent_stat_points": self.hero.unspent_stat_points,
             "hp": self.hero.current_hp,
+            "health_split": health_split,
             "max_hp": self.hero.stat_manager.get_stat_breakdown("max_hp"),
             "defense": self.hero.stat_manager.get_stat_breakdown("defense"),
             "ap": self.hero.stat_manager.get_stat_breakdown("ap"),
@@ -185,15 +257,9 @@ class GameEngine:
                 "max_space": self.hero.armor_state.max_space,
                 "total_used_space": self.hero.armor_state.total_used_space,
                 "remaining_space": self.hero.armor_state.remaining_space,
-                "types": [
-                    {
-                        "name": t.name,
-                        "quantity": t.quantity,
-                        "space_per_fragment": t.space_per_fragment,
-                        "used_space": t.used_space,
-                    }
-                    for t in self.hero.armor_state.types.values()
-                ],
+                "damaged_space": damaged_space,
+                "intact_space": intact_space,
+                "types": armor_types_view,
             },
             "economy": {
                 "gold": self.hero.gold,
@@ -333,6 +399,62 @@ class GameEngine:
         self._snapshot()
         setattr(self.hero.stats, stat_attr, current + delta)
         logger.info(f"Hero stat {stat_name} modified by {delta}")
+        return True
+
+    def get_current_mitigation(self) -> int:
+        broken_fragments = self.hero.damage_taken_physical // 5
+        destroyed_left = broken_fragments
+
+        qty_pol = self.hero.armor_state.types.get("Półpłytowa")
+        qty_ply = self.hero.armor_state.types.get("Płytowa")
+        qty_stal = self.hero.armor_state.types.get("Stalowa")
+        
+        pol_q = qty_pol.quantity if qty_pol else 0
+        ply_q = qty_ply.quantity if qty_ply else 0
+        stal_q = qty_stal.quantity if qty_stal else 0
+
+        effective_stal = 0
+        effective_ply = 0
+        effective_pol = 0
+        
+        for name, orig_q in [("Stalowa", stal_q), ("Płytowa", ply_q), ("Półpłytowa", pol_q)]:
+            if destroyed_left > 0:
+                if orig_q >= destroyed_left:
+                    eff_q = orig_q - destroyed_left
+                    destroyed_left = 0
+                else:
+                    eff_q = 0
+                    destroyed_left -= orig_q
+            else:
+                eff_q = orig_q
+                
+            if name == "Stalowa":
+                effective_stal = eff_q
+            elif name == "Płytowa":
+                effective_ply = eff_q
+            elif name == "Półpłytowa":
+                effective_pol = eff_q
+
+        return (2 * effective_pol) + (4 * effective_ply) + (6 * effective_stal)
+
+    def apply_damage(self, damage_type: str, amount: int) -> bool:
+        """Applies damage considering armor mitigation for physical damage."""
+        if amount < 0:
+            return False
+
+        self._snapshot()
+        
+        if damage_type == "physical":
+            mitigation = self.get_current_mitigation()
+            effective_damage = max(0, amount - mitigation)
+            self.hero.damage_taken_physical += effective_damage
+            logger.info(f"Physical damage: {amount}, Mitigation: {mitigation}, Effective: {effective_damage}")
+        elif damage_type == "magical":
+            self.hero.damage_taken_magical += amount
+            logger.info(f"Magical damage: {amount}")
+        else:
+            return False
+
         return True
 
     def get_shop_data(self) -> dict:

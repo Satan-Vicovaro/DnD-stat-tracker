@@ -6,6 +6,7 @@ import { PaymentModal } from './components/PaymentModal.js';
 import { ItemEditorModal } from './components/ItemEditorModal.js';
 import { InventoryComponent } from './components/InventoryComponent.js';
 import { SaveLoadModal } from './components/SaveLoadModal.js';
+import { FightComponent } from './components/FightComponent.js';
 
 // ─── Undo / Redo Manager ─────────────────────────────────────────────────────
 
@@ -84,6 +85,12 @@ window.onload = async () => {
     // Initialize the Inventory View Component
     const inventoryView = new InventoryComponent("inventory-view-container");
     inventoryView.init();
+
+    const fightView = new FightComponent("fight-view-container");
+    fightView.init();
+
+    const fightArmorView = new ArmorComponent("fight-armor-view-container", true);
+    fightArmorView.init();
 
     // Initialize the Shop View Component
     const shopView = new ShopComponent("shop-view-container");

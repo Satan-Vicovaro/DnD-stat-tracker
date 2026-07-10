@@ -1,12 +1,15 @@
 export class ArmorComponent {
-    constructor(containerId) {
+    constructor(containerId, isReadonly = false) {
         this.containerId = containerId;
+        this.isReadonly = isReadonly;
+        this.container = null;
     }
 
     async init() {
         const response = await fetch('/components/armor.html');
         const html = await response.text();
-        document.getElementById(this.containerId).innerHTML = html;
+        this.container = document.getElementById(this.containerId);
+        this.container.innerHTML = html;
 
         // Listen for external updates
         document.addEventListener('characterUpdated', (e) => {
@@ -30,7 +33,7 @@ export class ArmorComponent {
 
     render(char) {
         const armorData = char.armor;
-        const container = document.getElementById("armor-list-container");
+        const container = this.container.querySelector(".armor-list-container");
         
         // Rebuild list
         container.innerHTML = "";
@@ -42,15 +45,30 @@ export class ArmorComponent {
             const row = document.createElement("div");
             row.className = "flex justify-between items-center bg-gray-700/20 py-2 px-4 rounded-lg";
             
-            row.innerHTML = `
-                <div class="flex flex-col w-32">
-                    <span class="text-gray-300 font-bold">${type.name}</span>
-                    <span class="text-xs text-gray-500">${type.space_per_fragment} space / frag</span>
-                </div>
-                <div class="flex items-center space-x-3">
+            let buttonsHtml = '';
+            if (this.isReadonly) {
+                buttonsHtml = `<span class="font-bold text-fuchsia-300 text-lg w-6 text-center">${type.quantity}</span>`;
+            } else {
+                buttonsHtml = `
                     <button data-action="modify-armor" data-name="${type.name}" data-delta="-1" class="w-8 h-8 rounded-full bg-gray-700 hover:bg-rose-500/80 text-gray-300 flex items-center justify-center transition-colors font-bold">-</button>
                     <span class="font-bold text-fuchsia-300 text-lg w-6 text-center">${type.quantity}</span>
                     <button data-action="modify-armor" data-name="${type.name}" data-delta="1" class="w-8 h-8 rounded-full bg-gray-700 hover:bg-emerald-500/80 text-gray-300 flex items-center justify-center transition-colors font-bold ${armorData.remaining_space < type.space_per_fragment ? 'opacity-30 cursor-not-allowed' : ''}">+</button>
+                `;
+            }
+
+            const hpColor = (type.current_hp < type.max_hp && type.max_hp > 0) ? "text-rose-400" : "text-emerald-400";
+            const hpDisplay = type.max_hp > 0 ? `<span class="text-[10px] ${hpColor} font-mono font-bold">HP: ${type.current_hp} / ${type.max_hp}</span>` : '';
+
+            row.innerHTML = `
+                <div class="flex flex-col w-32">
+                    <span class="text-gray-300 font-bold">${type.name}</span>
+                    <div class="flex flex-col">
+                      <span class="text-[10px] text-gray-500">${type.space_per_fragment} space / frag</span>
+                      ${hpDisplay}
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    ${buttonsHtml}
                 </div>
                 <div class="w-12 text-right">
                     <span class="text-sm font-semibold text-gray-400" title="Zużyte miejsce">${type.used_space}</span>
@@ -61,27 +79,37 @@ export class ArmorComponent {
 
         // Bind buttons
         const btns = container.querySelectorAll("[data-action='modify-armor']");
-        btns.forEach(btn => {
-            btn.addEventListener("click", () => {
-                const name = btn.getAttribute("data-name");
-                const delta = parseInt(btn.getAttribute("data-delta"));
-                this.modifyArmor(name, delta);
+        if (!this.isReadonly) {
+            btns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const name = btn.getAttribute("data-name");
+                    const delta = parseInt(btn.getAttribute("data-delta"));
+                    this.modifyArmor(name, delta);
+                });
             });
-        });
-
-        document.getElementById("armor-total-fragments").innerText = `${totalFragments} frag`;
-        document.getElementById("armor-used-space").innerText = armorData.total_used_space;
-        document.getElementById("armor-max-space").innerText = armorData.max_space;
-        document.getElementById("armor-remaining-space").innerText = armorData.remaining_space;
-
-        const percentage = (armorData.total_used_space / armorData.max_space) * 100;
-        const bar = document.getElementById("armor-capacity-bar");
-        bar.style.width = `${percentage}%`;
-        
-        if (percentage >= 100) {
-            bar.classList.replace("bg-fuchsia-500", "bg-rose-500");
-        } else {
-            bar.classList.replace("bg-rose-500", "bg-fuchsia-500");
         }
+
+        this.container.querySelector(".armor-total-fragments").innerText = `${totalFragments} frag`;
+        
+        const split = char.health_split;
+        const brokenFragments = split ? (split.broken_fragments || 0) : 0;
+        const brokenBadge = this.container.querySelector(".armor-broken-fragments");
+        if (brokenFragments > 0) {
+            brokenBadge.innerText = `${brokenFragments} zniszczonych! (Nie redukują obrażeń)`;
+            brokenBadge.classList.remove("hidden");
+        } else {
+            brokenBadge.classList.add("hidden");
+        }
+
+        this.container.querySelector(".armor-used-space").innerText = armorData.total_used_space;
+        this.container.querySelector(".armor-max-space").innerText = armorData.max_space;
+        this.container.querySelector(".armor-remaining-space").innerText = armorData.remaining_space;
+
+        const maxSpace = armorData.max_space || 24;
+        const intactPct = (armorData.intact_space / maxSpace) * 100;
+        const damagedPct = (armorData.damaged_space / maxSpace) * 100;
+
+        this.container.querySelector(".armor-capacity-bar-intact").style.width = `${intactPct}%`;
+        this.container.querySelector(".armor-capacity-bar-damaged").style.width = `${damagedPct}%`;
     }
 }

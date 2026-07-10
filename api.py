@@ -74,6 +74,13 @@ def modify_level(delta: int):
     return game_engine.get_character_view_model()
 
 @eel.expose
+def apply_damage(damage_type: str, amount: int):
+    """API endpoint to apply damage to the character."""
+    game_engine.apply_damage(damage_type, amount)
+    game_engine.save()
+    return game_engine.get_character_view_model()
+
+@eel.expose
 def get_shop_items():
     """API endpoint for frontend to fetch shop items."""
     logger.info("Frontend requested shop items.")
