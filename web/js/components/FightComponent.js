@@ -99,33 +99,82 @@ export class FightComponent {
       }
     }
 
-    // 2. Render Equipped Items
-    const equippedList = document.getElementById('fight-equipped-list');
-    const emptyMsg = document.getElementById('fight-equipped-empty');
+    // 2. Render Weapons & Consumables
+    const weaponsList = document.getElementById('fight-weapons-list');
+    const weaponsEmpty = document.getElementById('fight-weapons-empty');
+    const consList = document.getElementById('fight-consumables-list');
+    const consEmpty = document.getElementById('fight-consumables-empty');
     
     const inventory = this.characterData.inventory || [];
-    const equippedItems = inventory.filter(i => i.location === 'EQUIPPED');
 
-    if (equippedItems.length === 0) {
-      equippedList.innerHTML = '';
-      emptyMsg.classList.remove('hidden');
-    } else {
-      emptyMsg.classList.add('hidden');
-      let html = '';
-      equippedItems.forEach((item, originalIndex) => {
-        // We find the real index to preserve compatibility if we wanted to edit, but for display it's not strictly necessary.
-        html += this.renderItemCard(item);
-      });
-      equippedList.innerHTML = html;
+    let wHtml = '';
+    let wCount = 0;
+    let cHtml = '';
+    let cCount = 0;
+
+    inventory.forEach((item, originalIndex) => {
+      if (item.item_type === 'Weapon') {
+        wHtml += this.renderItemCard(item, originalIndex, false);
+        wCount++;
+      }
+      
+      const hasConsumable = item.consumable_effects ? Object.keys(item.consumable_effects).length > 0 : false;
+      if (hasConsumable) {
+        cHtml += this.renderItemCard(item, originalIndex, true);
+        cCount++;
+      }
+    });
+
+    if (weaponsList) {
+      weaponsList.innerHTML = wHtml;
+      if (weaponsEmpty) weaponsEmpty.classList.toggle('hidden', wCount > 0);
     }
+    
+    if (consList) {
+      consList.innerHTML = cHtml;
+      if (consEmpty) consEmpty.classList.toggle('hidden', cCount > 0);
+    }
+
+    this.bindDynamicActions();
   }
 
-  renderItemCard(item) {
+  bindDynamicActions() {
+    const container = document.getElementById(this.containerId);
+    container.querySelectorAll('button[data-action="fight-use"]').forEach(btn => {
+      // remove old listener if any (easiest way is to clone or just assume they are new DOM elements)
+      btn.addEventListener('click', async (e) => {
+        const index = parseInt(e.currentTarget.getAttribute('data-index'));
+        const item = this.characterData.inventory[index];
+        
+        let overrideValue = null;
+        if (item.consumable_effects && item.consumable_effects.dynamic_heal) {
+            const val = prompt(`Rzuć kośćmi (lub wpisz wartość leczenia) dla: ${item.name}`);
+            if (val === null) return; // cancelled
+            const parsed = parseInt(val);
+            if (isNaN(parsed) || parsed < 0) {
+                alert("Wprowadzono niepoprawną wartość.");
+                return;
+            }
+            overrideValue = parsed;
+        }
+
+        this.characterData = await eel.use_inventory_item(index, overrideValue)();
+        document.dispatchEvent(new CustomEvent('characterUpdated', { detail: this.characterData }));
+      });
+    });
+  }
+
+  renderItemCard(item, index, isConsumable = false) {
     const typeColor = item.item_type === "Weapon" ? "text-rose-400" : (item.item_type === "Armor" ? "text-emerald-400" : "text-gray-400");
     
+    // Map internal location to human readable tag
+    const locMap = { "EQUIPPED": "W Rękach", "BACKPACK": "Plecak (2 PA)", "BACK": "Plecy (1 PA)", "QUIVER": "Kołczan", "WAGON": "Wóz" };
+    const locTag = locMap[item.location] || item.location;
+    const locBadge = `<span class="bg-indigo-900/50 text-indigo-300 text-[9px] px-1.5 py-0.5 rounded border border-indigo-500/50">[${locTag}]</span>`;
+
     // Actions if weapon
     let actionsHtml = '';
-    if (item.item_type === "Weapon" && item.actions && item.actions.length > 0) {
+    if (!isConsumable && item.item_type === "Weapon" && item.actions && item.actions.length > 0) {
       actionsHtml = `<div class="mt-3 flex flex-col gap-2">` + item.actions.map(a => `
         <div class="bg-gray-900/60 rounded p-2 border border-gray-700/50">
           <div class="flex justify-between items-center mb-1">
@@ -140,14 +189,30 @@ export class FightComponent {
       `).join('') + `</div>`;
     }
 
+    // Consumable specific UI
+    let consHtml = '';
+    if (isConsumable) {
+       const usesBadge = item.max_uses > 0 ? `<span class="bg-teal-900/80 text-teal-300 text-[9px] px-1.5 py-0.5 rounded border border-teal-500/50">Użycia: ${item.current_uses}/${item.max_uses}</span>` : "";
+       consHtml = `
+         <div class="mt-3 flex justify-between items-center gap-2">
+           ${usesBadge}
+           <button data-action="fight-use" data-index="${index}" class="text-xs font-bold bg-teal-600 hover:bg-teal-500 text-white px-3 py-1.5 rounded border border-teal-500 transition-colors shadow-[0_0_8px_rgba(20,184,166,0.3)]">Użyj</button>
+         </div>
+       `;
+    }
+
     return `
       <div class="bg-gray-700/30 rounded p-3 border border-gray-600 relative transition-colors">
-        <h4 class="font-bold text-white leading-tight">${item.name}</h4>
+        <div class="flex justify-between items-start">
+          <h4 class="font-bold text-white leading-tight">${item.name}</h4>
+          ${locBadge}
+        </div>
         <div class="text-[10px] font-bold uppercase tracking-wider ${typeColor} mb-1">
             ${item.item_type}
         </div>
         ${item.description ? `<p class="text-xs text-gray-400 italic mt-1">${item.description}</p>` : ''}
         ${actionsHtml}
+        ${consHtml}
       </div>
     `;
   }

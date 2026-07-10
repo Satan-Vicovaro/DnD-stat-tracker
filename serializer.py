@@ -7,6 +7,7 @@ risk of circular imports.
 """
 
 import re
+import uuid
 from datetime import datetime
 
 from models import (
@@ -76,6 +77,16 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
     fb_name = fallback.name if fallback else "Unknown Item"
     fb_desc = fallback.description if fallback else ""
     fb_space = fallback.space_taken if fallback else 0.0
+    fb_effects = fallback.consumable_effects if fallback else {}
+    fb_max_uses = fallback.max_uses if fallback else 1
+    fb_current_uses = fallback.current_uses if fallback else 1
+    # Preserve the item's stable UUID; generate a new one only for brand-new items.
+    fb_item_id = fallback.item_id if fallback else str(uuid.uuid4())
+
+    consumable_effects = item_dict.get("consumable_effects", fb_effects)
+    max_uses = item_dict.get("max_uses", fb_max_uses)
+    current_uses = item_dict.get("current_uses", fb_current_uses)
+    item_id = item_dict.get("item_id", fb_item_id)
 
     if item_type == "Weapon":
         actions = [
@@ -98,6 +109,10 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
             space_taken=parse_space_taken(item_dict.get("space_taken", fb_space)),
             location=location,
             modifiers=modifiers,
+            consumable_effects=consumable_effects,
+            max_uses=max_uses,
+            current_uses=current_uses,
+            item_id=item_id,
             actions=actions,
         )
 
@@ -108,6 +123,10 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
             space_taken=parse_space_taken(item_dict.get("space_taken", fb_space)),
             location=location,
             modifiers=modifiers,
+            consumable_effects=consumable_effects,
+            max_uses=max_uses,
+            current_uses=current_uses,
+            item_id=item_id,
             effect_value=item_dict.get("effect_value", getattr(fallback, "effect_value", "")),
             uses_durability=item_dict.get(
                 "uses_durability", getattr(fallback, "uses_durability", "")
@@ -122,6 +141,10 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
         location=location,
         modifiers=modifiers,
         item_type=item_type,
+        consumable_effects=consumable_effects,
+        max_uses=max_uses,
+        current_uses=current_uses,
+        item_id=item_id,
     )
 
 
@@ -136,6 +159,7 @@ def serialize(hero: Character) -> dict:
     for item in hero.inventory:
         entry: dict = {
             "item_type": item.item_type,
+            "item_id": item.item_id,
             "name": item.name,
             "description": item.description,
             "space_taken": item.space_taken,
@@ -149,6 +173,9 @@ def serialize(hero: Character) -> dict:
                 }
                 for m in item.modifiers
             ],
+            "consumable_effects": item.consumable_effects,
+            "max_uses": item.max_uses,
+            "current_uses": item.current_uses,
         }
         if isinstance(item, Weapon):
             entry["actions"] = [

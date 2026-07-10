@@ -20,78 +20,85 @@ def update_name(new_name: str):
 @eel.expose
 def modify_stat(stat_name: str, delta: int):
     """API endpoint to modify a base stat."""
-    game_engine.modify_stat(stat_name, delta)
-    game_engine.save()
+    if game_engine.modify_stat(stat_name, delta):
+        game_engine.save()
     return game_engine.get_character_view_model()
 
 @eel.expose
 def modify_armor_quantity(armor_name: str, delta: int):
     """API endpoint to modify armor fragments."""
-    game_engine.modify_armor_quantity(armor_name, delta)
-    game_engine.save()
+    if game_engine.modify_armor_quantity(armor_name, delta):
+        game_engine.save()
     return game_engine.get_character_view_model()
 
 @eel.expose
 def modify_money(currency_type: str, delta: int):
     """API endpoint to modify character money."""
-    game_engine.modify_money(currency_type, delta)
-    game_engine.save()
+    if game_engine.modify_money(currency_type, delta):
+        game_engine.save()
     return game_engine.get_character_view_model()
 
 @eel.expose
 def set_money(currency_type: str, value: int):
     """API endpoint to set character money directly."""
-    game_engine.set_money(currency_type, value)
-    game_engine.save()
+    if game_engine.set_money(currency_type, value):
+        game_engine.save()
     return game_engine.get_character_view_model()
 
 @eel.expose
 def add_item_to_inventory(item_data: dict, payment: dict):
     """API endpoint to add a new item or buy from shop."""
-    game_engine.add_item_to_inventory(item_data, payment)
-    game_engine.save()
+    if game_engine.add_item_to_inventory(item_data, payment):
+        game_engine.save()
     return game_engine.get_character_view_model()
 
 @eel.expose
 def edit_inventory_item(index: int, item_data: dict):
     """API endpoint to edit an existing inventory item."""
-    game_engine.edit_inventory_item(index, item_data)
-    game_engine.save()
+    if game_engine.edit_inventory_item(index, item_data):
+        game_engine.save()
     return game_engine.get_character_view_model()
 
 @eel.expose
 def remove_inventory_item(index: int):
     """API endpoint to remove an item from inventory."""
-    game_engine.remove_inventory_item(index)
-    game_engine.save()
+    if game_engine.remove_inventory_item(index):
+        game_engine.save()
+    return game_engine.get_character_view_model()
+
+@eel.expose
+def use_inventory_item(index: int, override_value: int = None):
+    """API endpoint to use an item from inventory."""
+    if game_engine.use_inventory_item(index, override_value):
+        game_engine.save()
     return game_engine.get_character_view_model()
 
 @eel.expose
 def modify_level(delta: int):
     """API endpoint to modify the character level."""
-    game_engine.modify_level(delta)
-    game_engine.save()
+    if game_engine.modify_level(delta):
+        game_engine.save()
     return game_engine.get_character_view_model()
 
 @eel.expose
 def apply_damage(damage_type: str, amount: int):
     """API endpoint to apply damage to the character."""
-    game_engine.apply_damage(damage_type, amount)
-    game_engine.save()
+    if game_engine.apply_damage(damage_type, amount):
+        game_engine.save()
     return game_engine.get_character_view_model()
 
 @eel.expose
 def adjust_health(amount: int):
     """API endpoint to manually add or remove base health."""
-    game_engine.adjust_health(amount)
-    game_engine.save()
+    if game_engine.adjust_health(amount):
+        game_engine.save()
     return game_engine.get_character_view_model()
 
 @eel.expose
 def adjust_armor_health(amount: int):
     """API endpoint to manually repair or damage armor."""
-    game_engine.adjust_armor_health(amount)
-    game_engine.save()
+    if game_engine.adjust_armor_health(amount):
+        game_engine.save()
     return game_engine.get_character_view_model()
 
 @eel.expose
@@ -103,15 +110,15 @@ def get_shop_items():
 @eel.expose
 def undo():
     """API endpoint to undo the last state mutation."""
-    game_engine.undo()
-    game_engine.save()
+    if game_engine.undo():
+        game_engine.save()
     return game_engine.get_character_view_model()
 
 @eel.expose
 def redo():
     """API endpoint to redo the last undone mutation."""
-    game_engine.redo()
-    game_engine.save()
+    if game_engine.redo():
+        game_engine.save()
     return game_engine.get_character_view_model()
 
 @eel.expose

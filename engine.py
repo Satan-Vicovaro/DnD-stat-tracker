@@ -2,6 +2,7 @@ import copy
 import json
 import logging
 import os
+from pathlib import Path
 
 from models import Character
 from serializer import build_item, serialize, deserialize
@@ -136,8 +137,11 @@ class GameEngine:
 
     def load_named_save(self, filename: str) -> bool:
         """Load a specific manual save. Clears undo/redo history on success."""
-        # Guard against path traversal
-        if ".." in filename or os.sep in filename:
+        # Guard against path traversal — reject anything that isn't a plain
+        # filename with no directory component. Using pathlib is safer than
+        # string-contains checks, which can be bypassed with URL-encoding or
+        # Unicode look-alike characters.
+        if Path(filename).name != filename:
             logger.warning(f"Rejected suspicious filename: {filename!r}")
             return False
         path = os.path.join(_SAVES_DIR, filename)
@@ -162,6 +166,25 @@ class GameEngine:
     def get_character_view_model(self) -> dict:
         """Returns the character data formatted for the frontend."""
         from dataclasses import asdict
+
+        # Backward compatibility patch for existing items in memory:
+        # Dynamically fetch updated attributes from shop data.
+        shop_data = self.get_shop_data()
+        shop_items_map = {}
+        for category, items in shop_data.items():
+            for si in items:
+                shop_items_map[si.get("name")] = si
+
+        for item in self.hero.inventory:
+            if not item.consumable_effects:
+                shop_item = shop_items_map.get(item.name)
+                if shop_item and shop_item.get("consumable_effects"):
+                    item.consumable_effects = shop_item.get("consumable_effects")
+                    item.max_uses = shop_item.get("max_uses", 1)
+                    if item.current_uses <= 1 and item.max_uses > 1:
+                        item.current_uses = item.max_uses
+                    else:
+                        item.current_uses = max(1, item.current_uses)
 
         armor_max_hp = 0
         for name, armor in self.hero.armor_state.types.items():
@@ -270,10 +293,10 @@ class GameEngine:
         active_containers = view_model["inventory_space"].get("active_containers", {})
         for item in self.hero.inventory:
             item_dict = asdict(item)
-            item_id = id(item)
-            item_dict["is_active_container"] = item_id in active_containers
-            if item_id in active_containers:
-                item_dict["granted_space"] = active_containers[item_id]
+            # active_containers is now keyed by item_id (stable UUID), not id()
+            item_dict["is_active_container"] = item.item_id in active_containers
+            if item.item_id in active_containers:
+                item_dict["granted_space"] = active_containers[item.item_id]
             view_model["inventory"].append(item_dict)
 
         view_model["can_undo"] = self.can_undo()
@@ -324,6 +347,60 @@ class GameEngine:
         self._snapshot()
         item = self.hero.inventory.pop(index)
         logger.info(f"Removed item {item.name} from inventory.")
+        return True
+
+    def use_inventory_item(self, index: int, override_value: int = None) -> bool:
+        if index < 0 or index >= len(self.hero.inventory):
+            return False
+            
+        item = self.hero.inventory[index]
+        if not item.consumable_effects:
+            logger.warning(f"Item {item.name} has no consumable effects.")
+            return False
+            
+        ap_cost = 0
+        if item.location == "BACKPACK":
+            ap_cost = 2
+        elif item.location == "BACK":
+            ap_cost = 1
+
+        if self.hero.current_action_points < ap_cost:
+            logger.warning(f"Not enough AP to use item {item.name}. Need {ap_cost}, have {self.hero.current_action_points}")
+            return False
+
+        # Take exactly ONE snapshot for this entire action.
+        # Calling adjust_health / adjust_armor_health would each take an
+        # additional snapshot, creating multiple undo steps for a single use.
+        self._snapshot()
+        
+        self.hero.current_action_points -= ap_cost
+        
+        effects = item.consumable_effects
+        
+        heal_val = effects.get("heal_health")
+        if heal_val:
+            heal = min(heal_val, self.hero.damage_taken_magical)
+            self.hero.damage_taken_magical -= heal
+            logger.info(f"Healed base health by {heal}")
+            
+        if effects.get("dynamic_heal") and override_value is not None:
+            heal = min(override_value, self.hero.damage_taken_magical)
+            self.hero.damage_taken_magical -= heal
+            logger.info(f"Healed base health by {heal} (dynamic)")
+            
+        repair_val = effects.get("repair_armor")
+        if repair_val:
+            repair = min(repair_val, self.hero.damage_taken_physical)
+            self.hero.damage_taken_physical -= repair
+            logger.info(f"Repaired armor by {repair}")
+            
+        item.current_uses -= 1
+        if item.current_uses <= 0:
+            self.hero.inventory.pop(index)
+            logger.info(f"Item {item.name} consumed and removed.")
+        else:
+            logger.info(f"Item {item.name} used. {item.current_uses}/{item.max_uses} uses left.")
+            
         return True
 
     def modify_armor_quantity(self, armor_name: str, delta: int) -> bool:
@@ -402,40 +479,45 @@ class GameEngine:
         return True
 
     def get_current_mitigation(self) -> int:
-        broken_fragments = self.hero.damage_taken_physical // 5
-        destroyed_left = broken_fragments
+        """Compute total damage mitigation from intact armor fragments.
 
-        qty_pol = self.hero.armor_state.types.get("Półpłytowa")
-        qty_ply = self.hero.armor_state.types.get("Płytowa")
-        qty_stal = self.hero.armor_state.types.get("Stalowa")
+        Uses each armor type's ``hp_per_fragment`` from the config to determine
+        which fragments are broken, rather than the former hardcoded constant of
+        5 HP per fragment that silently gave wrong results when the config was
+        changed.
+        """
+        # Per-type mitigation bonus granted by each *intact* fragment.
+        # (These are still magic numbers — see issue #13 — but at least the
+        # hp_per_fragment breakage is now driven by data.)
+        _MIT_PER_FRAG: dict[str, int] = {"Stalowa": 6, "Płytowa": 4, "Półpłytowa": 2}
 
-        pol_q = qty_pol.quantity if qty_pol else 0
-        ply_q = qty_ply.quantity if qty_ply else 0
-        stal_q = qty_stal.quantity if qty_stal else 0
+        order = ["Stalowa", "Płytowa", "Półpłytowa", "Skórzana"]
+        all_types = self.hero.armor_state.types
 
-        effective_stal = 0
-        effective_ply = 0
-        effective_pol = 0
+        damage_left = self.hero.damage_taken_physical
+        mitigation = 0
 
-        for name, orig_q in [("Stalowa", stal_q), ("Płytowa", ply_q), ("Półpłytowa", pol_q)]:
-            if destroyed_left > 0:
-                if orig_q >= destroyed_left:
-                    eff_q = orig_q - destroyed_left
-                    destroyed_left = 0
-                else:
-                    eff_q = 0
-                    destroyed_left -= orig_q
+        for name in order + [n for n in all_types.keys() if n not in order]:
+            t = all_types.get(name)
+            if not t or t.quantity == 0:
+                continue
+
+            hp_per_frag = t.effects.get("hp_per_fragment", 0.0)
+            max_hp = t.quantity * hp_per_frag
+
+            if damage_left >= max_hp:
+                # All fragments of this type are destroyed — no mitigation from them.
+                damage_left -= max_hp
             else:
-                eff_q = orig_q
+                if hp_per_frag > 0:
+                    broken = int(damage_left // hp_per_frag)
+                else:
+                    broken = 0
+                intact = t.quantity - broken
+                mitigation += intact * _MIT_PER_FRAG.get(name, 0)
+                damage_left = 0
 
-            if name == "Stalowa":
-                effective_stal = eff_q
-            elif name == "Płytowa":
-                effective_ply = eff_q
-            elif name == "Półpłytowa":
-                effective_pol = eff_q
-
-        return (2 * effective_pol) + (4 * effective_ply) + (6 * effective_stal)
+        return mitigation
 
     def apply_damage(self, damage_type: str, amount: int) -> bool:
         """Applies damage considering armor mitigation for physical damage."""
@@ -522,7 +604,19 @@ class GameEngine:
             if os.path.exists(path):
                 try:
                     with open(path, "r", encoding="utf-8") as f:
-                        shop_data[category] = json.load(f)
+                        items = json.load(f)
+                    # Normalise every item to have a 'name' field so that
+                    # frontend code doesn't need a fragile multi-field OR-chain.
+                    for item in items:
+                        if "name" not in item:
+                            item["name"] = (
+                                item.get("weapon_name")
+                                or item.get("item_name")
+                                or item.get("tarcza")
+                                or item.get("zbroja")
+                                or "Nieznany Przedmiot"
+                            )
+                    shop_data[category] = items
                 except Exception as e:
                     logger.error(f"Error loading {filename}: {e}")
                     shop_data[category] = []

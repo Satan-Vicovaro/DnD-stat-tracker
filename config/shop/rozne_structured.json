@@ -4,14 +4,20 @@
     "cost_silver": "20",
     "action_cost": "raz dziennie",
     "description": "leczy max hp po krótkim odpoczynku",
-    "space_taken": "2/10"
+    "space_taken": "2/10",
+    "consumable_effects": { "heal_health": 9999 },
+    "max_uses": 1,
+    "current_uses": 1
   },
   {
     "name": "Leki",
     "cost_silver": "4",
     "action_cost": "10min",
     "description": "można go użyć raz po każdej walce, leczy d4 dmg za każde 10 życia postaci+wis (działa tylko na obrażenia zadane w walce po której zostanie użyte)",
-    "space_taken": "1/10"
+    "space_taken": "1/10",
+    "consumable_effects": { "dynamic_heal": true },
+    "max_uses": 1,
+    "current_uses": 1
   },
   {
     "name": "Zaopatrzenie",
@@ -102,14 +108,20 @@
     "cost_silver": "50",
     "action_cost": "1h",
     "description": "naprawia 10 życia zbroii (posiada 4 użycia)",
-    "space_taken": "użycia/10"
+    "space_taken": "użycia/10",
+    "consumable_effects": { "repair_armor": 10 },
+    "max_uses": 4,
+    "current_uses": 4
   },
   {
     "name": "Narzędzia ciężkie zbroje",
     "cost_silver": "100",
     "action_cost": "1h",
     "description": "naprawia 15 życia zbroii (posiada 6 użyć)",
-    "space_taken": "użycia/10"
+    "space_taken": "użycia/10",
+    "consumable_effects": { "repair_armor": 15 },
+    "max_uses": 6,
+    "current_uses": 6
   },
   {
     "name": "Mały kamień magiczny",

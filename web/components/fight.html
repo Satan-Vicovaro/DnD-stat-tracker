@@ -105,20 +105,40 @@
     <!-- Readonly Armor Component inside Fight Tab -->
     <div id="fight-armor-view-container" class="-mt-6"></div>
 
-    <div class="bg-gray-800 rounded-xl shadow-lg border border-gray-700 p-6">
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="text-xl font-bold text-white flex items-center gap-2">
-          <span class="text-emerald-500">🛡</span> W Rękach (Equipped)
-        </h3>
-      </div>
+    <div class="bg-gray-800 rounded-xl shadow-lg border border-gray-700 p-6 flex flex-col gap-6">
       
-      <!-- Equipped Items List -->
-      <div id="fight-equipped-list" class="grid gap-3">
-        <!-- Rendered by JS -->
+      <!-- Weapons Section -->
+      <div>
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-xl font-bold text-white flex items-center gap-2">
+            <span class="text-rose-500">⚔</span> Broń
+          </h3>
+        </div>
+        <div id="fight-weapons-list" class="grid gap-3">
+          <!-- Rendered by JS -->
+        </div>
+        <div id="fight-weapons-empty" class="text-center text-gray-500 py-6 italic hidden">
+          Brak broni w ekwipunku.
+        </div>
       </div>
-      <div id="fight-equipped-empty" class="text-center text-gray-500 py-6 italic hidden">
-        Brak przedmiotów podręcznych.
+
+      <hr class="border-gray-700">
+
+      <!-- Consumables Section -->
+      <div>
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-xl font-bold text-white flex items-center gap-2">
+            <span class="text-teal-500">🧪</span> Przedmioty Użytkowe
+          </h3>
+        </div>
+        <div id="fight-consumables-list" class="grid gap-3">
+          <!-- Rendered by JS -->
+        </div>
+        <div id="fight-consumables-empty" class="text-center text-gray-500 py-6 italic hidden">
+          Brak przedmiotów użytkowych.
+        </div>
       </div>
+
     </div>
   </div>
 

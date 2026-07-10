@@ -56,8 +56,8 @@ export class ShopComponent {
     const items = this.shopData[this.activeTab] || [];
 
     grid.innerHTML = items.map((item, index) => {
-      // Find name and cost properties
-      const name = item.weapon_name || item.name || item.item_name || item.tarcza || item.zbroja || "Nieznany Przedmiot";
+      // 'name' is guaranteed by backend normalisation in get_shop_data()
+      const name = item.name || "Nieznany Przedmiot";
       let cost = "?";
       if (item.cost_silver !== undefined && item.cost_silver !== null) cost = item.cost_silver;
       else if (item.quantity_or_cost !== undefined && item.quantity_or_cost !== null) cost = item.quantity_or_cost;
@@ -192,7 +192,8 @@ export class ShopComponent {
 
         // Prepare data for backend format
         const purchaseData = {
-          name: itemData.weapon_name || itemData.name || itemData.item_name || itemData.tarcza || itemData.zbroja || "Przedmiot",
+          // 'name' is guaranteed by backend normalisation in get_shop_data()
+          name: itemData.name || "Przedmiot",
           description: "Ze sklepu.",
           space_taken: itemData.space_taken || 0.0,
           cost_silver: itemData.cost_silver,

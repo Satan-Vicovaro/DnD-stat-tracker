@@ -1,4 +1,5 @@
 import math
+import uuid
 from dataclasses import dataclass, field
 from typing import List, Optional, Dict
 import json
@@ -153,6 +154,12 @@ class Item:
     location: ItemLocation = ItemLocation.BACKPACK
     modifiers: List[Modifier] = field(default_factory=list)
     item_type: str = "Misc"
+    consumable_effects: Dict[str, any] = field(default_factory=dict)
+    max_uses: int = 1
+    current_uses: int = 1
+    # Stable identifier that survives deep-copies and save/load cycles.
+    # Must NOT be compared with Python's id() which is address-based.
+    item_id: str = field(default_factory=lambda: str(uuid.uuid4()))
 
     def __post_init__(self):
         if isinstance(self, Weapon):
@@ -361,15 +368,17 @@ class Character:
         used_back = 0.0
         used_quiver = 0.0
 
-        exempt_items = {
-            id(quiver_item) if quiver_item else None,
-            id(pocket_clothes_item) if pocket_clothes_item else None,
-            id(attachment_belt_item) if attachment_belt_item else None,
-            id(best_backpack_item) if best_backpack_item else None,
+        # Use stable item_id (UUID) instead of id() which is an ephemeral
+        # memory address that changes after deep-copies and save/load cycles.
+        exempt_ids = {
+            quiver_item.item_id if quiver_item else None,
+            pocket_clothes_item.item_id if pocket_clothes_item else None,
+            attachment_belt_item.item_id if attachment_belt_item else None,
+            best_backpack_item.item_id if best_backpack_item else None,
         }
 
         for item in self.inventory:
-            if id(item) in exempt_items:
+            if item.item_id in exempt_ids:
                 continue
 
             if item.location == ItemLocation.EQUIPPED:
@@ -397,13 +406,13 @@ class Character:
 
         active_containers = {}
         if quiver_item:
-            active_containers[id(quiver_item)] = 10.0
+            active_containers[quiver_item.item_id] = 10.0
         if pocket_clothes_item:
-            active_containers[id(pocket_clothes_item)] = 10.0
+            active_containers[pocket_clothes_item.item_id] = 10.0
         if attachment_belt_item:
-            active_containers[id(attachment_belt_item)] = 10.0
+            active_containers[attachment_belt_item.item_id] = 10.0
         if best_backpack_item:
-            active_containers[id(best_backpack_item)] = backpack_bonus
+            active_containers[best_backpack_item.item_id] = backpack_bonus
 
         return {
             "quick": {"used": round(used_quick, 2), "max": round(max_quick, 2)},

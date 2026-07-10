@@ -135,6 +135,9 @@ export class InventoryComponent {
     const spaceText = isActive ? `<span class="text-amber-400 font-bold">Daje miejsce: ${item.granted_space}</span>` : `<span class="text-gray-500">Masa: ${item.space_taken}</span>`;
     const activeBadge = isActive ? `<span class="bg-amber-900/80 text-amber-300 text-[9px] px-1.5 py-0.5 rounded border border-amber-500/50">AKTYWNE POJEMNOŚĆ</span>` : "";
 
+    const hasConsumable = item.consumable_effects ? Object.keys(item.consumable_effects).length > 0 : false;
+    const usesBadge = (hasConsumable && item.max_uses > 0) ? `<span class="bg-teal-900/80 text-teal-300 text-[9px] px-1.5 py-0.5 rounded border border-teal-500/50">Użycia: ${item.current_uses}/${item.max_uses}</span>` : "";
+
     const showQuiverOption = this.characterData.inventory_space?.quiver?.visible || item.location === "QUIVER" || nameLower === "kołczan" || nameLower === "kolczan";
 
     return `
@@ -143,7 +146,7 @@ export class InventoryComponent {
           <div class="flex-1 pr-2">
             <h4 class="font-bold text-white leading-tight">${item.name}</h4>
             <div class="text-[10px] font-bold uppercase tracking-wider ${typeColor} mb-1 flex items-center flex-wrap gap-1">
-                <span>${item.item_type}</span> <span class="text-gray-500">&bull;</span> ${spaceText} ${activeBadge}
+                <span>${item.item_type}</span> <span class="text-gray-500">&bull;</span> ${spaceText} ${activeBadge} ${usesBadge}
             </div>
             ${item.description ? `<p class="text-xs text-gray-400 italic mt-1 line-clamp-2">${item.description}</p>` : ''}
             ${modsHtml}
@@ -161,9 +164,12 @@ export class InventoryComponent {
             <option value="WAGON" ${item.location === "WAGON" ? "selected" : ""}>Wóz</option>
           </select>
           
-          <div class="flex gap-2 w-full max-w-[150px] justify-between">
-            <button data-action="edit" data-index="${index}" class="text-xs bg-indigo-600 hover:bg-indigo-500 text-white px-2 py-1 rounded w-full border border-indigo-500 transition-colors">Edytuj</button>
-            <button data-action="drop" data-index="${index}" class="text-xs bg-red-900/60 hover:bg-red-800 text-red-200 px-2 py-1 rounded w-full border border-red-700 transition-colors">Wyrzuć</button>
+          <div class="flex flex-col gap-2 w-full max-w-[150px]">
+            ${hasConsumable ? `<button data-action="use" data-index="${index}" class="text-xs font-bold bg-teal-600 hover:bg-teal-500 text-white px-2 py-1.5 rounded w-full border border-teal-500 transition-colors shadow-[0_0_8px_rgba(20,184,166,0.3)]">Użyj</button>` : ''}
+            <div class="flex gap-2 w-full justify-between">
+              <button data-action="edit" data-index="${index}" class="text-xs bg-indigo-600 hover:bg-indigo-500 text-white px-2 py-1 rounded w-full border border-indigo-500 transition-colors">Edytuj</button>
+              <button data-action="drop" data-index="${index}" class="text-xs bg-red-900/60 hover:bg-red-800 text-red-200 px-2 py-1 rounded w-full border border-red-700 transition-colors">Wyrzuć</button>
+            </div>
           </div>
 
         </div>
@@ -195,6 +201,28 @@ export class InventoryComponent {
       btn.addEventListener('click', (e) => {
         const index = parseInt(e.currentTarget.getAttribute('data-index'));
         this.dropItem(index);
+      });
+    });
+
+    container.querySelectorAll('button[data-action="use"]').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        const index = parseInt(e.currentTarget.getAttribute('data-index'));
+        const item = this.characterData.inventory[index];
+        
+        let overrideValue = null;
+        if (item.consumable_effects && item.consumable_effects.dynamic_heal) {
+            const val = prompt(`Rzuć kośćmi (lub wpisz wartość leczenia) dla: ${item.name}`);
+            if (val === null) return; // cancelled
+            const parsed = parseInt(val);
+            if (isNaN(parsed) || parsed < 0) {
+                alert("Wprowadzono niepoprawną wartość.");
+                return;
+            }
+            overrideValue = parsed;
+        }
+
+        this.characterData = await eel.use_inventory_item(index, overrideValue)();
+        document.dispatchEvent(new CustomEvent('characterUpdated', { detail: this.characterData }));
       });
     });
   }
