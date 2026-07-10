@@ -23,6 +23,7 @@ class GameEngine:
 
     def get_character_view_model(self) -> dict:
         """Returns the character data formatted for the frontend."""
+        from dataclasses import asdict
         return {
             "name": self.hero.name,
             "level": self.hero.level,
@@ -58,7 +59,143 @@ class GameEngine:
                 "silver": self.hero.silver,
                 "copper": self.hero.copper,
             },
+            "inventory_space": {
+                "max": self.hero.max_inventory_space,
+                "used": self.hero.current_inventory_space,
+            },
+            "inventory": [asdict(item) for item in self.hero.inventory]
         }
+
+    def add_item_to_inventory(self, item_dict: dict, payment: dict) -> bool:
+        """Processes a payment and adds an item to the inventory."""
+        from models import Item, ItemLocation, Modifier, Weapon, ActionCard
+        
+        # Validate payment
+        gold_cost = int(payment.get("gold", 0))
+        silver_cost = int(payment.get("silver", 0))
+        copper_cost = int(payment.get("copper", 0))
+        
+        if self.hero.gold < gold_cost or self.hero.silver < silver_cost or self.hero.copper < copper_cost:
+            logger.warning("Insufficient funds for custom payment.")
+            return False
+            
+        # Deduct payment
+        self.hero.gold -= gold_cost
+        self.hero.silver -= silver_cost
+        self.hero.copper -= copper_cost
+        
+        # Build Item object
+        item_type = item_dict.get("item_type", "Misc")
+        location = ItemLocation(item_dict.get("location", "BACKPACK"))
+        
+        # Build modifiers
+        modifiers = []
+        for m in item_dict.get("modifiers", []):
+            modifiers.append(Modifier(
+                source=m.get("source", item_dict.get("name")),
+                stat_name=m.get("stat_name"),
+                value=m.get("value"),
+                mod_type=m.get("mod_type", "ADD")
+            ))
+            
+        if item_type == "Weapon":
+            actions = []
+            for a in item_dict.get("actions", []):
+                actions.append(ActionCard(
+                    card_value=a.get("card_value", 0),
+                    action_name=a.get("action_name", ""),
+                    action_cost=a.get("action_cost", 0),
+                    range_str=a.get("range_str", ""),
+                    hit_roll=a.get("hit_roll", ""),
+                    damage_roll=a.get("damage_roll", ""),
+                    targets=a.get("targets", ""),
+                    turn_execution=a.get("turn_execution", ""),
+                    description=a.get("description", "")
+                ))
+            item = Weapon(
+                name=item_dict.get("name", "Unknown Weapon"),
+                description=item_dict.get("description", ""),
+                space_taken=float(item_dict.get("space_taken", 0.0)),
+                location=location,
+                modifiers=modifiers,
+                actions=actions
+            )
+        else:
+            item = Item(
+                name=item_dict.get("name", "Unknown Item"),
+                description=item_dict.get("description", ""),
+                space_taken=float(item_dict.get("space_taken", 0.0)),
+                location=location,
+                modifiers=modifiers,
+                item_type=item_type
+            )
+            
+        self.hero.inventory.append(item)
+        logger.info(f"Added item {item.name} to inventory at {location}.")
+        return True
+
+    def edit_inventory_item(self, index: int, item_dict: dict) -> bool:
+        if index < 0 or index >= len(self.hero.inventory):
+            return False
+            
+        # We can just remove the old item and add a new one in place (without payment)
+        old_item = self.hero.inventory.pop(index)
+        
+        from models import Item, ItemLocation, Modifier, Weapon, ActionCard
+        item_type = item_dict.get("item_type", old_item.item_type)
+        location = ItemLocation(item_dict.get("location", old_item.location.value))
+        
+        modifiers = []
+        for m in item_dict.get("modifiers", []):
+            modifiers.append(Modifier(
+                source=m.get("source", item_dict.get("name")),
+                stat_name=m.get("stat_name"),
+                value=m.get("value"),
+                mod_type=m.get("mod_type", "ADD")
+            ))
+            
+        if item_type == "Weapon":
+            actions = []
+            for a in item_dict.get("actions", []):
+                actions.append(ActionCard(
+                    card_value=a.get("card_value", 0),
+                    action_name=a.get("action_name", ""),
+                    action_cost=a.get("action_cost", 0),
+                    range_str=a.get("range_str", ""),
+                    hit_roll=a.get("hit_roll", ""),
+                    damage_roll=a.get("damage_roll", ""),
+                    targets=a.get("targets", ""),
+                    turn_execution=a.get("turn_execution", ""),
+                    description=a.get("description", "")
+                ))
+            item = Weapon(
+                name=item_dict.get("name", old_item.name),
+                description=item_dict.get("description", old_item.description),
+                space_taken=float(item_dict.get("space_taken", old_item.space_taken)),
+                location=location,
+                modifiers=modifiers,
+                actions=actions
+            )
+        else:
+            item = Item(
+                name=item_dict.get("name", old_item.name),
+                description=item_dict.get("description", old_item.description),
+                space_taken=float(item_dict.get("space_taken", old_item.space_taken)),
+                location=location,
+                modifiers=modifiers,
+                item_type=item_type
+            )
+            
+        self.hero.inventory.insert(index, item)
+        logger.info(f"Edited item at index {index}.")
+        return True
+
+    def remove_inventory_item(self, index: int) -> bool:
+        if index < 0 or index >= len(self.hero.inventory):
+            return False
+        item = self.hero.inventory.pop(index)
+        logger.info(f"Removed item {item.name} from inventory.")
+        return True
 
     def modify_armor_quantity(self, armor_name: str, delta: int) -> bool:
         """Modifies armor quantity, checking space bounds. Returns True if successful."""

@@ -1,0 +1,66 @@
+<div id="payment-modal-backdrop" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+  <div class="bg-gray-800 rounded-xl shadow-2xl border border-gray-600 w-full max-w-md p-6 transform scale-95 transition-transform duration-300" id="payment-modal-content">
+    <div class="flex justify-between items-start mb-4 border-b border-gray-700 pb-4">
+      <div>
+        <h2 class="text-2xl font-bold text-white uppercase tracking-wide">Płatność</h2>
+        <p class="text-gray-400 text-sm mt-1">Przedmiot: <span id="payment-item-name" class="text-indigo-400 font-semibold">---</span></p>
+        <p class="text-gray-500 text-xs mt-1">Sugerowana cena: <span id="payment-item-cost" class="text-gray-300">---</span></p>
+      </div>
+      <button id="payment-modal-close" class="text-gray-400 hover:text-white transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+
+    <div class="space-y-4 my-6">
+      
+      <!-- Gold Input -->
+      <div class="flex items-center justify-between bg-gray-900 p-3 rounded border border-gray-700">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-yellow-500/20 flex items-center justify-center border border-yellow-500/50">
+            <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16z"/></svg>
+          </div>
+          <div>
+            <div class="text-yellow-500 font-bold uppercase text-sm">Złoto (Au)</div>
+            <div class="text-xs text-gray-500">Posiadasz: <span id="payment-current-gold" class="text-white font-mono">0</span></div>
+          </div>
+        </div>
+        <input type="number" id="payment-input-gold" min="0" value="0" class="w-20 bg-gray-800 border-b-2 border-gray-600 focus:border-yellow-500 focus:outline-none text-center text-xl font-bold text-white [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+      </div>
+
+      <!-- Silver Input -->
+      <div class="flex items-center justify-between bg-gray-900 p-3 rounded border border-gray-700">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-gray-400/20 flex items-center justify-center border border-gray-400/50">
+            <svg class="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16z"/></svg>
+          </div>
+          <div>
+            <div class="text-gray-400 font-bold uppercase text-sm">Srebro (Ag)</div>
+            <div class="text-xs text-gray-500">Posiadasz: <span id="payment-current-silver" class="text-white font-mono">0</span></div>
+          </div>
+        </div>
+        <input type="number" id="payment-input-silver" min="0" value="0" class="w-20 bg-gray-800 border-b-2 border-gray-600 focus:border-gray-400 focus:outline-none text-center text-xl font-bold text-white [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+      </div>
+
+      <!-- Copper Input -->
+      <div class="flex items-center justify-between bg-gray-900 p-3 rounded border border-gray-700">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-amber-700/20 flex items-center justify-center border border-amber-700/50">
+            <svg class="w-4 h-4 text-amber-600" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16z"/></svg>
+          </div>
+          <div>
+            <div class="text-amber-600 font-bold uppercase text-sm">Brąz (Cu)</div>
+            <div class="text-xs text-gray-500">Posiadasz: <span id="payment-current-copper" class="text-white font-mono">0</span></div>
+          </div>
+        </div>
+        <input type="number" id="payment-input-copper" min="0" value="0" class="w-20 bg-gray-800 border-b-2 border-gray-600 focus:border-amber-600 focus:outline-none text-center text-xl font-bold text-white [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+      </div>
+      
+      <div id="payment-error-msg" class="text-red-500 text-sm font-bold text-center hidden">Niewystarczające środki!</div>
+    </div>
+
+    <div class="mt-6 flex justify-end gap-3">
+      <button id="payment-btn-cancel" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded font-semibold transition-colors">Anuluj</button>
+      <button id="payment-btn-confirm" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded font-semibold transition-colors shadow-lg shadow-indigo-500/30">Zapłać i Dodaj</button>
+    </div>
+  </div>
+</div>

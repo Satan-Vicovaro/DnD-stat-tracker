@@ -4,7 +4,7 @@ from typing import List, Optional, Dict
 import json
 import os
 from abc import ABC, abstractmethod
-
+from enum import Enum
 
 @dataclass
 class Modifier:
@@ -140,11 +140,25 @@ class ActionCard:
     description: str
 
 
+class ItemLocation(str, Enum):
+    EQUIPPED = "EQUIPPED"
+    BACKPACK = "BACKPACK"
+    WAGON = "WAGON"
+
 @dataclass
 class Item:
     name: str
-    cost_silver: Optional[float] = None
+    description: str = ""
     space_taken: float = 0.0
+    location: ItemLocation = ItemLocation.BACKPACK
+    modifiers: List[Modifier] = field(default_factory=list)
+    item_type: str = "Misc"
+
+    def __post_init__(self):
+        if isinstance(self, Weapon):
+            self.item_type = "Weapon"
+        elif isinstance(self, Armor):
+            self.item_type = "Armor"
 
 
 @dataclass
@@ -217,6 +231,14 @@ class CharacterBaseProvider(ModifierProvider):
 
         return mods
 
+class ItemModifierProvider(ModifierProvider):
+    def get_modifiers(self, character) -> List[Modifier]:
+        mods = []
+        for item in character.inventory:
+            if item.location == ItemLocation.EQUIPPED:
+                mods.extend(item.modifiers)
+        return mods
+
 
 class Character:
     def __init__(self, name: str, level: int = 1):
@@ -229,6 +251,9 @@ class Character:
         self.base_provider = CharacterBaseProvider()
         self.stat_manager.add_provider(self.base_provider)
         self.stat_manager.add_provider(self.armor_state)
+        
+        self.item_provider = ItemModifierProvider()
+        self.stat_manager.add_provider(self.item_provider)
 
         # Combat State
         self.damage_taken_physical: int = 0
@@ -241,9 +266,7 @@ class Character:
         self.gold: int = 0
 
         # Inventory
-        self.backpack: List[Item] = []
-        self.equipped_weapons: List[Weapon] = []
-        self.equipped_armor: Optional[Armor] = None
+        self.inventory: List[Item] = []
 
         self.base_movement: int = 30
 
@@ -286,18 +309,18 @@ class Character:
     def max_inventory_space(self) -> float:
         # Base is 20, can be expanded with items
         base_space = 20.0
-        for item in self.backpack:
-            if item.name == "Ubrania z kieszeniami" or item.name == "Pasek z mocowaniem":
-                base_space += 10.0
+        for item in self.inventory:
+            if item.location in (ItemLocation.BACKPACK, ItemLocation.EQUIPPED):
+                if item.name == "Ubrania z kieszeniami" or item.name == "Pasek z mocowaniem":
+                    base_space += 10.0
         return base_space
 
     @property
     def current_inventory_space(self) -> float:
         used_space = 0.0
-        for item in self.backpack:
-            used_space += item.space_taken
-        for weapon in self.equipped_weapons:
-            used_space += weapon.space_taken
+        for item in self.inventory:
+            if item.location in (ItemLocation.BACKPACK, ItemLocation.EQUIPPED):
+                used_space += item.space_taken
 
         # Coin weight: Złote*0.005 + Srebrne*0.004 + Miedziane*0.01
         coin_weight = (self.gold * 0.005) + (self.silver * 0.004) + (self.copper * 0.01)

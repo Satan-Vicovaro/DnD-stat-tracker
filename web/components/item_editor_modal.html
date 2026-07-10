@@ -1,0 +1,122 @@
+<div id="item-editor-modal-backdrop"
+  class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300 overflow-y-auto py-10">
+  <div
+    class="bg-gray-800 rounded-xl shadow-2xl border border-indigo-500/50 w-full max-w-2xl p-6 transform scale-95 transition-transform duration-300 relative my-auto"
+    id="item-editor-modal-content">
+
+    <div class="flex justify-between items-start mb-6 border-b border-gray-700 pb-4">
+      <div>
+        <h2 id="item-editor-title" class="text-2xl font-bold text-white uppercase tracking-wide">Kreator Przedmiotu</h2>
+        <p class="text-gray-400 text-sm mt-1">Skonfiguruj właściwości i statystyki</p>
+      </div>
+      <button id="item-editor-modal-close"
+        class="text-gray-400 hover:text-white transition-colors bg-gray-700 hover:bg-gray-600 rounded-full p-1">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="space-y-6">
+
+      <!-- Basic Info -->
+      <div class="space-y-4 bg-gray-900 p-4 rounded border border-gray-700">
+        <h3 class="text-indigo-400 font-bold uppercase text-xs tracking-wider mb-2">1. Podstawowe Informacje</h3>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="col-span-2 md:col-span-1">
+            <label class="block text-gray-400 text-xs font-bold mb-1">Nazwa</label>
+            <input type="text" id="item-editor-name"
+              class="w-full bg-gray-800 border border-gray-600 text-white rounded px-3 py-2 focus:outline-none focus:border-indigo-500">
+          </div>
+          <div class="col-span-2 md:col-span-1">
+            <label class="block text-gray-400 text-xs font-bold mb-1">Typ Przedmiotu</label>
+            <select id="item-editor-type"
+              class="w-full bg-gray-800 border border-gray-600 text-white rounded px-3 py-2 focus:outline-none focus:border-indigo-500">
+              <option value="Misc">Różne</option>
+              <option value="Weapon">Broń</option>
+              <option value="Armor">Zbroja</option>
+            </select>
+          </div>
+          <div class="col-span-2">
+            <label class="block text-gray-400 text-xs font-bold mb-1">Opis</label>
+            <textarea id="item-editor-desc" rows="2"
+              class="w-full bg-gray-800 border border-gray-600 text-white rounded px-3 py-2 focus:outline-none focus:border-indigo-500"></textarea>
+          </div>
+          <div class="col-span-2 md:col-span-1">
+            <label class="block text-gray-400 text-xs font-bold mb-1">Zajmowane Miejsce</label>
+            <input type="number" id="item-editor-space" step="0.5" min="0"
+              class="w-full bg-gray-800 border border-gray-600 text-white rounded px-3 py-2 focus:outline-none focus:border-indigo-500">
+          </div>
+        </div>
+      </div>
+
+      <!-- Modifiers -->
+      <div class="space-y-4 bg-gray-900 p-4 rounded border border-gray-700">
+        <div class="flex justify-between items-center mb-2">
+          <h3 class="text-indigo-400 font-bold uppercase text-xs tracking-wider">2. Modyfikatory Statystyk</h3>
+          <button id="btn-add-modifier"
+            class="text-xs bg-indigo-600 hover:bg-indigo-500 text-white px-2 py-1 rounded transition-colors">+
+            Dodaj</button>
+        </div>
+        <p class="text-xs text-gray-500 mb-2">Te bonusy będą aktywne tylko gdy przedmiot znajdzie się w "Założonych".
+        </p>
+        <div id="item-editor-modifiers-list" class="space-y-2">
+          <!-- Modifiers will be injected here -->
+        </div>
+      </div>
+
+      <!-- Payment Section (Hidden by default) -->
+      <div id="item-editor-payment-section" class="hidden space-y-4 bg-gray-900 p-4 rounded border border-yellow-600/30">
+        <h3 class="text-yellow-500 font-bold uppercase text-xs tracking-wider mb-2">3. Koszt (Płatność z sakiewki)</h3>
+        
+        <div class="grid grid-cols-3 gap-4">
+          <!-- Gold -->
+          <div class="flex flex-col bg-gray-800 p-2 rounded border border-gray-700">
+            <div class="text-yellow-500 font-bold text-[10px] uppercase mb-1 flex justify-between items-center">
+              <span>Złoto</span>
+              <span class="text-gray-500">Max: <span id="item-editor-gold-balance" class="text-gray-300">0</span></span>
+            </div>
+            <input type="number" id="item-editor-gold" min="0" value="0" class="w-full bg-gray-900 border border-gray-600 focus:border-yellow-500 rounded px-2 py-1 text-center font-bold text-white outline-none">
+          </div>
+          
+          <!-- Silver -->
+          <div class="flex flex-col bg-gray-800 p-2 rounded border border-gray-700">
+            <div class="text-gray-400 font-bold text-[10px] uppercase mb-1 flex justify-between items-center">
+              <span>Srebro</span>
+              <span class="text-gray-500">Max: <span id="item-editor-silver-balance" class="text-gray-300">0</span></span>
+            </div>
+            <input type="number" id="item-editor-silver" min="0" value="0" class="w-full bg-gray-900 border border-gray-600 focus:border-gray-400 rounded px-2 py-1 text-center font-bold text-white outline-none">
+          </div>
+
+          <!-- Copper -->
+          <div class="flex flex-col bg-gray-800 p-2 rounded border border-gray-700">
+            <div class="text-amber-600 font-bold text-[10px] uppercase mb-1 flex justify-between items-center">
+              <span>Brąz</span>
+              <span class="text-gray-500">Max: <span id="item-editor-copper-balance" class="text-gray-300">0</span></span>
+            </div>
+            <input type="number" id="item-editor-copper" min="0" value="0" class="w-full bg-gray-900 border border-gray-600 focus:border-amber-600 rounded px-2 py-1 text-center font-bold text-white outline-none">
+          </div>
+        </div>
+        <div id="item-editor-payment-error" class="text-red-500 text-sm font-bold hidden">Niewystarczające środki lub nieprawidłowa wartość!</div>
+      </div>
+
+    </div>
+
+    <!-- Footer Actions -->
+    <div class="mt-8 pt-4 border-t border-gray-700 flex justify-between items-center">
+      <div id="item-editor-cost-section" class="flex items-center gap-2">
+        <label class="text-gray-400 text-xs font-bold">Kupujesz to?</label>
+        <button id="btn-item-buy"
+          class="text-xs bg-yellow-600/30 text-yellow-500 border border-yellow-600 hover:bg-yellow-600 hover:text-white px-3 py-1.5 rounded transition-colors font-bold uppercase">Ustal
+          Koszt</button>
+      </div>
+
+      <div class="flex gap-3">
+        <button id="item-editor-btn-cancel"
+          class="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded font-semibold transition-colors">Anuluj</button>
+        <button id="item-editor-btn-save"
+          class="px-6 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded font-bold transition-colors shadow-lg shadow-indigo-500/30">Zapisz</button>
+      </div>
+    </div>
+  </div>
+</div>

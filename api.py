@@ -41,6 +41,24 @@ def set_money(currency_type: str, value: int):
     return game_engine.get_character_view_model()
 
 @eel.expose
+def add_item_to_inventory(item_data: dict, payment: dict):
+    """API endpoint to add a new item or buy from shop."""
+    game_engine.add_item_to_inventory(item_data, payment)
+    return game_engine.get_character_view_model()
+
+@eel.expose
+def edit_inventory_item(index: int, item_data: dict):
+    """API endpoint to edit an existing inventory item."""
+    game_engine.edit_inventory_item(index, item_data)
+    return game_engine.get_character_view_model()
+
+@eel.expose
+def remove_inventory_item(index: int):
+    """API endpoint to remove an item from inventory."""
+    game_engine.remove_inventory_item(index)
+    return game_engine.get_character_view_model()
+
+@eel.expose
 def modify_level(delta: int):
     """API endpoint to modify the character level."""
     game_engine.modify_level(delta)
