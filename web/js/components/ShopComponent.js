@@ -126,12 +126,20 @@ export class ShopComponent {
           <div class="${item.actions && item.actions.length > 0 ? 'mt-6' : ''} w-full">
             <h4 class="text-sm font-bold text-indigo-400 mb-3 uppercase tracking-wider">Właściwości</h4>
             <div class="flex flex-wrap gap-3 w-full">
-              ${otherProps.map(prop => `
-                <div class="bg-black/80 px-4 py-2.5 rounded-lg border-2 border-slate-600 flex items-center shadow-md">
-                  <span class="text-slate-400 mr-2 text-xs font-extrabold uppercase tracking-wide">${prop.k}:</span>
-                  <span class="font-bold text-white text-base">${prop.v}</span>
+              ${otherProps.map(prop => {
+                let valHtml = prop.v;
+                if (typeof prop.v === "string" && prop.v.includes("||")) {
+                  const parts = prop.v.split("||").map(s => s.trim()).filter(s => s.length > 0);
+                  valHtml = `<ul class="list-disc list-inside ml-1 block w-full mt-1 font-medium">${parts.map(p => `<li>${p}</li>`).join("")}</ul>`;
+                }
+                
+                return `
+                <div class="bg-black/80 px-4 py-3 rounded-lg border-2 border-slate-600 flex flex-col items-start shadow-md w-full">
+                  <span class="text-slate-400 text-xs font-extrabold uppercase tracking-wide mb-1">${prop.k}:</span>
+                  <span class="font-bold text-white text-sm md:text-base w-full">${valHtml}</span>
                 </div>
-              `).join("")}
+                `;
+              }).join("")}
             </div>
           </div>
         `;
