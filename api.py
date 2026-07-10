@@ -1,8 +1,13 @@
 import eel
 import logging
-from engine import game_engine
+from engine import GameEngine
 
 logger = logging.getLogger(__name__)
+
+# Injected by main.py after the engine is created.
+# Never import game_engine directly from engine — that would trigger disk I/O.
+game_engine: "GameEngine | None" = None
+
 
 @eel.expose
 def get_character():

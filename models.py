@@ -161,20 +161,20 @@ class Item:
     # Must NOT be compared with Python's id() which is address-based.
     item_id: str = field(default_factory=lambda: str(uuid.uuid4()))
 
-    def __post_init__(self):
-        if isinstance(self, Weapon):
-            self.item_type = "Weapon"
-        elif isinstance(self, Armor):
-            self.item_type = "Armor"
-
 
 @dataclass
 class Weapon(Item):
+    # item_type is fixed and excluded from __init__ so it can never be
+    # accidentally overridden by a caller passing item_type= to the constructor.
+    item_type: str = field(default="Weapon", init=False)
     actions: List[ActionCard] = field(default_factory=list)
 
 
 @dataclass
 class Armor(Item):
+    # item_type is fixed and excluded from __init__ so it can never be
+    # accidentally overridden by a caller passing item_type= to the constructor.
+    item_type: str = field(default="Armor", init=False)
     effect_value: str = ""
     uses_durability: str = ""
     cost_type: str = ""

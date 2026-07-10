@@ -1,59 +1,67 @@
 export class EconomyComponent {
-  constructor(containerId) {
-    this.containerId = containerId;
+  /**
+   * @param {...string} containerIds - One or more element IDs to mount into.
+   *   All containers stay in sync; UI events from any container update all.
+   */
+  constructor(...containerIds) {
+    this.containerIds = containerIds;
     this.characterData = null;
-    this.bindEvents = this.bindEvents.bind(this);
   }
 
   async init() {
-    // Load HTML template
+    // Load the HTML template once and stamp it into every container.
     const response = await fetch('/components/economy.html');
     const html = await response.text();
-    document.getElementById(this.containerId).innerHTML = html;
+    for (const id of this.containerIds) {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = html;
+    }
 
-    // Listen for external updates
+    // Single event subscription covers all containers.
     document.addEventListener('characterUpdated', (e) => {
       this.characterData = e.detail;
       this.render();
     });
 
-    // Fetch initial data
-    await this.fetchData();
+    // Single initial data fetch.
+    this.characterData = await eel.get_character()();
+    this.render();
     this.bindEvents();
   }
 
-  async fetchData() {
-    this.characterData = await eel.get_character()();
-    this.render();
+  bindEvents() {
+    for (const id of this.containerIds) {
+      this._bindContainerEvents(id);
+    }
   }
 
-  bindEvents() {
-    const attachHandlers = (currency) => {
-      const container = document.getElementById(this.containerId);
-      if (!container) return;
+  _bindContainerEvents(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
 
-      // +/- buttons
-      container.querySelector(`.btn-${currency}-inc`).addEventListener("click", () => this.modifyMoney(currency, 1));
-      container.querySelector(`.btn-${currency}-dec`).addEventListener("click", () => this.modifyMoney(currency, -1));
-      
-      // Direct input editing
+    const attachHandlers = (currency) => {
+      const incBtn = container.querySelector(`.btn-${currency}-inc`);
+      const decBtn = container.querySelector(`.btn-${currency}-dec`);
       const inputEl = container.querySelector(`.economy-input-${currency}`);
+
+      if (incBtn) incBtn.addEventListener('click', () => this.modifyMoney(currency, 1));
+      if (decBtn) decBtn.addEventListener('click', () => this.modifyMoney(currency, -1));
+
       if (inputEl) {
-        inputEl.addEventListener("change", (e) => {
+        inputEl.addEventListener('change', (e) => {
           const newVal = parseInt(e.target.value);
           if (!isNaN(newVal) && newVal >= 0) {
             this.setMoney(currency, newVal);
           } else {
-            // Revert to valid value if invalid input
-            this.render();
+            this.render(); // revert invalid input
           }
         });
       }
     };
 
-    attachHandlers("gold");
-    attachHandlers("silver");
-    attachHandlers("copper");
+    attachHandlers('gold');
+    attachHandlers('silver');
+    attachHandlers('copper');
   }
 
   async modifyMoney(currency, delta) {
@@ -70,18 +78,19 @@ export class EconomyComponent {
 
   render() {
     if (!this.characterData || !this.characterData.economy) return;
-    
     const { gold, silver, copper } = this.characterData.economy;
-    const container = document.getElementById(this.containerId);
-    if (!container) return;
-    
-    const goldInput = container.querySelector(".economy-input-gold");
-    if (goldInput) goldInput.value = gold;
 
-    const silverInput = container.querySelector(".economy-input-silver");
-    if (silverInput) silverInput.value = silver;
+    for (const id of this.containerIds) {
+      const container = document.getElementById(id);
+      if (!container) continue;
 
-    const copperInput = container.querySelector(".economy-input-copper");
-    if (copperInput) copperInput.value = copper;
+      const goldInput   = container.querySelector('.economy-input-gold');
+      const silverInput = container.querySelector('.economy-input-silver');
+      const copperInput = container.querySelector('.economy-input-copper');
+
+      if (goldInput)   goldInput.value   = gold;
+      if (silverInput) silverInput.value = silver;
+      if (copperInput) copperInput.value = copper;
+    }
   }
 }

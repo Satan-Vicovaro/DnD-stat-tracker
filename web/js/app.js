@@ -75,12 +75,12 @@ window.onload = async () => {
     const armorView = new ArmorComponent("armor-view-container");
     armorView.init();
 
-    // Initialize the Economy View Components for both tabs
-    const economyViewItems = new EconomyComponent("economy-view-container-items");
-    economyViewItems.init();
-
-    const economyViewShop = new EconomyComponent("economy-view-container-shop");
-    economyViewShop.init();
+    // Single EconomyComponent instance mounts to both tabs simultaneously.
+    const economyView = new EconomyComponent(
+      "economy-view-container-items",
+      "economy-view-container-shop"
+    );
+    economyView.init();
 
     // Initialize the Inventory View Component
     const inventoryView = new InventoryComponent("inventory-view-container");

@@ -21,6 +21,10 @@ class GameEngine:
         self._future: list[Character] = []  # redo stack
         self._max_history: int = 20
 
+        # Load and cache shop data once at startup so every subsequent call
+        # to get_shop_data() is a simple dict return with no disk I/O.
+        self._shop_data: dict = self._load_shop_data()
+
         if os.path.exists(_AUTOSAVE_PATH):
             try:
                 with open(_AUTOSAVE_PATH, "r", encoding="utf-8") as f:
@@ -34,6 +38,11 @@ class GameEngine:
             self.hero = self._create_starting_character()
             logger.info("No autosave found — starting fresh")
 
+        # One-time migration: back-fill consumable_effects for items that were
+        # saved before this field existed. Safe to call repeatedly — it is a
+        # no-op for items that already have the field populated.
+        self._patch_item_consumables()
+
     # ------------------------------------------------------------------
     # Character factory
     # ------------------------------------------------------------------
@@ -45,6 +54,29 @@ class GameEngine:
         hero.stats.base_wis = 0
         hero.stats.base_cha = 0
         return hero
+
+    def _patch_item_consumables(self):
+        """Back-fill consumable_effects from shop data for items that predate the field.
+
+        This used to run on every view-model render (causing disk I/O each time).
+        Now it runs once after any hero load, which is all that was ever needed.
+        """
+        shop_items_map = {}
+        for items in self._shop_data.values():
+            for si in items:
+                if si.get("name"):
+                    shop_items_map[si["name"]] = si
+
+        for item in self.hero.inventory:
+            if not item.consumable_effects:
+                shop_item = shop_items_map.get(item.name)
+                if shop_item and shop_item.get("consumable_effects"):
+                    item.consumable_effects = shop_item["consumable_effects"]
+                    item.max_uses = shop_item.get("max_uses", 1)
+                    if item.current_uses <= 1 and item.max_uses > 1:
+                        item.current_uses = item.max_uses
+                    else:
+                        item.current_uses = max(1, item.current_uses)
 
     # ------------------------------------------------------------------
     # History / Undo / Redo
@@ -153,6 +185,7 @@ class GameEngine:
             self.hero = deserialize(data)
             self._history.clear()
             self._future.clear()
+            self._patch_item_consumables()
             logger.info(f"Loaded named save: {filename}")
             return True
         except Exception as e:
@@ -166,25 +199,6 @@ class GameEngine:
     def get_character_view_model(self) -> dict:
         """Returns the character data formatted for the frontend."""
         from dataclasses import asdict
-
-        # Backward compatibility patch for existing items in memory:
-        # Dynamically fetch updated attributes from shop data.
-        shop_data = self.get_shop_data()
-        shop_items_map = {}
-        for category, items in shop_data.items():
-            for si in items:
-                shop_items_map[si.get("name")] = si
-
-        for item in self.hero.inventory:
-            if not item.consumable_effects:
-                shop_item = shop_items_map.get(item.name)
-                if shop_item and shop_item.get("consumable_effects"):
-                    item.consumable_effects = shop_item.get("consumable_effects")
-                    item.max_uses = shop_item.get("max_uses", 1)
-                    if item.current_uses <= 1 and item.max_uses > 1:
-                        item.current_uses = item.max_uses
-                    else:
-                        item.current_uses = max(1, item.current_uses)
 
         armor_max_hp = 0
         for name, armor in self.hero.armor_state.types.items():
@@ -356,12 +370,12 @@ class GameEngine:
     def use_inventory_item(self, index: int, override_value: int = None) -> bool:
         if index < 0 or index >= len(self.hero.inventory):
             return False
-            
+
         item = self.hero.inventory[index]
         if not item.consumable_effects:
             logger.warning(f"Item {item.name} has no consumable effects.")
             return False
-            
+
         ap_cost = 0
         if item.location == "BACKPACK":
             ap_cost = 2
@@ -369,42 +383,44 @@ class GameEngine:
             ap_cost = 1
 
         if self.hero.current_action_points < ap_cost:
-            logger.warning(f"Not enough AP to use item {item.name}. Need {ap_cost}, have {self.hero.current_action_points}")
+            logger.warning(
+                f"Not enough AP to use item {item.name}. Need {ap_cost}, have {self.hero.current_action_points}"
+            )
             return False
 
         # Take exactly ONE snapshot for this entire action.
         # Calling adjust_health / adjust_armor_health would each take an
         # additional snapshot, creating multiple undo steps for a single use.
         self._snapshot()
-        
+
         self.hero.current_action_points -= ap_cost
-        
+
         effects = item.consumable_effects
-        
+
         heal_val = effects.get("heal_health")
         if heal_val:
             heal = min(heal_val, self.hero.damage_taken_magical)
             self.hero.damage_taken_magical -= heal
             logger.info(f"Healed base health by {heal}")
-            
+
         if effects.get("dynamic_heal") and override_value is not None:
             heal = min(override_value, self.hero.damage_taken_magical)
             self.hero.damage_taken_magical -= heal
             logger.info(f"Healed base health by {heal} (dynamic)")
-            
+
         repair_val = effects.get("repair_armor")
         if repair_val:
             repair = min(repair_val, self.hero.damage_taken_physical)
             self.hero.damage_taken_physical -= repair
             logger.info(f"Repaired armor by {repair}")
-            
+
         item.current_uses -= 1
         if item.current_uses <= 0:
             self.hero.inventory.pop(index)
             logger.info(f"Item {item.name} consumed and removed.")
         else:
             logger.info(f"Item {item.name} used. {item.current_uses}/{item.max_uses} uses left.")
-            
+
         return True
 
     def modify_armor_quantity(self, armor_name: str, delta: int) -> bool:
@@ -594,6 +610,15 @@ class GameEngine:
         return True
 
     def get_shop_data(self) -> dict:
+        """Return cached shop data — loaded once at startup, no disk I/O."""
+        return self._shop_data
+
+    def _load_shop_data(self) -> dict:
+        """Read all shop JSON files from disk and normalise item names.
+
+        Called once in ``__init__``. All subsequent access should go through
+        ``get_shop_data()`` which returns the cached result.
+        """
         shop_dir = "config/shop"
         categories = {
             "Broń biała": "bron_biala_structured.json",
@@ -629,5 +654,6 @@ class GameEngine:
         return shop_data
 
 
-# Singleton instance exported for use by APIs
-game_engine = GameEngine()
+# GameEngine is instantiated in main.py and injected into api.py.
+# Do NOT create a module-level instance here — importing this module must
+# have no side-effects (disk I/O, etc.) so it can be imported safely in tests.
