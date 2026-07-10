@@ -192,10 +192,14 @@ class GameEngine:
                 hp = armor.effects.get("hp_per_fragment", 0.0) * armor.quantity
                 armor_max_hp += hp
 
-        base_max_hp = self.hero.max_hp - armor_max_hp
+        # hero.max_hp is computed by the stat manager, which has NO armor HP
+        # contributor — it is already the pure base (non-armor) max HP.
+        # The old code subtracted armor_max_hp from it a second time, giving
+        # base_max_hp = 18 - 20 = -2 when armor HP > stat HP.
+        base_max_hp = self.hero.max_hp  # already base-only
 
         current_armor_hp = max(0, armor_max_hp - self.hero.damage_taken_physical)
-        current_base_hp = base_max_hp - self.hero.damage_taken_magical
+        current_base_hp = max(0, base_max_hp - self.hero.damage_taken_magical)
 
         broken_fragments = self.hero.damage_taken_physical // 5
         current_mitigation = self.get_current_mitigation()
@@ -205,7 +209,7 @@ class GameEngine:
             "armor_current_hp": current_armor_hp,
             "base_max_hp": base_max_hp,
             "base_current_hp": current_base_hp,
-            "total_max_hp": self.hero.max_hp,
+            "total_max_hp": base_max_hp + armor_max_hp,
             "total_current_hp": current_base_hp + current_armor_hp,
             "current_mitigation": current_mitigation,
             "broken_fragments": broken_fragments,
