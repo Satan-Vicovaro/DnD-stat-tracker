@@ -1,0 +1,2372 @@
+[
+  {
+    "row": 2,
+    "cells": [
+      {
+        "col": "B",
+        "val": "LVL",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "Pozostałe do rozdania statystyki",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Pieniążki",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Życie w Walce",
+        "formula": ""
+      },
+      {
+        "col": "R",
+        "val": "Redukcja Fizycznych Obrażeń",
+        "formula": ""
+      },
+      {
+        "col": "V",
+        "val": "Rodzaje leczenia i koszt",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 3,
+    "cells": [
+      {
+        "col": "B",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "3",
+        "formula": "3+(B3-1)*2-SUM(D8:D11)"
+      },
+      {
+        "col": "G",
+        "val": "Miedziane",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "Srebrne",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "Złote",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "Waga monet",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Bazowe",
+        "formula": ""
+      },
+      {
+        "col": "N",
+        "val": "Obrażenia",
+        "formula": ""
+      },
+      {
+        "col": "P",
+        "val": "Aktualne",
+        "formula": ""
+      },
+      {
+        "col": "V",
+        "val": "Nazwa",
+        "formula": ""
+      },
+      {
+        "col": "X",
+        "val": "Postaci",
+        "formula": ""
+      },
+      {
+        "col": "Z",
+        "val": "Naprawia",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 4,
+    "cells": [
+      {
+        "col": "G",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "200",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "0.8",
+        "formula": "I4*0.005+H4*0.004+G4*0.01"
+      },
+      {
+        "col": "X",
+        "val": "Zużywane miejsce z eq",
+        "formula": ""
+      },
+      {
+        "col": "Y",
+        "val": "Leczenie opatrunek",
+        "formula": ""
+      },
+      {
+        "col": "Z",
+        "val": "Zużywane miejsce z eq",
+        "formula": ""
+      },
+      {
+        "col": "AA",
+        "val": "Leczenie dzienne",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 5,
+    "cells": [
+      {
+        "col": "L",
+        "val": "Postaci",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "Zbroii",
+        "formula": ""
+      },
+      {
+        "col": "N",
+        "val": "Fizyczne",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "Magiczne",
+        "formula": ""
+      },
+      {
+        "col": "P",
+        "val": "Postaci",
+        "formula": ""
+      },
+      {
+        "col": "Q",
+        "val": "Zbroii",
+        "formula": ""
+      },
+      {
+        "col": "R",
+        "val": "0",
+        "formula": "C32*2+C33*4+C34*6+C27"
+      },
+      {
+        "col": "V",
+        "val": "Narzędzia do zbroii ciężkie",
+        "formula": ""
+      },
+      {
+        "col": "X",
+        "val": "1 sen",
+        "formula": ""
+      },
+      {
+        "col": "Y",
+        "val": "0",
+        "formula": "E22"
+      }
+    ]
+  },
+  {
+    "row": 6,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Statystyki",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Miejsce Podręczne (wyekwipowanie przedmiotu - 0 akcji)",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "10",
+        "formula": "E13-E40"
+      },
+      {
+        "col": "M",
+        "val": "0",
+        "formula": "E40"
+      },
+      {
+        "col": "N",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "O",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "P",
+        "val": "10",
+        "formula": "L6-O6+IF(Q6=0,M6-N6,0)"
+      },
+      {
+        "col": "Q",
+        "val": "0",
+        "formula": "IF(M6-N6>0,M6-N6,0)"
+      },
+      {
+        "col": "V",
+        "val": "Obrona -0,4 || Akcje -0,2 || Wytrwałość -0,125 || Ruch -1",
+        "formula": ""
+      },
+      {
+        "col": "X",
+        "val": "1 lek (20s)",
+        "formula": ""
+      },
+      {
+        "col": "Y",
+        "val": "5",
+        "formula": "(E13-E40)/2"
+      }
+    ]
+  },
+  {
+    "row": 7,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Statystyki",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "Modyfikatory postaci",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "Wartości rozdane",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Użytkowe Statystyki",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Przedmiot (max 6)",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "Rodzaj/Ilość",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "Miejsce za Przedmiot",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "Miejsce zużywane",
+        "formula": ""
+      },
+      {
+        "col": "V",
+        "val": "Naprawa tarczy u kowala",
+        "formula": ""
+      },
+      {
+        "col": "X",
+        "val": "1 opat (4s)",
+        "formula": ""
+      },
+      {
+        "col": "Y",
+        "val": "d4+wie",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 8,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Siła",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "0",
+        "formula": "D8+C8"
+      },
+      {
+        "col": "G",
+        "val": "Broń 1",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "Ręce",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "0",
+        "formula": "_xlfn.XLOOKUP(H8,'Zajmowane miejsce'!E3:E31,'Zajmowane miejsce'!F3:F31)"
+      },
+      {
+        "col": "J",
+        "val": "0",
+        "formula": "I8"
+      },
+      {
+        "col": "V",
+        "val": "5s",
+        "formula": ""
+      },
+      {
+        "col": "Z",
+        "val": "1 s",
+        "formula": ""
+      },
+      {
+        "col": "AA",
+        "val": "1",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 9,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Zwinność",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "0",
+        "formula": "D9+C9"
+      },
+      {
+        "col": "G",
+        "val": "Broń 2",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "Ręce",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "0",
+        "formula": "_xlfn.XLOOKUP(H9,'Zajmowane miejsce'!E3:E31,'Zajmowane miejsce'!F3:F31)"
+      },
+      {
+        "col": "J",
+        "val": "0",
+        "formula": "I9"
+      },
+      {
+        "col": "V",
+        "val": "Zestaw naprawczy tarcze",
+        "formula": ""
+      },
+      {
+        "col": "Z",
+        "val": "12,5 s",
+        "formula": ""
+      },
+      {
+        "col": "AA",
+        "val": "10",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 10,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Wiedza ",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "0",
+        "formula": "D10+C10"
+      },
+      {
+        "col": "J",
+        "val": "0",
+        "formula": "I10*H10"
+      },
+      {
+        "col": "V",
+        "val": "Narzędzia do naprawy tarcz",
+        "formula": ""
+      },
+      {
+        "col": "Z",
+        "val": "12,5 s",
+        "formula": ""
+      },
+      {
+        "col": "AA",
+        "val": "10",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 11,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Charyzma",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "0",
+        "formula": "D11+C11"
+      },
+      {
+        "col": "J",
+        "val": "0",
+        "formula": null
+      },
+      {
+        "col": "V",
+        "val": "Duży kamień magiczny ",
+        "formula": ""
+      },
+      {
+        "col": "Z",
+        "val": "Średni kamień magiczny ",
+        "formula": ""
+      },
+      {
+        "col": "AA",
+        "val": "Naprawa u kowala",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 12,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Parametry",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "Podstawa",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "Przyrost: lvl, statystyki ",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Użytkowe parametry",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "0",
+        "formula": null
+      },
+      {
+        "col": "V",
+        "val": "Narzędzia ciężkie zbroje",
+        "formula": ""
+      },
+      {
+        "col": "Z",
+        "val": "Naprawa",
+        "formula": ""
+      },
+      {
+        "col": "AA",
+        "val": "Narzędzia do zbroii lekkie",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 13,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Max Życie",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "0",
+        "formula": "(B3-1)*2+D8*3"
+      },
+      {
+        "col": "E",
+        "val": "10",
+        "formula": "D13+C13+E40"
+      },
+      {
+        "col": "J",
+        "val": "0",
+        "formula": null
+      }
+    ]
+  },
+  {
+    "row": 14,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Obrona",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "0",
+        "formula": "(B3-1)*0.8+D9"
+      },
+      {
+        "col": "E",
+        "val": "10",
+        "formula": "D14+C14+E41+C25"
+      },
+      {
+        "col": "G",
+        "val": "Miejsce Podręczne ",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Akcje",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 15,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Akcje",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "0",
+        "formula": "(B3*0.5-0.5)+D9*0.5"
+      },
+      {
+        "col": "E",
+        "val": "1",
+        "formula": "D15+C15+E42+D25*0.5"
+      },
+      {
+        "col": "G",
+        "val": "Modyfikator",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "Dodawane miejsce",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "Miejsce zużyte",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "Pozostałe miejsce",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Na turę",
+        "formula": ""
+      },
+      {
+        "col": "M",
+        "val": "Zużyte",
+        "formula": ""
+      },
+      {
+        "col": "N",
+        "val": "Pozostałe",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 16,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Wytrwałość",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "1",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "0",
+        "formula": "(B3-1)*0.25+D11*0.25"
+      },
+      {
+        "col": "E",
+        "val": "1",
+        "formula": "ROUND(D16+C16+E43+E25*0.5,0)"
+      },
+      {
+        "col": "G",
+        "val": "Baza",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "20",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "0",
+        "formula": "SUM(J8:J13)"
+      },
+      {
+        "col": "J",
+        "val": "20",
+        "formula": "H20-I16"
+      },
+      {
+        "col": "L",
+        "val": "1",
+        "formula": "E15"
+      },
+      {
+        "col": "M",
+        "val": "0",
+        "formula": "SUM(Obl!W3:W24)"
+      },
+      {
+        "col": "N",
+        "val": "1",
+        "formula": "L16-M16"
+      }
+    ]
+  },
+  {
+    "row": 17,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Ruch (ft)",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "30",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "30",
+        "formula": "C17+D17+E44+B27*5"
+      },
+      {
+        "col": "G",
+        "val": "Ubrania z kieszeniami",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "0",
+        "formula": "IF(C43=FALSE,0,10)"
+      }
+    ]
+  },
+  {
+    "row": 18,
+    "cells": [
+      {
+        "col": "G",
+        "val": "Pasek z mocowaniem",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "0",
+        "formula": "IF(C44=FALSE,0,10)"
+      }
+    ]
+  },
+  {
+    "row": 19,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Magia",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Siła",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "0",
+        "formula": "E8*2"
+      },
+      {
+        "col": "L",
+        "val": "Karty Broń 1",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 20,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Punkty",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "Zużyte",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Pozostałe",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Suma:",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "20",
+        "formula": "SUM(H16:H19)"
+      },
+      {
+        "col": "L",
+        "val": "Karta 1",
+        "formula": "IF($E$16>=1,Obl!Z2,\"\")"
+      },
+      {
+        "col": "N",
+        "val": "Użyta",
+        "formula": "IF($E$16>=1,Obl!AB2,\"\")"
+      },
+      {
+        "col": "O",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "P",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AD2,\"\")"
+      },
+      {
+        "col": "R",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AF2,\"\")"
+      },
+      {
+        "col": "S",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "T",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AH2,\"\")"
+      },
+      {
+        "col": "V",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AJ2,\"\")"
+      },
+      {
+        "col": "W",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "X",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AL2,\"\")"
+      },
+      {
+        "col": "Z",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AN2,\"\")"
+      },
+      {
+        "col": "AA",
+        "val": "0",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 21,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Mana na turę",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": "ROUND(E8/3+E9*2/3,0)"
+      },
+      {
+        "col": "D",
+        "val": "0",
+        "formula": "SUM(B25:E25)+SUM(B27:E27)"
+      },
+      {
+        "col": "E",
+        "val": "0",
+        "formula": "C21-D21"
+      },
+      {
+        "col": "L",
+        "val": "Wyrzucona kostka",
+        "formula": "IF($E$16>=1,Obl!Z3,\"\")"
+      },
+      {
+        "col": "P",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AD3,\"\")"
+      },
+      {
+        "col": "R",
+        "val": "7",
+        "formula": ""
+      },
+      {
+        "col": "T",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AH3,\"\")"
+      },
+      {
+        "col": "X",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AL3,\"\")"
+      }
+    ]
+  },
+  {
+    "row": 22,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Mana na dzień",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": "ROUND((E10*2/3+E11/3)*3,0)"
+      },
+      {
+        "col": "D",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "0",
+        "formula": "C22-D22"
+      },
+      {
+        "col": "G",
+        "val": "Miejsce Niepodręczne (wyekwipowanie przedmiotu - 2 akcje)",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Prosty",
+        "formula": "IF($E$16>=1,Obl!Z4,\"\")"
+      },
+      {
+        "col": "P",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AD4,\"\")"
+      },
+      {
+        "col": "T",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AH4,\"\")"
+      },
+      {
+        "col": "X",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AL4,\"\")"
+      }
+    ]
+  },
+  {
+    "row": 23,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Mana na parametry (na 1 tura)",
+        "formula": ""
+      },
+      {
+        "col": "G",
+        "val": "Przedmiot (max 20)",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "Ilość",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "Miejsce za Przedmiot",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "Miejsce zużywane",
+        "formula": ""
+      },
+      {
+        "col": "L",
+        "val": "Zwykły, chamski atak",
+        "formula": "IF($E$16>=1,Obl!Z6,\"\")"
+      },
+      {
+        "col": "P",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AD6,\"\")"
+      },
+      {
+        "col": "T",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AH6,\"\")"
+      },
+      {
+        "col": "X",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AL6,\"\")"
+      }
+    ]
+  },
+  {
+    "row": 24,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Życie (leczenie)",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "Obrona",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "Akcje",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Wytrwałość",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "0",
+        "formula": "I24*H24"
+      }
+    ]
+  },
+  {
+    "row": 25,
+    "cells": [
+      {
+        "col": "J",
+        "val": "0",
+        "formula": "I25*H25"
+      }
+    ]
+  },
+  {
+    "row": 26,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Ruch",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "Redukcja obrażeń",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "Przerzucenie kostki",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Inne",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "0",
+        "formula": null
+      }
+    ]
+  },
+  {
+    "row": 27,
+    "cells": [
+      {
+        "col": "J",
+        "val": "0",
+        "formula": null
+      },
+      {
+        "col": "L",
+        "val": "Dmg",
+        "formula": "IF($E$16>=1,Obl!Z10,\"\")"
+      },
+      {
+        "col": "M",
+        "val": "str",
+        "formula": "IF($E$16>=1,Obl!AA10,\"\")"
+      },
+      {
+        "col": "N",
+        "val": "Akcja",
+        "formula": "IF($E$16>=1,Obl!AB10,\"\")"
+      },
+      {
+        "col": "O",
+        "val": "0.5",
+        "formula": "IF($E$16>=1,Obl!AC10,\"\")"
+      },
+      {
+        "col": "P",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AD10,\"\")"
+      },
+      {
+        "col": "Q",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AE10,\"\")"
+      },
+      {
+        "col": "R",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AF10,\"\")"
+      },
+      {
+        "col": "S",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AG10,\"\")"
+      },
+      {
+        "col": "T",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AH10,\"\")"
+      },
+      {
+        "col": "U",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AI10,\"\")"
+      },
+      {
+        "col": "V",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AJ10,\"\")"
+      },
+      {
+        "col": "W",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AK10,\"\")"
+      },
+      {
+        "col": "X",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AL10,\"\")"
+      },
+      {
+        "col": "Y",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AM10,\"\")"
+      },
+      {
+        "col": "Z",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AN10,\"\")"
+      },
+      {
+        "col": "AA",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AO10,\"\")"
+      }
+    ]
+  },
+  {
+    "row": 28,
+    "cells": [
+      {
+        "col": "J",
+        "val": "0",
+        "formula": null
+      },
+      {
+        "col": "L",
+        "val": "Trafienie",
+        "formula": "IF($E$16>=1,Obl!Z11,\"\")"
+      },
+      {
+        "col": "M",
+        "val": "d20+dex",
+        "formula": "IF($E$16>=1,Obl!AA11,\"\")"
+      },
+      {
+        "col": "N",
+        "val": "Ilośc celów",
+        "formula": "IF($E$16>=1,Obl!AB11,\"\")"
+      },
+      {
+        "col": "O",
+        "val": "1",
+        "formula": "IF($E$16>=1,Obl!AC11,\"\")"
+      },
+      {
+        "col": "P",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AD11,\"\")"
+      },
+      {
+        "col": "Q",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AE11,\"\")"
+      },
+      {
+        "col": "R",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AF11,\"\")"
+      },
+      {
+        "col": "S",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AG11,\"\")"
+      },
+      {
+        "col": "T",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AH11,\"\")"
+      },
+      {
+        "col": "U",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AI11,\"\")"
+      },
+      {
+        "col": "V",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AJ11,\"\")"
+      },
+      {
+        "col": "W",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AK11,\"\")"
+      },
+      {
+        "col": "X",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AL11,\"\")"
+      },
+      {
+        "col": "Y",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AM11,\"\")"
+      },
+      {
+        "col": "Z",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AN11,\"\")"
+      },
+      {
+        "col": "AA",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AO11,\"\")"
+      }
+    ]
+  },
+  {
+    "row": 29,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Zbroja",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "0",
+        "formula": null
+      },
+      {
+        "col": "L",
+        "val": "Zasięg",
+        "formula": "IF($E$16>=1,Obl!Z12,\"\")"
+      },
+      {
+        "col": "M",
+        "val": "Mele",
+        "formula": "IF($E$16>=1,Obl!AA12,\"\")"
+      },
+      {
+        "col": "N",
+        "val": "Tura",
+        "formula": "IF($E$16>=1,Obl!AB12,\"\")"
+      },
+      {
+        "col": "O",
+        "val": "Gracza",
+        "formula": "IF($E$16>=1,Obl!AC12,\"\")"
+      },
+      {
+        "col": "P",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AD12,\"\")"
+      },
+      {
+        "col": "Q",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AE12,\"\")"
+      },
+      {
+        "col": "R",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AF12,\"\")"
+      },
+      {
+        "col": "S",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AG12,\"\")"
+      },
+      {
+        "col": "T",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AH12,\"\")"
+      },
+      {
+        "col": "U",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AI12,\"\")"
+      },
+      {
+        "col": "V",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AJ12,\"\")"
+      },
+      {
+        "col": "W",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AK12,\"\")"
+      },
+      {
+        "col": "X",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AL12,\"\")"
+      },
+      {
+        "col": "Y",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AM12,\"\")"
+      },
+      {
+        "col": "Z",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AN12,\"\")"
+      },
+      {
+        "col": "AA",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AO12,\"\")"
+      }
+    ]
+  },
+  {
+    "row": 30,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Rodzaj",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "Ilość",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "Miejsce na fragment",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "Miejsce zużywane",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "0",
+        "formula": null
+      }
+    ]
+  },
+  {
+    "row": 31,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Skórzana",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "8",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "0",
+        "formula": "D31*C31"
+      },
+      {
+        "col": "J",
+        "val": "0",
+        "formula": null
+      },
+      {
+        "col": "L",
+        "val": "Karty Broń 2",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 32,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Półpłytowa",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "6",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "0",
+        "formula": "D32*C32"
+      },
+      {
+        "col": "J",
+        "val": "0",
+        "formula": null
+      },
+      {
+        "col": "L",
+        "val": "Karta 1",
+        "formula": "IF($E$16>=1,Obl!Z15,\"\")"
+      },
+      {
+        "col": "N",
+        "val": "Użyta",
+        "formula": "IF($E$16>=1,Obl!AB15,\"\")"
+      },
+      {
+        "col": "O",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "P",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AD15,\"\")"
+      },
+      {
+        "col": "R",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AF15,\"\")"
+      },
+      {
+        "col": "S",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "T",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AH15,\"\")"
+      },
+      {
+        "col": "V",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AJ15,\"\")"
+      },
+      {
+        "col": "W",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "X",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AL15,\"\")"
+      },
+      {
+        "col": "Z",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AN15,\"\")"
+      },
+      {
+        "col": "AA",
+        "val": "0",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 33,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Płytowa",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "4",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "0",
+        "formula": "D33*C33"
+      },
+      {
+        "col": "J",
+        "val": "0",
+        "formula": null
+      },
+      {
+        "col": "L",
+        "val": "Wyrzucona kostka",
+        "formula": "IF($E$16>=1,Obl!Z16,\"\")"
+      },
+      {
+        "col": "P",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AD16,\"\")"
+      },
+      {
+        "col": "T",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AH16,\"\")"
+      },
+      {
+        "col": "X",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AL16,\"\")"
+      }
+    ]
+  },
+  {
+    "row": 34,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Stalowa",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "4",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "0",
+        "formula": "D34*C34"
+      },
+      {
+        "col": "J",
+        "val": "0",
+        "formula": null
+      },
+      {
+        "col": "L",
+        "val": "Prosty",
+        "formula": "IF($E$16>=1,Obl!Z17,\"\")"
+      },
+      {
+        "col": "P",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AD17,\"\")"
+      },
+      {
+        "col": "T",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AH17,\"\")"
+      },
+      {
+        "col": "X",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AL17,\"\")"
+      }
+    ]
+  },
+  {
+    "row": 35,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Pozostałe miejsce",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "0",
+        "formula": null
+      },
+      {
+        "col": "L",
+        "val": "Zwykły, chamski atak",
+        "formula": "IF($E$16>=1,Obl!Z18,\"\")"
+      },
+      {
+        "col": "P",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AD18,\"\")"
+      },
+      {
+        "col": "T",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AH18,\"\")"
+      },
+      {
+        "col": "X",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AL18,\"\")"
+      }
+    ]
+  },
+  {
+    "row": 36,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Max miejsce",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "Zużywane miejsce",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "Pozostałe miesjce zbroii",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "0",
+        "formula": null
+      }
+    ]
+  },
+  {
+    "row": 37,
+    "cells": [
+      {
+        "col": "B",
+        "val": "24",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": "SUM(E31:E34)"
+      },
+      {
+        "col": "D",
+        "val": "24",
+        "formula": "B37-C37"
+      },
+      {
+        "col": "J",
+        "val": "0",
+        "formula": null
+      }
+    ]
+  },
+  {
+    "row": 38,
+    "cells": [
+      {
+        "col": "J",
+        "val": "0",
+        "formula": null
+      }
+    ]
+  },
+  {
+    "row": 39,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Posiadasz",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "Modyfikacje statystyk przez zbroję",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "0",
+        "formula": null
+      },
+      {
+        "col": "L",
+        "val": "Dmg",
+        "formula": "IF($E$16>=1,Obl!Z22,\"\")"
+      },
+      {
+        "col": "M",
+        "val": "str",
+        "formula": "IF($E$16>=1,Obl!AA22,\"\")"
+      },
+      {
+        "col": "N",
+        "val": "Akcja",
+        "formula": "IF($E$16>=1,Obl!AB22,\"\")"
+      },
+      {
+        "col": "O",
+        "val": "0.5",
+        "formula": "IF($E$16>=1,Obl!AC22,\"\")"
+      },
+      {
+        "col": "P",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AD22,\"\")"
+      },
+      {
+        "col": "Q",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AE22,\"\")"
+      },
+      {
+        "col": "R",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AF22,\"\")"
+      },
+      {
+        "col": "S",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AG22,\"\")"
+      },
+      {
+        "col": "T",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AH22,\"\")"
+      },
+      {
+        "col": "U",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AI22,\"\")"
+      },
+      {
+        "col": "V",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AJ22,\"\")"
+      },
+      {
+        "col": "W",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AK22,\"\")"
+      },
+      {
+        "col": "X",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AL22,\"\")"
+      },
+      {
+        "col": "Y",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AM22,\"\")"
+      },
+      {
+        "col": "Z",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AN22,\"\")"
+      },
+      {
+        "col": "AA",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AO22,\"\")"
+      }
+    ]
+  },
+  {
+    "row": 40,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Plecak",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "Max życie",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "0",
+        "formula": "SUM(C31:C34*5)"
+      },
+      {
+        "col": "J",
+        "val": "0",
+        "formula": null
+      },
+      {
+        "col": "L",
+        "val": "Trafienie",
+        "formula": "IF($E$16>=1,Obl!Z23,\"\")"
+      },
+      {
+        "col": "M",
+        "val": "d20+dex",
+        "formula": "IF($E$16>=1,Obl!AA23,\"\")"
+      },
+      {
+        "col": "N",
+        "val": "Ilośc celów",
+        "formula": "IF($E$16>=1,Obl!AB23,\"\")"
+      },
+      {
+        "col": "O",
+        "val": "1",
+        "formula": "IF($E$16>=1,Obl!AC23,\"\")"
+      },
+      {
+        "col": "P",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AD23,\"\")"
+      },
+      {
+        "col": "Q",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AE23,\"\")"
+      },
+      {
+        "col": "R",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AF23,\"\")"
+      },
+      {
+        "col": "S",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AG23,\"\")"
+      },
+      {
+        "col": "T",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AH23,\"\")"
+      },
+      {
+        "col": "U",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AI23,\"\")"
+      },
+      {
+        "col": "V",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AJ23,\"\")"
+      },
+      {
+        "col": "W",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AK23,\"\")"
+      },
+      {
+        "col": "X",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AL23,\"\")"
+      },
+      {
+        "col": "Y",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AM23,\"\")"
+      },
+      {
+        "col": "Z",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AN23,\"\")"
+      },
+      {
+        "col": "AA",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AO23,\"\")"
+      }
+    ]
+  },
+  {
+    "row": 41,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Plecak podróżnika",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "Obrona",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "0",
+        "formula": "(C32*-0.2+C33*-0.5+C34*-1)/(B3/2)"
+      },
+      {
+        "col": "J",
+        "val": "0",
+        "formula": null
+      },
+      {
+        "col": "L",
+        "val": "Zasięg",
+        "formula": "IF($E$16>=1,Obl!Z24,\"\")"
+      },
+      {
+        "col": "M",
+        "val": "Mele",
+        "formula": "IF($E$16>=1,Obl!AA24,\"\")"
+      },
+      {
+        "col": "N",
+        "val": "Tura",
+        "formula": "IF($E$16>=1,Obl!AB24,\"\")"
+      },
+      {
+        "col": "O",
+        "val": "Gracza",
+        "formula": "IF($E$16>=1,Obl!AC24,\"\")"
+      },
+      {
+        "col": "P",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AD24,\"\")"
+      },
+      {
+        "col": "Q",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AE24,\"\")"
+      },
+      {
+        "col": "R",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AF24,\"\")"
+      },
+      {
+        "col": "S",
+        "val": null,
+        "formula": "IF($E$16>=2,Obl!AG24,\"\")"
+      },
+      {
+        "col": "T",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AH24,\"\")"
+      },
+      {
+        "col": "U",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AI24,\"\")"
+      },
+      {
+        "col": "V",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AJ24,\"\")"
+      },
+      {
+        "col": "W",
+        "val": null,
+        "formula": "IF($E$16>=3,Obl!AK24,\"\")"
+      },
+      {
+        "col": "X",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AL24,\"\")"
+      },
+      {
+        "col": "Y",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AM24,\"\")"
+      },
+      {
+        "col": "Z",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AN24,\"\")"
+      },
+      {
+        "col": "AA",
+        "val": null,
+        "formula": "IF($E$16>=4,Obl!AO24,\"\")"
+      }
+    ]
+  },
+  {
+    "row": 42,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Kołczan",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "Akcje",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "0",
+        "formula": "(C32*-0.1+C33*-0.2+C34*-0.4)/(B3/2)"
+      },
+      {
+        "col": "J",
+        "val": "0",
+        "formula": null
+      }
+    ]
+  },
+  {
+    "row": 43,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Ubrania z kieszeniami",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "Wytrwałość",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "0",
+        "formula": "(C32*-0.25+C33*-0.5+C34*-0.5)*B3/2"
+      },
+      {
+        "col": "J",
+        "val": "0",
+        "formula": null
+      }
+    ]
+  },
+  {
+    "row": 44,
+    "cells": [
+      {
+        "col": "B",
+        "val": "Pasek z mocowaniem",
+        "formula": ""
+      },
+      {
+        "col": "C",
+        "val": "0",
+        "formula": ""
+      },
+      {
+        "col": "D",
+        "val": "Ruch (ft)",
+        "formula": ""
+      },
+      {
+        "col": "E",
+        "val": "0",
+        "formula": "C32*-1+C33*-1.5"
+      },
+      {
+        "col": "G",
+        "val": "Miejsce Niepodręczne",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 45,
+    "cells": [
+      {
+        "col": "G",
+        "val": "Modyfikator",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "Dodawane miejsce",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "Miejsce zużyte",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "Pozostałe miejsce",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 46,
+    "cells": [
+      {
+        "col": "G",
+        "val": "Baza",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "10",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "0",
+        "formula": "SUM(J24:J43)"
+      },
+      {
+        "col": "J",
+        "val": "14",
+        "formula": "H50-I46"
+      }
+    ]
+  },
+  {
+    "row": 47,
+    "cells": [
+      {
+        "col": "G",
+        "val": "plecak",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "0",
+        "formula": "IF(C40=FALSE,0,10)"
+      }
+    ]
+  },
+  {
+    "row": 48,
+    "cells": [
+      {
+        "col": "G",
+        "val": "plecak podróżnika",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "0",
+        "formula": "IF(C41=FALSE,0,10)"
+      }
+    ]
+  },
+  {
+    "row": 49,
+    "cells": [
+      {
+        "col": "G",
+        "val": "Wytrwałość",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "4",
+        "formula": "E16*4"
+      }
+    ]
+  },
+  {
+    "row": 50,
+    "cells": [
+      {
+        "col": "G",
+        "val": "Suma:",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "14",
+        "formula": "SUM(H46:H49)"
+      }
+    ]
+  },
+  {
+    "row": 52,
+    "cells": [
+      {
+        "col": "G",
+        "val": "Kołczan (wyekwipowanie przedmiotu - 0 akcji)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 53,
+    "cells": [
+      {
+        "col": "G",
+        "val": "Rodzaj strzały/bełtu",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "Ilość",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "Pojemność max",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "Pozostałe miejsce",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 54,
+    "cells": [
+      {
+        "col": "I",
+        "val": "0",
+        "formula": "IF(C42=FALSE,0,10)"
+      },
+      {
+        "col": "J",
+        "val": "0",
+        "formula": "I54-H54-H55-H56"
+      }
+    ]
+  },
+  {
+    "row": 58,
+    "cells": [
+      {
+        "col": "G",
+        "val": "Plecy (wyekwipowanie przedmiotu - 1 akcja)",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 59,
+    "cells": [
+      {
+        "col": "G",
+        "val": "Przedmiot",
+        "formula": ""
+      },
+      {
+        "col": "H",
+        "val": "Zużyte miejsce",
+        "formula": ""
+      },
+      {
+        "col": "I",
+        "val": "Pojemność max ",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "Pozostałe miesjce",
+        "formula": ""
+      }
+    ]
+  },
+  {
+    "row": 60,
+    "cells": [
+      {
+        "col": "I",
+        "val": "20",
+        "formula": ""
+      },
+      {
+        "col": "J",
+        "val": "20",
+        "formula": "I60-H60"
+      }
+    ]
+  }
+]

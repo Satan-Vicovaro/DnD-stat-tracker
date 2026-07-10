@@ -2,6 +2,7 @@ import zipfile
 import xml.etree.ElementTree as ET
 import json
 import re
+import os
 
 def col2num(col_str):
     num = 0
@@ -56,7 +57,12 @@ def extract_sheet_formulas(z, sheet_path, shared_strings):
     return grid
 
 def main():
-    with zipfile.ZipFile('Ekwipunki.xlsx', 'r') as z:
+
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    input_file = os.path.join(script_dir, '..', 'Ekwipunki.xlsx')
+    output_file = os.path.join(script_dir, '..', 'ekwipunek.json')
+    
+    with zipfile.ZipFile(input_file, 'r') as z:
         ss = get_shared_strings(z)
         try:
             grid = extract_sheet_formulas(z, 'xl/worksheets/sheet1.xml', ss)
@@ -77,9 +83,9 @@ def main():
                         "cells": row_data
                     })
 
-            with open('ekwipunek_filtered.json', 'w', encoding='utf-8') as f:
+            with open(output_file, 'w', encoding='utf-8') as f:
                 json.dump(extracted, f, ensure_ascii=False, indent=2)
-            print("Extracted sheet1 to ekwipunek_filtered.json")
+            print(f"Extracted sheet1 to {output_file}")
         except Exception as e:
             print("Error:", e)
 

@@ -13,10 +13,10 @@ class GameEngine:
 
     def _create_starting_character(self) -> Character:
         hero = Character(name="Kajzer", level=1)
-        hero.stats.base_str = 5
-        hero.stats.base_dex = 5
-        hero.stats.base_wis = 5
-        hero.stats.base_cha = 5
+        hero.stats.base_str = 0
+        hero.stats.base_dex = 0
+        hero.stats.base_wis = 0
+        hero.stats.base_cha = 0
         return hero
 
     def get_character_view_model(self) -> dict:
@@ -93,16 +93,16 @@ class GameEngine:
         stat_attr = f"base_{stat_name}"
         if hasattr(self.hero.stats, stat_attr):
             current = getattr(self.hero.stats, stat_attr)
-            
+
             # Prevent lowering below 0
             if delta < 0 and current + delta < 0:
                 return False
-                
+
             # Check if we have unspent points for additions
             if delta > 0 and self.hero.unspent_stat_points < delta:
                 logger.warning("Not enough unspent stat points.")
                 return False
-                
+
             setattr(self.hero.stats, stat_attr, current + delta)
             logger.info(f"Hero stat {stat_name} modified by {delta}")
             return True
