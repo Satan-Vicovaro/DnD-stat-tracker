@@ -1,0 +1,59 @@
+<div class="bg-gray-800 rounded-xl shadow-lg border-2 border-gray-700 p-6 flex flex-col items-center">
+  <h2 class="text-xl font-extrabold text-white mb-4 uppercase tracking-wider text-center border-b border-gray-700 pb-2 w-full">Finanse</h2>
+  
+  <div class="flex flex-row justify-center items-center gap-6 w-full">
+    
+    <!-- Złoto (Gold) -->
+    <div class="flex flex-col items-center bg-gray-900 px-6 py-4 rounded-lg border-2 border-yellow-500 shadow-inner flex-1 max-w-[140px]">
+      <div class="w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center mb-2 border border-yellow-500/50">
+        <svg class="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14a6 6 0 110-12 6 6 0 010 12z"/>
+          <path d="M10 6a4 4 0 100 8 4 4 0 000-8z"/>
+        </svg>
+      </div>
+      <input type="number" id="economy-gold" value="0" min="0" class="mt-2 w-24 bg-transparent border-b-2 border-transparent hover:border-gray-500 focus:border-yellow-500 focus:outline-none text-center text-4xl font-extrabold text-white transition-colors [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
+      <span class="text-yellow-500 text-xs font-bold uppercase tracking-widest mt-1">Złoto (Au)</span>
+      <div class="flex items-center justify-center gap-3 mt-4 w-full">
+        <button id="btn-gold-dec" class="w-8 h-8 rounded bg-gray-700 hover:bg-gray-600 text-white font-bold flex items-center justify-center transition-colors shadow-sm">-</button>
+        <button id="btn-gold-inc" class="w-8 h-8 rounded bg-gray-700 hover:bg-gray-600 text-white font-bold flex items-center justify-center transition-colors shadow-sm">+</button>
+      </div>
+    </div>
+
+    <!-- Srebro (Silver) -->
+    <div class="flex flex-col items-center bg-gray-900 px-6 py-4 rounded-lg border-2 border-gray-400 shadow-inner flex-1 max-w-[150px]">
+      <div class="w-10 h-10 rounded-full bg-gray-400/20 flex items-center justify-center mb-2 border border-gray-400/50">
+        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14a6 6 0 110-12 6 6 0 010 12z"/>
+          <path d="M10 6a4 4 0 100 8 4 4 0 000-8z"/>
+        </svg>
+      </div>
+      <input type="number" id="economy-silver" value="0" min="0" class="mt-2 w-24 bg-transparent border-b-2 border-transparent hover:border-gray-500 focus:border-gray-400 focus:outline-none text-center text-4xl font-extrabold text-white transition-colors [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
+      <span class="text-gray-400 text-xs font-bold uppercase tracking-widest mt-1">Srebro (Ag)</span>
+      <div class="flex items-center justify-center gap-3 mt-4 w-full">
+        <button id="btn-silver-dec" class="w-8 h-8 rounded bg-gray-700 hover:bg-gray-600 text-white font-bold flex items-center justify-center transition-colors shadow-sm">-</button>
+        <button id="btn-silver-inc" class="w-8 h-8 rounded bg-gray-700 hover:bg-gray-600 text-white font-bold flex items-center justify-center transition-colors shadow-sm">+</button>
+      </div>
+    </div>
+
+    <!-- Miedź (Copper/Bronze) -->
+    <div class="flex flex-col items-center bg-gray-900 px-6 py-4 rounded-lg border-2 border-amber-700 shadow-inner flex-1 max-w-[150px]">
+      <div class="w-10 h-10 rounded-full bg-amber-700/20 flex items-center justify-center mb-2 border border-amber-700/50">
+        <svg class="w-6 h-6 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14a6 6 0 110-12 6 6 0 010 12z"/>
+          <path d="M10 6a4 4 0 100 8 4 4 0 000-8z"/>
+        </svg>
+      </div>
+      <input type="number" id="economy-copper" value="0" min="0" class="mt-2 w-24 bg-transparent border-b-2 border-transparent hover:border-gray-500 focus:border-amber-600 focus:outline-none text-center text-4xl font-extrabold text-white transition-colors [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
+      <span class="text-amber-600 text-xs font-bold uppercase tracking-widest mt-1">Brąz (Cu)</span>
+      <div class="flex items-center justify-center gap-3 mt-4 w-full">
+        <button id="btn-copper-dec" class="w-8 h-8 rounded bg-gray-700 hover:bg-gray-600 text-white font-bold flex items-center justify-center transition-colors shadow-sm">-</button>
+        <button id="btn-copper-inc" class="w-8 h-8 rounded bg-gray-700 hover:bg-gray-600 text-white font-bold flex items-center justify-center transition-colors shadow-sm">+</button>
+      </div>
+    </div>
+
+  </div>
+  
+  <div class="mt-4 text-xs text-gray-400 font-medium">
+    Kurs wymiany: 1 Złoto = 10 Srebra = 100 Brązu
+  </div>
+</div>

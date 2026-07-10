@@ -1,6 +1,7 @@
 import { CharacterComponent } from './components/CharacterComponent.js';
 import { ArmorComponent } from './components/ArmorComponent.js';
 import { ShopComponent } from './components/ShopComponent.js';
+import { EconomyComponent } from './components/EconomyComponent.js';
 
 // Application initialization
 window.onload = () => {
@@ -11,6 +12,10 @@ window.onload = () => {
     // Initialize the Armor View Component
     const armorView = new ArmorComponent("armor-view-container");
     armorView.init();
+
+    // Initialize the Economy View Component
+    const economyView = new EconomyComponent("economy-view-container");
+    economyView.init();
 
     // Initialize the Shop View Component
     const shopView = new ShopComponent("shop-view-container");

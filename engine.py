@@ -53,6 +53,11 @@ class GameEngine:
                     for t in self.hero.armor_state.types.values()
                 ],
             },
+            "economy": {
+                "gold": self.hero.gold,
+                "silver": self.hero.silver,
+                "copper": self.hero.copper,
+            },
         }
 
     def modify_armor_quantity(self, armor_name: str, delta: int) -> bool:
@@ -77,6 +82,31 @@ class GameEngine:
         logger.info(
             f"Armor {armor_name} quantity changed by {delta}. New total: {armor_type.quantity}"
         )
+        return True
+
+    def modify_money(self, currency_type: str, delta: int) -> bool:
+        """Modifies character money (gold, silver, copper). Returns True if successful."""
+        if not hasattr(self.hero, currency_type):
+            return False
+            
+        current = getattr(self.hero, currency_type)
+        if current + delta < 0:
+            return False
+            
+        setattr(self.hero, currency_type, current + delta)
+        logger.info(f"Money {currency_type} changed by {delta}. New total: {current + delta}")
+        return True
+
+    def set_money(self, currency_type: str, value: int) -> bool:
+        """Sets character money directly. Returns True if successful."""
+        if not hasattr(self.hero, currency_type):
+            return False
+            
+        if value < 0:
+            value = 0
+            
+        setattr(self.hero, currency_type, value)
+        logger.info(f"Money {currency_type} set to {value}.")
         return True
 
     def update_name(self, new_name: str):
