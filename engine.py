@@ -283,6 +283,7 @@ class GameEngine:
             "max_hp": self.hero.stat_manager.get_stat_breakdown("max_hp"),
             "defense": self.hero.stat_manager.get_stat_breakdown("defense"),
             "ap": self.hero.stat_manager.get_stat_breakdown("ap"),
+            "current_action_points": self.hero.current_action_points,
             "stamina": self.hero.stat_manager.get_stat_breakdown("stamina"),
             "movement": self.hero.stat_manager.get_stat_breakdown("movement"),
             "stats": {
@@ -539,6 +540,21 @@ class GameEngine:
 
         return mitigation
 
+    def reset_action_points(self) -> bool:
+        """Reset current AP to maximum (start-of-turn reset)."""
+        self._snapshot()
+        self.hero.current_action_points = self.hero.max_action_points
+        logger.info(f"AP reset to {self.hero.current_action_points}")
+        return True
+
+    def set_action_points(self, value: float) -> bool:
+        """Manually set current AP, clamped between 0 and max."""
+        clamped = max(0.0, min(float(value), self.hero.max_action_points))
+        self._snapshot()
+        self.hero.current_action_points = clamped
+        logger.info(f"AP set to {clamped}")
+        return True
+
     def apply_damage(self, damage_type: str, amount: int) -> bool:
         """Applies damage considering armor mitigation for physical damage."""
         if amount < 0:
@@ -557,10 +573,10 @@ class GameEngine:
             current_armor_hp = max(0, armor_max_hp - self.hero.damage_taken_physical)
 
             damage_to_armor = min(effective_damage, current_armor_hp)
+
             self.hero.damage_taken_physical += damage_to_armor
-            logger.info(f"damage to armor: {damage_to_armor}")
             damage_to_health = effective_damage - damage_to_armor
-            logger.info(f"damage to health: {damage_to_health}")
+
             if damage_to_health > 0:
                 self.hero.damage_taken_magical += damage_to_health
 

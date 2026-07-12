@@ -38,6 +38,46 @@
       <span class="text-xl font-black text-indigo-400" id="fight-mitigation-badge">0</span>
     </div>
 
+    <!-- Action Points Panel -->
+    <div class="bg-gray-900/50 p-4 rounded-lg border border-amber-500/30 flex flex-col gap-3">
+      <div class="flex items-center justify-between">
+        <h4 class="text-sm font-bold text-amber-400 uppercase tracking-wider flex items-center gap-2">
+          <span>⚡</span> Punkty Akcji (PA)
+        </h4>
+        <button id="btn-reset-ap" class="text-xs font-bold bg-amber-500/20 hover:bg-amber-500/40 text-amber-300 border border-amber-500/50 px-3 py-1 rounded transition-colors">
+          🔄 Nowa Runda
+        </button>
+      </div>
+
+      <!-- AP Bar -->
+      <div>
+        <div class="flex justify-between items-end mb-1">
+          <span class="text-xs text-gray-500 uppercase tracking-wider">Aktualne / Max</span>
+          <span id="fight-ap-text" class="text-xl font-black text-amber-400 font-mono">0 / 0</span>
+        </div>
+        <div class="w-full bg-gray-700/50 rounded-full h-3 overflow-hidden shadow-inner border border-gray-600/50">
+          <div id="fight-ap-bar" class="bg-amber-400 h-3 rounded-full transition-all duration-500" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Manual AP Adjust -->
+      <div class="flex items-center justify-between gap-3 pt-1">
+        <span class="text-xs font-bold text-gray-400">Ustaw ręcznie:</span>
+        <div class="flex items-center gap-2">
+          <button id="btn-ap-dec" class="w-8 h-8 rounded bg-gray-700 hover:bg-rose-500/80 text-white font-bold transition-colors flex items-center justify-center">−</button>
+          <input
+            type="number"
+            id="fight-ap-input"
+            min="0"
+            step="0.5"
+            class="w-20 bg-gray-800 text-white font-mono text-center text-sm p-2 rounded border border-amber-500/40 focus:border-amber-400 focus:outline-none"
+          />
+          <button id="btn-ap-inc" class="w-8 h-8 rounded bg-gray-700 hover:bg-emerald-500/80 text-white font-bold transition-colors flex items-center justify-center">+</button>
+          <button id="btn-ap-set" class="text-xs font-bold bg-amber-600 hover:bg-amber-500 text-white px-3 py-2 rounded border border-amber-500 transition-colors">Ustaw</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Damage Form -->
     <div class="bg-gray-900/50 p-4 rounded-lg border border-gray-700 flex flex-col gap-4">
       <div>
@@ -140,6 +180,68 @@
       </div>
 
     </div>
+
+    <!-- Read-only Character Stats Panel -->
+    <div class="bg-gray-800 rounded-xl shadow-lg border border-gray-700 p-6">
+      <div class="flex items-center justify-between mb-5">
+        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <span class="text-indigo-400">📋</span> Statystyki Postaci
+        </h3>
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-gray-500 uppercase tracking-wider">Lv.</span>
+          <span id="fight-stat-level" class="text-sm font-black text-indigo-400 bg-indigo-900/40 px-2.5 py-0.5 rounded border border-indigo-500/40">—</span>
+          <span id="fight-stat-name" class="text-sm font-semibold text-gray-300 italic">—</span>
+        </div>
+      </div>
+
+      <!-- Derived Stats Grid -->
+      <div class="grid grid-cols-3 gap-3 mb-5">
+        <div class="bg-gray-900/60 rounded-lg p-3 text-center border border-gray-700/60">
+          <p class="text-[10px] text-emerald-400 uppercase tracking-wider font-bold mb-1">HP</p>
+          <p class="text-lg font-black text-emerald-300 leading-none" id="fight-stat-hp">—</p>
+        </div>
+        <div class="bg-gray-900/60 rounded-lg p-3 text-center border border-gray-700/60">
+          <p class="text-[10px] text-blue-400 uppercase tracking-wider font-bold mb-1">Obrona</p>
+          <p class="text-lg font-black text-blue-300 leading-none" id="fight-stat-def">—</p>
+        </div>
+        <div class="bg-gray-900/60 rounded-lg p-3 text-center border border-gray-700/60">
+          <p class="text-[10px] text-amber-400 uppercase tracking-wider font-bold mb-1">Akcje (PA)</p>
+          <p class="text-lg font-black text-amber-300 leading-none" id="fight-stat-ap">—</p>
+        </div>
+        <div class="bg-gray-900/60 rounded-lg p-3 text-center border border-gray-700/60">
+          <p class="text-[10px] text-rose-400 uppercase tracking-wider font-bold mb-1">Stamina</p>
+          <p class="text-lg font-black text-rose-300 leading-none" id="fight-stat-stam">—</p>
+        </div>
+        <div class="bg-gray-900/60 rounded-lg p-3 text-center border border-gray-700/60 col-span-2">
+          <p class="text-[10px] text-teal-400 uppercase tracking-wider font-bold mb-1">Ruch (ft)</p>
+          <p class="text-lg font-black text-teal-300 leading-none" id="fight-stat-move">—</p>
+        </div>
+      </div>
+
+      <!-- Base Stats -->
+      <div class="border-t border-gray-700/60 pt-4">
+        <p class="text-[10px] text-gray-500 uppercase tracking-widest font-bold mb-3">Base Stats</p>
+        <div class="grid grid-cols-2 gap-2">
+          <div class="flex justify-between items-center bg-gray-700/20 px-3 py-2 rounded-lg">
+            <span class="text-xs text-gray-400 font-semibold">Strength (STR)</span>
+            <span class="text-sm font-black text-indigo-300" id="fight-stat-str">—</span>
+          </div>
+          <div class="flex justify-between items-center bg-gray-700/20 px-3 py-2 rounded-lg">
+            <span class="text-xs text-gray-400 font-semibold">Dexterity (DEX)</span>
+            <span class="text-sm font-black text-indigo-300" id="fight-stat-dex">—</span>
+          </div>
+          <div class="flex justify-between items-center bg-gray-700/20 px-3 py-2 rounded-lg">
+            <span class="text-xs text-gray-400 font-semibold">Wisdom (WIS)</span>
+            <span class="text-sm font-black text-indigo-300" id="fight-stat-wis">—</span>
+          </div>
+          <div class="flex justify-between items-center bg-gray-700/20 px-3 py-2 rounded-lg">
+            <span class="text-xs text-gray-400 font-semibold">Charisma (CHA)</span>
+            <span class="text-sm font-black text-indigo-300" id="fight-stat-cha">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 </div>

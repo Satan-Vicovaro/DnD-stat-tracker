@@ -71,6 +71,33 @@ export class FightComponent {
             document.dispatchEvent(new CustomEvent('characterUpdated', { detail: this.characterData }));
         }
     });
+
+    // Action Points controls
+    const dispatchAP = (data) => {
+      this.characterData = data;
+      document.dispatchEvent(new CustomEvent('characterUpdated', { detail: data }));
+    };
+
+    document.getElementById('btn-reset-ap').addEventListener('click', async () => {
+      dispatchAP(await eel.reset_action_points()());
+    });
+
+    document.getElementById('btn-ap-inc').addEventListener('click', async () => {
+      const cur = parseFloat(document.getElementById('fight-ap-input').value) || 0;
+      dispatchAP(await eel.set_action_points(cur + 0.5)());
+    });
+
+    document.getElementById('btn-ap-dec').addEventListener('click', async () => {
+      const cur = parseFloat(document.getElementById('fight-ap-input').value) || 0;
+      dispatchAP(await eel.set_action_points(Math.max(0, cur - 0.5))());
+    });
+
+    document.getElementById('btn-ap-set').addEventListener('click', async () => {
+      const val = parseFloat(document.getElementById('fight-ap-input').value);
+      if (!isNaN(val) && val >= 0) {
+        dispatchAP(await eel.set_action_points(val)());
+      }
+    });
   }
 
   render() {
@@ -98,6 +125,17 @@ export class FightComponent {
         mitigationBadge.innerText = split.current_mitigation || 0;
       }
     }
+
+    // 2a. Render Action Points bar
+    const curAP  = char.current_action_points ?? 0;
+    const maxAP  = char.ap?.total ?? 0;
+    const apText = document.getElementById('fight-ap-text');
+    const apBar  = document.getElementById('fight-ap-bar');
+    const apInput = document.getElementById('fight-ap-input');
+    if (apText)  apText.innerText = `${Number.isInteger(curAP) ? curAP : curAP.toFixed(2)} / ${Number.isInteger(maxAP) ? maxAP : maxAP.toFixed(2)}`;
+    if (apBar)   apBar.style.width = `${maxAP > 0 ? Math.max(0, Math.min(100, (curAP / maxAP) * 100)) : 0}%`;
+    // Keep input in sync only when user is not actively editing it
+    if (apInput && document.activeElement !== apInput) apInput.value = curAP;
 
     // 2. Render Weapons & Consumables
     const weaponsList = document.getElementById('fight-weapons-list');
@@ -135,27 +173,66 @@ export class FightComponent {
       if (consEmpty) consEmpty.classList.toggle('hidden', cCount > 0);
     }
 
+    // 3. Render read-only character stats panel
+    const setText = (id, val) => {
+      const el = document.getElementById(id);
+      if (el) el.innerText = val;
+    };
+    const fmt = (v) => (Number.isInteger(v) ? v : Number(v).toFixed(2));
+
+    setText('fight-stat-name',  char.name ?? '—');
+    setText('fight-stat-level', char.level ?? '—');
+    setText('fight-stat-hp',    `${char.hp} / ${char.max_hp?.total ?? '?'}`);
+    setText('fight-stat-def',   fmt(char.defense?.total ?? 0));
+    setText('fight-stat-ap',    fmt(char.ap?.total ?? 0));
+    setText('fight-stat-stam',  fmt(char.stamina?.total ?? 0));
+    setText('fight-stat-move',  char.movement?.total ?? '—');
+    setText('fight-stat-str',   char.stats?.str ?? '—');
+    setText('fight-stat-dex',   char.stats?.dex ?? '—');
+    setText('fight-stat-wis',   char.stats?.wis ?? '—');
+    setText('fight-stat-cha',   char.stats?.cha ?? '—');
+
     this.bindDynamicActions();
   }
 
   bindDynamicActions() {
     const container = document.getElementById(this.containerId);
     container.querySelectorAll('button[data-action="fight-use"]').forEach(btn => {
-      // remove old listener if any (easiest way is to clone or just assume they are new DOM elements)
       btn.addEventListener('click', async (e) => {
         const index = parseInt(e.currentTarget.getAttribute('data-index'));
-        const item = this.characterData.inventory[index];
-        
+        const item  = this.characterData.inventory[index];
+
+        // AP cost mirrors engine logic (engine.py use_inventory_item)
+        const apCostMap = { BACKPACK: 2, BACK: 1 };
+        const apCost    = apCostMap[item.location] ?? 0;
+        const curAP     = this.characterData.current_action_points ?? 0;
+        const apErrEl   = container.querySelector(`[data-ap-err="${index}"]`);
+
+        if (apCost > 0 && curAP < apCost) {
+          if (apErrEl) {
+            apErrEl.textContent = `Za mało PA! Potrzebujesz ${apCost} PA, masz ${Number.isInteger(curAP) ? curAP : curAP.toFixed(2)}.`;
+            apErrEl.classList.remove('hidden');
+          }
+          return;
+        }
+        if (apErrEl) apErrEl.classList.add('hidden');
+
         let overrideValue = null;
         if (item.consumable_effects && item.consumable_effects.dynamic_heal) {
-            const val = prompt(`Rzuć kośćmi (lub wpisz wartość leczenia) dla: ${item.name}`);
-            if (val === null) return; // cancelled
-            const parsed = parseInt(val);
-            if (isNaN(parsed) || parsed < 0) {
-                alert("Wprowadzono niepoprawną wartość.");
-                return;
+          // Read value from the inline input rendered on the card
+          const inputEl = container.querySelector(`input[data-dynamic-index="${index}"]`);
+          const errEl   = container.querySelector(`[data-dynamic-err="${index}"]`);
+          const parsed  = inputEl ? parseInt(inputEl.value) : NaN;
+
+          if (isNaN(parsed) || parsed < 0) {
+            if (errEl) {
+              errEl.textContent = 'Wpisz poprawną wartość (≥ 0)';
+              errEl.classList.remove('hidden');
             }
-            overrideValue = parsed;
+            return;
+          }
+          if (errEl) errEl.classList.add('hidden');
+          overrideValue = parsed;
         }
 
         this.characterData = await eel.use_inventory_item(index, overrideValue)();
@@ -192,13 +269,49 @@ export class FightComponent {
     // Consumable specific UI
     let consHtml = '';
     if (isConsumable) {
-       const usesBadge = item.max_uses > 0 ? `<span class="bg-teal-900/80 text-teal-300 text-[9px] px-1.5 py-0.5 rounded border border-teal-500/50">Użycia: ${item.current_uses}/${item.max_uses}</span>` : "";
-       consHtml = `
-         <div class="mt-3 flex justify-between items-center gap-2">
-           ${usesBadge}
-           <button data-action="fight-use" data-index="${index}" class="text-xs font-bold bg-teal-600 hover:bg-teal-500 text-white px-3 py-1.5 rounded border border-teal-500 transition-colors shadow-[0_0_8px_rgba(20,184,166,0.3)]">Użyj</button>
-         </div>
-       `;
+      const usesBadge = item.max_uses > 0
+        ? `<span class="bg-teal-900/80 text-teal-300 text-[9px] px-1.5 py-0.5 rounded border border-teal-500/50">Użycia: ${item.current_uses}/${item.max_uses}</span>`
+        : '';
+
+      const isDynamic = item.consumable_effects && item.consumable_effects.dynamic_heal;
+
+      if (isDynamic) {
+        // Inline dice-roll input — no browser prompt needed
+        consHtml = `
+          <div class="mt-3 flex flex-col gap-2">
+            <div class="flex items-center gap-1.5">
+              <span class="text-[10px] text-amber-400 font-bold uppercase tracking-wide">🎲 Wynik rzutu:</span>
+              ${usesBadge}
+            </div>
+            <div class="flex items-center gap-2">
+              <input
+                type="number"
+                min="0"
+                placeholder="np. 7"
+                data-dynamic-index="${index}"
+                class="w-20 bg-gray-900 border border-amber-500/60 text-white text-sm text-center rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-amber-400 placeholder-gray-600"
+              />
+              <button
+                data-action="fight-use"
+                data-index="${index}"
+                class="flex-1 text-xs font-bold bg-teal-600 hover:bg-teal-500 text-white px-3 py-1.5 rounded border border-teal-500 transition-colors shadow-[0_0_8px_rgba(20,184,166,0.3)]"
+              >Użyj</button>
+            </div>
+            <span data-dynamic-err="${index}" class="hidden text-[10px] text-rose-400 font-semibold"></span>
+            <span data-ap-err="${index}" class="hidden text-[10px] text-rose-400 font-semibold flex items-center gap-1"><span>⚡</span><span></span></span>
+          </div>
+        `;
+      } else {
+        consHtml = `
+          <div class="mt-3 flex flex-col gap-2">
+            <div class="flex justify-between items-center gap-2">
+              ${usesBadge}
+              <button data-action="fight-use" data-index="${index}" class="text-xs font-bold bg-teal-600 hover:bg-teal-500 text-white px-3 py-1.5 rounded border border-teal-500 transition-colors shadow-[0_0_8px_rgba(20,184,166,0.3)]">Użyj</button>
+            </div>
+            <span data-ap-err="${index}" class="hidden text-[10px] text-rose-400 font-semibold flex items-center gap-1"><span>⚡</span><span></span></span>
+          </div>
+        `;
+      }
     }
 
     return `
