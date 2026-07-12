@@ -3,6 +3,7 @@ export class FightComponent {
     this.containerId = containerId;
     this.characterData = null;
     this.weaponInputs = {};
+    this.openItemCards = new Set();
   }
 
   async init() {
@@ -199,6 +200,18 @@ export class FightComponent {
   bindDynamicActions() {
     const container = document.getElementById(this.containerId);
     
+    // Bind toggle events for accordions to persist open state
+    container.querySelectorAll('details[data-card-index]').forEach(el => {
+      el.addEventListener('toggle', (e) => {
+        const idx = parseInt(e.currentTarget.getAttribute('data-card-index'));
+        if (e.currentTarget.open) {
+          this.openItemCards.add(idx);
+        } else {
+          this.openItemCards.delete(idx);
+        }
+      });
+    });
+
     // Bind weapon inputs
     container.querySelectorAll('input[data-weapon-input]').forEach(input => {
       input.addEventListener('input', (e) => {
@@ -305,7 +318,48 @@ export class FightComponent {
     // Map internal location to human readable tag
     const locMap = { "EQUIPPED": "W Rękach", "BACKPACK": "Plecak (2 PA)", "BACK": "Plecy (1 PA)", "QUIVER": "Kołczan", "WAGON": "Wóz" };
     const locTag = locMap[item.location] || item.location;
-    const locBadge = `<span class="bg-indigo-900/50 text-indigo-300 text-[15px] px-1.5 py-0.5 rounded border border-indigo-500/50">[${locTag}]</span>`;
+    const locBadge = `<span class="bg-indigo-900/50 text-indigo-300 text-[10px] px-1.5 py-0.5 rounded border border-indigo-500/50 uppercase tracking-wider">${locTag}</span>`;
+
+    const usesBadge = (isConsumable && item.max_uses > 0)
+      ? `<span class="bg-teal-900/80 text-teal-300 text-[9px] px-1.5 py-0.5 rounded border border-teal-500/50">Użycia: ${item.current_uses}/${item.max_uses}</span>`
+      : '';
+
+    const spaceText = `<span class="text-gray-500 text-[9px]">Masa: ${item.space_taken}</span>`;
+
+    let modsHtml = "";
+    if (item.modifiers && item.modifiers.length > 0) {
+      modsHtml = `<div class="mt-1.5 flex flex-wrap gap-1">` +
+        item.modifiers.map(m => `<span class="bg-indigo-900/50 text-indigo-300 text-[9px] px-1.5 py-0.5 rounded border border-indigo-500/30">${m.stat_name}: ${m.value > 0 ? '+' + m.value : m.value}</span>`).join('') +
+        `</div>`;
+    }
+
+    // Handle generic properties
+    let propsHtml = '';
+    if (item.properties && Object.keys(item.properties).length > 0) {
+      const propItems = Object.entries(item.properties).map(([k, v]) => {
+        let valHtml = v;
+        if (typeof v === "string" && v.includes("||")) {
+          const parts = v.split("||").map(s => s.trim()).filter(s => s.length > 0);
+          valHtml = `<ul class="list-disc list-inside ml-1 block w-full mt-1 font-medium">${parts.map(p => `<li>${p}</li>`).join("")}</ul>`;
+        }
+        const formattedKey = k.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase());
+        return `
+          <div class="bg-black/50 px-3 py-2 rounded-lg border border-slate-700 flex flex-col items-start shadow-sm flex-1 min-w-[200px]">
+            <span class="text-slate-400 text-[10px] font-extrabold uppercase tracking-wide mb-1">${formattedKey}:</span>
+            <span class="font-bold text-white text-xs w-full">${valHtml}</span>
+          </div>
+        `;
+      }).join('');
+      
+      propsHtml = `
+        <div class="mt-3">
+          <h4 class="text-[11px] font-bold text-indigo-400 mb-2 uppercase tracking-wider">Właściwości</h4>
+          <div class="flex flex-wrap gap-2 w-full">
+            ${propItems}
+          </div>
+        </div>
+      `;
+    }
 
     // Actions if weapon
     let actionsHtml = '';
@@ -369,8 +423,8 @@ export class FightComponent {
       }
 
       actionsHtml = `
-        <div class="mt-3 border-t border-gray-600 pt-3">
-          <div class="flex items-center justify-between gap-2">
+        <div class="mt-2 pt-2 border-t border-gray-600">
+          <div class="flex items-center justify-between gap-2 mt-2">
             <label class="text-[10px] text-amber-400 font-bold uppercase tracking-wide">🎲 Wartość karty:</label>
             <input type="number" min="0" data-weapon-input="${index}" class="w-20 bg-gray-900 border border-amber-500/60 text-white text-sm text-center rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-amber-400 placeholder-gray-600 shadow-inner" value="${inputVal}" placeholder="np. 5">
           </div>
@@ -382,19 +436,13 @@ export class FightComponent {
     // Consumable specific UI
     let consHtml = '';
     if (isConsumable) {
-      const usesBadge = item.max_uses > 0
-        ? `<span class="bg-teal-900/80 text-teal-300 text-[9px] px-1.5 py-0.5 rounded border border-teal-500/50">Użycia: ${item.current_uses}/${item.max_uses}</span>`
-        : '';
-
       const isDynamic = item.consumable_effects && item.consumable_effects.dynamic_heal;
 
       if (isDynamic) {
-        // Inline dice-roll input — no browser prompt needed
         consHtml = `
-          <div class="mt-3 flex flex-col gap-2">
+          <div class="mt-3 flex flex-col gap-2 pt-3 border-t border-gray-600">
             <div class="flex items-center gap-1.5">
-              <span class="text-[10px] text-amber-400 font-bold uppercase tracking-wide">🎲 Wynik rzutu:</span>
-              ${usesBadge}
+              <span class="text-[10px] text-amber-400 font-bold uppercase tracking-wide">🎲 Wynik rzutu leczenia:</span>
             </div>
             <div class="flex items-center gap-2">
               <input
@@ -416,10 +464,9 @@ export class FightComponent {
         `;
       } else {
         consHtml = `
-          <div class="mt-3 flex flex-col gap-2">
-            <div class="flex justify-between items-center gap-2">
-              ${usesBadge}
-              <button data-action="fight-use" data-index="${index}" class="text-xs font-bold bg-teal-600 hover:bg-teal-500 text-white px-3 py-1.5 rounded border border-teal-500 transition-colors shadow-[0_0_8px_rgba(20,184,166,0.3)]">Użyj</button>
+          <div class="mt-3 flex flex-col gap-2 pt-3 border-t border-gray-600">
+            <div class="flex justify-end items-center gap-2">
+              <button data-action="fight-use" data-index="${index}" class="w-full text-xs font-bold bg-teal-600 hover:bg-teal-500 text-white px-3 py-1.5 rounded border border-teal-500 transition-colors shadow-[0_0_8px_rgba(20,184,166,0.3)]">Użyj przedmiotu</button>
             </div>
             <span data-ap-err="${index}" class="hidden text-[10px] text-rose-400 font-semibold flex items-center gap-1"><span>⚡</span><span></span></span>
           </div>
@@ -427,19 +474,31 @@ export class FightComponent {
       }
     }
 
+    const isOpen = this.openItemCards.has(index) ? 'open' : '';
+    const arrowIcon = `<svg class="w-4 h-4 text-gray-400 group-open:rotate-180 transition-transform mt-1 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>`;
+
     return `
-      <div class="bg-gray-700/30 rounded p-3 border border-gray-600 relative transition-colors">
-        <div class="flex justify-between items-start">
-          <h4 class="font-bold text-white leading-tight">${item.name}</h4>
-          ${locBadge}
+      <details data-card-index="${index}" ${isOpen} class="bg-gray-800 rounded border border-gray-700 mb-3 shadow-sm group">
+        <summary class="p-3 cursor-pointer select-none flex justify-between items-start hover:bg-gray-700/50 transition-colors list-none">
+          <div class="flex-1 pr-3">
+            <h4 class="font-bold text-white leading-tight">${item.name}</h4>
+            <div class="text-[10px] font-bold uppercase tracking-wider ${typeColor} mb-1 flex items-center flex-wrap gap-1 mt-0.5">
+                <span>${item.item_type}</span> <span class="text-gray-500">&bull;</span> ${spaceText} ${item.action_cost ? `<span class="text-gray-500">&bull;</span> <span class="bg-amber-900/60 text-amber-400 text-[9px] px-1.5 py-0.5 rounded border border-amber-500/50">Akcja: ${item.action_cost}</span>` : ''} ${usesBadge ? `<span class="text-gray-500">&bull;</span> ${usesBadge}` : ''}
+            </div>
+            ${modsHtml}
+          </div>
+          <div class="flex flex-col items-end shrink-0 gap-1 mt-0.5">
+            ${locBadge}
+            ${arrowIcon}
+          </div>
+        </summary>
+        <div class="p-3 border-t border-gray-700 bg-gray-800/50">
+          ${item.description ? `<p class="text-[11px] text-gray-400 italic mb-2 leading-snug">${item.description}</p>` : ''}
+          ${propsHtml}
+          ${actionsHtml}
+          ${consHtml}
         </div>
-        <div class="text-[10px] font-bold uppercase tracking-wider ${typeColor} mb-1">
-            ${item.item_type}
-        </div>
-        ${item.description ? `<p class="text-xs text-gray-400 italic mt-1">${item.description}</p>` : ''}
-        ${actionsHtml}
-        ${consHtml}
-      </div>
+      </details>
     `;
   }
 }

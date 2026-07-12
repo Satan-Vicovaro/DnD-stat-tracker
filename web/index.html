@@ -13,7 +13,7 @@
     class="bg-gray-900 text-gray-100 min-h-screen p-8 font-sans selection:bg-indigo-500/30"
   >
     <!-- ─── Toolbar ─────────────────────────────────────────────────── -->
-    <div class="sticky top-0 z-50 mb-6 max-w-7xl mx-auto">
+    <div class="sticky top-0 z-50 mb-6 w-3/4 mx-auto">
       <div
         class="bg-gray-800/80 backdrop-blur border border-gray-700 rounded-xl px-4 py-2.5 flex items-center gap-3 shadow-lg"
       >
@@ -101,7 +101,7 @@
     </div>
 
     <!-- ─── Tabs Navigation ─────────────────────────────────────────────────── -->
-    <div class="max-w-7xl mx-auto mb-8">
+    <div class="w-3/4 mx-auto mb-8">
       <nav
         class="flex space-x-4 border-b border-gray-700"
         aria-label="Tabs"
@@ -135,8 +135,8 @@
     </div>
 
     <!-- ─── Tab Content ─────────────────────────────────────────────────────── -->
-    <div id="tab-content-character" class="tab-pane max-w-7xl mx-auto block">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start mb-8">
+    <div id="tab-content-character" class="tab-pane w-3/4 mx-auto block">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start mb-8">
         <!-- Character View Component -->
         <div id="character-view-container">
           <div class="text-center text-gray-500 mt-20 animate-pulse">
@@ -150,19 +150,19 @@
             Ładowanie pancerza...
           </div>
         </div>
-      </div>
 
-      <!-- Status Effects Panel (full width below) -->
-      <div id="status-effects-view-container">
-        <div class="text-center text-gray-500 mt-4 animate-pulse">
-          Ładowanie statusów...
+        <!-- Status Effects Panel -->
+        <div id="status-effects-view-container">
+          <div class="text-center text-gray-500 mt-20 animate-pulse">
+            Ładowanie statusów...
+          </div>
         </div>
       </div>
     </div>
 
-    <div id="tab-content-items" class="tab-pane max-w-7xl mx-auto hidden">
+    <div id="tab-content-items" class="tab-pane w-3/4 mx-auto hidden">
       <!-- Economy View Component (Items) -->
-      <div class="max-w-5xl mx-auto mb-8">
+      <div class="w-full mx-auto mb-8">
         <div id="economy-view-container-items">
           <div class="text-center text-gray-500 mt-10 animate-pulse">
             Ładowanie finansów...
@@ -179,9 +179,9 @@
       </div>
     </div>
 
-    <div id="tab-content-shop" class="tab-pane max-w-7xl mx-auto hidden">
+    <div id="tab-content-shop" class="tab-pane w-3/4 mx-auto hidden">
       <!-- Economy View Component (Shop) -->
-      <div class="max-w-5xl mx-auto mb-8">
+      <div class="w-full mx-auto mb-8">
         <div id="economy-view-container-shop">
           <div class="text-center text-gray-500 mt-10 animate-pulse">
             Ładowanie finansów...
@@ -198,7 +198,7 @@
       </div>
     </div>
 
-    <div id="tab-content-fight" class="tab-pane max-w-7xl mx-auto hidden">
+    <div id="tab-content-fight" class="tab-pane w-3/4 mx-auto hidden">
       <div id="fight-view-container">
         <div class="text-center text-gray-500 mt-20 animate-pulse">
           Ładowanie walki...

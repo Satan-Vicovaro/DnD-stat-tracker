@@ -229,7 +229,7 @@ export class ShopComponent {
         const purchaseData = {
           // 'name' is guaranteed by backend normalisation in get_shop_data()
           name: itemData.name || "Przedmiot",
-          description: "Ze sklepu.",
+          description: itemData.description || "Ze sklepu.",
           space_taken: itemData.space_taken || 0.0,
           cost_silver: itemData.cost_silver,
           item_type:
@@ -246,6 +246,7 @@ export class ShopComponent {
           consumable_effects: itemData.consumable_effects || {},
           max_uses: itemData.max_uses ?? 1,
           current_uses: itemData.current_uses ?? 1,
+          action_cost: itemData.action_cost || "",
         };
 
         if (window.paymentModal) {

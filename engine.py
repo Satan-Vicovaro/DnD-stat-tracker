@@ -772,6 +772,16 @@ class GameEngine:
                     shop_data[category] = []
             else:
                 shop_data[category] = []
+
+        # Separate ammunition into its own category
+        if "Broń zasięgowa" in shop_data:
+            bron = shop_data["Broń zasięgowa"]
+            amunicja = [item for item in bron if not item.get("actions")]
+            bronie_wlasciwe = [item for item in bron if item.get("actions")]
+            shop_data["Broń zasięgowa"] = bronie_wlasciwe
+            if amunicja:
+                shop_data["Amunicja"] = amunicja
+
         return shop_data
 
 

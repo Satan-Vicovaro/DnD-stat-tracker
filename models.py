@@ -167,6 +167,8 @@ class Item:
     consumable_effects: Dict[str, any] = field(default_factory=dict)
     max_uses: int = 1
     current_uses: int = 1
+    action_cost: str = ""
+    properties: Dict[str, any] = field(default_factory=dict)
     # Stable identifier that survives deep-copies and save/load cycles.
     # Must NOT be compared with Python's id() which is address-based.
     item_id: str = field(default_factory=lambda: str(uuid.uuid4()))
