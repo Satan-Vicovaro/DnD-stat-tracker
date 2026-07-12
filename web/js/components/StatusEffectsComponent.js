@@ -266,8 +266,9 @@ export class StatusEffectsComponent {
       ].join(' ');
 
       const modSummary = (se.modifiers || []).map(m => {
-        const sign = m.value >= 0 ? '+' : '';
-        return `${this._statLabel(m.stat_name)} ${sign}${m.value}`;
+        const isMult = m.mod_type === 'MULT';
+        const prefix = isMult ? 'x' : (m.value >= 0 ? '+' : '');
+        return `${this._statLabel(m.stat_name)} ${prefix}${m.value}`;
       }).join(' · ') || 'Brak modyfikatorów';
 
       li.innerHTML = `

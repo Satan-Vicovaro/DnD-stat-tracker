@@ -23,6 +23,13 @@ def update_name(new_name: str):
     return game_engine.get_character_view_model()
 
 @eel.expose
+def update_notes(notes: str):
+    """API endpoint to update character notes."""
+    game_engine.update_notes(notes)
+    game_engine.save()
+    return game_engine.get_character_view_model()
+
+@eel.expose
 def modify_stat(stat_name: str, delta: int):
     """API endpoint to modify a base stat."""
     if game_engine.modify_stat(stat_name, delta):

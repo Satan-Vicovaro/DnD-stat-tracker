@@ -235,6 +235,7 @@ def serialize(hero: Character) -> dict:
         # Identity
         "name": hero.name,
         "level": hero.level,
+        "notes": hero.notes,
         # Base stats
         "base_str": hero.stats.base_str,
         "base_dex": hero.stats.base_dex,
@@ -289,6 +290,8 @@ def serialize(hero: Character) -> dict:
 def deserialize(data: dict) -> Character:
     """Reconstruct a Character object from a save dict."""
     hero = Character(name=data["name"], level=data["level"])
+
+    hero.notes = data.get("notes", "")
 
     # Base stats
     hero.stats.base_str = data.get("base_str", 0)

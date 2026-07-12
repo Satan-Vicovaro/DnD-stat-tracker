@@ -8,6 +8,7 @@ import { InventoryComponent } from './components/InventoryComponent.js';
 import { SaveLoadModal } from './components/SaveLoadModal.js';
 import { FightComponent } from './components/FightComponent.js';
 import { StatusEffectsComponent } from './components/StatusEffectsComponent.js';
+import { NotesComponent } from './components/NotesComponent.js';
 
 // ─── Undo / Redo Manager ─────────────────────────────────────────────────────
 
@@ -99,6 +100,10 @@ window.onload = async () => {
     // Initialize the Shop View Component
     const shopView = new ShopComponent("shop-view-container");
     shopView.init();
+
+    // Initialize the Notes View Component
+    const notesView = new NotesComponent("notes-view-container");
+    notesView.init();
 
     // ─── Undo / Redo wiring ───────────────────────────────────────────────────
     const undoManager = new UndoManager();

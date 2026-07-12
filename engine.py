@@ -293,6 +293,7 @@ class GameEngine:
         view_model = {
             "name": self.hero.name,
             "level": self.hero.level,
+            "notes": self.hero.notes,
             "unspent_stat_points": self.hero.unspent_stat_points,
             "hp": self.hero.current_hp,
             "health_split": health_split,
@@ -568,6 +569,11 @@ class GameEngine:
         self.hero.name = new_name
         logger.info(f"Hero name updated to: {new_name}")
 
+    def update_notes(self, new_notes: str):
+        self._snapshot()
+        self.hero.notes = new_notes
+        logger.info("Hero notes updated.")
+
     def modify_level(self, delta: int) -> bool:
         if self.hero.level + delta < 1:
             return False
@@ -694,15 +700,20 @@ class GameEngine:
             hp_per_frag = t.effects.get("hp_per_fragment", 0.0)
             max_hp = t.quantity * hp_per_frag
 
-            if hp_per_frag > 0:
-                broken = int(damage_left // hp_per_frag)
+            if damage_left >= max_hp:
+                broken = t.quantity
+                damage_left -= max_hp
             else:
-                broken = 0
+                if hp_per_frag > 0:
+                    broken = int(damage_left // hp_per_frag)
+                else:
+                    broken = 0
+                damage_left = 0
+
             intact = t.quantity - broken
             mitigation += intact * _MIT_PER_FRAG.get(name, 0)
             # half mitigation from broken ones
-            mitigation += broken * _MIT_PER_FRAG.get(name, 0) // 2
-            damage_left = 0
+            mitigation += broken * (_MIT_PER_FRAG.get(name, 0) // 2)
 
         return mitigation
 

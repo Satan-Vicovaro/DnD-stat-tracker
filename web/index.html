@@ -8,6 +8,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Include Eel JS bridge -->
     <script type="text/javascript" src="/eel.js"></script>
+    <!-- Include EasyMDE -->
+    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+    <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
   </head>
   <body
     class="bg-gray-900 text-gray-100 min-h-screen p-8 font-sans selection:bg-indigo-500/30"
@@ -131,6 +134,12 @@
         >
           Walka
         </button>
+        <button
+          data-target="tab-content-notes"
+          class="tab-btn bg-transparent text-gray-400 hover:text-gray-300 hover:bg-gray-800/50 px-4 py-2 rounded-t-lg font-semibold focus:outline-none transition-colors flex items-center gap-2"
+        >
+          Notatki
+        </button>
       </nav>
     </div>
 
@@ -203,6 +212,12 @@
         <div class="text-center text-gray-500 mt-20 animate-pulse">
           Ładowanie walki...
         </div>
+      </div>
+    </div>
+
+    <div id="tab-content-notes" class="tab-pane w-3/4 mx-auto hidden">
+      <div id="notes-view-container">
+        <!-- Notes component will be loaded here -->
       </div>
     </div>
 

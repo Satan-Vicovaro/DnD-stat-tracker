@@ -38,7 +38,7 @@ export class ItemEditorModal {
     document.getElementById('btn-add-action').addEventListener('click', () => {
       this.actions.push({
         action_name: 'Nowa Akcja', action_cost: 1, card_value: 0,
-        range_str: '', hit_roll: '', damage_roll: '', description: ''
+        range_str: '', hit_roll: '', damage_roll: '', description: '', targets: '', turn_execution: ''
       });
       this.renderActions();
     });
@@ -239,6 +239,16 @@ export class ItemEditorModal {
           <div class="flex flex-col">
             <label class="text-[10px] text-rose-400 uppercase font-bold">Dmg Roll</label>
             <input type="text" class="act-val bg-gray-700 text-white text-xs rounded px-2 py-1 outline-none border border-transparent" data-idx="${i}" data-field="damage_roll" value="${act.damage_roll || ''}">
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2 mb-2">
+          <div class="flex flex-col">
+            <label class="text-[10px] text-indigo-300 uppercase font-bold">Cel</label>
+            <input type="text" class="act-val bg-gray-700 text-white text-xs rounded px-2 py-1 outline-none border border-transparent" data-idx="${i}" data-field="targets" value="${act.targets || ''}">
+          </div>
+          <div class="flex flex-col">
+            <label class="text-[10px] text-teal-300 uppercase font-bold">Tura</label>
+            <input type="text" class="act-val bg-gray-700 text-white text-xs rounded px-2 py-1 outline-none border border-transparent" data-idx="${i}" data-field="turn_execution" value="${act.turn_execution || ''}">
           </div>
         </div>
         <div class="flex flex-col">

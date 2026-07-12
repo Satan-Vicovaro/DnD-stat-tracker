@@ -49,10 +49,15 @@ class StatManager:
             )
 
         aggregated = {}
+        mult_mods = []
         for mod in modifiers:
-            if mod.source not in aggregated:
-                aggregated[mod.source] = 0.0
-            aggregated[mod.source] += mod.value
+            mod_type = getattr(mod, "mod_type", "ADD")
+            if mod_type == "MULT":
+                mult_mods.append(mod)
+            else:
+                if mod.source not in aggregated:
+                    aggregated[mod.source] = 0.0
+                aggregated[mod.source] += mod.value
 
         breakdown = [
             {"source": source, "value": round(val, 2)}
@@ -61,6 +66,16 @@ class StatManager:
         ]
 
         total = base_value + sum(item["value"] for item in breakdown)
+        
+        for mod in mult_mods:
+            new_total = total * mod.value
+            bonus = new_total - total
+            total = new_total
+            if round(bonus, 2) != 0:
+                breakdown.append({
+                    "source": f"{mod.source} (x{mod.value})", 
+                    "value": round(bonus, 2)
+                })
 
         return {"total": round(total, 2) if total % 1 != 0 else int(total), "breakdown": breakdown}
 
@@ -306,6 +321,8 @@ class Character:
 
         # Inventory
         self.inventory: List[Item] = []
+
+        self.notes: str = ""
 
         self.base_movement: int = 30
 

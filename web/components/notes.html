@@ -1,0 +1,48 @@
+<style>
+  /* EasyMDE Dark Mode Overrides */
+  .editor-toolbar {
+    border-color: #374151 !important;
+    background-color: #1f2937 !important;
+    border-top-left-radius: 0.5rem !important;
+    border-top-right-radius: 0.5rem !important;
+  }
+  .editor-toolbar button {
+    color: #9ca3af !important;
+  }
+  .editor-toolbar button:hover, .editor-toolbar button.active {
+    background-color: #374151 !important;
+    color: #f3f4f6 !important;
+  }
+  .editor-toolbar i.separator {
+    border-left-color: #374151 !important;
+    border-right-color: #374151 !important;
+  }
+  .CodeMirror {
+    background-color: #111827 !important;
+    color: #f3f4f6 !important;
+    border-color: #374151 !important;
+    border-bottom-left-radius: 0.5rem !important;
+    border-bottom-right-radius: 0.5rem !important;
+    font-family: inherit !important;
+  }
+  .CodeMirror-cursor {
+    border-left-color: #f3f4f6 !important;
+  }
+  .editor-preview {
+    background-color: #111827 !important;
+    color: #f3f4f6 !important;
+  }
+</style>
+
+<div class="bg-gray-800 p-6 rounded-lg shadow-lg border border-gray-700 w-full mb-6 relative">
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-2xl font-bold text-gray-100 flex items-center gap-2">
+      <i class="fas fa-book-open text-blue-500"></i> Notatki
+    </h2>
+    <span id="notes-save-status" class="text-sm text-gray-400 opacity-0 transition-opacity duration-300">Zapisano</span>
+  </div>
+
+  <div class="bg-gray-900 rounded-lg p-2 border border-gray-700">
+    <textarea id="notes-editor"></textarea>
+  </div>
+</div>

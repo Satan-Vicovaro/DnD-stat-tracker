@@ -92,7 +92,7 @@ export class ShopComponent {
                     if (parts.length === 1) {
                       descHtml = parts[0];
                     } else {
-                      descHtml = `<ul class="list-disc list-inside space-y-1 ml-1">${parts.map((p) => `<li>${p}</li>`).join("")}</ul>`;
+                      descHtml = `<ul class="list-disc list-outside space-y-1 ml-5">${parts.map((p) => `<li>${p}</li>`).join("")}</ul>`;
                     }
                   }
 
@@ -107,6 +107,8 @@ export class ShopComponent {
                     <span class="bg-slate-800/80 px-2.5 py-1 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[10px] font-extrabold mr-1.5">Zas:</span> <span class="font-bold text-white text-sm">${act.range || act.range_str || "-"}</span></span>
                     <span class="bg-slate-800/80 px-2.5 py-1 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[10px] font-extrabold mr-1.5">Hit:</span> <span class="font-bold text-amber-400 text-sm">${act.hit_roll || "-"}</span></span>
                     <span class="bg-slate-800/80 px-2.5 py-1 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[10px] font-extrabold mr-1.5">Dmg:</span> <span class="font-bold text-rose-400 text-sm">${act.damage_roll || "-"}</span></span>
+                    ${act.targets ? `<span class="bg-slate-800/80 px-2.5 py-1 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[10px] font-extrabold mr-1.5">Cel:</span> <span class="font-bold text-indigo-300 text-sm">${act.targets}</span></span>` : ''}
+                    ${act.turn_execution ? `<span class="bg-slate-800/80 px-2.5 py-1 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[10px] font-extrabold mr-1.5">Tura:</span> <span class="font-bold text-teal-300 text-sm">${act.turn_execution}</span></span>` : ''}
                   </div>
                   <div class="text-slate-100 italic text-sm leading-relaxed border-t border-slate-600/50 pt-3 mt-1 font-medium">${descHtml}</div>
                 </div>
@@ -161,7 +163,7 @@ export class ShopComponent {
                       .split("||")
                       .map((s) => s.trim())
                       .filter((s) => s.length > 0);
-                    valHtml = `<ul class="list-disc list-inside ml-1 block w-full mt-1 font-medium">${parts.map((p) => `<li>${p}</li>`).join("")}</ul>`;
+                    valHtml = `<ul class="list-disc list-outside ml-5 block w-full mt-1 font-medium">${parts.map((p) => `<li>${p}</li>`).join("")}</ul>`;
                   }
 
                   return `
