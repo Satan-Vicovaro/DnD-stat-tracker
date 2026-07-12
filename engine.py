@@ -19,12 +19,8 @@ def get_data_path(relative_path: str) -> str:
     return os.path.join(base_path, relative_path)
 
 def get_resource_path(relative_path: str) -> str:
-    """Return the path for bundled static resources (config), which might be in PyInstaller's temp dir."""
-    if hasattr(sys, '_MEIPASS'):
-        base_path = sys._MEIPASS
-    else:
-        base_path = os.path.abspath(".")
-    return os.path.join(base_path, relative_path)
+    """Return the path for external static resources (config), which lives next to the executable."""
+    return get_data_path(relative_path)
 
 _AUTOSAVE_PATH = get_data_path("data/quick_save.json")
 _SAVES_DIR = get_data_path("data/saves")

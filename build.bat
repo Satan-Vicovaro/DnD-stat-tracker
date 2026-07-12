@@ -2,14 +2,16 @@
 :: build.bat - Windows build script
 
 echo Installing packaging dependencies...
-:: Ensure setuptools is installed (often missing in newer venvs, causing pkg_resources errors)
-pip install setuptools pyinstaller eel
+pip install pyinstaller eel
 
 echo Building GieraKajzera for Windows...
-:: Note: eel automatically bundles the 'web' folder.
-:: We manually bundle the 'config' folder using PyInstaller's --add-data flag.
-:: Windows uses semicolon (;) as the separator for --add-data
-python -m eel main.py web --onefile --noconsole --name "GieraKajzera" --add-data "config/shop;config/shop"
+:: We use pyinstaller directly instead of python -m eel to avoid the pkg_resources bug in eel.
+:: We bundle only the 'web' folder, NOT the config folder.
+python -m PyInstaller main.py --onefile --noconsole --name "GieraKajzera" ^
+  --add-data "web;web"
 
-echo Build complete. Check the 'dist' folder for your executable.
+echo Copying config folder to dist...
+xcopy config dist\config /E /I /Y
+
+echo Build complete. Your executable and config folder are in 'dist/'.
 pause

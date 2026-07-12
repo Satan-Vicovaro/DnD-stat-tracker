@@ -3,3 +3,5 @@ __pycache__
 .idea
 quick_save.json
 saves
+build
+dist
