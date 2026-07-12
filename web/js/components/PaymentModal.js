@@ -60,6 +60,8 @@ export class PaymentModal {
     document.getElementById('payment-input-gold').value = 0;
     document.getElementById('payment-input-silver').value = 0;
     document.getElementById('payment-input-copper').value = 0;
+    const qtyInput = document.getElementById('payment-input-quantity');
+    if (qtyInput) qtyInput.value = 1;
 
     this.updateBalances();
     this.validate();
@@ -123,6 +125,10 @@ export class PaymentModal {
       copper: parseInt(document.getElementById('payment-input-copper').value) || 0
     };
 
+    let quantity = 1;
+    const qtyInput = document.getElementById('payment-input-quantity');
+    if (qtyInput) quantity = parseInt(qtyInput.value) || 1;
+
     if (this.onConfirmCallback) {
       // Show loading state
       const btn = document.getElementById('payment-btn-confirm');
@@ -130,7 +136,7 @@ export class PaymentModal {
       btn.innerText = "Przetwarzanie...";
       btn.disabled = true;
 
-      await this.onConfirmCallback(this.itemData, payment);
+      await this.onConfirmCallback(this.itemData, payment, quantity);
 
       btn.innerText = originalText;
       btn.disabled = false;

@@ -1,7 +1,7 @@
 <div id="item-editor-modal-backdrop"
   class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300 overflow-y-auto py-10">
   <div
-    class="bg-gray-800 rounded-xl shadow-2xl border border-indigo-500/50 w-full max-w-2xl p-6 transform scale-95 transition-transform duration-300 relative my-auto"
+    class="bg-gray-800 rounded-xl shadow-2xl border border-indigo-500/50 w-full max-w-4xl p-6 transform scale-95 transition-transform duration-300 relative my-auto"
     id="item-editor-modal-content">
 
     <div class="flex justify-between items-start mb-6 border-b border-gray-700 pb-4">
@@ -45,6 +45,11 @@
           <div class="col-span-2 md:col-span-1">
             <label class="block text-gray-400 text-xs font-bold mb-1">Zajmowane Miejsce</label>
             <input type="number" id="item-editor-space" step="0.5" min="0"
+              class="w-full bg-gray-800 border border-gray-600 text-white rounded px-3 py-2 focus:outline-none focus:border-indigo-500">
+          </div>
+          <div class="col-span-2 md:col-span-1">
+            <label class="block text-gray-400 text-xs font-bold mb-1">Ilość w stosie</label>
+            <input type="number" id="item-editor-quantity" min="1" value="1"
               class="w-full bg-gray-800 border border-gray-600 text-white rounded px-3 py-2 focus:outline-none focus:border-indigo-500">
           </div>
         </div>

@@ -13,6 +13,20 @@
 
     <div class="space-y-4 my-6">
       
+      <!-- Quantity Input -->
+      <div class="flex items-center justify-between bg-gray-900 p-3 rounded border border-gray-700 mb-2">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center border border-indigo-500/50">
+            <svg class="w-4 h-4 text-indigo-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/></svg>
+          </div>
+          <div>
+            <div class="text-indigo-400 font-bold uppercase text-sm">Ilość</div>
+            <div class="text-xs text-gray-500">Sztuk do kupienia</div>
+          </div>
+        </div>
+        <input type="number" id="payment-input-quantity" min="1" value="1" class="w-20 bg-gray-800 border-b-2 border-gray-600 focus:border-indigo-500 focus:outline-none text-center text-xl font-bold text-white [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+      </div>
+
       <!-- Gold Input -->
       <div class="flex items-center justify-between bg-gray-900 p-3 rounded border border-gray-700">
         <div class="flex items-center gap-3">

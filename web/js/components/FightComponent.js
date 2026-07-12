@@ -481,7 +481,7 @@ export class FightComponent {
       <details data-card-index="${index}" ${isOpen} class="bg-gray-800 rounded border border-gray-700 mb-3 shadow-sm group">
         <summary class="p-3 cursor-pointer select-none flex justify-between items-start hover:bg-gray-700/50 transition-colors list-none">
           <div class="flex-1 pr-3">
-            <h4 class="font-bold text-white leading-tight">${item.name}</h4>
+            <h4 class="font-bold text-white leading-tight">${item.name}${item.quantity > 1 ? ` <span class="text-indigo-400 font-bold ml-1 text-sm">(x${item.quantity})</span>` : ''}</h4>
             <div class="text-[10px] font-bold uppercase tracking-wider ${typeColor} mb-1 flex items-center flex-wrap gap-1 mt-0.5">
                 <span>${item.item_type}</span> <span class="text-gray-500">&bull;</span> ${spaceText} ${item.action_cost ? `<span class="text-gray-500">&bull;</span> <span class="bg-amber-900/60 text-amber-400 text-[9px] px-1.5 py-0.5 rounded border border-amber-500/50">Akcja: ${item.action_cost}</span>` : ''} ${usesBadge ? `<span class="text-gray-500">&bull;</span> ${usesBadge}` : ''}
             </div>

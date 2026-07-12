@@ -250,8 +250,8 @@ export class ShopComponent {
         };
 
         if (window.paymentModal) {
-          window.paymentModal.open(purchaseData, async (data, payment) => {
-            const result = await eel.add_item_to_inventory(data, payment)();
+          window.paymentModal.open(purchaseData, async (data, payment, quantity) => {
+            const result = await eel.add_item_to_inventory(data, payment, quantity)();
             document.dispatchEvent(
               new CustomEvent("characterUpdated", { detail: result }),
             );

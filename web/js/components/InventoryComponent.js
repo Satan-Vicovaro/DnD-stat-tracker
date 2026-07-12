@@ -141,37 +141,35 @@ export class InventoryComponent {
     const showQuiverOption = this.characterData.inventory_space?.quiver?.visible || item.location === "QUIVER" || nameLower === "kołczan" || nameLower === "kolczan";
 
     return `
-      <div class="bg-gray-800 rounded p-3 border ${borderClass} relative group/card transition-colors">
-        <div class="flex justify-between items-start">
-          <div class="flex-1 pr-2">
-            <h4 class="font-bold text-white leading-tight">${item.name}</h4>
-            <div class="text-[10px] font-bold uppercase tracking-wider ${typeColor} mb-1 flex items-center flex-wrap gap-1">
+      <div class="bg-gray-800 rounded p-3 border ${borderClass} transition-colors">
+        <div class="flex justify-between items-start gap-4">
+          <!-- Left side: info -->
+          <div class="flex-1 min-w-0 pr-2">
+            <h4 class="font-bold text-white leading-tight">${item.name}${item.quantity > 1 ? ` <span class="text-indigo-400 font-bold ml-1 text-sm">(x${item.quantity})</span>` : ''}</h4>
+            <div class="text-[10px] font-bold uppercase tracking-wider ${typeColor} mb-1 flex items-center flex-wrap gap-1 mt-1">
                 <span>${item.item_type}</span> <span class="text-gray-500">&bull;</span> ${spaceText} ${activeBadge} ${usesBadge}
             </div>
-            ${item.description ? `<p class="text-xs text-gray-400 italic mt-1 line-clamp-2">${item.description}</p>` : ''}
+            ${item.description ? `<p class="text-[11px] text-gray-400 italic mt-1.5 leading-snug">${item.description}</p>` : ''}
             ${modsHtml}
           </div>
-        </div>
-        
-        <!-- Hover actions overlay -->
-        <div class="absolute inset-0 bg-gray-900/95 rounded flex flex-col justify-center items-center opacity-0 group-hover/card:opacity-100 transition-opacity p-2 gap-2 z-10">
           
-          <select data-action="move" data-index="${index}" class="bg-gray-800 text-xs text-white border border-gray-600 rounded px-2 py-1 focus:outline-none w-full max-w-[150px]">
-            <option value="EQUIPPED" ${item.location === "EQUIPPED" ? "selected" : ""}>Podręczne</option>
-            <option value="BACKPACK" ${item.location === "BACKPACK" ? "selected" : ""}>Plecak</option>
-            <option value="BACK" ${item.location === "BACK" ? "selected" : ""}>Plecy</option>
-            ${showQuiverOption ? `<option value="QUIVER" ${item.location === "QUIVER" ? "selected" : ""}>Kołczan</option>` : ''}
-            <option value="WAGON" ${item.location === "WAGON" ? "selected" : ""}>Wóz</option>
-          </select>
-          
-          <div class="flex flex-col gap-2 w-full max-w-[150px]">
-            ${hasConsumable ? `<button data-action="use" data-index="${index}" class="text-xs font-bold bg-teal-600 hover:bg-teal-500 text-white px-2 py-1.5 rounded w-full border border-teal-500 transition-colors shadow-[0_0_8px_rgba(20,184,166,0.3)]">Użyj</button>` : ''}
-            <div class="flex gap-2 w-full justify-between">
-              <button data-action="edit" data-index="${index}" class="text-xs bg-indigo-600 hover:bg-indigo-500 text-white px-2 py-1 rounded w-full border border-indigo-500 transition-colors">Edytuj</button>
-              <button data-action="drop" data-index="${index}" class="text-xs bg-red-900/60 hover:bg-red-800 text-red-200 px-2 py-1 rounded w-full border border-red-700 transition-colors">Wyrzuć</button>
+          <!-- Right side: actions -->
+          <div class="flex flex-col items-stretch justify-start gap-2 shrink-0 w-[140px] bg-gray-900/40 p-2 rounded border border-gray-700/50">
+            <select data-action="move" data-index="${index}" class="bg-gray-800 text-[10px] text-white border border-gray-600 rounded px-1.5 py-1 focus:outline-none w-full font-semibold cursor-pointer">
+              <option value="EQUIPPED" ${item.location === "EQUIPPED" ? "selected" : ""}>Podręczne</option>
+              <option value="BACKPACK" ${item.location === "BACKPACK" ? "selected" : ""}>Plecak</option>
+              <option value="BACK" ${item.location === "BACK" ? "selected" : ""}>Plecy</option>
+              ${showQuiverOption ? `<option value="QUIVER" ${item.location === "QUIVER" ? "selected" : ""}>Kołczan</option>` : ''}
+              <option value="WAGON" ${item.location === "WAGON" ? "selected" : ""}>Wóz</option>
+            </select>
+            
+            ${hasConsumable ? `<button data-action="use" data-index="${index}" class="text-[10px] font-bold bg-teal-600 hover:bg-teal-500 text-white px-2 py-1.5 rounded w-full border border-teal-500 transition-colors shadow-sm">Użyj przedmiotu</button>` : ''}
+            
+            <div class="flex gap-1 w-full justify-between mt-0.5 pt-1.5 border-t border-gray-700/50">
+              <button data-action="edit" data-index="${index}" class="flex-1 text-[10px] font-bold bg-indigo-600 hover:bg-indigo-500 text-white px-1 py-1 rounded border border-indigo-500 transition-colors">Edytuj</button>
+              <button data-action="drop" data-index="${index}" class="flex-1 text-[10px] font-bold bg-red-900/60 hover:bg-red-800 text-red-200 px-1 py-1 rounded border border-red-700 transition-colors">Wyrzuć</button>
             </div>
           </div>
-
         </div>
       </div>
     `;

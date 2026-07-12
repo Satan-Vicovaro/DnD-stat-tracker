@@ -357,7 +357,7 @@ class GameEngine:
     # Mutations
     # ------------------------------------------------------------------
 
-    def add_item_to_inventory(self, item_dict: dict, payment: dict) -> bool:
+    def add_item_to_inventory(self, item_dict: dict, payment: dict, quantity: int = 1) -> bool:
         """Validate payment, deduct it, and add the item to inventory."""
         gold_cost = int(payment.get("gold", 0))
         silver_cost = int(payment.get("silver", 0))
@@ -376,14 +376,41 @@ class GameEngine:
         self.hero.silver -= silver_cost
         self.hero.copper -= copper_cost
 
+        # Try to stack with an existing item of the same name
+        for item in self.hero.inventory:
+            if item.name == item_dict.get("name"):
+                item.quantity += quantity
+                logger.info(f"Stacked {quantity} of {item.name} to existing stack.")
+                return True
+
         item = build_item(item_dict)
+        item.quantity = quantity
         self.hero.inventory.append(item)
-        logger.info(f"Added item {item.name} to inventory at {item.location}.")
+        logger.info(f"Added item {item.name} (x{quantity}) to inventory at {item.location}.")
         return True
 
     def edit_inventory_item(self, index: int, item_dict: dict) -> bool:
         if index < 0 or index >= len(self.hero.inventory):
             return False
+            
+        old_item = self.hero.inventory[index]
+        old_loc = old_item.location
+        new_loc = item_dict.get("location")
+        
+        # Check if the item is being moved to a different location
+        if new_loc:
+            old_loc_str = old_loc.value if hasattr(old_loc, 'value') else old_loc
+            if new_loc != old_loc_str:
+                ap_cost = 0
+                if old_loc_str == "BACKPACK":
+                    ap_cost = 2
+                elif old_loc_str == "BACK":
+                    ap_cost = 1
+                    
+                if ap_cost > 0:
+                    self.hero.current_action_points -= ap_cost
+                    logger.info(f"Moved item from {old_loc_str} to {new_loc}. Deducted {ap_cost} AP.")
+
         self._snapshot()
         old_item = self.hero.inventory.pop(index)
         item = build_item(item_dict, fallback=old_item)
@@ -448,11 +475,30 @@ class GameEngine:
 
         item.current_uses -= 1
         if item.current_uses <= 0:
-            self.hero.inventory.pop(index)
-            logger.info(f"Item {item.name} consumed and removed.")
+            if getattr(item, "quantity", 1) > 1:
+                item.quantity -= 1
+                item.current_uses = item.max_uses
+                logger.info(f"Item {item.name} stack decremented to {item.quantity}. Uses reset to {item.max_uses}.")
+            else:
+                self.hero.inventory.pop(index)
+                logger.info(f"Item {item.name} consumed and removed.")
         else:
             logger.info(f"Item {item.name} used. {item.current_uses}/{item.max_uses} uses left.")
 
+        return True
+
+    def modify_item_quantity(self, index: int, delta: int) -> bool:
+        if index < 0 or index >= len(self.hero.inventory):
+            return False
+        
+        item = self.hero.inventory[index]
+        self._snapshot()
+        if item.quantity + delta <= 0:
+            self.hero.inventory.pop(index)
+            logger.info(f"Item {item.name} removed (quantity reached 0).")
+        else:
+            item.quantity += delta
+            logger.info(f"Item {item.name} quantity changed by {delta} to {item.quantity}.")
         return True
 
     def modify_armor_quantity(self, armor_name: str, delta: int) -> bool:

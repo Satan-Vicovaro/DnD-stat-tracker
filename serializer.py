@@ -90,6 +90,7 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
     max_uses = item_dict.get("max_uses", fb_max_uses)
     current_uses = item_dict.get("current_uses", fb_current_uses)
     action_cost = item_dict.get("action_cost", fb_action_cost)
+    quantity = item_dict.get("quantity", fallback.quantity if fallback else 1)
     item_id = item_dict.get("item_id", fb_item_id)
     
     # Collect arbitrary properties from the shop JSON
@@ -99,7 +100,7 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
     else:
         exclude_keys = {
             "name", "description", "space_taken", "location", "modifiers", "item_type",
-            "consumable_effects", "max_uses", "current_uses", "action_cost", "item_id",
+            "consumable_effects", "max_uses", "current_uses", "action_cost", "quantity", "item_id",
             "actions", "effect_value", "uses_durability", "cost_type",
             "weapon_name", "item_name", "tarcza", "zbroja", "cost_silver", "quantity_or_cost"
         }
@@ -133,6 +134,7 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
             current_uses=current_uses,
             action_cost=action_cost,
             properties=properties,
+            quantity=quantity,
             item_id=item_id,
             actions=actions,
         )
@@ -149,6 +151,7 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
             current_uses=current_uses,
             action_cost=action_cost,
             properties=properties,
+            quantity=quantity,
             item_id=item_id,
             effect_value=item_dict.get("effect_value", getattr(fallback, "effect_value", "")),
             uses_durability=item_dict.get(
@@ -169,6 +172,7 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
         current_uses=current_uses,
         action_cost=action_cost,
         properties=properties,
+        quantity=quantity,
         item_id=item_id,
     )
 
@@ -202,6 +206,7 @@ def serialize(hero: Character) -> dict:
             "max_uses": item.max_uses,
             "current_uses": item.current_uses,
             "action_cost": item.action_cost,
+            "quantity": item.quantity,
             "properties": item.properties,
         }
         if isinstance(item, Weapon):

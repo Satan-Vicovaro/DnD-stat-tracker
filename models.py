@@ -169,6 +169,7 @@ class Item:
     current_uses: int = 1
     action_cost: str = ""
     properties: Dict[str, any] = field(default_factory=dict)
+    quantity: int = 1
     # Stable identifier that survives deep-copies and save/load cycles.
     # Must NOT be compared with Python's id() which is address-based.
     item_id: str = field(default_factory=lambda: str(uuid.uuid4()))
@@ -429,14 +430,16 @@ class Character:
             if item.item_id in exempt_ids:
                 continue
 
+            item_total_space = item.space_taken * item.quantity
+
             if item.location == ItemLocation.EQUIPPED:
-                used_quick += item.space_taken
+                used_quick += item_total_space
             elif item.location == ItemLocation.BACKPACK:
-                used_backpack += item.space_taken
+                used_backpack += item_total_space
             elif item.location == ItemLocation.BACK:
-                used_back += item.space_taken
+                used_back += item_total_space
             elif item.location == ItemLocation.QUIVER:
-                used_quiver += item.space_taken
+                used_quiver += item_total_space
 
         # Coin weight: Złote*0.005 + Srebrne*0.004 + Miedziane*0.01
         used_backpack += (self.gold * 0.005) + (self.silver * 0.004) + (self.copper * 0.01)

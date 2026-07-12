@@ -94,6 +94,9 @@ export class ItemEditorModal {
     document.getElementById('item-editor-type').value = "Misc";
     document.getElementById('item-editor-desc').value = "";
     document.getElementById('item-editor-space').value = "0";
+    if(document.getElementById('item-editor-quantity')) {
+      document.getElementById('item-editor-quantity').value = "1";
+    }
     document.getElementById('item-editor-actions-section').classList.add('hidden');
     document.getElementById('item-editor-armor-section').classList.add('hidden');
     document.getElementById('item-editor-armor-effect').value = "";
@@ -135,6 +138,9 @@ export class ItemEditorModal {
     document.getElementById('item-editor-type').value = itemData.item_type || "Misc";
     document.getElementById('item-editor-desc').value = itemData.description || "";
     document.getElementById('item-editor-space').value = itemData.space_taken || "0";
+    if(document.getElementById('item-editor-quantity')) {
+      document.getElementById('item-editor-quantity').value = itemData.quantity || 1;
+    }
     
     document.getElementById('item-editor-armor-effect').value = itemData.effect_value || "";
     document.getElementById('item-editor-armor-uses').value = itemData.uses_durability || "";
@@ -311,6 +317,7 @@ export class ItemEditorModal {
       item_type: document.getElementById('item-editor-type').value,
       description: document.getElementById('item-editor-desc').value,
       space_taken: parseFloat(document.getElementById('item-editor-space').value) || 0.0,
+      quantity: document.getElementById('item-editor-quantity') ? (parseInt(document.getElementById('item-editor-quantity').value) || 1) : 1,
       location: "BACKPACK", // Default to backpack for new items
       modifiers: this.modifiers,
       actions: this.actions,
