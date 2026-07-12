@@ -65,7 +65,7 @@ class StatManager:
             if round(val, 2) != 0
         ]
 
-        total = base_value + sum(item["value"] for item in breakdown)
+        total = base_value + sum(val for val in aggregated.values())
         
         for mod in mult_mods:
             new_total = total * mod.value
@@ -77,7 +77,7 @@ class StatManager:
                     "value": round(bonus, 2)
                 })
 
-        return {"total": round(total, 2) if total % 1 != 0 else int(total), "breakdown": breakdown}
+        return {"total": int(math.floor(total + 0.5)), "breakdown": breakdown}
 
 
 @dataclass
@@ -339,43 +339,43 @@ class Character:
 
     @property
     def total_str(self) -> int:
-        return int(self.stat_manager.get_stat_breakdown("str", base_value=self.stats.str)["total"])
+        return int(math.floor(self.stat_manager.get_stat_breakdown("str", base_value=self.stats.str)["total"] + 0.5))
 
     @property
     def total_dex(self) -> int:
-        return int(self.stat_manager.get_stat_breakdown("dex", base_value=self.stats.dex)["total"])
+        return int(math.floor(self.stat_manager.get_stat_breakdown("dex", base_value=self.stats.dex)["total"] + 0.5))
 
     @property
     def total_wis(self) -> int:
-        return int(self.stat_manager.get_stat_breakdown("wis", base_value=self.stats.wis)["total"])
+        return int(math.floor(self.stat_manager.get_stat_breakdown("wis", base_value=self.stats.wis)["total"] + 0.5))
 
     @property
     def total_cha(self) -> int:
-        return int(self.stat_manager.get_stat_breakdown("cha", base_value=self.stats.cha)["total"])
+        return int(math.floor(self.stat_manager.get_stat_breakdown("cha", base_value=self.stats.cha)["total"] + 0.5))
 
     @property
     def max_hp(self) -> int:
-        return int(self.stat_manager.get_stat_breakdown("max_hp")["total"])
+        return int(math.floor(self.stat_manager.get_stat_breakdown("max_hp")["total"] + 0.5))
 
     @property
     def current_hp(self) -> int:
         return self.max_hp - self.damage_taken_magical
 
     @property
-    def defense(self) -> float:
-        return self.stat_manager.get_stat_breakdown("defense")["total"]
+    def defense(self) -> int:
+        return int(math.floor(self.stat_manager.get_stat_breakdown("defense")["total"] + 0.5))
 
     @property
-    def max_action_points(self) -> float:
-        return self.stat_manager.get_stat_breakdown("ap")["total"]
+    def max_action_points(self) -> int:
+        return int(math.floor(self.stat_manager.get_stat_breakdown("ap")["total"] + 0.5))
 
     @property
-    def max_stamina(self) -> float:
-        return self.stat_manager.get_stat_breakdown("stamina")["total"]
+    def max_stamina(self) -> int:
+        return int(math.floor(self.stat_manager.get_stat_breakdown("stamina")["total"] + 0.5))
 
     @property
     def movement(self) -> int:
-        return int(self.stat_manager.get_stat_breakdown("movement")["total"])
+        return int(math.floor(self.stat_manager.get_stat_breakdown("movement")["total"] + 0.5))
 
     @property
     def inventory_space(self) -> Dict[str, Dict[str, float]]:
