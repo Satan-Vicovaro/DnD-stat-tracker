@@ -75,39 +75,55 @@
     </div>
     <div class="space-y-3">
       <!-- STR -->
-      <div class="flex justify-between items-center bg-gray-700/20 py-2 px-4 rounded-lg">
+      <div class="relative group flex justify-between items-center bg-gray-700/20 py-2 px-4 rounded-lg hover:z-50">
         <span class="text-gray-400 font-medium w-32">Siła (SIŁ)</span>
         <div class="flex items-center space-x-3">
           <button data-action="modify-stat" data-stat="str" data-delta="-1" class="w-8 h-8 rounded-full bg-gray-700 hover:bg-rose-500/80 text-gray-300 flex items-center justify-center transition-colors font-bold">-</button>
           <span class="font-bold text-indigo-300 text-lg w-6 text-center" id="stat-str">-</span>
           <button data-action="modify-stat" data-stat="str" data-delta="1" class="w-8 h-8 rounded-full bg-gray-700 hover:bg-emerald-500/80 text-gray-300 flex items-center justify-center transition-colors font-bold">+</button>
         </div>
+        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-56 bg-gray-950 border border-gray-600 rounded-lg shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 p-3 text-left">
+          <h4 class="text-xs font-bold text-gray-300 border-b border-gray-600 pb-1 mb-2">Szczegóły Siły</h4>
+          <ul id="breakdown-str" class="text-xs space-y-1"></ul>
+        </div>
       </div>
       <!-- DEX -->
-      <div class="flex justify-between items-center bg-gray-700/20 py-2 px-4 rounded-lg">
+      <div class="relative group flex justify-between items-center bg-gray-700/20 py-2 px-4 rounded-lg hover:z-50">
         <span class="text-gray-400 font-medium w-32">Zręczność (ZRĘ)</span>
         <div class="flex items-center space-x-3">
           <button data-action="modify-stat" data-stat="dex" data-delta="-1" class="w-8 h-8 rounded-full bg-gray-700 hover:bg-rose-500/80 text-gray-300 flex items-center justify-center transition-colors font-bold">-</button>
           <span class="font-bold text-indigo-300 text-lg w-6 text-center" id="stat-dex">-</span>
           <button data-action="modify-stat" data-stat="dex" data-delta="1" class="w-8 h-8 rounded-full bg-gray-700 hover:bg-emerald-500/80 text-gray-300 flex items-center justify-center transition-colors font-bold">+</button>
         </div>
+        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-56 bg-gray-950 border border-gray-600 rounded-lg shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 p-3 text-left">
+          <h4 class="text-xs font-bold text-gray-300 border-b border-gray-600 pb-1 mb-2">Szczegóły Zręczności</h4>
+          <ul id="breakdown-dex" class="text-xs space-y-1"></ul>
+        </div>
       </div>
       <!-- WIS -->
-      <div class="flex justify-between items-center bg-gray-700/20 py-2 px-4 rounded-lg">
+      <div class="relative group flex justify-between items-center bg-gray-700/20 py-2 px-4 rounded-lg hover:z-50">
         <span class="text-gray-400 font-medium w-32">Wiedza (WIEDZ)</span>
         <div class="flex items-center space-x-3">
           <button data-action="modify-stat" data-stat="wis" data-delta="-1" class="w-8 h-8 rounded-full bg-gray-700 hover:bg-rose-500/80 text-gray-300 flex items-center justify-center transition-colors font-bold">-</button>
           <span class="font-bold text-indigo-300 text-lg w-6 text-center" id="stat-wis">-</span>
           <button data-action="modify-stat" data-stat="wis" data-delta="1" class="w-8 h-8 rounded-full bg-gray-700 hover:bg-emerald-500/80 text-gray-300 flex items-center justify-center transition-colors font-bold">+</button>
         </div>
+        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-56 bg-gray-950 border border-gray-600 rounded-lg shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 p-3 text-left">
+          <h4 class="text-xs font-bold text-gray-300 border-b border-gray-600 pb-1 mb-2">Szczegóły Wiedzy</h4>
+          <ul id="breakdown-wis" class="text-xs space-y-1"></ul>
+        </div>
       </div>
       <!-- CHA -->
-      <div class="flex justify-between items-center bg-gray-700/20 py-2 px-4 rounded-lg">
+      <div class="relative group flex justify-between items-center bg-gray-700/20 py-2 px-4 rounded-lg hover:z-50">
         <span class="text-gray-400 font-medium w-32">Charyzma (CHA)</span>
         <div class="flex items-center space-x-3">
           <button data-action="modify-stat" data-stat="cha" data-delta="-1" class="w-8 h-8 rounded-full bg-gray-700 hover:bg-rose-500/80 text-gray-300 flex items-center justify-center transition-colors font-bold">-</button>
           <span class="font-bold text-indigo-300 text-lg w-6 text-center" id="stat-cha">-</span>
           <button data-action="modify-stat" data-stat="cha" data-delta="1" class="w-8 h-8 rounded-full bg-gray-700 hover:bg-emerald-500/80 text-gray-300 flex items-center justify-center transition-colors font-bold">+</button>
+        </div>
+        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-56 bg-gray-950 border border-gray-600 rounded-lg shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 p-3 text-left">
+          <h4 class="text-xs font-bold text-gray-300 border-b border-gray-600 pb-1 mb-2">Szczegóły Charyzmy</h4>
+          <ul id="breakdown-cha" class="text-xs space-y-1"></ul>
         </div>
       </div>
     </div>

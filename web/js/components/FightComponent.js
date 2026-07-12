@@ -189,10 +189,10 @@ export class FightComponent {
     setText('fight-stat-ap',    fmt(char.ap?.total ?? 0));
     setText('fight-stat-stam',  fmt(char.stamina?.total ?? 0));
     setText('fight-stat-move',  char.movement?.total ?? '—');
-    setText('fight-stat-str',   char.stats?.str ?? '—');
-    setText('fight-stat-dex',   char.stats?.dex ?? '—');
-    setText('fight-stat-wis',   char.stats?.wis ?? '—');
-    setText('fight-stat-cha',   char.stats?.cha ?? '—');
+    setText('fight-stat-str',   char.stats?.str?.total ?? '—');
+    setText('fight-stat-dex',   char.stats?.dex?.total ?? '—');
+    setText('fight-stat-wis',   char.stats?.wis?.total ?? '—');
+    setText('fight-stat-cha',   char.stats?.cha?.total ?? '—');
 
     this.bindDynamicActions();
   }

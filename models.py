@@ -92,8 +92,6 @@ class ArmorState(ModifierProvider):
 
     def get_modifiers(self, character=None, stat_name: Optional[str] = None) -> List[Modifier]:
         mods = []
-        level_div = (character.level / 2.0) if character and character.level > 0 else 0.5
-        level_mult = (character.level / 2.0) if character else 0.5
 
         for name, armor in self.types.items():
             if armor.quantity > 0:
@@ -101,15 +99,15 @@ class ArmorState(ModifierProvider):
 
                 def_pen = armor.effects.get("defense_penalty", 0.0) * armor.quantity
                 if def_pen != 0:
-                    mods.append(Modifier(source_name, "defense", -(def_pen / level_div)))
+                    mods.append(Modifier(source_name, "defense", -def_pen))
 
                 ap_pen = armor.effects.get("ap_penalty", 0.0) * armor.quantity
                 if ap_pen != 0:
-                    mods.append(Modifier(source_name, "ap", -(ap_pen / level_div)))
+                    mods.append(Modifier(source_name, "ap", -ap_pen))
 
                 stam_pen = armor.effects.get("stamina_penalty", 0.0) * armor.quantity
                 if stam_pen != 0:
-                    mods.append(Modifier(source_name, "stamina", -(stam_pen * level_mult)))
+                    mods.append(Modifier(source_name, "stamina", -stam_pen))
 
                 move_pen = armor.effects.get("movement_penalty", 0.0) * armor.quantity
                 if move_pen != 0:
@@ -365,66 +363,76 @@ class Character:
     @property
     def inventory_space(self) -> Dict[str, Dict[str, float]]:
         has_quiver = False
-        quiver_item = None
-        has_pocket_clothes = False
-        pocket_clothes_item = None
-        has_attachment_belt = False
-        attachment_belt_item = None
-        backpack_bonus = 0.0
+        quick_bonus = 0.0
+        back_bonus = 0.0
+        quiver_bonus = 0.0
         best_backpack_item = None
+        best_backpack_value = 0.0
+        
+        active_containers = {}
+        exempt_ids = set()
 
         # Pass 1: Identify items that provide space bonuses
         for item in self.inventory:
             name_lower = item.name.lower()
             loc = item.location
 
-            if (
-                name_lower in ("kołczan", "kolczan")
-                and loc == ItemLocation.QUIVER
-                and not has_quiver
-            ):
-                has_quiver = True
-                quiver_item = item
-            elif (
-                name_lower in ("ubranie z kieszeniami", "ubrania z kieszeniami")
-                and loc == ItemLocation.EQUIPPED
-                and not has_pocket_clothes
-            ):
-                has_pocket_clothes = True
-                pocket_clothes_item = item
-            elif (
-                name_lower == "pasek z mocowaniem"
-                and loc == ItemLocation.EQUIPPED
-                and not has_attachment_belt
-            ):
-                has_attachment_belt = True
-                attachment_belt_item = item
+            item_quick = 0.0
+            item_backpack = 0.0
+            item_back = 0.0
+            item_quiver = 0.0
+
+            # 1. Modifiers check (works as tags on the item)
+            for mod in item.modifiers:
+                if mod.stat_name == "quick_space": item_quick += mod.value
+                elif mod.stat_name == "backpack_space": item_backpack += mod.value
+                elif mod.stat_name == "back_space": item_back += mod.value
+                elif mod.stat_name == "quiver_space": item_quiver += mod.value
+
+            # 2. Hardcoded fallback for backwards compatibility
+            if name_lower in ("kołczan", "kolczan") and loc == ItemLocation.QUIVER:
+                item_quiver = max(item_quiver, 10.0)
+            elif name_lower in ("ubranie z kieszeniami", "ubrania z kieszeniami") and loc == ItemLocation.EQUIPPED:
+                item_quick = max(item_quick, 10.0)
+            elif name_lower == "pasek z mocowaniem" and loc == ItemLocation.EQUIPPED:
+                item_quick = max(item_quick, 10.0)
             elif name_lower == "plecak" and loc == ItemLocation.BACKPACK:
-                if 10.0 > backpack_bonus:
-                    backpack_bonus = 10.0
+                item_backpack = max(item_backpack, 10.0)
+            elif name_lower in ("plecak podróżnika", "plecak podroznika") and loc == ItemLocation.BACKPACK:
+                item_backpack = max(item_backpack, 20.0)
+
+            # 3. Apply bonuses and mark as active containers
+            granted = 0.0
+            if item_quick > 0 and loc == ItemLocation.EQUIPPED:
+                quick_bonus += item_quick
+                granted += item_quick
+            if item_back > 0 and loc == ItemLocation.BACK:
+                back_bonus += item_back
+                granted += item_back
+            if item_quiver > 0 and loc == ItemLocation.QUIVER:
+                has_quiver = True
+                quiver_bonus += item_quiver
+                granted += item_quiver
+
+            if granted > 0:
+                active_containers[item.item_id] = granted
+                exempt_ids.add(item.item_id)
+                
+            # Backpacks take max so you can't infinitely nest them
+            if item_backpack > 0 and loc == ItemLocation.BACKPACK:
+                if item_backpack > best_backpack_value:
+                    best_backpack_value = item_backpack
                     best_backpack_item = item
-            elif (
-                name_lower in ("plecak podróżnika", "plecak podroznika")
-                and loc == ItemLocation.BACKPACK
-            ):
-                if 20.0 > backpack_bonus:
-                    backpack_bonus = 20.0
-                    best_backpack_item = item
+
+        if best_backpack_item:
+            active_containers[best_backpack_item.item_id] = best_backpack_value
+            exempt_ids.add(best_backpack_item.item_id)
 
         # Pass 2: Calculate used space, skipping the items that provide the bonuses
         used_quick = 0.0
         used_backpack = 0.0
         used_back = 0.0
         used_quiver = 0.0
-
-        # Use stable item_id (UUID) instead of id() which is an ephemeral
-        # memory address that changes after deep-copies and save/load cycles.
-        exempt_ids = {
-            quiver_item.item_id if quiver_item else None,
-            pocket_clothes_item.item_id if pocket_clothes_item else None,
-            attachment_belt_item.item_id if attachment_belt_item else None,
-            best_backpack_item.item_id if best_backpack_item else None,
-        }
 
         for item in self.inventory:
             if item.item_id in exempt_ids:
@@ -445,25 +453,10 @@ class Character:
         used_backpack += (self.gold * 0.005) + (self.silver * 0.004) + (self.copper * 0.01)
 
         # Calculate max capacities
-        max_quick = 20.0 + (self.total_str * 2.0)
-        if has_pocket_clothes:
-            max_quick += 10.0
-        if has_attachment_belt:
-            max_quick += 10.0
-
-        max_backpack = 10.0 + (self.max_stamina * 4.0) + backpack_bonus
-        max_back = 20.0
-        max_quiver = 10.0 if has_quiver else 0.0
-
-        active_containers = {}
-        if quiver_item:
-            active_containers[quiver_item.item_id] = 10.0
-        if pocket_clothes_item:
-            active_containers[pocket_clothes_item.item_id] = 10.0
-        if attachment_belt_item:
-            active_containers[attachment_belt_item.item_id] = 10.0
-        if best_backpack_item:
-            active_containers[best_backpack_item.item_id] = backpack_bonus
+        max_quick = 20.0 + (self.total_str * 2.0) + quick_bonus
+        max_backpack = 10.0 + (self.max_stamina * 4.0) + best_backpack_value
+        max_back = 20.0 + back_bonus
+        max_quiver = quiver_bonus if has_quiver else 0.0
 
         return {
             "quick": {"used": round(used_quick, 2), "max": round(max_quick, 2)},

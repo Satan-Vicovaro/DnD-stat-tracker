@@ -10,17 +10,20 @@ from serializer import build_item, serialize, deserialize
 
 logger = logging.getLogger(__name__)
 
+
 def get_data_path(relative_path: str) -> str:
     """Return the path for mutable data (saves), which lives next to the executable."""
-    if getattr(sys, 'frozen', False):
+    if getattr(sys, "frozen", False):
         base_path = os.path.dirname(sys.executable)
     else:
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
 
+
 def get_resource_path(relative_path: str) -> str:
     """Return the path for external static resources (config), which lives next to the executable."""
     return get_data_path(relative_path)
+
 
 _AUTOSAVE_PATH = get_data_path("data/quick_save.json")
 _SAVES_DIR = get_data_path("data/saves")
@@ -300,10 +303,18 @@ class GameEngine:
             "stamina": self.hero.stat_manager.get_stat_breakdown("stamina"),
             "movement": self.hero.stat_manager.get_stat_breakdown("movement"),
             "stats": {
-                "str": self.hero.total_str,
-                "dex": self.hero.total_dex,
-                "wis": self.hero.total_wis,
-                "cha": self.hero.total_cha,
+                "str": self.hero.stat_manager.get_stat_breakdown(
+                    "str", base_value=self.hero.stats.str
+                ),
+                "dex": self.hero.stat_manager.get_stat_breakdown(
+                    "dex", base_value=self.hero.stats.dex
+                ),
+                "wis": self.hero.stat_manager.get_stat_breakdown(
+                    "wis", base_value=self.hero.stats.wis
+                ),
+                "cha": self.hero.stat_manager.get_stat_breakdown(
+                    "cha", base_value=self.hero.stats.cha
+                ),
             },
             "armor": {
                 "max_space": self.hero.armor_state.max_space,
@@ -392,24 +403,26 @@ class GameEngine:
     def edit_inventory_item(self, index: int, item_dict: dict) -> bool:
         if index < 0 or index >= len(self.hero.inventory):
             return False
-            
+
         old_item = self.hero.inventory[index]
         old_loc = old_item.location
         new_loc = item_dict.get("location")
-        
+
         # Check if the item is being moved to a different location
         if new_loc:
-            old_loc_str = old_loc.value if hasattr(old_loc, 'value') else old_loc
+            old_loc_str = old_loc.value if hasattr(old_loc, "value") else old_loc
             if new_loc != old_loc_str:
                 ap_cost = 0
                 if old_loc_str == "BACKPACK":
                     ap_cost = 2
                 elif old_loc_str == "BACK":
                     ap_cost = 1
-                    
+
                 if ap_cost > 0:
                     self.hero.current_action_points -= ap_cost
-                    logger.info(f"Moved item from {old_loc_str} to {new_loc}. Deducted {ap_cost} AP.")
+                    logger.info(
+                        f"Moved item from {old_loc_str} to {new_loc}. Deducted {ap_cost} AP."
+                    )
 
         self._snapshot()
         old_item = self.hero.inventory.pop(index)
@@ -478,7 +491,9 @@ class GameEngine:
             if getattr(item, "quantity", 1) > 1:
                 item.quantity -= 1
                 item.current_uses = item.max_uses
-                logger.info(f"Item {item.name} stack decremented to {item.quantity}. Uses reset to {item.max_uses}.")
+                logger.info(
+                    f"Item {item.name} stack decremented to {item.quantity}. Uses reset to {item.max_uses}."
+                )
             else:
                 self.hero.inventory.pop(index)
                 logger.info(f"Item {item.name} consumed and removed.")
@@ -490,7 +505,7 @@ class GameEngine:
     def modify_item_quantity(self, index: int, delta: int) -> bool:
         if index < 0 or index >= len(self.hero.inventory):
             return False
-        
+
         item = self.hero.inventory[index]
         self._snapshot()
         if item.quantity + delta <= 0:
@@ -584,6 +599,7 @@ class GameEngine:
         """Add a new status effect to the character."""
         from models import StatusEffect, Modifier
         import uuid as _uuid
+
         mods = [
             Modifier(
                 source=m.get("source", effect_dict.get("title", "Status")),
@@ -630,6 +646,7 @@ class GameEngine:
     def update_status_effect(self, status_id: str, effect_dict: dict) -> bool:
         """Replace a status effect's data in-place."""
         from models import Modifier
+
         for se in self.hero.status_effects:
             if se.status_id == status_id:
                 self._snapshot()
@@ -677,17 +694,15 @@ class GameEngine:
             hp_per_frag = t.effects.get("hp_per_fragment", 0.0)
             max_hp = t.quantity * hp_per_frag
 
-            if damage_left >= max_hp:
-                # All fragments of this type are destroyed — no mitigation from them.
-                damage_left -= max_hp
+            if hp_per_frag > 0:
+                broken = int(damage_left // hp_per_frag)
             else:
-                if hp_per_frag > 0:
-                    broken = int(damage_left // hp_per_frag)
-                else:
-                    broken = 0
-                intact = t.quantity - broken
-                mitigation += intact * _MIT_PER_FRAG.get(name, 0)
-                damage_left = 0
+                broken = 0
+            intact = t.quantity - broken
+            mitigation += intact * _MIT_PER_FRAG.get(name, 0)
+            # half mitigation from broken ones
+            mitigation += broken * _MIT_PER_FRAG.get(name, 0) // 2
+            damage_left = 0
 
         return mitigation
 

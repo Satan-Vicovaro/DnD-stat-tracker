@@ -118,9 +118,14 @@ export class CharacterComponent {
     renderBreakdown("breakdown-stam", char.stamina.breakdown);
     renderBreakdown("breakdown-move", char.movement.breakdown);
 
-    document.getElementById("stat-str").innerText = char.stats.str;
-    document.getElementById("stat-dex").innerText = char.stats.dex;
-    document.getElementById("stat-wis").innerText = char.stats.wis;
-    document.getElementById("stat-cha").innerText = char.stats.cha;
+    document.getElementById("stat-str").innerText = char.stats.str.total;
+    document.getElementById("stat-dex").innerText = char.stats.dex.total;
+    document.getElementById("stat-wis").innerText = char.stats.wis.total;
+    document.getElementById("stat-cha").innerText = char.stats.cha.total;
+
+    renderBreakdown("breakdown-str", char.stats.str.breakdown);
+    renderBreakdown("breakdown-dex", char.stats.dex.breakdown);
+    renderBreakdown("breakdown-wis", char.stats.wis.breakdown);
+    renderBreakdown("breakdown-cha", char.stats.cha.breakdown);
   }
 }

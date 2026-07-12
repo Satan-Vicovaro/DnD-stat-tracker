@@ -399,11 +399,27 @@
   {
     "name": "amunicja rozbijająca",
     "cost_silver": "10",
-    "actions": []
+    "actions": [
+      {
+        "action_cost": "2",
+        "range": "60/120",
+        "hit_roll": "-2",
+        "damage_roll": "d6+stała-->2d4+0,5stała",
+        "turn_execution": "Gracza"
+      }
+    ]
   },
   {
     "name": "amunicja przeciwpancerna",
     "cost_silver": "20",
-    "actions": []
+    "actions": [
+      {
+        "action_cost": "2",
+        "range": "60/120",
+        "hit_roll": "1",
+        "damage_roll": "d6+stała-->d8+1,5stała",
+        "turn_execution": "Gracza"
+      }
+    ]
   }
 ]
