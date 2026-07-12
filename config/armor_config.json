@@ -8,7 +8,8 @@
         "defense_penalty": 0,
         "ap_penalty": 0,
         "stamina_penalty": 0,
-        "movement_penalty": 0
+        "movement_penalty": 0,
+        "mitigation_per_fragment": 0
       }
     },
     "Półpłytowa": {
@@ -18,7 +19,8 @@
         "defense_penalty": 0.2,
         "ap_penalty": 0.1,
         "stamina_penalty": 0.25,
-        "movement_penalty": 1.0
+        "movement_penalty": 1.0,
+        "mitigation_per_fragment": 2
       }
     },
     "Płytowa": {
@@ -28,7 +30,8 @@
         "defense_penalty": 0.5,
         "ap_penalty": 0.2,
         "stamina_penalty": 0.5,
-        "movement_penalty": 1.5
+        "movement_penalty": 1.5,
+        "mitigation_per_fragment": 4
       }
     },
     "Stalowa": {
@@ -38,7 +41,8 @@
         "defense_penalty": 1.0,
         "ap_penalty": 0.4,
         "stamina_penalty": 0.5,
-        "movement_penalty": 2.0
+        "movement_penalty": 2.0,
+        "mitigation_per_fragment": 6
       }
     }
   }

@@ -1,0 +1,80 @@
+{
+  "progression": {
+    "starting_unspent_stat_points": 3,
+    "unspent_stat_points_per_level": 2
+  },
+  "stats_scaling": {
+    "max_hp": {
+      "base": 10,
+      "scaling": [
+        { "source": "level", "multiplier": 2.0, "offset": -1 },
+        { "source": "total_str", "multiplier": 3.0, "offset": 0 }
+      ]
+    },
+    "defense": {
+      "base": 10,
+      "scaling": [
+        { "source": "level", "multiplier": 0.8, "offset": -1 },
+        { "source": "total_dex", "multiplier": 1.0, "offset": 0 }
+      ]
+    },
+    "ap": {
+      "base": 1,
+      "scaling": [
+        { "source": "level", "multiplier": 0.5, "offset": -1 },
+        { "source": "total_dex", "multiplier": 0.5, "offset": 0 }
+      ]
+    },
+    "stamina": {
+      "base": 1,
+      "scaling": [
+        { "source": "level", "multiplier": 0.25, "offset": -1 },
+        { "source": "total_cha", "multiplier": 0.25, "offset": 0 }
+      ]
+    },
+    "movement": {
+      "base": 30,
+      "scaling": []
+    }
+  },
+  "inventory": {
+    "coin_weights": {
+      "gold": 0.005,
+      "silver": 0.004,
+      "copper": 0.01
+    },
+    "capacity_scaling": {
+      "quick": {
+        "base": 20.0,
+        "scaling": [
+          { "source": "total_str", "multiplier": 2.0, "offset": 0 }
+        ]
+      },
+      "backpack": {
+        "base": 10.0,
+        "scaling": [
+          { "source": "max_stamina", "multiplier": 4.0, "offset": 0 }
+        ]
+      },
+      "back": {
+        "base": 20.0,
+        "scaling": []
+      }
+    },
+    "action_costs": {
+      "move_from_BACKPACK": 2,
+      "move_from_BACK": 1,
+      "use_from_BACKPACK": 2,
+      "use_from_BACK": 1
+    },
+    "clothes_identifiers": [
+      "ubrani"
+    ]
+  },
+  "combat": {
+    "broken_fragment_mitigation_multiplier": 0.5
+  },
+  "engine": {
+    "max_undo_history": 20
+  }
+}

@@ -130,6 +130,19 @@ class ArmorState(ModifierProvider):
         return mods
 
 
+
+_GAME_RULES_CACHE = None
+
+def get_game_rules(file_path: str = "config/game_rules.json") -> dict:
+    global _GAME_RULES_CACHE
+    if _GAME_RULES_CACHE is None:
+        if os.path.exists(file_path):
+            with open(file_path, "r", encoding="utf-8") as f:
+                _GAME_RULES_CACHE = json.load(f)
+        else:
+            _GAME_RULES_CACHE = {}
+    return _GAME_RULES_CACHE
+
 def load_armor_config(file_path: str = "config/armor_config.json") -> ArmorState:
     state = ArmorState()
     if not os.path.exists(file_path):
@@ -167,6 +180,7 @@ class ItemLocation(str, Enum):
     BACK = "BACK"
     QUIVER = "QUIVER"
     WAGON = "WAGON"
+    CLOTHES = "CLOTHES"
 
 
 @dataclass
@@ -242,6 +256,33 @@ class CharacterBaseProvider(ModifierProvider):
         # Fast return for base stats to prevent infinite recursion
         if stat_name in ("str", "dex", "wis", "cha"):
             return mods
+            
+        rules = get_game_rules().get("stats_scaling", {})
+        name_map = {
+            "level": "Poziom",
+            "total_str": "Siła",
+            "total_dex": "Zręczność",
+            "total_wis": "Mądrość",
+            "total_cha": "Charyzma"
+        }
+        
+        for stat, conf in rules.items():
+            base = conf.get("base", 0)
+            if base != 0:
+                mods.append(Modifier("Baza", stat, base))
+                
+            for scale in conf.get("scaling", []):
+                source = scale.get("source")
+                multiplier = scale.get("multiplier", 1.0)
+                offset = scale.get("offset", 0.0)
+                
+                val = getattr(character, source, 0)
+                calc_val = (val + offset) * multiplier
+                
+                if calc_val != 0:
+                    mods.append(Modifier(name_map.get(source, source), stat, calc_val))
+
+        return mods
             
         # max_hp
         mods.append(Modifier("Baza", "max_hp", 10))
@@ -330,8 +371,10 @@ class Character:
 
     @property
     def unspent_stat_points(self) -> int:
-        # Starts with 3 points, gains 2 per level
-        total_earned = 3 + (self.level - 1) * 2
+        rules = get_game_rules().get("progression", {})
+        initial = rules.get("starting_unspent_stat_points", 3)
+        per_lvl = rules.get("unspent_stat_points_per_level", 2)
+        total_earned = initial + (self.level - 1) * per_lvl
         spent = (
             self.stats.base_str + self.stats.base_dex + self.stats.base_wis + self.stats.base_cha
         )
@@ -406,21 +449,9 @@ class Character:
                 elif mod.stat_name == "back_space": item_back += mod.value
                 elif mod.stat_name == "quiver_space": item_quiver += mod.value
 
-            # 2. Hardcoded fallback for backwards compatibility
-            if name_lower in ("kołczan", "kolczan") and loc == ItemLocation.QUIVER:
-                item_quiver = max(item_quiver, 10.0)
-            elif name_lower in ("ubranie z kieszeniami", "ubrania z kieszeniami") and loc == ItemLocation.EQUIPPED:
-                item_quick = max(item_quick, 10.0)
-            elif name_lower == "pasek z mocowaniem" and loc == ItemLocation.EQUIPPED:
-                item_quick = max(item_quick, 10.0)
-            elif name_lower == "plecak" and loc == ItemLocation.BACKPACK:
-                item_backpack = max(item_backpack, 10.0)
-            elif name_lower in ("plecak podróżnika", "plecak podroznika") and loc == ItemLocation.BACKPACK:
-                item_backpack = max(item_backpack, 20.0)
-
             # 3. Apply bonuses and mark as active containers
             granted = 0.0
-            if item_quick > 0 and loc == ItemLocation.EQUIPPED:
+            if item_quick > 0 and loc in (ItemLocation.EQUIPPED, ItemLocation.CLOTHES):
                 quick_bonus += item_quick
                 granted += item_quick
             if item_back > 0 and loc == ItemLocation.BACK:
@@ -466,13 +497,28 @@ class Character:
             elif item.location == ItemLocation.QUIVER:
                 used_quiver += item_total_space
 
-        # Coin weight: Złote*0.005 + Srebrne*0.004 + Miedziane*0.01
-        used_backpack += (self.gold * 0.005) + (self.silver * 0.004) + (self.copper * 0.01)
+        # Load rules
+        rules = get_game_rules().get("inventory", {})
+        coin_weights = rules.get("coin_weights", {"gold": 0.005, "silver": 0.004, "copper": 0.01})
+        caps = rules.get("capacity_scaling", {})
+
+        # Coin weight
+        used_backpack += (self.gold * coin_weights.get("gold", 0.005)) + \
+                         (self.silver * coin_weights.get("silver", 0.004)) + \
+                         (self.copper * coin_weights.get("copper", 0.01))
+
+        def calc_cap(key, bonus, default_base):
+            conf = caps.get(key, {})
+            base = conf.get("base", default_base)
+            for scale in conf.get("scaling", []):
+                val = getattr(self, scale.get("source"), 0)
+                base += (val + scale.get("offset", 0.0)) * scale.get("multiplier", 1.0)
+            return base + bonus
 
         # Calculate max capacities
-        max_quick = 20.0 + (self.total_str * 2.0) + quick_bonus
-        max_backpack = 10.0 + (self.max_stamina * 4.0) + best_backpack_value
-        max_back = 20.0 + back_bonus
+        max_quick = calc_cap("quick", quick_bonus, 20.0)
+        max_backpack = calc_cap("backpack", best_backpack_value, 10.0)
+        max_back = calc_cap("back", back_bonus, 20.0)
         max_quiver = quiver_bonus if has_quiver else 0.0
 
         return {

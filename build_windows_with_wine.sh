@@ -42,7 +42,7 @@ echo "=== Packaging Game for Windows ==="
 rm -f dist/GieraKajzera.exe
 
 # Notice the semicolon (;) used for Windows paths
-wine python -m PyInstaller main.py --onefile --noconsole --name "GieraKajzera" --add-data "web;web"
+wine python -m PyInstaller main.py --onefile --name "GieraKajzera" --add-data "web;web"
 
 echo "=== Finalizing ==="
 cp -r config dist/config

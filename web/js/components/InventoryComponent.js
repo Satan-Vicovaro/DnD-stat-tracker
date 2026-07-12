@@ -87,18 +87,24 @@ export class InventoryComponent {
     const backList = document.getElementById('inventory-list-back');
     const quiverList = document.getElementById('inventory-list-quiver');
     const wgList = document.getElementById('inventory-list-wagon');
+    const clothesList = document.getElementById('inventory-list-clothes');
 
-    let eqHtml = "", bpHtml = "", backHtml = "", quiverHtml = "", wgHtml = "";
-    let eqCount = 0, bpCount = 0, backCount = 0, quiverCount = 0, wgCount = 0;
+    let eqHtml = "", bpHtml = "", backHtml = "", quiverHtml = "", wgHtml = "", clothesHtml = "";
+    let eqCount = 0, bpCount = 0, backCount = 0, quiverCount = 0, wgCount = 0, clothesCount = 0;
+    let hasClothesInInventory = false;
 
     const inventory = this.characterData.inventory || [];
 
     inventory.forEach((item, index) => {
+      if (item.is_clothes) {
+        hasClothesInInventory = true;
+      }
       const itemHtml = this.renderItemCard(item, index);
       if (item.location === "EQUIPPED") { eqHtml += itemHtml; eqCount++; }
       else if (item.location === "BACKPACK") { bpHtml += itemHtml; bpCount++; }
       else if (item.location === "BACK") { backHtml += itemHtml; backCount++; }
       else if (item.location === "QUIVER") { quiverHtml += itemHtml; quiverCount++; }
+      else if (item.location === "CLOTHES") { clothesHtml += itemHtml; clothesCount++; }
       else if (item.location === "WAGON") { wgHtml += itemHtml; wgCount++; }
     });
 
@@ -106,13 +112,24 @@ export class InventoryComponent {
     if (bpList) bpList.innerHTML = bpHtml;
     if (backList) backList.innerHTML = backHtml;
     if (quiverList) quiverList.innerHTML = quiverHtml;
+    if (clothesList) clothesList.innerHTML = clothesHtml;
     if (wgList) wgList.innerHTML = wgHtml;
 
     document.getElementById('inventory-empty-equipped')?.classList.toggle('hidden', eqCount > 0);
     document.getElementById('inventory-empty-backpack')?.classList.toggle('hidden', bpCount > 0);
     document.getElementById('inventory-empty-back')?.classList.toggle('hidden', backCount > 0);
     document.getElementById('inventory-empty-quiver')?.classList.toggle('hidden', quiverCount > 0);
+    document.getElementById('inventory-empty-clothes')?.classList.toggle('hidden', clothesCount > 0);
     document.getElementById('inventory-empty-wagon')?.classList.toggle('hidden', wgCount > 0);
+
+    const clothesSection = document.getElementById('section-clothes');
+    if (clothesSection) {
+      if (hasClothesInInventory) {
+        clothesSection.classList.remove('hidden');
+      } else {
+        clothesSection.classList.add('hidden');
+      }
+    }
 
     // Bind item actions (Move, Edit, Drop)
     this.bindItemActions();
@@ -160,6 +177,7 @@ export class InventoryComponent {
               <option value="BACKPACK" ${item.location === "BACKPACK" ? "selected" : ""}>Plecak</option>
               <option value="BACK" ${item.location === "BACK" ? "selected" : ""}>Plecy</option>
               ${showQuiverOption ? `<option value="QUIVER" ${item.location === "QUIVER" ? "selected" : ""}>Kołczan</option>` : ''}
+              ${item.is_clothes ? `<option value="CLOTHES" ${item.location === "CLOTHES" ? "selected" : ""}>Założone (Ubranie)</option>` : ''}
               <option value="WAGON" ${item.location === "WAGON" ? "selected" : ""}>Wóz</option>
             </select>
             

@@ -235,12 +235,14 @@ export class ShopComponent {
           space_taken: itemData.space_taken || 0.0,
           cost_silver: itemData.cost_silver,
           item_type:
-            this.activeTab === "Broń biała" ||
-            this.activeTab === "Broń zasięgowa"
-              ? "Weapon"
-              : this.activeTab === "Zbroje"
-                ? "Armor"
-                : "Misc",
+            itemData.item_type || (
+              this.activeTab === "Broń biała" ||
+              this.activeTab === "Broń zasięgowa"
+                ? "Weapon"
+                : this.activeTab === "Zbroje"
+                  ? "Armor"
+                  : "Misc"
+            ),
           actions: itemData.actions || [],
           // Consumable fields — must be forwarded so the Fight tab renders them
           // immediately without waiting for the _patch_item_consumables migration

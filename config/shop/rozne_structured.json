@@ -5,7 +5,9 @@
     "action_cost": "raz dziennie",
     "description": "leczy max hp po krótkim odpoczynku",
     "space_taken": "2/10",
-    "consumable_effects": { "heal_health": 9999 },
+    "consumable_effects": {
+      "heal_health": 9999
+    },
     "max_uses": 1,
     "current_uses": 1
   },
@@ -15,7 +17,9 @@
     "action_cost": "10min",
     "description": "można go użyć raz po każdej walce, leczy d4 dmg za każde 10 życia postaci+wis (działa tylko na obrażenia zadane w walce po której zostanie użyte)",
     "space_taken": "1/10",
-    "consumable_effects": { "dynamic_heal": true },
+    "consumable_effects": {
+      "dynamic_heal": true
+    },
     "max_uses": 1,
     "current_uses": 1
   },
@@ -73,35 +77,70 @@
     "cost_silver": "4",
     "action_cost": "",
     "description": "może utrzymać do 20 strzał/bełtów || możecie nosić jeden przy sobie i jednen w eq nie używając miejsca",
-    "space_taken": "1 lub 5/10"
+    "space_taken": "1 lub 5/10",
+    "modifiers": [
+      {
+        "stat_name": "quiver_space",
+        "value": 10.0,
+        "mod_type": "ADD"
+      }
+    ]
   },
   {
     "name": "Plecak",
     "cost_silver": "10",
     "action_cost": "",
     "description": "dodaje 1 miesjce w ekwipuku || możesz nosić jeden bez kary do miesjca w eq",
-    "space_taken": "5 lub 10/10"
+    "space_taken": "5 lub 10/10",
+    "modifiers": [
+      {
+        "stat_name": "backpack_space",
+        "value": 10.0,
+        "mod_type": "ADD"
+      }
+    ]
   },
   {
     "name": "Plecak podróżnika",
     "cost_silver": "40",
     "action_cost": "",
     "description": "dodaje 2 miesjce w ekwipuku || możesz nosić jeden bez kary do miesjca w eq",
-    "space_taken": "7,5 lub 20/10"
+    "space_taken": "7,5 lub 20/10",
+    "modifiers": [
+      {
+        "stat_name": "backpack_space",
+        "value": 20.0,
+        "mod_type": "ADD"
+      }
+    ]
   },
   {
     "name": "Ubranie z kieszeniami",
     "cost_silver": "koszt+20%",
     "action_cost": "",
     "description": "dodają +1/2 miesjca w eq || miejsce staje się miejscem podręczym o ile nie nosisz zbroii || możesz nosić jeden zestaw bez kary do miesjca w eq",
-    "space_taken": "5/10"
+    "space_taken": "5/10",
+    "modifiers": [
+      {
+        "stat_name": "quick_space",
+        "value": 10.0,
+        "mod_type": "ADD"
+      }
+    ]
   },
   {
     "name": "Pasek z mocowaniem",
     "cost_silver": "4/20/100",
     "action_cost": "",
     "description": "dodają +1/2 miesjca podręcznego || możesz nosić jeden zestaw bez kary do miesjca w eq",
-    "space_taken": "2/10"
+    "space_taken": "2/10",
+    "modifiers": [
+      {
+        "stat_name": "quick_space",
+        "value": 10.0,
+        "mod_type": "ADD"
+      }
+    ]
   },
   {
     "name": "Narzędzia lekkie zbroje",
@@ -109,7 +148,9 @@
     "action_cost": "1h",
     "description": "naprawia 10 życia zbroii (posiada 4 użycia)",
     "space_taken": "użycia/10",
-    "consumable_effects": { "repair_armor": 10 },
+    "consumable_effects": {
+      "repair_armor": 10
+    },
     "max_uses": 4,
     "current_uses": 4
   },
@@ -119,7 +160,9 @@
     "action_cost": "1h",
     "description": "naprawia 15 życia zbroii (posiada 6 użyć)",
     "space_taken": "użycia/10",
-    "consumable_effects": { "repair_armor": 15 },
+    "consumable_effects": {
+      "repair_armor": 15
+    },
     "max_uses": 6,
     "current_uses": 6
   },

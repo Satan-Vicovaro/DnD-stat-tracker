@@ -231,7 +231,27 @@ class GameEngine:
         current_armor_hp = max(0, armor_max_hp - self.hero.damage_taken_physical)
         current_base_hp = max(0, base_max_hp - self.hero.damage_taken_magical)
 
-        broken_fragments = self.hero.damage_taken_physical // 5
+        # Compute broken fragments dynamically
+        broken_fragments = 0
+        damage_left_for_broken = self.hero.damage_taken_physical
+        
+        order = ["Stalowa", "Płytowa", "Półpłytowa", "Skórzana"]
+        all_types = self.hero.armor_state.types
+        for name in order + [n for n in all_types.keys() if n not in order]:
+            t = all_types.get(name)
+            if not t or t.quantity == 0:
+                continue
+            hp_pf = t.effects.get("hp_per_fragment", 0.0)
+            if hp_pf > 0:
+                max_hp_type = t.quantity * hp_pf
+                if damage_left_for_broken >= max_hp_type:
+                    broken_fragments += t.quantity
+                    damage_left_for_broken -= max_hp_type
+                else:
+                    broken_fragments += int(damage_left_for_broken // hp_pf)
+                    damage_left_for_broken = 0
+                    break
+
         current_mitigation = self.get_current_mitigation()
 
         health_split = {
@@ -335,10 +355,14 @@ class GameEngine:
         }
 
         active_containers = view_model["inventory_space"].get("active_containers", {})
+        from models import get_game_rules
+        clothes_ids = get_game_rules().get("inventory", {}).get("clothes_identifiers", ["ubrani"])
+
         for item in self.hero.inventory:
             item_dict = asdict(item)
             # active_containers is now keyed by item_id (stable UUID), not id()
             item_dict["is_active_container"] = item.item_id in active_containers
+            item_dict["is_clothes"] = any(cid.lower() in item.name.lower() for cid in clothes_ids)
             if item.item_id in active_containers:
                 item_dict["granted_space"] = active_containers[item.item_id]
             view_model["inventory"].append(item_dict)
@@ -413,17 +437,22 @@ class GameEngine:
         if new_loc:
             old_loc_str = old_loc.value if hasattr(old_loc, "value") else old_loc
             if new_loc != old_loc_str:
-                ap_cost = 0
-                if old_loc_str == "BACKPACK":
-                    ap_cost = 2
-                elif old_loc_str == "BACK":
-                    ap_cost = 1
+                from models import get_game_rules
+                costs = get_game_rules().get("inventory", {}).get("action_costs", {})
+                ap_cost = costs.get(f"move_from_{old_loc_str}", 0)
 
                 if ap_cost > 0:
                     self.hero.current_action_points -= ap_cost
                     logger.info(
                         f"Moved item from {old_loc_str} to {new_loc}. Deducted {ap_cost} AP."
                     )
+
+                if new_loc == "CLOTHES":
+                    from models import ItemLocation
+                    for i, inv_item in enumerate(self.hero.inventory):
+                        if i != index and (inv_item.location == "CLOTHES" or getattr(inv_item.location, "value", inv_item.location) == "CLOTHES"):
+                            inv_item.location = ItemLocation.BACKPACK
+                            logger.info(f"Auto-unequipped {inv_item.name} to backpack.")
 
         self._snapshot()
         old_item = self.hero.inventory.pop(index)
@@ -449,11 +478,10 @@ class GameEngine:
             logger.warning(f"Item {item.name} has no consumable effects.")
             return False
 
-        ap_cost = 0
-        if item.location == "BACKPACK":
-            ap_cost = 2
-        elif item.location == "BACK":
-            ap_cost = 1
+        from models import get_game_rules
+        costs = get_game_rules().get("inventory", {}).get("action_costs", {})
+        loc_str = item.location.value if hasattr(item.location, "value") else item.location
+        ap_cost = costs.get(f"use_from_{loc_str}", 0)
 
         if self.hero.current_action_points < ap_cost:
             logger.warning(
@@ -681,10 +709,9 @@ class GameEngine:
         5 HP per fragment that silently gave wrong results when the config was
         changed.
         """
-        # Per-type mitigation bonus granted by each *intact* fragment.
-        # (These are still magic numbers — see issue #13 — but at least the
-        # hp_per_fragment breakage is now driven by data.)
-        _MIT_PER_FRAG: dict[str, int] = {"Stalowa": 6, "Płytowa": 4, "Półpłytowa": 2}
+        from models import get_game_rules
+        rules = get_game_rules().get("combat", {})
+        broken_mult = rules.get("broken_fragment_mitigation_multiplier", 0.5)
 
         order = ["Stalowa", "Płytowa", "Półpłytowa", "Skórzana"]
         all_types = self.hero.armor_state.types
@@ -698,6 +725,7 @@ class GameEngine:
                 continue
 
             hp_per_frag = t.effects.get("hp_per_fragment", 0.0)
+            mit_per_frag = t.effects.get("mitigation_per_fragment", 0)
             max_hp = t.quantity * hp_per_frag
 
             if damage_left >= max_hp:
@@ -711,9 +739,8 @@ class GameEngine:
                 damage_left = 0
 
             intact = t.quantity - broken
-            mitigation += intact * _MIT_PER_FRAG.get(name, 0)
-            # half mitigation from broken ones
-            mitigation += broken * (_MIT_PER_FRAG.get(name, 0) // 2)
+            mitigation += intact * mit_per_frag
+            mitigation += int(broken * (mit_per_frag * broken_mult))
 
         return mitigation
 
