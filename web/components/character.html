@@ -6,11 +6,11 @@
     type="text"
     id="char-name"
     class="text-3xl font-extrabold text-center text-indigo-400 mb-1 bg-transparent border-b-2 border-transparent hover:border-indigo-500/50 focus:border-indigo-500 focus:outline-none w-full transition-colors"
-    value="Loading..."
+    value="Ładowanie..."
   />
   <div class="flex items-center justify-center space-x-3 mb-8">
     <p class="text-gray-400 font-medium tracking-wide w-24 text-right">
-      Level
+      Poziom
     </p>
     <div class="flex items-center space-x-3 bg-gray-900/50 p-1.5 rounded-full border border-gray-700/50 shadow-inner">
       <button data-action="modify-level" data-delta="-1" class="w-8 h-8 rounded-full bg-gray-700 hover:bg-rose-500/80 text-gray-300 flex items-center justify-center transition-colors font-bold shadow-md">-</button>
@@ -22,34 +22,34 @@
   <!-- Derived Stats Grid -->
   <div class="grid grid-cols-2 gap-4 mb-8 relative z-30">
     <div class="relative group bg-gray-900/50 p-4 rounded-xl text-center border border-gray-700/50 shadow-inner hover:z-50">
-      <p class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-1">Health Points</p>
+      <p class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-1">Zdrowie</p>
       <p class="text-2xl font-bold text-emerald-400" id="char-hp">-</p>
       <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-gray-950 border border-gray-600 rounded-lg shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 p-3 text-left">
-        <h4 class="text-xs font-bold text-gray-300 border-b border-gray-600 pb-1 mb-2">HP Breakdown</h4>
+        <h4 class="text-xs font-bold text-gray-300 border-b border-gray-600 pb-1 mb-2">Szczegóły HP</h4>
         <ul id="breakdown-hp" class="text-xs space-y-1"></ul>
       </div>
     </div>
     <div class="relative group bg-gray-900/50 p-4 rounded-xl text-center border border-gray-700/50 shadow-inner hover:z-50">
-      <p class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-1">Defense</p>
+      <p class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-1">Obrona</p>
       <p class="text-2xl font-bold text-blue-400" id="char-def">-</p>
       <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-gray-950 border border-gray-600 rounded-lg shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 p-3 text-left">
-        <h4 class="text-xs font-bold text-gray-300 border-b border-gray-600 pb-1 mb-2">Defense Breakdown</h4>
+        <h4 class="text-xs font-bold text-gray-300 border-b border-gray-600 pb-1 mb-2">Szczegóły Obrony</h4>
         <ul id="breakdown-def" class="text-xs space-y-1"></ul>
       </div>
     </div>
     <div class="relative group bg-gray-900/50 p-4 rounded-xl text-center border border-gray-700/50 shadow-inner hover:z-50">
-      <p class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-1">Action Points</p>
+      <p class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-1">Punkty Akcji</p>
       <p class="text-2xl font-bold text-amber-400" id="char-ap">-</p>
       <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-gray-950 border border-gray-600 rounded-lg shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 p-3 text-left">
-        <h4 class="text-xs font-bold text-gray-300 border-b border-gray-600 pb-1 mb-2">AP Breakdown</h4>
+        <h4 class="text-xs font-bold text-gray-300 border-b border-gray-600 pb-1 mb-2">Szczegóły PA</h4>
         <ul id="breakdown-ap" class="text-xs space-y-1"></ul>
       </div>
     </div>
     <div class="relative group bg-gray-900/50 p-4 rounded-xl text-center border border-gray-700/50 shadow-inner hover:z-50">
-      <p class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-1">Stamina</p>
+      <p class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-1">Wytrwałość</p>
       <p class="text-2xl font-bold text-rose-400" id="char-stam">-</p>
       <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-gray-950 border border-gray-600 rounded-lg shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 p-3 text-left">
-        <h4 class="text-xs font-bold text-gray-300 border-b border-gray-600 pb-1 mb-2">Stamina Breakdown</h4>
+        <h4 class="text-xs font-bold text-gray-300 border-b border-gray-600 pb-1 mb-2">Szczegóły Wytrwałości</h4>
         <ul id="breakdown-stam" class="text-xs space-y-1"></ul>
       </div>
     </div>
@@ -57,7 +57,7 @@
       <p class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-1">Ruch (ft)</p>
       <p class="text-2xl font-bold text-teal-400" id="char-move">-</p>
       <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-gray-950 border border-gray-600 rounded-lg shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 p-3 text-left">
-        <h4 class="text-xs font-bold text-gray-300 border-b border-gray-600 pb-1 mb-2">Movement Breakdown</h4>
+        <h4 class="text-xs font-bold text-gray-300 border-b border-gray-600 pb-1 mb-2">Szczegóły Ruchu</h4>
         <ul id="breakdown-move" class="text-xs space-y-1"></ul>
       </div>
     </div>
@@ -67,16 +67,16 @@
   <div class="relative z-10">
     <div class="flex justify-between items-end border-b border-gray-700/50 pb-2 mb-4">
       <h2 class="text-lg font-bold text-gray-300 uppercase tracking-widest">
-        Base Stats
+        Podstawowe Atrybuty
       </h2>
       <span class="text-xs font-medium text-gray-400 bg-gray-900 px-3 py-1 rounded-full border border-gray-700">
-        Points: <span id="unspent-points" class="text-indigo-400 font-bold">-</span>
+        Punkty: <span id="unspent-points" class="text-indigo-400 font-bold">-</span>
       </span>
     </div>
     <div class="space-y-3">
       <!-- STR -->
       <div class="flex justify-between items-center bg-gray-700/20 py-2 px-4 rounded-lg">
-        <span class="text-gray-400 font-medium w-32">Strength (STR)</span>
+        <span class="text-gray-400 font-medium w-32">Siła (SIŁ)</span>
         <div class="flex items-center space-x-3">
           <button data-action="modify-stat" data-stat="str" data-delta="-1" class="w-8 h-8 rounded-full bg-gray-700 hover:bg-rose-500/80 text-gray-300 flex items-center justify-center transition-colors font-bold">-</button>
           <span class="font-bold text-indigo-300 text-lg w-6 text-center" id="stat-str">-</span>
@@ -85,7 +85,7 @@
       </div>
       <!-- DEX -->
       <div class="flex justify-between items-center bg-gray-700/20 py-2 px-4 rounded-lg">
-        <span class="text-gray-400 font-medium w-32">Dexterity (DEX)</span>
+        <span class="text-gray-400 font-medium w-32">Zręczność (ZRĘ)</span>
         <div class="flex items-center space-x-3">
           <button data-action="modify-stat" data-stat="dex" data-delta="-1" class="w-8 h-8 rounded-full bg-gray-700 hover:bg-rose-500/80 text-gray-300 flex items-center justify-center transition-colors font-bold">-</button>
           <span class="font-bold text-indigo-300 text-lg w-6 text-center" id="stat-dex">-</span>
@@ -94,7 +94,7 @@
       </div>
       <!-- WIS -->
       <div class="flex justify-between items-center bg-gray-700/20 py-2 px-4 rounded-lg">
-        <span class="text-gray-400 font-medium w-32">Wisdom (WIS)</span>
+        <span class="text-gray-400 font-medium w-32">Wiedza (WIEDZ)</span>
         <div class="flex items-center space-x-3">
           <button data-action="modify-stat" data-stat="wis" data-delta="-1" class="w-8 h-8 rounded-full bg-gray-700 hover:bg-rose-500/80 text-gray-300 flex items-center justify-center transition-colors font-bold">-</button>
           <span class="font-bold text-indigo-300 text-lg w-6 text-center" id="stat-wis">-</span>
@@ -103,7 +103,7 @@
       </div>
       <!-- CHA -->
       <div class="flex justify-between items-center bg-gray-700/20 py-2 px-4 rounded-lg">
-        <span class="text-gray-400 font-medium w-32">Charisma (CHA)</span>
+        <span class="text-gray-400 font-medium w-32">Charyzma (CHA)</span>
         <div class="flex items-center space-x-3">
           <button data-action="modify-stat" data-stat="cha" data-delta="-1" class="w-8 h-8 rounded-full bg-gray-700 hover:bg-rose-500/80 text-gray-300 flex items-center justify-center transition-colors font-bold">-</button>
           <span class="font-bold text-indigo-300 text-lg w-6 text-center" id="stat-cha">-</span>

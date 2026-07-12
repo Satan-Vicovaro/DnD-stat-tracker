@@ -9,26 +9,33 @@
     <!-- Include Eel JS bridge -->
     <script type="text/javascript" src="/eel.js"></script>
   </head>
-  <body class="bg-gray-900 text-gray-100 min-h-screen p-8 font-sans selection:bg-indigo-500/30">
-
+  <body
+    class="bg-gray-900 text-gray-100 min-h-screen p-8 font-sans selection:bg-indigo-500/30"
+  >
     <!-- ─── Toolbar ─────────────────────────────────────────────────── -->
     <div class="sticky top-0 z-50 mb-6 max-w-7xl mx-auto">
-      <div class="bg-gray-800/80 backdrop-blur border border-gray-700 rounded-xl px-4 py-2.5 flex items-center gap-3 shadow-lg">
-
+      <div
+        class="bg-gray-800/80 backdrop-blur border border-gray-700 rounded-xl px-4 py-2.5 flex items-center gap-3 shadow-lg"
+      >
         <!-- Undo button -->
         <button
           id="btn-undo"
           disabled
           title="Cofnij ostatnią akcję (Ctrl+Z)"
-          class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold
-                 bg-gray-700 text-gray-500 border border-gray-600
-                 transition-all duration-150 select-none cursor-not-allowed
-                 enabled:cursor-pointer enabled:text-indigo-300 enabled:border-indigo-500/50
-                 enabled:bg-indigo-900/40 enabled:hover:bg-indigo-800/60 enabled:hover:text-white
-                 active:scale-95"
+          class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold bg-gray-700 text-gray-500 border border-gray-600 transition-all duration-150 select-none cursor-not-allowed enabled:cursor-pointer enabled:text-indigo-300 enabled:border-indigo-500/50 enabled:bg-indigo-900/40 enabled:hover:bg-indigo-800/60 enabled:hover:text-white active:scale-95"
         >
-          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"/>
+          <svg
+            class="w-4 h-4 shrink-0"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
+            />
           </svg>
           Cofnij
         </button>
@@ -37,13 +44,20 @@
         <button
           id="btn-load-saves"
           title="Wczytaj zapisaną grę"
-          class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold
-                 bg-indigo-900/40 text-indigo-300 border border-indigo-500/50
-                 transition-all duration-150 select-none cursor-pointer
-                 hover:bg-indigo-800/60 hover:text-white active:scale-95 ml-2"
+          class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold bg-indigo-900/40 text-indigo-300 border border-indigo-500/50 transition-all duration-150 select-none cursor-pointer hover:bg-indigo-800/60 hover:text-white active:scale-95 ml-2"
         >
-          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/>
+          <svg
+            class="w-4 h-4 shrink-0"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
+            />
           </svg>
           Wczytaj
         </button>
@@ -53,21 +67,28 @@
           id="btn-redo"
           disabled
           title="Ponów akcję (Ctrl+Y)"
-          class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold
-                 bg-gray-700 text-gray-500 border border-gray-600
-                 transition-all duration-150 select-none cursor-not-allowed
-                 enabled:cursor-pointer enabled:text-emerald-300 enabled:border-emerald-500/50
-                 enabled:bg-emerald-900/40 enabled:hover:bg-emerald-800/60 enabled:hover:text-white
-                 active:scale-95"
+          class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold bg-gray-700 text-gray-500 border border-gray-600 transition-all duration-150 select-none cursor-not-allowed enabled:cursor-pointer enabled:text-emerald-300 enabled:border-emerald-500/50 enabled:bg-emerald-900/40 enabled:hover:bg-emerald-800/60 enabled:hover:text-white active:scale-95"
         >
-          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l6-6m0 0-6-6m6 6H9a6 6 0 0 0 0 12h3"/>
+          <svg
+            class="w-4 h-4 shrink-0"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15 15l6-6m0 0-6-6m6 6H9a6 6 0 0 0 0 12h3"
+            />
           </svg>
           Ponów
         </button>
 
         <!-- Shortcut hints -->
-        <span class="text-gray-600 text-xs font-mono select-none">Ctrl+Z / Ctrl+Y | Ctrl+S Zapisz</span>
+        <span class="text-gray-600 text-xs font-mono select-none"
+          >Ctrl+Z / Ctrl+Y | Ctrl+S Zapisz</span
+        >
 
         <div class="flex-1"></div>
 
@@ -81,11 +102,35 @@
 
     <!-- ─── Tabs Navigation ─────────────────────────────────────────────────── -->
     <div class="max-w-7xl mx-auto mb-8">
-      <nav class="flex space-x-4 border-b border-gray-700" aria-label="Tabs" id="main-tabs">
-        <button data-target="tab-content-character" class="tab-btn bg-gray-800 text-white px-4 py-2 rounded-t-lg border-t border-l border-r border-gray-700 font-bold focus:outline-none transition-colors">Postać</button>
-        <button data-target="tab-content-items" class="tab-btn bg-transparent text-gray-400 hover:text-gray-300 hover:bg-gray-800/50 px-4 py-2 rounded-t-lg font-semibold focus:outline-none transition-colors">Przedmioty</button>
-        <button data-target="tab-content-shop" class="tab-btn bg-transparent text-gray-400 hover:text-gray-300 hover:bg-gray-800/50 px-4 py-2 rounded-t-lg font-semibold focus:outline-none transition-colors">Sklep</button>
-        <button data-target="tab-content-fight" class="tab-btn bg-transparent text-gray-400 hover:text-gray-300 hover:bg-gray-800/50 px-4 py-2 rounded-t-lg font-semibold focus:outline-none transition-colors flex items-center gap-2"><span class="text-rose-500">⚔</span> Walka</button>
+      <nav
+        class="flex space-x-4 border-b border-gray-700"
+        aria-label="Tabs"
+        id="main-tabs"
+      >
+        <button
+          data-target="tab-content-character"
+          class="tab-btn bg-gray-800 text-white px-4 py-2 rounded-t-lg border-t border-l border-r border-gray-700 font-bold focus:outline-none transition-colors"
+        >
+          Postać
+        </button>
+        <button
+          data-target="tab-content-items"
+          class="tab-btn bg-transparent text-gray-400 hover:text-gray-300 hover:bg-gray-800/50 px-4 py-2 rounded-t-lg font-semibold focus:outline-none transition-colors"
+        >
+          Przedmioty
+        </button>
+        <button
+          data-target="tab-content-shop"
+          class="tab-btn bg-transparent text-gray-400 hover:text-gray-300 hover:bg-gray-800/50 px-4 py-2 rounded-t-lg font-semibold focus:outline-none transition-colors"
+        >
+          Sklep
+        </button>
+        <button
+          data-target="tab-content-fight"
+          class="tab-btn bg-transparent text-gray-400 hover:text-gray-300 hover:bg-gray-800/50 px-4 py-2 rounded-t-lg font-semibold focus:outline-none transition-colors flex items-center gap-2"
+        >
+          Walka
+        </button>
       </nav>
     </div>
 
@@ -94,18 +139,24 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start mb-8">
         <!-- Character View Component -->
         <div id="character-view-container">
-          <div class="text-center text-gray-500 mt-20 animate-pulse">Loading Character...</div>
+          <div class="text-center text-gray-500 mt-20 animate-pulse">
+            Ładowanie postaci...
+          </div>
         </div>
-        
+
         <!-- Armor View Component -->
         <div id="armor-view-container">
-          <div class="text-center text-gray-500 mt-20 animate-pulse">Loading Armor Config...</div>
+          <div class="text-center text-gray-500 mt-20 animate-pulse">
+            Ładowanie pancerza...
+          </div>
         </div>
       </div>
 
       <!-- Status Effects Panel (full width below) -->
       <div id="status-effects-view-container">
-        <div class="text-center text-gray-500 mt-4 animate-pulse">Loading Statuses...</div>
+        <div class="text-center text-gray-500 mt-4 animate-pulse">
+          Ładowanie statusów...
+        </div>
       </div>
     </div>
 
@@ -113,13 +164,17 @@
       <!-- Economy View Component (Items) -->
       <div class="max-w-5xl mx-auto mb-8">
         <div id="economy-view-container-items">
-          <div class="text-center text-gray-500 mt-10 animate-pulse">Loading Economy...</div>
+          <div class="text-center text-gray-500 mt-10 animate-pulse">
+            Ładowanie finansów...
+          </div>
         </div>
       </div>
       <!-- Inventory View Component -->
       <div>
         <div id="inventory-view-container">
-          <div class="text-center text-gray-500 mt-20 animate-pulse">Loading Inventory...</div>
+          <div class="text-center text-gray-500 mt-20 animate-pulse">
+            Ładowanie ekwipunku...
+          </div>
         </div>
       </div>
     </div>
@@ -128,20 +183,26 @@
       <!-- Economy View Component (Shop) -->
       <div class="max-w-5xl mx-auto mb-8">
         <div id="economy-view-container-shop">
-          <div class="text-center text-gray-500 mt-10 animate-pulse">Loading Economy...</div>
+          <div class="text-center text-gray-500 mt-10 animate-pulse">
+            Ładowanie finansów...
+          </div>
         </div>
       </div>
       <!-- Shop View Component -->
       <div>
         <div id="shop-view-container">
-          <div class="text-center text-gray-500 mt-20 animate-pulse">Loading Shop...</div>
+          <div class="text-center text-gray-500 mt-20 animate-pulse">
+            Ładowanie sklepu...
+          </div>
         </div>
       </div>
     </div>
 
     <div id="tab-content-fight" class="tab-pane max-w-7xl mx-auto hidden">
       <div id="fight-view-container">
-        <div class="text-center text-gray-500 mt-20 animate-pulse">Loading Fight...</div>
+        <div class="text-center text-gray-500 mt-20 animate-pulse">
+          Ładowanie walki...
+        </div>
       </div>
     </div>
 

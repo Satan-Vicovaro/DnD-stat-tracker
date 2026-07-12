@@ -159,14 +159,14 @@ export class ItemEditorModal {
     list.innerHTML = this.modifiers.map((mod, i) => `
       <div class="flex items-center gap-2 bg-gray-800 p-2 rounded border border-gray-600">
         <select class="mod-stat flex-1 bg-gray-700 text-white text-sm rounded px-2 py-1 outline-none" data-idx="${i}">
-          <option value="max_hp" ${mod.stat_name === 'max_hp' ? 'selected' : ''}>Max HP</option>
+          <option value="max_hp" ${mod.stat_name === 'max_hp' ? 'selected' : ''}>Maks. HP</option>
           <option value="defense" ${mod.stat_name === 'defense' ? 'selected' : ''}>Obrona</option>
           <option value="ap" ${mod.stat_name === 'ap' ? 'selected' : ''}>Punkty Akcji</option>
-          <option value="stamina" ${mod.stat_name === 'stamina' ? 'selected' : ''}>Kondycja</option>
-          <option value="movement" ${mod.stat_name === 'movement' ? 'selected' : ''}>Szybkość</option>
+          <option value="stamina" ${mod.stat_name === 'stamina' ? 'selected' : ''}>Wytrwałość</option>
+          <option value="movement" ${mod.stat_name === 'movement' ? 'selected' : ''}>Ruch (ft)</option>
           <option value="str" ${mod.stat_name === 'str' ? 'selected' : ''}>Siła</option>
           <option value="dex" ${mod.stat_name === 'dex' ? 'selected' : ''}>Zręczność</option>
-          <option value="wis" ${mod.stat_name === 'wis' ? 'selected' : ''}>Mądrość</option>
+          <option value="wis" ${mod.stat_name === 'wis' ? 'selected' : ''}>Wiedza</option>
           <option value="cha" ${mod.stat_name === 'cha' ? 'selected' : ''}>Charyzma</option>
         </select>
         <input type="number" class="mod-val w-20 bg-gray-700 text-white text-sm rounded px-2 py-1 outline-none text-center" data-idx="${i}" value="${mod.value}">
