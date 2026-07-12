@@ -16,9 +16,19 @@ class Modifier:
     mod_type: str = "ADD"
 
 
+@dataclass
+class StatusEffect:
+    """A named status that can apply stat modifiers when active."""
+    title: str
+    description: str = ""
+    active: bool = True
+    modifiers: List[Modifier] = field(default_factory=list)
+    status_id: str = field(default_factory=lambda: str(uuid.uuid4()))
+
+
 class ModifierProvider(ABC):
     @abstractmethod
-    def get_modifiers(self, character=None) -> List[Modifier]:
+    def get_modifiers(self, character=None, stat_name: Optional[str] = None) -> List[Modifier]:
         pass
 
 
@@ -35,7 +45,7 @@ class StatManager:
         modifiers = []
         for provider in self.providers:
             modifiers.extend(
-                [m for m in provider.get_modifiers(self.character) if m.stat_name == stat_name]
+                [m for m in provider.get_modifiers(self.character, stat_name) if m.stat_name == stat_name]
             )
 
         aggregated = {}
@@ -80,7 +90,7 @@ class ArmorState(ModifierProvider):
     def remaining_space(self) -> int:
         return self.max_space - self.total_used_space
 
-    def get_modifiers(self, character=None) -> List[Modifier]:
+    def get_modifiers(self, character=None, stat_name: Optional[str] = None) -> List[Modifier]:
         mods = []
         level_div = (character.level / 2.0) if character and character.level > 0 else 0.5
         level_mult = (character.level / 2.0) if character else 0.5
@@ -211,27 +221,31 @@ class CharacterStats:
 
 
 class CharacterBaseProvider(ModifierProvider):
-    def get_modifiers(self, character) -> List[Modifier]:
+    def get_modifiers(self, character, stat_name: Optional[str] = None) -> List[Modifier]:
         mods = []
+        # Fast return for base stats to prevent infinite recursion
+        if stat_name in ("str", "dex", "wis", "cha"):
+            return mods
+            
         # max_hp
         mods.append(Modifier("Baza", "max_hp", 10))
         mods.append(Modifier("Poziom", "max_hp", (character.level - 1) * 2))
-        mods.append(Modifier("Siła", "max_hp", character.stats.str * 3))
+        mods.append(Modifier("Siła", "max_hp", character.total_str * 3))
 
         # defense
         mods.append(Modifier("Baza", "defense", 10))
         mods.append(Modifier("Poziom", "defense", (character.level - 1) * 0.8))
-        mods.append(Modifier("Zręczność", "defense", character.stats.dex))
+        mods.append(Modifier("Zręczność", "defense", character.total_dex))
 
         # ap
         mods.append(Modifier("Baza", "ap", 1))
         mods.append(Modifier("Poziom", "ap", character.level * 0.5 - 0.5))
-        mods.append(Modifier("Zręczność", "ap", character.stats.dex * 0.5))
+        mods.append(Modifier("Zręczność", "ap", character.total_dex * 0.5))
 
         # stamina
         mods.append(Modifier("Baza", "stamina", 1))
         mods.append(Modifier("Poziom", "stamina", (character.level - 1) * 0.25))
-        mods.append(Modifier("Charyzma", "stamina", character.stats.cha * 0.25))
+        mods.append(Modifier("Charyzma", "stamina", character.total_cha * 0.25))
 
         # movement
         mods.append(Modifier("Baza", "movement", 30))
@@ -240,11 +254,22 @@ class CharacterBaseProvider(ModifierProvider):
 
 
 class ItemModifierProvider(ModifierProvider):
-    def get_modifiers(self, character) -> List[Modifier]:
+    def get_modifiers(self, character, stat_name: Optional[str] = None) -> List[Modifier]:
         mods = []
         for item in character.inventory:
             if item.location == ItemLocation.EQUIPPED:
                 mods.extend(item.modifiers)
+        return mods
+
+
+class StatusEffectProvider(ModifierProvider):
+    """Feeds active StatusEffect modifiers into the stat manager."""
+
+    def get_modifiers(self, character, stat_name: Optional[str] = None) -> List[Modifier]:
+        mods = []
+        for effect in character.status_effects:
+            if effect.active:
+                mods.extend(effect.modifiers)
         return mods
 
 
@@ -262,6 +287,11 @@ class Character:
 
         self.item_provider = ItemModifierProvider()
         self.stat_manager.add_provider(self.item_provider)
+
+        # Status Effects (buffs / debuffs)
+        self.status_effects: List[StatusEffect] = []
+        self.status_provider = StatusEffectProvider()
+        self.stat_manager.add_provider(self.status_provider)
 
         # Combat State
         self.damage_taken_physical: int = 0
@@ -288,6 +318,22 @@ class Character:
             self.stats.base_str + self.stats.base_dex + self.stats.base_wis + self.stats.base_cha
         )
         return total_earned - spent
+
+    @property
+    def total_str(self) -> int:
+        return int(self.stat_manager.get_stat_breakdown("str", base_value=self.stats.str)["total"])
+
+    @property
+    def total_dex(self) -> int:
+        return int(self.stat_manager.get_stat_breakdown("dex", base_value=self.stats.dex)["total"])
+
+    @property
+    def total_wis(self) -> int:
+        return int(self.stat_manager.get_stat_breakdown("wis", base_value=self.stats.wis)["total"])
+
+    @property
+    def total_cha(self) -> int:
+        return int(self.stat_manager.get_stat_breakdown("cha", base_value=self.stats.cha)["total"])
 
     @property
     def max_hp(self) -> int:
@@ -394,7 +440,7 @@ class Character:
         used_backpack += (self.gold * 0.005) + (self.silver * 0.004) + (self.copper * 0.01)
 
         # Calculate max capacities
-        max_quick = 20.0 + (self.stats.str * 2.0)
+        max_quick = 20.0 + (self.total_str * 2.0)
         if has_pocket_clothes:
             max_quick += 10.0
         if has_attachment_belt:

@@ -18,6 +18,7 @@ from models import (
     Weapon,
     ActionCard,
     Armor,
+    StatusEffect,
 )
 
 # ---------------------------------------------------------------------------
@@ -225,6 +226,25 @@ def serialize(hero: Character) -> dict:
         "armor_quantities": {
             name: atype.quantity for name, atype in hero.armor_state.types.items()
         },
+        # Status effects
+        "status_effects": [
+            {
+                "status_id": se.status_id,
+                "title": se.title,
+                "description": se.description,
+                "active": se.active,
+                "modifiers": [
+                    {
+                        "source": m.source,
+                        "stat_name": m.stat_name,
+                        "value": m.value,
+                        "mod_type": m.mod_type,
+                    }
+                    for m in se.modifiers
+                ],
+            }
+            for se in hero.status_effects
+        ],
         # Inventory
         "inventory": inventory,
     }
@@ -264,6 +284,27 @@ def deserialize(data: dict) -> Character:
     for name, qty in data.get("armor_quantities", {}).items():
         if name in hero.armor_state.types:
             hero.armor_state.types[name].quantity = qty
+
+    # Status effects
+    for se_dict in data.get("status_effects", []):
+        mods = [
+            Modifier(
+                source=m.get("source", se_dict.get("title", "Status")),
+                stat_name=m.get("stat_name", ""),
+                value=m.get("value", 0.0),
+                mod_type=m.get("mod_type", "ADD"),
+            )
+            for m in se_dict.get("modifiers", [])
+        ]
+        hero.status_effects.append(
+            StatusEffect(
+                title=se_dict.get("title", "Status"),
+                description=se_dict.get("description", ""),
+                active=se_dict.get("active", True),
+                modifiers=mods,
+                status_id=se_dict.get("status_id", str(uuid.uuid4())),
+            )
+        )
 
     # Inventory
     for item_dict in data.get("inventory", []):

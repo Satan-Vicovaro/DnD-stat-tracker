@@ -2,6 +2,7 @@ export class FightComponent {
   constructor(containerId) {
     this.containerId = containerId;
     this.characterData = null;
+    this.weaponInputs = {};
   }
 
   async init() {
@@ -197,6 +198,63 @@ export class FightComponent {
 
   bindDynamicActions() {
     const container = document.getElementById(this.containerId);
+    
+    // Bind weapon inputs
+    container.querySelectorAll('input[data-weapon-input]').forEach(input => {
+      input.addEventListener('input', (e) => {
+        const index = e.currentTarget.getAttribute('data-weapon-input');
+        this.weaponInputs[index] = e.currentTarget.value;
+        this.render(); // Re-render to update the displayed action
+        
+        // After re-render, focus the input again and push cursor to the end
+        requestAnimationFrame(() => {
+          const el = document.querySelector(`input[data-weapon-input="${index}"]`);
+          if (el) {
+            el.focus();
+            // Hack to move cursor to the end of a type="number" input after re-render
+            const val = el.value;
+            el.value = '';
+            el.value = val;
+          }
+        });
+      });
+    });
+
+    // Bind weapon attack buttons
+    container.querySelectorAll('button[data-action="fight-weapon-use"]').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        const index = parseInt(e.currentTarget.getAttribute('data-index'));
+        const actionCost = parseFloat(e.currentTarget.getAttribute('data-cost')) || 0;
+        
+        const curAP = this.characterData.current_action_points ?? 0;
+        const errEl = container.querySelector(`[data-weapon-err="${index}"]`);
+
+        if (actionCost > 0 && curAP < actionCost) {
+          if (errEl) {
+            errEl.textContent = `Za mało PA! Potrzebujesz ${actionCost} PA, masz ${Number.isInteger(curAP) ? curAP : curAP.toFixed(2)}.`;
+            errEl.classList.remove('hidden');
+          }
+          return;
+        }
+        if (errEl) errEl.classList.add('hidden');
+
+        // Drain AP
+        this.characterData = await eel.set_action_points(Math.max(0, curAP - actionCost))();
+        document.dispatchEvent(new CustomEvent('characterUpdated', { detail: this.characterData }));
+        
+        // Optional visual feedback
+        const originalText = e.currentTarget.innerHTML;
+        e.currentTarget.innerHTML = `<span>⚔</span> Atak!`;
+        e.currentTarget.classList.replace('bg-rose-600', 'bg-rose-400');
+        setTimeout(() => {
+          if (document.contains(e.currentTarget)) {
+            e.currentTarget.innerHTML = originalText;
+            e.currentTarget.classList.replace('bg-rose-400', 'bg-rose-600');
+          }
+        }, 400);
+      });
+    });
+
     container.querySelectorAll('button[data-action="fight-use"]').forEach(btn => {
       btn.addEventListener('click', async (e) => {
         const index = parseInt(e.currentTarget.getAttribute('data-index'));
@@ -247,23 +305,78 @@ export class FightComponent {
     // Map internal location to human readable tag
     const locMap = { "EQUIPPED": "W Rękach", "BACKPACK": "Plecak (2 PA)", "BACK": "Plecy (1 PA)", "QUIVER": "Kołczan", "WAGON": "Wóz" };
     const locTag = locMap[item.location] || item.location;
-    const locBadge = `<span class="bg-indigo-900/50 text-indigo-300 text-[9px] px-1.5 py-0.5 rounded border border-indigo-500/50">[${locTag}]</span>`;
+    const locBadge = `<span class="bg-indigo-900/50 text-indigo-300 text-[15px] px-1.5 py-0.5 rounded border border-indigo-500/50">[${locTag}]</span>`;
 
     // Actions if weapon
     let actionsHtml = '';
     if (!isConsumable && item.item_type === "Weapon" && item.actions && item.actions.length > 0) {
-      actionsHtml = `<div class="mt-3 flex flex-col gap-2">` + item.actions.map(a => `
-        <div class="bg-gray-900/60 rounded p-2 border border-gray-700/50">
-          <div class="flex justify-between items-center mb-1">
-            <span class="text-sm font-bold text-rose-300">${a.action_name}</span>
-            <span class="text-xs font-mono text-gray-500">Koszt: ${a.action_cost} PA</span>
+      const inputVal = this.weaponInputs[index] !== undefined ? this.weaponInputs[index] : '';
+      
+      let selectedAction = null;
+      if (inputVal !== '') {
+        const numericVal = parseInt(inputVal);
+        if (!isNaN(numericVal)) {
+          // Sort actions by card_value ascending
+          const sortedActions = [...item.actions].sort((a, b) => parseInt(a.card_value) - parseInt(b.card_value));
+          for (let i = sortedActions.length - 1; i >= 0; i--) {
+            if (numericVal >= parseInt(sortedActions[i].card_value)) {
+              selectedAction = sortedActions[i];
+              break;
+            }
+          }
+        }
+      }
+
+      let selectedActionHtml = '';
+      if (selectedAction) {
+        const act = selectedAction;
+        let descHtml = "";
+        if (act.description) {
+          const parts = act.description.split("||").map(s => s.trim()).filter(s => s.length > 0);
+          if (parts.length === 1) descHtml = parts[0];
+          else descHtml = `<ul class="list-disc list-inside space-y-1 ml-1">${parts.map(p => `<li>${p}</li>`).join("")}</ul>`;
+        }
+
+        const isUltimate = parseInt(act.card_value) >= 10;
+        const cardWrapperClasses = isUltimate 
+          ? "bg-black/90 rounded-lg p-3 border-2 border-amber-500/80 shadow-[0_0_15px_rgba(245,158,11,0.5)] mt-3 relative transition-all duration-300"
+          : "bg-black/80 rounded-lg p-3 border-2 border-slate-600 shadow-md mt-3 relative transition-all duration-300";
+
+        selectedActionHtml = `
+          <div class="${cardWrapperClasses}">
+            <div class="flex justify-between items-center text-indigo-200 mb-2 pb-2 border-b border-slate-600">
+              <span class="text-sm font-extrabold tracking-wide">${act.action_name}</span>
+              <span class="text-emerald-400 font-bold text-xs bg-emerald-900/40 px-2 py-1 rounded border border-emerald-500/30">AP: ${act.action_cost}</span>
+            </div>
+            <div class="flex flex-wrap gap-2 mb-2">
+              <span class="bg-slate-800/80 px-2 py-1 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[9px] font-extrabold mr-1">Odp:</span> <span class="font-bold text-white text-xs">${act.card_value}</span></span>
+              <span class="bg-slate-800/80 px-2 py-1 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[9px] font-extrabold mr-1">Zas:</span> <span class="font-bold text-white text-xs">${act.range || act.range_str || "-"}</span></span>
+              <span class="bg-slate-800/80 px-2 py-1 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[9px] font-extrabold mr-1">Hit:</span> <span class="font-bold text-amber-400 text-xs">${act.hit_roll || "-"}</span></span>
+              <span class="bg-slate-800/80 px-2 py-1 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[9px] font-extrabold mr-1">Dmg:</span> <span class="font-bold text-rose-400 text-xs">${act.damage_roll || "-"}</span></span>
+            </div>
+            <div class="text-slate-200 italic text-xs leading-relaxed border-t border-slate-600/50 pt-2 mt-1 font-medium">${descHtml}</div>
+            
+            <div class="mt-3 flex flex-col gap-1">
+              <button data-action="fight-weapon-use" data-index="${index}" data-cost="${act.action_cost}" class="w-full bg-rose-600 hover:bg-rose-500 text-white font-extrabold text-sm py-1.5 px-3 rounded shadow-md transition-colors border border-rose-500/50 flex items-center justify-center gap-2">
+                <span>⚔</span> Użyj
+              </button>
+              <span data-weapon-err="${index}" class="hidden text-[10px] text-rose-400 font-semibold text-center mt-1"></span>
+            </div>
           </div>
-          <div class="text-[11px] text-gray-400 flex flex-wrap gap-x-3 gap-y-1">
-            ${a.hit_roll ? `<span>🎯 Trafienie: <span class="text-white">${a.hit_roll}</span></span>` : ''}
-            ${a.damage_roll ? `<span>🩸 Obrażenia: <span class="text-white">${a.damage_roll}</span></span>` : ''}
+        `;
+      } else if (inputVal !== '') {
+        selectedActionHtml = `<div class="text-xs text-rose-400 mt-2 font-semibold">Brak akcji dla tej wartości.</div>`;
+      }
+
+      actionsHtml = `
+        <div class="mt-3 border-t border-gray-600 pt-3">
+          <div class="flex items-center justify-between gap-2">
+            <label class="text-[10px] text-amber-400 font-bold uppercase tracking-wide">🎲 Wartość karty:</label>
+            <input type="number" min="0" data-weapon-input="${index}" class="w-20 bg-gray-900 border border-amber-500/60 text-white text-sm text-center rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-amber-400 placeholder-gray-600 shadow-inner" value="${inputVal}" placeholder="np. 5">
           </div>
+          ${selectedActionHtml}
         </div>
-      `).join('') + `</div>`;
+      `;
     }
 
     // Consumable specific UI

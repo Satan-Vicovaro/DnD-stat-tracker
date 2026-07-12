@@ -1,0 +1,95 @@
+<div class="bg-gray-800 rounded-2xl shadow-2xl p-6 w-full border border-gray-700 relative overflow-hidden">
+  <!-- Decorative glow -->
+  <div class="absolute -top-10 -left-10 w-40 h-40 bg-purple-600 rounded-full blur-3xl opacity-15 pointer-events-none"></div>
+
+  <!-- Header -->
+  <div class="flex items-center justify-between border-b border-gray-700/50 pb-3 mb-4 relative z-10">
+    <div class="flex items-center gap-2">
+      <span class="text-purple-400 text-lg">✦</span>
+      <h2 class="text-lg font-bold text-gray-300 uppercase tracking-widest">Statusy</h2>
+    </div>
+    <button
+      id="se-add-btn"
+      class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold
+             bg-purple-900/40 text-purple-300 border border-purple-500/40
+             hover:bg-purple-800/60 hover:text-white transition-all duration-150 active:scale-95"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+      </svg>
+      Dodaj status
+    </button>
+  </div>
+
+  <!-- Effect list -->
+  <ul id="se-list" class="space-y-2 relative z-10 min-h-[48px]">
+    <!-- populated by JS -->
+    <li id="se-empty" class="text-center text-gray-600 text-sm py-4 italic">Brak statusów</li>
+  </ul>
+</div>
+
+<!-- ── Status Effect Modal ─────────────────────────────────────────────────── -->
+<div id="se-modal-backdrop"
+     class="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm hidden">
+  <div class="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-lg mx-4 overflow-hidden">
+    <!-- Modal header -->
+    <div class="flex items-center justify-between px-6 py-4 border-b border-gray-700 bg-gray-800/60">
+      <h3 id="se-modal-title" class="text-base font-bold text-purple-300 uppercase tracking-widest">Nowy status</h3>
+      <button id="se-modal-close" class="text-gray-500 hover:text-white transition-colors text-xl leading-none">&times;</button>
+    </div>
+
+    <!-- Modal body -->
+    <div class="p-6 space-y-4 overflow-y-auto max-h-[70vh]">
+      <!-- Title -->
+      <div>
+        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1" for="se-input-title">Tytuł</label>
+        <input id="se-input-title" type="text" placeholder="np. Błogosławieństwo, Trucizna…"
+               class="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white placeholder-gray-600 focus:border-purple-500 focus:outline-none transition-colors text-sm" />
+      </div>
+
+      <!-- Description -->
+      <div>
+        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1" for="se-input-desc">Opis</label>
+        <textarea id="se-input-desc" rows="2" placeholder="Krótki opis efektu…"
+                  class="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white placeholder-gray-600 focus:border-purple-500 focus:outline-none transition-colors text-sm resize-none"></textarea>
+      </div>
+
+      <!-- Active toggle -->
+      <div class="flex items-center gap-3">
+        <button id="se-input-active-btn"
+                class="relative w-10 h-6 rounded-full transition-colors duration-200 focus:outline-none"
+                role="switch" aria-checked="true">
+          <span id="se-input-active-knob" class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform duration-200"></span>
+        </button>
+        <span class="text-sm text-gray-400">Status aktywny</span>
+      </div>
+
+      <!-- Modifiers -->
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Modyfikatory statystyk</label>
+          <button id="se-add-mod-btn"
+                  class="text-xs px-2 py-1 rounded-md bg-gray-700 text-purple-300 hover:bg-gray-600 transition-colors font-semibold">
+            + Dodaj
+          </button>
+        </div>
+        <ul id="se-mod-list" class="space-y-2">
+          <!-- rows added by JS -->
+        </ul>
+        <p id="se-mod-empty" class="text-xs text-gray-600 italic text-center py-2">Brak modyfikatorów</p>
+      </div>
+    </div>
+
+    <!-- Modal footer -->
+    <div class="flex justify-end gap-3 px-6 py-4 border-t border-gray-700 bg-gray-800/60">
+      <button id="se-modal-cancel"
+              class="px-4 py-2 rounded-lg text-sm font-semibold text-gray-400 hover:text-white bg-gray-700 hover:bg-gray-600 transition-all">
+        Anuluj
+      </button>
+      <button id="se-modal-save"
+              class="px-4 py-2 rounded-lg text-sm font-semibold text-white bg-purple-600 hover:bg-purple-500 transition-all active:scale-95">
+        Zapisz
+      </button>
+    </div>
+  </div>
+</div>

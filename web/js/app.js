@@ -7,6 +7,7 @@ import { ItemEditorModal } from './components/ItemEditorModal.js';
 import { InventoryComponent } from './components/InventoryComponent.js';
 import { SaveLoadModal } from './components/SaveLoadModal.js';
 import { FightComponent } from './components/FightComponent.js';
+import { StatusEffectsComponent } from './components/StatusEffectsComponent.js';
 
 // ─── Undo / Redo Manager ─────────────────────────────────────────────────────
 
@@ -91,6 +92,9 @@ window.onload = async () => {
 
     const fightArmorView = new ArmorComponent("fight-armor-view-container", true);
     fightArmorView.init();
+
+    const statusEffectsView = new StatusEffectsComponent("status-effects-view-container");
+    statusEffectsView.init();
 
     // Initialize the Shop View Component
     const shopView = new ShopComponent("shop-view-container");

@@ -165,3 +165,35 @@ def load_named_save(filename: str):
         game_engine.save()
         return game_engine.get_character_view_model()
     return None
+
+
+@eel.expose
+def add_status_effect(effect_dict: dict):
+    """API endpoint to add a new status effect."""
+    game_engine.add_status_effect(effect_dict)
+    game_engine.save()
+    return game_engine.get_character_view_model()
+
+
+@eel.expose
+def remove_status_effect(status_id: str):
+    """API endpoint to remove a status effect by ID."""
+    game_engine.remove_status_effect(status_id)
+    game_engine.save()
+    return game_engine.get_character_view_model()
+
+
+@eel.expose
+def toggle_status_effect(status_id: str):
+    """API endpoint to toggle a status effect's active state."""
+    game_engine.toggle_status_effect(status_id)
+    game_engine.save()
+    return game_engine.get_character_view_model()
+
+
+@eel.expose
+def update_status_effect(status_id: str, effect_dict: dict):
+    """API endpoint to update an existing status effect."""
+    game_engine.update_status_effect(status_id, effect_dict)
+    game_engine.save()
+    return game_engine.get_character_view_model()

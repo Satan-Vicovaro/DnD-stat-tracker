@@ -36,7 +36,8 @@
         "turn_execution": "Gracza",
         "description": "Otrzymuejsz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera"
       }
-    ]
+    ],
+    "space_taken": "7,5"
   },
   {
     "name": "Tarcza migdałowata (drewniana)",
@@ -75,7 +76,8 @@
         "turn_execution": "Gracza",
         "description": "Otrzymuejsz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera"
       }
-    ]
+    ],
+    "space_taken": "10"
   },
   {
     "name": "Puklerz (drewniany)",
@@ -103,7 +105,8 @@
         "turn_execution": "Gracza",
         "description": "Do końca walki otrzymuejsz +2ac"
       }
-    ]
+    ],
+    "space_taken": "5"
   },
   {
     "name": "Tarcza rzymska (drewniana)",
@@ -142,10 +145,11 @@
         "turn_execution": "Gracza",
         "description": "Możesz zablokować wszystke ataki wroga wymierzone w ciebie (d20+8<dmg wroga --> tarcza zostaje niszczona) || Wróg nie może wyjść z twojej strefy kontrolii"
       }
-    ]
+    ],
+    "space_taken": "10"
   },
   {
-    "name": "Tarcza okrągła (żelana)",
+    "name": "Tarcza okrągła (żelazna)",
     "cost_silver": "50",
     "actions": [
       {
@@ -181,7 +185,8 @@
         "turn_execution": "Gracza",
         "description": "Otrzymuejsz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera"
       }
-    ]
+    ],
+    "space_taken": "7,5"
   },
   {
     "name": "Tarcza migdałowata (żelazna)",
@@ -220,7 +225,8 @@
         "turn_execution": "Gracza",
         "description": "Otrzymuejsz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera"
       }
-    ]
+    ],
+    "space_taken": "10"
   },
   {
     "name": "Puklerz (żelazny)",
@@ -248,7 +254,8 @@
         "turn_execution": "Gracza",
         "description": "Do końca walki otrzymuejsz +2ac"
       }
-    ]
+    ],
+    "space_taken": "5"
   },
   {
     "name": "Tarcza rzymska (żelazna)",
@@ -287,6 +294,7 @@
         "turn_execution": "Gracza",
         "description": "Możesz zablokować wszystke ataki wroga wymierzone w ciebie (d20+12<dmg wroga --> tarcza zostaje niszczona) || Wróg nie może wyjść z twojej strefy kontrolii"
       }
-    ]
+    ],
+    "space_taken": "10"
   }
 ]

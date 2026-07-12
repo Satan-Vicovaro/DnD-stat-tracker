@@ -47,7 +47,8 @@
         "turn_execution": "Gracza/Soj",
         "description": "Odepchnij wroga 5ft w wybranym kierunku (save: d20+str>13+str) || Advantage na kolejny atak w cel tego ataku"
       }
-    ]
+    ],
+    "space_taken": "0"
   },
   {
     "weapon_name": "Topór",
@@ -86,7 +87,8 @@
         "turn_execution": "Gracza",
         "description": "Otrzymujesz 10ft ruchu (tylko raz)"
       }
-    ]
+    ],
+    "space_taken": "10"
   },
   {
     "weapon_name": "Miecz",
@@ -147,7 +149,8 @@
         "turn_execution": "Sojusznka/Wro",
         "description": "Zniwecz jedną akcje przeciniwka || Rozbrój wroga (save: d20+dex>d20+dex wroga)"
       }
-    ]
+    ],
+    "space_taken": "7,5"
   },
   {
     "weapon_name": "Buzdygan",
@@ -186,7 +189,8 @@
         "turn_execution": "Gracza",
         "description": "Advantage na wszystkie ataki przeciwko trafionemu przeciwnikowi o mniejszym str od ciebie || Jeżeli nie trafisz, przeciwnik zostaje trafiony \"Ciosem\""
       }
-    ]
+    ],
+    "space_taken": "7,5"
   },
   {
     "weapon_name": "Włócznia",
@@ -225,7 +229,8 @@
         "turn_execution": "Gracza",
         "description": "Wszystkie pchnięcia do końca następnej tury zadają d4+2xstr"
       }
-    ]
+    ],
+    "space_taken": "10"
   },
   {
     "weapon_name": "Miecz długi",
@@ -264,7 +269,8 @@
         "turn_execution": "Gracza",
         "description": "Rzuć d4, w przypadku, gdy wyrzucisz 4, zabij przeciwnika swojego rozmiaru lub zadaj 3xdmg przeciwnikowi większemu od siebie"
       }
-    ]
+    ],
+    "space_taken": "10"
   },
   {
     "weapon_name": "Topór dwuręczny",
@@ -303,7 +309,8 @@
         "turn_execution": "Gracza",
         "description": "Ataku nie można zablokować || Jeżeli po tym gdy zadasz obrażenia przeciwnikowi, gdy zostanie mu mniej niż 20 życia, ten zostaje zabity"
       }
-    ]
+    ],
+    "space_taken": "20"
   },
   {
     "weapon_name": "Miecz dwuręczny",
@@ -353,7 +360,8 @@
         "turn_execution": "Sojusznika/Wro",
         "description": "Użyj dowolną kartę miecza dwóręcznego"
       }
-    ]
+    ],
+    "space_taken": "20"
   },
   {
     "weapon_name": "Młot dwuręczny",
@@ -392,7 +400,8 @@
         "turn_execution": "Gracz",
         "description": "Spraw, że sąsiedzi przeciwnika mogą go raz zaatakować za darmo (save: d20+str>15+2xstr)"
       }
-    ]
+    ],
+    "space_taken": "20"
   },
   {
     "weapon_name": "Włócznia długa",
@@ -431,10 +440,11 @@
         "turn_execution": "Gracza",
         "description": "Wszystkie pchnięcia do końca następnej tury zadają d8+3xstr"
       }
-    ]
+    ],
+    "space_taken": "20"
   },
   {
-    "weapon_name": "Morning star dwu.",
+    "weapon_name": "Morning star dwuręczny",
     "cost_silver": "25",
     "actions": [
       {
@@ -481,7 +491,8 @@
         "turn_execution": "Sojusznika",
         "description": "Gdy sojusznik zaatakuje przeciwnika, możesz wykonać \"Zamachy\" || Sojusznik otrzymuje możliwość przerzucenia jednej ze swoich kostek w trakcie ataku"
       }
-    ]
+    ],
+    "space_taken": "20"
   },
   {
     "weapon_name": "Halabarda",
@@ -531,6 +542,7 @@
         "turn_execution": "Gracza",
         "description": "Jeżeli po tym gdy zadasz obrażenia przeciwnikowi, gdy zostanie mu mniej niż 6 życia, ten zostaje zabity"
       }
-    ]
+    ],
+    "space_taken": "20"
   }
 ]

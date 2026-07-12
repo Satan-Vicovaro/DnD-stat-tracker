@@ -2,6 +2,7 @@ import copy
 import json
 import logging
 import os
+import sys
 from pathlib import Path
 
 from models import Character
@@ -9,8 +10,24 @@ from serializer import build_item, serialize, deserialize
 
 logger = logging.getLogger(__name__)
 
-_AUTOSAVE_PATH = "data/quick_save.json"
-_SAVES_DIR = "data/saves"
+def get_data_path(relative_path: str) -> str:
+    """Return the path for mutable data (saves), which lives next to the executable."""
+    if getattr(sys, 'frozen', False):
+        base_path = os.path.dirname(sys.executable)
+    else:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
+def get_resource_path(relative_path: str) -> str:
+    """Return the path for bundled static resources (config), which might be in PyInstaller's temp dir."""
+    if hasattr(sys, '_MEIPASS'):
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
+_AUTOSAVE_PATH = get_data_path("data/quick_save.json")
+_SAVES_DIR = get_data_path("data/saves")
 
 
 class GameEngine:
@@ -119,7 +136,7 @@ class GameEngine:
 
     def save(self):
         """Auto-save current hero to data/autosave.json."""
-        os.makedirs("data", exist_ok=True)
+        os.makedirs(os.path.dirname(_AUTOSAVE_PATH), exist_ok=True)
         try:
             with open(_AUTOSAVE_PATH, "w", encoding="utf-8") as f:
                 json.dump(serialize(self.hero), f, ensure_ascii=False, indent=2)
@@ -287,10 +304,10 @@ class GameEngine:
             "stamina": self.hero.stat_manager.get_stat_breakdown("stamina"),
             "movement": self.hero.stat_manager.get_stat_breakdown("movement"),
             "stats": {
-                "str": self.hero.stats.str,
-                "dex": self.hero.stats.dex,
-                "wis": self.hero.stats.wis,
-                "cha": self.hero.stats.cha,
+                "str": self.hero.total_str,
+                "dex": self.hero.total_dex,
+                "wis": self.hero.total_wis,
+                "cha": self.hero.total_cha,
             },
             "armor": {
                 "max_space": self.hero.armor_state.max_space,
@@ -320,6 +337,24 @@ class GameEngine:
 
         view_model["can_undo"] = self.can_undo()
         view_model["can_redo"] = self.can_redo()
+        view_model["status_effects"] = [
+            {
+                "status_id": se.status_id,
+                "title": se.title,
+                "description": se.description,
+                "active": se.active,
+                "modifiers": [
+                    {
+                        "source": m.source,
+                        "stat_name": m.stat_name,
+                        "value": m.value,
+                        "mod_type": m.mod_type,
+                    }
+                    for m in se.modifiers
+                ],
+            }
+            for se in self.hero.status_effects
+        ]
         return view_model
 
     # ------------------------------------------------------------------
@@ -499,6 +534,80 @@ class GameEngine:
         logger.info(f"Hero stat {stat_name} modified by {delta}")
         return True
 
+    # ------------------------------------------------------------------
+    # Status Effects
+    # ------------------------------------------------------------------
+
+    def add_status_effect(self, effect_dict: dict) -> bool:
+        """Add a new status effect to the character."""
+        from models import StatusEffect, Modifier
+        import uuid as _uuid
+        mods = [
+            Modifier(
+                source=m.get("source", effect_dict.get("title", "Status")),
+                stat_name=m.get("stat_name", ""),
+                value=float(m.get("value", 0.0)),
+                mod_type=m.get("mod_type", "ADD"),
+            )
+            for m in effect_dict.get("modifiers", [])
+        ]
+        se = StatusEffect(
+            title=effect_dict.get("title", "Status"),
+            description=effect_dict.get("description", ""),
+            active=effect_dict.get("active", True),
+            modifiers=mods,
+            status_id=effect_dict.get("status_id") or str(_uuid.uuid4()),
+        )
+        self._snapshot()
+        self.hero.status_effects.append(se)
+        logger.info(f"Added status effect: {se.title}")
+        return True
+
+    def remove_status_effect(self, status_id: str) -> bool:
+        """Remove a status effect by its ID."""
+        for i, se in enumerate(self.hero.status_effects):
+            if se.status_id == status_id:
+                self._snapshot()
+                self.hero.status_effects.pop(i)
+                logger.info(f"Removed status effect: {se.title}")
+                return True
+        logger.warning(f"Status effect {status_id!r} not found.")
+        return False
+
+    def toggle_status_effect(self, status_id: str) -> bool:
+        """Toggle the active state of a status effect."""
+        for se in self.hero.status_effects:
+            if se.status_id == status_id:
+                self._snapshot()
+                se.active = not se.active
+                logger.info(f"Toggled status effect {se.title!r} → active={se.active}")
+                return True
+        logger.warning(f"Status effect {status_id!r} not found.")
+        return False
+
+    def update_status_effect(self, status_id: str, effect_dict: dict) -> bool:
+        """Replace a status effect's data in-place."""
+        from models import Modifier
+        for se in self.hero.status_effects:
+            if se.status_id == status_id:
+                self._snapshot()
+                se.title = effect_dict.get("title", se.title)
+                se.description = effect_dict.get("description", se.description)
+                se.active = effect_dict.get("active", se.active)
+                se.modifiers = [
+                    Modifier(
+                        source=m.get("source", se.title),
+                        stat_name=m.get("stat_name", ""),
+                        value=float(m.get("value", 0.0)),
+                        mod_type=m.get("mod_type", "ADD"),
+                    )
+                    for m in effect_dict.get("modifiers", [])
+                ]
+                logger.info(f"Updated status effect: {se.title}")
+                return True
+        logger.warning(f"Status effect {status_id!r} not found.")
+        return False
+
     def get_current_mitigation(self) -> int:
         """Compute total damage mitigation from intact armor fragments.
 
@@ -635,7 +744,7 @@ class GameEngine:
         Called once in ``__init__``. All subsequent access should go through
         ``get_shop_data()`` which returns the cached result.
         """
-        shop_dir = "config/shop"
+        shop_dir = get_resource_path("config/shop")
         categories = {
             "Broń biała": "bron_biala_structured.json",
             "Broń zasięgowa": "bron_zasiegowa_structured.json",

@@ -36,7 +36,8 @@
         "turn_execution": "Wroga",
         "description": "Wykonaj atak gdy przeciwnik wejdzie w zasięg twojego rzutu || Zmniejsza ruch wroga o 15ft, w tej turze"
       }
-    ]
+    ],
+    "space_taken": "5"
   },
   {
     "name": "Toporek do rzucania",
@@ -75,7 +76,8 @@
         "turn_execution": "Gracza",
         "description": "Wykonujesz ataki w wroga, do momentu w którym któryś z nich nie trafi lub gdy wykonasz ich 6"
       }
-    ]
+    ],
+    "space_taken": "3,3"
   },
   {
     "name": "Noże do rzucania",
@@ -114,7 +116,8 @@
         "turn_execution": "Gracza",
         "description": "Możesz wykonać rzuty wszsytkimi wyjętymi przez ciebie nożami"
       }
-    ]
+    ],
+    "space_taken": "2,5"
   },
   {
     "name": "Kusza ręczna",
@@ -164,7 +167,8 @@
         "turn_execution": "Gracza",
         "description": "Z tego się nie pozbiera (1 bełt)"
       }
-    ]
+    ],
+    "space_taken": "7,5"
   },
   {
     "name": "Kusza ciężka",
@@ -214,7 +218,8 @@
         "turn_execution": "Gracza",
         "description": "Twój dex wlicza się do wyrzuconej kostki na trafienie (np. 17+3dex = kryt)"
       }
-    ]
+    ],
+    "space_taken": "20"
   },
   {
     "name": "bełt",
@@ -268,7 +273,8 @@
         "turn_execution": "Gracza",
         "description": "Istoty na wybranych pięciu sonsiadujących plach jeżeli nie uda im się save throw, otrzymują obrażenia krytyczne (save: d20+dex>14+dex) (8 strzał)"
       }
-    ]
+    ],
+    "space_taken": "7,5"
   },
   {
     "name": "Łuk długi",
@@ -307,7 +313,8 @@
         "turn_execution": "Gracza",
         "description": "Twój dex wlicza się do wyrzuconej kostki na trafienie (np. 17+3dex = kryt) || Jeżeli twój wynik na trafienie będzie większy niż 40, zadaj 4x obrażenia (1 strzała)"
       }
-    ]
+    ],
+    "space_taken": "20"
   },
   {
     "name": "strzała",
@@ -361,7 +368,8 @@
         "turn_execution": "Gracza",
         "description": "Jeżeli trafisz, obrażenia są podwajane (1 kula)"
       }
-    ]
+    ],
+    "space_taken": "10"
   },
   {
     "name": "Muszkiet",
@@ -389,7 +397,8 @@
         "turn_execution": "Gracza",
         "description": "Zwykły strzał, ale celniejszy (1 kula)"
       }
-    ]
+    ],
+    "space_taken": "20"
   },
   {
     "name": "kula",
