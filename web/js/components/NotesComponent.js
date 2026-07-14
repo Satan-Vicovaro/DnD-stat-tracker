@@ -25,17 +25,14 @@ export class NotesComponent {
     });
 
     // Handle autosave when typing
-    this.editor.codemirror.on('change', () => {
-      if (this.isUpdating) return; // Prevent loop when updated from backend
-      
-      this.saveStatus.style.opacity = '0';
+    const triggerSave = async () => {
+      clearTimeout(this.saveTimeout);
+      this.saveStatus.style.opacity = '1';
       this.saveStatus.textContent = 'Zapisywanie...';
       this.saveStatus.classList.remove('text-emerald-400');
       this.saveStatus.classList.add('text-gray-400');
-      this.saveStatus.style.opacity = '1';
 
-      clearTimeout(this.saveTimeout);
-      this.saveTimeout = setTimeout(async () => {
+      try {
         const content = this.editor.value();
         const updatedChar = await eel.update_notes(content)();
         document.dispatchEvent(new CustomEvent('characterUpdated', { detail: updatedChar }));
@@ -45,9 +42,30 @@ export class NotesComponent {
         this.saveStatus.classList.add('text-emerald-400');
         
         setTimeout(() => {
-          this.saveStatus.style.opacity = '0';
+          if (this.saveStatus.textContent === 'Zapisano') {
+            this.saveStatus.style.opacity = '0';
+          }
         }, 2000);
-      }, 1000); // Save 1 second after last keystroke
+      } catch (e) {
+        console.error("Notes save failed", e);
+      }
+    };
+
+    this.editor.codemirror.on('change', () => {
+      if (this.isUpdating) return; // Prevent loop when updated from backend
+      
+      this.saveStatus.style.opacity = '1';
+      this.saveStatus.textContent = 'Oczekujące...';
+      this.saveStatus.classList.remove('text-emerald-400');
+      this.saveStatus.classList.add('text-gray-400');
+
+      clearTimeout(this.saveTimeout);
+      this.saveTimeout = setTimeout(triggerSave, 1000);
+    });
+
+    this.editor.codemirror.on('blur', () => {
+      if (this.isUpdating) return;
+      triggerSave();
     });
 
     // Listen for global character updates (e.g. undo/redo or load save)
@@ -67,6 +85,10 @@ export class NotesComponent {
         }
       });
     });
+
+    // Fetch initial state so notes are displayed on load
+    let char = await eel.get_character()();
+    this.render(char);
   }
 
   render(characterData) {

@@ -123,6 +123,18 @@ window.onload = async () => {
 
     // Keyboard shortcuts
     document.addEventListener('keydown', (e) => {
+      // Ctrl+S → Save
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+        (async () => {
+          const filename = await eel.create_named_save()();
+          if (filename) {
+            undoManager._showToast('Zapisano!', 'text-blue-400');
+          }
+        })();
+        return;
+      }
+
       if (undoManager._inTextField()) return;
 
       // Ctrl+Z → Undo
@@ -136,18 +148,6 @@ window.onload = async () => {
       if ((e.ctrlKey || e.metaKey) && (e.key === 'y' || (e.key === 'z' && e.shiftKey))) {
         e.preventDefault();
         undoManager.performRedo();
-        return;
-      }
-
-      // Ctrl+S → Save
-      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-        e.preventDefault();
-        (async () => {
-          const filename = await eel.create_named_save()();
-          if (filename) {
-            undoManager._showToast('Zapisano!', 'text-blue-400');
-          }
-        })();
         return;
       }
     });
