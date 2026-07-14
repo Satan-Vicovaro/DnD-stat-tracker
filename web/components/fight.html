@@ -175,6 +175,31 @@
       </div>
     </div>
 
+    <!-- Damage Form -->
+    <div class="bg-gray-900/50 p-4 rounded-lg border border-gray-700 flex flex-col gap-4">
+      <div>
+        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Ilość obrażeń</label>
+        <input type="number" id="fight-damage-amount" min="1" value="1" class="w-full bg-gray-800 text-white font-mono text-xl p-3 rounded-lg border-2 border-gray-700 focus:border-rose-500 focus:outline-none transition-colors" />
+      </div>
+
+      <div>
+        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Typ obrażeń</label>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="cursor-pointer relative">
+            <input type="radio" name="fight_damage_type" value="physical" class="peer sr-only" checked />
+            <div class="p-3 rounded-lg border-2 border-gray-700 bg-gray-800 text-center text-gray-400 font-bold transition-all peer-checked:border-orange-500 peer-checked:text-orange-400 peer-checked:bg-orange-900/20 hover:bg-gray-700">Fizyczne</div>
+          </label>
+          <label class="cursor-pointer relative">
+            <input type="radio" name="fight_damage_type" value="magical" class="peer sr-only" />
+            <div class="p-3 rounded-lg border-2 border-gray-700 bg-gray-800 text-center text-gray-400 font-bold transition-all peer-checked:border-purple-500 peer-checked:text-purple-400 peer-checked:bg-purple-900/20 hover:bg-gray-700">Magiczne</div>
+          </label>
+        </div>
+        <p class="text-[10px] text-gray-500 mt-2 italic">* Pancerz redukuje tylko obrażenia fizyczne.</p>
+      </div>
+
+      <button id="btn-apply-damage" class="mt-2 w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-3 rounded-lg shadow-[0_0_15px_rgba(225,29,72,0.4)] transition-all active:scale-95">Zadaj Obrażenia</button>
+    </div>
+
     <!-- Magia (Mana) Panel -->
     <div class="bg-indigo-900/20 p-4 rounded-lg border border-indigo-500/30 flex flex-col gap-3">
       <div class="flex flex-col gap-2 border-b border-indigo-500/30 pb-3">
@@ -208,31 +233,6 @@
           </button>
         </div>
       </div>
-    </div>
-
-    <!-- Damage Form -->
-    <div class="bg-gray-900/50 p-4 rounded-lg border border-gray-700 flex flex-col gap-4">
-      <div>
-        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Ilość obrażeń</label>
-        <input type="number" id="fight-damage-amount" min="1" value="1" class="w-full bg-gray-800 text-white font-mono text-xl p-3 rounded-lg border-2 border-gray-700 focus:border-rose-500 focus:outline-none transition-colors" />
-      </div>
-
-      <div>
-        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Typ obrażeń</label>
-        <div class="grid grid-cols-2 gap-3">
-          <label class="cursor-pointer relative">
-            <input type="radio" name="fight_damage_type" value="physical" class="peer sr-only" checked />
-            <div class="p-3 rounded-lg border-2 border-gray-700 bg-gray-800 text-center text-gray-400 font-bold transition-all peer-checked:border-orange-500 peer-checked:text-orange-400 peer-checked:bg-orange-900/20 hover:bg-gray-700">Fizyczne</div>
-          </label>
-          <label class="cursor-pointer relative">
-            <input type="radio" name="fight_damage_type" value="magical" class="peer sr-only" />
-            <div class="p-3 rounded-lg border-2 border-gray-700 bg-gray-800 text-center text-gray-400 font-bold transition-all peer-checked:border-purple-500 peer-checked:text-purple-400 peer-checked:bg-purple-900/20 hover:bg-gray-700">Magiczne</div>
-          </label>
-        </div>
-        <p class="text-[10px] text-gray-500 mt-2 italic">* Pancerz redukuje tylko obrażenia fizyczne.</p>
-      </div>
-
-      <button id="btn-apply-damage" class="mt-2 w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-3 rounded-lg shadow-[0_0_15px_rgba(225,29,72,0.4)] transition-all active:scale-95">Zadaj Obrażenia</button>
     </div>
 
     <hr class="border-gray-700" />
