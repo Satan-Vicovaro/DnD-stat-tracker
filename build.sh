@@ -11,6 +11,7 @@ python3 -m PyInstaller main.py --onefile --name "GieraKajzera" \
   --add-data "web:web"
 
 echo "Copying config folder to dist..."
-cp -r config dist/config
+rm -rf dist/config
+cp -r config dist/
 
 echo "Build complete. Your executable and config folder are in 'dist/'."

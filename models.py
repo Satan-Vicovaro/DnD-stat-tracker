@@ -133,11 +133,21 @@ class ArmorState(ModifierProvider):
 
 _GAME_RULES_CACHE = None
 
+def get_resource_path(relative_path: str) -> str:
+    """Return the path for external static resources (config), which lives next to the executable."""
+    import sys
+    if getattr(sys, "frozen", False):
+        base_path = os.path.dirname(sys.executable)
+    else:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
 def get_game_rules(file_path: str = "config/game_rules.json") -> dict:
     global _GAME_RULES_CACHE
     if _GAME_RULES_CACHE is None:
-        if os.path.exists(file_path):
-            with open(file_path, "r", encoding="utf-8") as f:
+        full_path = get_resource_path(file_path)
+        if os.path.exists(full_path):
+            with open(full_path, "r", encoding="utf-8") as f:
                 _GAME_RULES_CACHE = json.load(f)
         else:
             _GAME_RULES_CACHE = {}
@@ -145,10 +155,11 @@ def get_game_rules(file_path: str = "config/game_rules.json") -> dict:
 
 def load_armor_config(file_path: str = "config/armor_config.json") -> ArmorState:
     state = ArmorState()
-    if not os.path.exists(file_path):
+    full_path = get_resource_path(file_path)
+    if not os.path.exists(full_path):
         return state
 
-    with open(file_path, "r", encoding="utf-8") as f:
+    with open(full_path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
     state.max_space = data.get("max_space", 24)

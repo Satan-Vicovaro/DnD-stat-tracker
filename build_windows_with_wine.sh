@@ -45,6 +45,7 @@ rm -f dist/GieraKajzera.exe
 wine python -m PyInstaller main.py --onefile --name "GieraKajzera" --add-data "web;web"
 
 echo "=== Finalizing ==="
-cp -r config dist/config
+rm -rf dist/config
+cp -r config dist/
 
 echo "✅ Build complete! You can find 'GieraKajzera.exe' and your 'config' folder in the 'dist/' directory."
