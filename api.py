@@ -211,3 +211,43 @@ def update_status_effect(status_id: str, effect_dict: dict):
     game_engine.update_status_effect(status_id, effect_dict)
     game_engine.save()
     return game_engine.get_character_view_model()
+
+
+@eel.expose
+def set_mana_config(max_val: int, current_val: int = None):
+    """API endpoint to update max and current mana."""
+    if game_engine.set_mana_config(max_val, current_val):
+        game_engine.save()
+    return game_engine.get_character_view_model()
+
+
+@eel.expose
+def end_day():
+    """API endpoint to restore mana and clear buffs."""
+    if game_engine.end_day():
+        game_engine.save()
+    return game_engine.get_character_view_model()
+
+
+@eel.expose
+def heal_remaining_mana():
+    """API endpoint to heal the character using remaining mana."""
+    if game_engine.heal_remaining_mana():
+        game_engine.save()
+    return game_engine.get_character_view_model()
+
+
+@eel.expose
+def activate_mana_effects(planned_buffs: dict):
+    """API endpoint to apply planned buffs and spend mana."""
+    if game_engine.activate_mana_effects(planned_buffs):
+        game_engine.save()
+    return game_engine.get_character_view_model()
+
+
+@eel.expose
+def cancel_mana_effects():
+    """API endpoint to drop active buffs without refunding mana."""
+    if game_engine.cancel_mana_effects():
+        game_engine.save()
+    return game_engine.get_character_view_model()

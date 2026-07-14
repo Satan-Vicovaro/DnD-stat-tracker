@@ -1,0 +1,38 @@
+<div class="bg-gray-800 rounded-xl shadow-lg border border-indigo-700/50 p-6">
+  <div class="flex items-center justify-between mb-4">
+    <h3 class="text-lg font-bold text-indigo-400 flex items-center gap-2">
+      <span>✨</span> Magia
+    </h3>
+    <button id="btn-end-day" class="text-xs bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-1 px-3 rounded shadow transition-colors">
+      Zakończ dzień (Odśwież)
+    </button>
+  </div>
+  
+  <div class="space-y-4">
+    <!-- Mana Capacity -->
+    <div class="flex items-center justify-between bg-gray-900/50 p-3 rounded-lg border border-gray-700/60">
+      <span class="text-sm font-bold text-gray-400">Max Mana:</span>
+      <input type="number" id="magia-max-input" min="0" class="w-20 bg-gray-800 text-white font-mono text-center text-sm p-1.5 rounded border border-indigo-500/40 focus:border-indigo-400 focus:outline-none" />
+    </div>
+
+    <!-- Current Mana Bar -->
+    <div class="bg-gray-900/50 p-3 rounded-lg border border-gray-700/60">
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-sm font-bold text-indigo-300">Aktualna Mana</span>
+        <div class="flex items-center gap-3">
+          <button id="btn-magia-current-dec" class="w-6 h-6 rounded bg-gray-700 hover:bg-rose-500/80 text-white font-bold transition-colors flex items-center justify-center">-</button>
+          <span class="text-lg font-black text-indigo-400 font-mono"><span id="magia-current-text">0</span> / <span id="magia-max-text">0</span></span>
+          <button id="btn-magia-current-inc" class="w-6 h-6 rounded bg-gray-700 hover:bg-emerald-500/80 text-white font-bold transition-colors flex items-center justify-center">+</button>
+        </div>
+      </div>
+      <div class="w-full bg-gray-700/50 rounded-full h-3 overflow-hidden shadow-inner border border-gray-600/50">
+        <div id="magia-current-bar" class="bg-indigo-500 h-3 rounded-full transition-all duration-500 shadow-[0_0_8px_rgba(99,102,241,0.8)]" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <!-- Healing Button -->
+    <button id="btn-heal-remaining" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-lg shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all active:scale-95 flex items-center justify-center gap-2">
+      <span>♥</span> Ulecz za pozostałą manę
+    </button>
+  </div>
+</div>

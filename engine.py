@@ -352,6 +352,11 @@ class GameEngine:
             },
             "inventory_space": self.hero.inventory_space,
             "inventory": [],
+            "magia": {
+                "max_mana": getattr(self.hero, "max_mana", 0),
+                "current_mana": getattr(self.hero, "current_mana", 0),
+                "mana_buffs": getattr(self.hero, "mana_buffs", {})
+            }
         }
 
         active_containers = view_model["inventory_space"].get("active_containers", {})
@@ -392,6 +397,66 @@ class GameEngine:
     # ------------------------------------------------------------------
     # Mutations
     # ------------------------------------------------------------------
+
+    def set_mana_config(self, max_val: int, current_val: int = None) -> bool:
+        self._snapshot()
+        self.hero.max_mana = max_val
+        if current_val is not None:
+            self.hero.current_mana = current_val
+        return True
+
+    def end_day(self) -> bool:
+        """Restores current mana to max_mana"""
+        self._snapshot()
+        self.hero.current_mana = self.hero.max_mana
+        # Optionally clear buffs on day end? Yes, makes sense.
+        for k in self.hero.mana_buffs:
+            self.hero.mana_buffs[k] = 0
+        return True
+
+    def heal_remaining_mana(self) -> bool:
+        """Spends all current_mana and heals based on config"""
+        char = self.hero
+        if char.current_mana > 0:
+            self._snapshot()
+            mana_to_spend = char.current_mana
+            char.current_mana = 0
+            
+            from models import get_game_rules
+            rules = get_game_rules()
+            heal_per_point = rules.get("magia", {}).get("healing_per_mana_day", 1)
+            total_heal = heal_per_point * mana_to_spend
+            
+            # Heal physical then magical
+            while total_heal > 0 and (char.damage_taken_physical > 0 or char.damage_taken_magical > 0):
+                if char.damage_taken_physical > 0:
+                    char.damage_taken_physical -= 1
+                elif char.damage_taken_magical > 0:
+                    char.damage_taken_magical -= 1
+                total_heal -= 1
+            return True
+        return False
+
+    def activate_mana_effects(self, planned_buffs: dict) -> bool:
+        """Spends mana and applies the planned buffs."""
+        char = self.hero
+        total_cost = sum(val for val in planned_buffs.values() if val > 0)
+        
+        if total_cost > 0 and char.current_mana >= total_cost:
+            self._snapshot()
+            char.current_mana -= total_cost
+            for stat, val in planned_buffs.items():
+                if val > 0 and stat in char.mana_buffs:
+                    char.mana_buffs[stat] += val
+            return True
+        return False
+
+    def cancel_mana_effects(self) -> bool:
+        """Drops active buffs without refunding mana."""
+        self._snapshot()
+        for k in self.hero.mana_buffs:
+            self.hero.mana_buffs[k] = 0
+        return True
 
     def add_item_to_inventory(self, item_dict: dict, payment: dict, quantity: int = 1) -> bool:
         """Validate payment, deduct it, and add the item to inventory."""

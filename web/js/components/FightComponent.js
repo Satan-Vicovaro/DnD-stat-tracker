@@ -4,6 +4,10 @@ export class FightComponent {
     this.characterData = null;
     this.weaponInputs = {};
     this.openItemCards = new Set();
+    this.plannedBuffs = {
+      "Obrona": 0, "Akcje": 0, "Wytrwałość": 0, "Ruch": 0,
+      "Redukcja obrażeń": 0, "Przerzucenie kostki": 0, "Inne": 0
+    };
   }
 
   async init() {
@@ -139,6 +143,54 @@ export class FightComponent {
     // Keep input in sync only when user is not actively editing it
     if (apInput && document.activeElement !== apInput) apInput.value = curAP;
 
+    // Magia (Mana)
+    if (char.magia) {
+      const manaMax = char.magia.max_mana || 0;
+      const currentMana = char.magia.current_mana || 0;
+      const mCurEl = document.getElementById('fight-mana-current');
+      const mMaxEl = document.getElementById('fight-mana-max');
+      const mBarEl = document.getElementById('fight-mana-bar');
+      
+      if (mCurEl) mCurEl.innerText = currentMana;
+      if (mMaxEl) mMaxEl.innerText = manaMax;
+      if (mBarEl) mBarEl.style.width = `${manaMax > 0 ? (currentMana / manaMax) * 100 : 0}%`;
+
+      const buffsContainer = document.getElementById('fight-mana-buffs-container');
+      if (buffsContainer) {
+        let buffsHtml = '';
+        let totalCost = 0;
+        const stats = ["Obrona", "Akcje", "Wytrwałość", "Ruch", "Redukcja obrażeń", "Przerzucenie kostki", "Inne"];
+        stats.forEach(stat => {
+          const activeBuff = char.magia.mana_buffs[stat] || 0;
+          const planned = this.plannedBuffs[stat] || 0;
+          totalCost += planned;
+          
+          buffsHtml += `
+            <div class="flex items-center justify-between bg-indigo-900/40 p-3 rounded-lg border border-indigo-500/30">
+              <span class="text-sm text-indigo-300 font-bold w-full truncate" title="${stat}">${stat}</span>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-mono text-indigo-400">Aktywne: +${activeBuff}</span>
+                <div class="flex items-center gap-1">
+                  <button data-action="fight-mana-buff-dec" data-stat="${stat}" class="w-6 h-6 rounded bg-gray-700 text-white flex items-center justify-center font-bold hover:bg-rose-500 transition-colors ${planned > 0 ? '' : 'opacity-50 cursor-not-allowed'}" ${planned > 0 ? '' : 'disabled'}>-</button>
+                  <span class="text-sm font-mono font-bold w-6 text-center text-indigo-200">${planned}</span>
+                  <button data-action="fight-mana-buff-inc" data-stat="${stat}" class="w-6 h-6 rounded bg-gray-700 text-white flex items-center justify-center font-bold hover:bg-indigo-500 transition-colors ${currentMana - totalCost > 0 ? '' : 'opacity-50 cursor-not-allowed'}" ${currentMana - totalCost > 0 ? '' : 'disabled'}>+</button>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+        buffsContainer.innerHTML = buffsHtml;
+
+        const costEl = document.getElementById('fight-mana-planned-cost');
+        if (costEl) costEl.innerText = totalCost;
+
+        const btnActivate = document.getElementById('btn-mana-activate-effects');
+        if (btnActivate) {
+          btnActivate.disabled = totalCost === 0 || totalCost > currentMana;
+        }
+      }
+    }
+
     // 2. Render Weapons & Consumables
     const weaponsList = document.getElementById('fight-weapons-list');
     const weaponsEmpty = document.getElementById('fight-weapons-empty');
@@ -199,7 +251,42 @@ export class FightComponent {
 
   bindDynamicActions() {
     const container = document.getElementById(this.containerId);
-    
+
+    // Bind Mana Buff buttons
+    container.querySelectorAll('button[data-action="fight-mana-buff-inc"]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const stat = e.currentTarget.getAttribute('data-stat');
+        this.plannedBuffs[stat] = (this.plannedBuffs[stat] || 0) + 1;
+        this.render();
+      });
+    });
+    container.querySelectorAll('button[data-action="fight-mana-buff-dec"]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const stat = e.currentTarget.getAttribute('data-stat');
+        if (this.plannedBuffs[stat] > 0) {
+          this.plannedBuffs[stat] -= 1;
+          this.render();
+        }
+      });
+    });
+
+    const btnActivate = document.getElementById('btn-mana-activate-effects');
+    if (btnActivate) {
+      btnActivate.onclick = async () => {
+        this.characterData = await eel.activate_mana_effects(this.plannedBuffs)();
+        for (let k in this.plannedBuffs) this.plannedBuffs[k] = 0;
+        document.dispatchEvent(new CustomEvent('characterUpdated', { detail: this.characterData }));
+      };
+    }
+
+    const btnCancel = document.getElementById('btn-mana-cancel-effects');
+    if (btnCancel) {
+      btnCancel.onclick = async () => {
+        this.characterData = await eel.cancel_mana_effects()();
+        document.dispatchEvent(new CustomEvent('characterUpdated', { detail: this.characterData }));
+      };
+    }
+
     // Bind toggle events for accordions to persist open state
     container.querySelectorAll('details[data-card-index]').forEach(el => {
       el.addEventListener('toggle', (e) => {

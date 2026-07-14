@@ -341,6 +341,27 @@ class StatusEffectProvider(ModifierProvider):
         return mods
 
 
+class ManaBoostProvider(ModifierProvider):
+    """Feeds temporary mana boosts into the stat manager."""
+
+    def get_modifiers(self, character, stat_name: Optional[str] = None) -> List[Modifier]:
+        mods = []
+        # Mapping from UI/buff keys to actual stat names
+        stat_map = {
+            "Obrona": "defense",
+            "Akcje": "ap",
+            "Wytrwałość": "stamina",
+            "Ruch": "movement"
+        }
+        for buff_key, value in character.mana_buffs.items():
+            if value > 0 and buff_key in stat_map:
+                target_stat = stat_map[buff_key]
+                if stat_name is None or stat_name == target_stat:
+                    # Depending on rules, 1 mana = 1 point of boost
+                    mods.append(Modifier("Magia", target_stat, value))
+        return mods
+
+
 class Character:
     def __init__(self, name: str, level: int = 1):
         self.name = name
@@ -360,6 +381,21 @@ class Character:
         self.status_effects: List[StatusEffect] = []
         self.status_provider = StatusEffectProvider()
         self.stat_manager.add_provider(self.status_provider)
+
+        # Magia (Mana)
+        self.max_mana: int = 0
+        self.current_mana: int = 0
+        self.mana_buffs: Dict[str, int] = {
+            "Obrona": 0,
+            "Akcje": 0,
+            "Wytrwałość": 0,
+            "Ruch": 0,
+            "Redukcja obrażeń": 0,
+            "Przerzucenie kostki": 0,
+            "Inne": 0
+        }
+        self.mana_provider = ManaBoostProvider()
+        self.stat_manager.add_provider(self.mana_provider)
 
         # Combat State
         self.damage_taken_physical: int = 0
@@ -547,8 +583,10 @@ class Character:
     # --- Actions ---
 
     def start_turn(self):
-        """Resets Action Points at the start of the round."""
+        """Resets Action Points and Turn Buffs at the start of the round."""
         self.current_action_points = self.max_action_points
+        for k in self.mana_buffs:
+            self.mana_buffs[k] = 0
 
     def use_action(self, action: ActionCard) -> bool:
         """Attempts to use an action. Returns True if successful."""

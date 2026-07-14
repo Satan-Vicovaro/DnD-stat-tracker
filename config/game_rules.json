@@ -76,5 +76,8 @@
   },
   "engine": {
     "max_undo_history": 20
+  },
+  "magia": {
+    "healing_per_mana_day": 1
   }
 }

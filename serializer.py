@@ -254,6 +254,10 @@ def serialize(hero: Character) -> dict:
         "gold": hero.gold,
         "silver": hero.silver,
         "copper": hero.copper,
+        # Magia (Mana)
+        "max_mana": hero.max_mana,
+        "current_mana": hero.current_mana,
+        "mana_buffs": hero.mana_buffs,
         # Armor fragment quantities (armor types defined in armor_config.json)
         "armor_quantities": {
             name: atype.quantity for name, atype in hero.armor_state.types.items()
@@ -313,6 +317,19 @@ def deserialize(data: dict) -> Character:
     hero.gold = data.get("gold", 0)
     hero.silver = data.get("silver", 0)
     hero.copper = data.get("copper", 0)
+
+    # Magia (Mana)
+    hero.max_mana = data.get("max_mana", 0)
+    hero.current_mana = data.get("current_mana", 0)
+    hero.mana_buffs = data.get("mana_buffs", {
+        "Obrona": 0,
+        "Akcje": 0,
+        "Wytrwałość": 0,
+        "Ruch": 0,
+        "Redukcja obrażeń": 0,
+        "Przerzucenie kostki": 0,
+        "Inne": 0
+    })
 
     # Armor quantities — types come from armor_config, only quantities saved
     for name, qty in data.get("armor_quantities", {}).items():

@@ -9,6 +9,7 @@ import { SaveLoadModal } from './components/SaveLoadModal.js';
 import { FightComponent } from './components/FightComponent.js';
 import { StatusEffectsComponent } from './components/StatusEffectsComponent.js';
 import { NotesComponent } from './components/NotesComponent.js';
+import { MagiaComponent } from './components/MagiaComponent.js';
 
 // ─── Undo / Redo Manager ─────────────────────────────────────────────────────
 
@@ -19,6 +20,7 @@ class UndoManager {
     this.toast    = document.getElementById('undo-toast');
     this._toastTimer = null;
   }
+
 
   /** Sync button enabled/disabled state from the latest view model. */
   sync(characterData) {
@@ -76,6 +78,9 @@ window.onload = async () => {
     // Initialize the Armor View Component
     const armorView = new ArmorComponent("armor-view-container");
     armorView.init();
+
+    const magiaView = new MagiaComponent("magia-view-container");
+    magiaView.init();
 
     // Single EconomyComponent instance mounts to both tabs simultaneously.
     const economyView = new EconomyComponent(
