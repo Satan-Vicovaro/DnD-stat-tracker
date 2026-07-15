@@ -11,55 +11,146 @@
           <span class="text-indigo-400">📋</span> Statystyki Postaci
         </h3>
         <div class="flex items-center gap-2">
-          <span class="text-xs text-gray-500 uppercase tracking-wider">Poz.</span>
-          <span id="fight-stat-level" class="text-sm font-black text-indigo-400 bg-indigo-900/40 px-2.5 py-0.5 rounded border border-indigo-500/40">—</span>
-          <span id="fight-stat-name" class="text-sm font-semibold text-gray-300 italic">—</span>
+          <span class="text-xs text-gray-500 uppercase tracking-wider"
+            >Poz.</span
+          >
+          <span
+            id="fight-stat-level"
+            class="text-sm font-black text-indigo-400 bg-indigo-900/40 px-2.5 py-0.5 rounded border border-indigo-500/40"
+            >—</span
+          >
+          <span
+            id="fight-stat-name"
+            class="text-sm font-semibold text-gray-300 italic"
+            >—</span
+          >
         </div>
       </div>
 
       <!-- Derived Stats Grid -->
       <div class="grid grid-cols-3 gap-3 mb-5">
-        <div class="bg-gray-900/60 rounded-lg p-3 text-center border border-gray-700/60">
-          <p class="text-[10px] text-emerald-400 uppercase tracking-wider font-bold mb-1">HP</p>
-          <p class="text-lg font-black text-emerald-300 leading-none" id="fight-stat-hp">—</p>
+        <div
+          class="bg-gray-900/60 rounded-lg p-3 text-center border border-gray-700/60"
+        >
+          <p
+            class="text-[10px] text-emerald-400 uppercase tracking-wider font-bold mb-1"
+          >
+            HP
+          </p>
+          <p
+            class="text-lg font-black text-emerald-300 leading-none"
+            id="fight-stat-hp"
+          >
+            —
+          </p>
         </div>
-        <div class="bg-gray-900/60 rounded-lg p-3 text-center border border-gray-700/60">
-          <p class="text-[10px] text-blue-400 uppercase tracking-wider font-bold mb-1">Obrona</p>
-          <p class="text-lg font-black text-blue-300 leading-none" id="fight-stat-def">—</p>
+        <div
+          class="bg-gray-900/60 rounded-lg p-3 text-center border border-gray-700/60"
+        >
+          <p
+            class="text-[10px] text-blue-400 uppercase tracking-wider font-bold mb-1"
+          >
+            Obrona
+          </p>
+          <p
+            class="text-lg font-black text-blue-300 leading-none"
+            id="fight-stat-def"
+          >
+            —
+          </p>
         </div>
-        <div class="bg-gray-900/60 rounded-lg p-3 text-center border border-gray-700/60">
-          <p class="text-[10px] text-amber-400 uppercase tracking-wider font-bold mb-1">Akcje (PA)</p>
-          <p class="text-lg font-black text-amber-300 leading-none" id="fight-stat-ap">—</p>
+        <div
+          class="bg-gray-900/60 rounded-lg p-3 text-center border border-gray-700/60"
+        >
+          <p
+            class="text-[10px] text-amber-400 uppercase tracking-wider font-bold mb-1"
+          >
+            Akcje (PA)
+          </p>
+          <p
+            class="text-lg font-black text-amber-300 leading-none"
+            id="fight-stat-ap"
+          >
+            —
+          </p>
         </div>
-        <div class="bg-gray-900/60 rounded-lg p-3 text-center border border-gray-700/60">
-          <p class="text-[10px] text-rose-400 uppercase tracking-wider font-bold mb-1">Stamina</p>
-          <p class="text-lg font-black text-rose-300 leading-none" id="fight-stat-stam">—</p>
+        <div
+          class="bg-gray-900/60 rounded-lg p-3 text-center border border-gray-700/60"
+        >
+          <p
+            class="text-[10px] text-rose-400 uppercase tracking-wider font-bold mb-1"
+          >
+            Stamina
+          </p>
+          <p
+            class="text-lg font-black text-rose-300 leading-none"
+            id="fight-stat-stam"
+          >
+            —
+          </p>
         </div>
-        <div class="bg-gray-900/60 rounded-lg p-3 text-center border border-gray-700/60 col-span-2">
-          <p class="text-[10px] text-teal-400 uppercase tracking-wider font-bold mb-1">Ruch (ft)</p>
-          <p class="text-lg font-black text-teal-300 leading-none" id="fight-stat-move">—</p>
+        <div
+          class="bg-gray-900/60 rounded-lg p-3 text-center border border-gray-700/60 col-span-2"
+        >
+          <p
+            class="text-[10px] text-teal-400 uppercase tracking-wider font-bold mb-1"
+          >
+            Ruch (ft)
+          </p>
+          <p
+            class="text-lg font-black text-teal-300 leading-none"
+            id="fight-stat-move"
+          >
+            —
+          </p>
         </div>
       </div>
 
       <!-- Base Stats -->
       <div class="border-t border-gray-700/60 pt-4">
-        <p class="text-[10px] text-gray-500 uppercase tracking-widest font-bold mb-3">Podstawowe Atrybuty</p>
+        <p
+          class="text-[10px] text-gray-500 uppercase tracking-widest font-bold mb-3"
+        >
+          Podstawowe Atrybuty
+        </p>
         <div class="grid grid-cols-2 gap-2">
-          <div class="flex justify-between items-center bg-gray-700/20 px-3 py-2 rounded-lg">
+          <div
+            class="flex justify-between items-center bg-gray-700/20 px-3 py-2 rounded-lg"
+          >
             <span class="text-xs text-gray-400 font-semibold">Siła (SIŁ)</span>
-            <span class="text-sm font-black text-indigo-300" id="fight-stat-str">—</span>
+            <span class="text-sm font-black text-indigo-300" id="fight-stat-str"
+              >—</span
+            >
           </div>
-          <div class="flex justify-between items-center bg-gray-700/20 px-3 py-2 rounded-lg">
-            <span class="text-xs text-gray-400 font-semibold">Zręczność (ZRĘ)</span>
-            <span class="text-sm font-black text-indigo-300" id="fight-stat-dex">—</span>
+          <div
+            class="flex justify-between items-center bg-gray-700/20 px-3 py-2 rounded-lg"
+          >
+            <span class="text-xs text-gray-400 font-semibold"
+              >Zręczność (ZRĘ)</span
+            >
+            <span class="text-sm font-black text-indigo-300" id="fight-stat-dex"
+              >—</span
+            >
           </div>
-          <div class="flex justify-between items-center bg-gray-700/20 px-3 py-2 rounded-lg">
-            <span class="text-xs text-gray-400 font-semibold">Wiedza (WIEDZ)</span>
-            <span class="text-sm font-black text-indigo-300" id="fight-stat-wis">—</span>
+          <div
+            class="flex justify-between items-center bg-gray-700/20 px-3 py-2 rounded-lg"
+          >
+            <span class="text-xs text-gray-400 font-semibold"
+              >Wiedza (WIEDZ)</span
+            >
+            <span class="text-sm font-black text-indigo-300" id="fight-stat-wis"
+              >—</span
+            >
           </div>
-          <div class="flex justify-between items-center bg-gray-700/20 px-3 py-2 rounded-lg">
-            <span class="text-xs text-gray-400 font-semibold">Charyzma (CHA)</span>
-            <span class="text-sm font-black text-indigo-300" id="fight-stat-cha">—</span>
+          <div
+            class="flex justify-between items-center bg-gray-700/20 px-3 py-2 rounded-lg"
+          >
+            <span class="text-xs text-gray-400 font-semibold"
+              >Charyzma (CHA)</span
+            >
+            <span class="text-sm font-black text-indigo-300" id="fight-stat-cha"
+              >—</span
+            >
           </div>
         </div>
       </div>
@@ -68,7 +159,9 @@
 
   <!-- Center Column: Equipped Items & Actions -->
   <div class="flex flex-col gap-6">
-    <div class="bg-gray-800 rounded-xl shadow-lg border border-gray-700 p-6 flex flex-col gap-6">
+    <div
+      class="bg-gray-800 rounded-xl shadow-lg border border-gray-700 p-6 flex flex-col gap-6"
+    >
       <!-- Weapons Section -->
       <div>
         <div class="flex justify-between items-center mb-4">
@@ -79,7 +172,10 @@
         <div id="fight-weapons-list" class="grid gap-3">
           <!-- Rendered by JS -->
         </div>
-        <div id="fight-weapons-empty" class="text-center text-gray-500 py-6 italic hidden">
+        <div
+          id="fight-weapons-empty"
+          class="text-center text-gray-500 py-6 italic hidden"
+        >
           Brak broni w ekwipunku.
         </div>
       </div>
@@ -96,7 +192,10 @@
         <div id="fight-consumables-list" class="grid gap-3">
           <!-- Rendered by JS -->
         </div>
-        <div id="fight-consumables-empty" class="text-center text-gray-500 py-6 italic hidden">
+        <div
+          id="fight-consumables-empty"
+          class="text-center text-gray-500 py-6 italic hidden"
+        >
           Brak przedmiotów użytkowych.
         </div>
       </div>
@@ -104,7 +203,9 @@
   </div>
 
   <!-- Right Column: Damage & Health -->
-  <div class="bg-gray-800 rounded-xl shadow-lg border border-gray-700 p-6 flex flex-col gap-6">
+  <div
+    class="bg-gray-800 rounded-xl shadow-lg border border-gray-700 p-6 flex flex-col gap-6"
+  >
     <h3 class="text-xl font-bold text-white flex items-center gap-2">
       <span class="text-rose-500">⚔</span> Otrzymane Obrażenia
     </h3>
@@ -114,40 +215,81 @@
       <!-- Base Health -->
       <div>
         <div class="flex justify-between items-end mb-1">
-          <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Zdrowie Bohatera</span>
-          <span id="fight-base-hp-text" class="text-xl font-black text-emerald-500 font-mono">100/100</span>
+          <span
+            class="text-xs font-bold text-emerald-400 uppercase tracking-wider"
+            >Zdrowie Bohatera</span
+          >
+          <span
+            id="fight-base-hp-text"
+            class="text-xl font-black text-emerald-500 font-mono"
+            >100/100</span
+          >
         </div>
-        <div class="w-full bg-gray-700/50 rounded-full h-4 overflow-hidden shadow-inner border border-gray-600/50">
-          <div id="fight-base-hp-bar" class="bg-emerald-500 h-4 rounded-full transition-all duration-500" style="width: 0%"></div>
+        <div
+          class="w-full bg-gray-700/50 rounded-full h-4 overflow-hidden shadow-inner border border-gray-600/50"
+        >
+          <div
+            id="fight-base-hp-bar"
+            class="bg-emerald-500 h-4 rounded-full transition-all duration-500"
+            style="width: 0%"
+          ></div>
         </div>
       </div>
 
       <!-- Armor Health -->
       <div>
         <div class="flex justify-between items-end mb-1">
-          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Pancerz</span>
-          <span class="font-mono text-xl font-bold text-slate-400" id="fight-armor-hp-value">0 / 0</span>
+          <span
+            class="text-xs font-bold text-slate-400 uppercase tracking-wider"
+            >Pancerz</span
+          >
+          <span
+            class="font-mono text-xl font-bold text-slate-400"
+            id="fight-armor-hp-value"
+            >0 / 0</span
+          >
         </div>
-        <div class="w-full bg-gray-700/50 rounded-full h-3 overflow-hidden shadow-inner border border-gray-600/50">
-          <div id="fight-armor-hp-bar" class="bg-slate-500 h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+        <div
+          class="w-full bg-gray-700/50 rounded-full h-3 overflow-hidden shadow-inner border border-gray-600/50"
+        >
+          <div
+            id="fight-armor-hp-bar"
+            class="bg-slate-500 h-3 rounded-full transition-all duration-500"
+            style="width: 0%"
+          ></div>
         </div>
       </div>
     </div>
 
     <hr class="border-gray-700" />
 
-    <div class="flex items-center justify-between bg-indigo-900/40 p-3 rounded-lg border border-indigo-500/50">
-      <span class="text-sm font-bold text-indigo-300">Aktualna Redukcja Obrażeń Fizycznych:</span>
-      <span class="text-xl font-black text-indigo-400" id="fight-mitigation-badge">0</span>
+    <div
+      class="flex items-center justify-between bg-indigo-900/40 p-3 rounded-lg border border-indigo-500/50"
+    >
+      <span class="text-sm font-bold text-indigo-300"
+        >Aktualna Redukcja Obrażeń Fizycznych:</span
+      >
+      <span
+        class="text-xl font-black text-indigo-400"
+        id="fight-mitigation-badge"
+        >0</span
+      >
     </div>
 
     <!-- Action Points Panel -->
-    <div class="bg-gray-900/50 p-4 rounded-lg border border-amber-500/30 flex flex-col gap-3">
+    <div
+      class="bg-gray-900/50 p-4 rounded-lg border border-amber-500/30 flex flex-col gap-3"
+    >
       <div class="flex items-center justify-between">
-        <h4 class="text-sm font-bold text-amber-400 uppercase tracking-wider flex items-center gap-2">
+        <h4
+          class="text-sm font-bold text-amber-400 uppercase tracking-wider flex items-center gap-2"
+        >
           <span>⚡</span> Punkty Akcji (PA)
         </h4>
-        <button id="btn-reset-ap" class="text-xs font-bold bg-amber-500/20 hover:bg-amber-500/40 text-amber-300 border border-amber-500/50 px-3 py-1 rounded transition-colors">
+        <button
+          id="btn-reset-ap"
+          class="text-xs font-bold bg-amber-500/20 hover:bg-amber-500/40 text-amber-300 border border-amber-500/50 px-3 py-1 rounded transition-colors"
+        >
           🔄 Nowa Runda
         </button>
       </div>
@@ -155,11 +297,23 @@
       <!-- AP Bar -->
       <div>
         <div class="flex justify-between items-end mb-1">
-          <span class="text-xs text-gray-500 uppercase tracking-wider">Aktualne / Max</span>
-          <span id="fight-ap-text" class="text-xl font-black text-amber-400 font-mono">0 / 0</span>
+          <span class="text-xs text-gray-500 uppercase tracking-wider"
+            >Aktualne / Max</span
+          >
+          <span
+            id="fight-ap-text"
+            class="text-xl font-black text-amber-400 font-mono"
+            >0 / 0</span
+          >
         </div>
-        <div class="w-full bg-gray-700/50 rounded-full h-3 overflow-hidden shadow-inner border border-gray-600/50">
-          <div id="fight-ap-bar" class="bg-amber-400 h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+        <div
+          class="w-full bg-gray-700/50 rounded-full h-3 overflow-hidden shadow-inner border border-gray-600/50"
+        >
+          <div
+            id="fight-ap-bar"
+            class="bg-amber-400 h-3 rounded-full transition-all duration-500"
+            style="width: 0%"
+          ></div>
         </div>
       </div>
 
@@ -167,68 +321,150 @@
       <div class="flex items-center justify-between gap-3 pt-1">
         <span class="text-xs font-bold text-gray-400">Ustaw ręcznie:</span>
         <div class="flex items-center gap-2">
-          <button id="btn-ap-dec" class="w-8 h-8 rounded bg-gray-700 hover:bg-rose-500/80 text-white font-bold transition-colors flex items-center justify-center">−</button>
-          <input type="number" id="fight-ap-input" min="0" step="0.5" class="w-20 bg-gray-800 text-white font-mono text-center text-sm p-2 rounded border border-amber-500/40 focus:border-amber-400 focus:outline-none" />
-          <button id="btn-ap-inc" class="w-8 h-8 rounded bg-gray-700 hover:bg-emerald-500/80 text-white font-bold transition-colors flex items-center justify-center">+</button>
-          <button id="btn-ap-set" class="text-xs font-bold bg-amber-600 hover:bg-amber-500 text-white px-3 py-2 rounded border border-amber-500 transition-colors">Ustaw</button>
+          <button
+            id="btn-ap-dec"
+            class="w-8 h-8 rounded bg-gray-700 hover:bg-rose-500/80 text-white font-bold transition-colors flex items-center justify-center"
+          >
+            −
+          </button>
+          <input
+            type="number"
+            id="fight-ap-input"
+            min="0"
+            step="0.5"
+            class="w-20 bg-gray-800 text-white font-mono text-center text-sm p-2 rounded border border-amber-500/40 focus:border-amber-400 focus:outline-none"
+          />
+          <button
+            id="btn-ap-inc"
+            class="w-8 h-8 rounded bg-gray-700 hover:bg-emerald-500/80 text-white font-bold transition-colors flex items-center justify-center"
+          >
+            +
+          </button>
+          <button
+            id="btn-ap-set"
+            class="text-xs font-bold bg-amber-600 hover:bg-amber-500 text-white px-3 py-2 rounded border border-amber-500 transition-colors"
+          >
+            Ustaw
+          </button>
         </div>
       </div>
     </div>
 
     <!-- Damage Form -->
-    <div class="bg-gray-900/50 p-4 rounded-lg border border-gray-700 flex flex-col gap-4">
+    <div
+      class="bg-gray-900/50 p-4 rounded-lg border border-gray-700 flex flex-col gap-4"
+    >
       <div>
-        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Ilość obrażeń</label>
-        <input type="number" id="fight-damage-amount" min="1" value="1" class="w-full bg-gray-800 text-white font-mono text-xl p-3 rounded-lg border-2 border-gray-700 focus:border-rose-500 focus:outline-none transition-colors" />
+        <label
+          class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2"
+          >Ilość obrażeń</label
+        >
+        <input
+          type="number"
+          id="fight-damage-amount"
+          min="1"
+          value="1"
+          class="w-full bg-gray-800 text-white font-mono text-xl p-3 rounded-lg border-2 border-gray-700 focus:border-rose-500 focus:outline-none transition-colors"
+        />
       </div>
 
       <div>
-        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Typ obrażeń</label>
+        <label
+          class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2"
+          >Typ obrażeń</label
+        >
         <div class="grid grid-cols-2 gap-3">
           <label class="cursor-pointer relative">
-            <input type="radio" name="fight_damage_type" value="physical" class="peer sr-only" checked />
-            <div class="p-3 rounded-lg border-2 border-gray-700 bg-gray-800 text-center text-gray-400 font-bold transition-all peer-checked:border-orange-500 peer-checked:text-orange-400 peer-checked:bg-orange-900/20 hover:bg-gray-700">Fizyczne</div>
+            <input
+              type="radio"
+              name="fight_damage_type"
+              value="physical"
+              class="peer sr-only"
+              checked
+            />
+            <div
+              class="p-3 rounded-lg border-2 border-gray-700 bg-gray-800 text-center text-gray-400 font-bold transition-all peer-checked:border-orange-500 peer-checked:text-orange-400 peer-checked:bg-orange-900/20 hover:bg-gray-700"
+            >
+              Fizyczne
+            </div>
           </label>
           <label class="cursor-pointer relative">
-            <input type="radio" name="fight_damage_type" value="magical" class="peer sr-only" />
-            <div class="p-3 rounded-lg border-2 border-gray-700 bg-gray-800 text-center text-gray-400 font-bold transition-all peer-checked:border-purple-500 peer-checked:text-purple-400 peer-checked:bg-purple-900/20 hover:bg-gray-700">Magiczne</div>
+            <input
+              type="radio"
+              name="fight_damage_type"
+              value="magical"
+              class="peer sr-only"
+            />
+            <div
+              class="p-3 rounded-lg border-2 border-gray-700 bg-gray-800 text-center text-gray-400 font-bold transition-all peer-checked:border-purple-500 peer-checked:text-purple-400 peer-checked:bg-purple-900/20 hover:bg-gray-700"
+            >
+              Magiczne
+            </div>
           </label>
         </div>
-        <p class="text-[10px] text-gray-500 mt-2 italic">* Pancerz redukuje tylko obrażenia fizyczne.</p>
+        <p class="text-[10px] text-gray-500 mt-2 italic">
+          * Pancerz redukuje tylko obrażenia fizyczne.
+        </p>
       </div>
 
-      <button id="btn-apply-damage" class="mt-2 w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-3 rounded-lg shadow-[0_0_15px_rgba(225,29,72,0.4)] transition-all active:scale-95">Zadaj Obrażenia</button>
+      <button
+        id="btn-apply-damage"
+        class="mt-2 w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-3 rounded-lg shadow-[0_0_15px_rgba(225,29,72,0.4)] transition-all active:scale-95"
+      >
+        Zadaj Obrażenia
+      </button>
     </div>
 
     <!-- Magia (Mana) Panel -->
-    <div class="bg-indigo-900/20 p-4 rounded-lg border border-indigo-500/30 flex flex-col gap-3">
+    <div
+      class="bg-indigo-900/20 p-4 rounded-lg border border-indigo-500/30 flex flex-col gap-3"
+    >
       <div class="flex flex-col gap-2 border-b border-indigo-500/30 pb-3">
         <div class="flex items-center justify-between">
-          <h4 class="text-sm font-bold text-indigo-400 uppercase tracking-wider flex items-center gap-2">
+          <h4
+            class="text-sm font-bold text-indigo-400 uppercase tracking-wider flex items-center gap-2"
+          >
             <span>✨</span> Magia
           </h4>
           <div class="text-xs text-indigo-300 font-bold">
-            <span id="fight-mana-current" class="text-white text-base">0</span> / <span id="fight-mana-max">0</span>
+            <span id="fight-mana-current" class="text-white text-base">0</span>
+            / <span id="fight-mana-max">0</span>
           </div>
         </div>
         <!-- Progress Bar -->
-        <div class="w-full bg-gray-700/50 rounded-full h-3 overflow-hidden shadow-inner border border-gray-600/50">
-          <div id="fight-mana-bar" class="bg-indigo-500 h-3 rounded-full transition-all duration-500 shadow-[0_0_8px_rgba(99,102,241,0.8)]" style="width: 0%"></div>
+        <div
+          class="w-full bg-gray-700/50 rounded-full h-3 overflow-hidden shadow-inner border border-gray-600/50"
+        >
+          <div
+            id="fight-mana-bar"
+            class="bg-indigo-500 h-3 rounded-full transition-all duration-500 shadow-[0_0_8px_rgba(99,102,241,0.8)]"
+            style="width: 0%"
+          ></div>
         </div>
       </div>
-      
+
       <!-- Staging area for buffs -->
       <div class="grid grid-cols-1 gap-3 mt-2" id="fight-mana-buffs-container">
         <!-- Rendered by JS -->
       </div>
 
-      <div class="flex items-center justify-between mt-2 pt-2 border-t border-indigo-500/30">
-        <div class="text-xs font-bold text-indigo-200">Koszt: <span id="fight-mana-planned-cost">0</span></div>
+      <div
+        class="flex items-center justify-between mt-2 pt-2 border-t border-indigo-500/30"
+      >
+        <div class="text-xs font-bold text-indigo-200">
+          Koszt: <span id="fight-mana-planned-cost">0</span>
+        </div>
         <div class="flex gap-2">
-          <button id="btn-mana-cancel-effects" class="text-xs font-bold px-3 py-1.5 rounded border border-rose-500/50 bg-rose-900/30 hover:bg-rose-500/50 text-rose-300 transition-colors">
+          <button
+            id="btn-mana-cancel-effects"
+            class="text-xs font-bold px-3 py-1.5 rounded border border-rose-500/50 bg-rose-900/30 hover:bg-rose-500/50 text-rose-300 transition-colors"
+          >
             Anuluj Efekt
           </button>
-          <button id="btn-mana-activate-effects" class="text-xs font-bold px-3 py-1.5 rounded border border-indigo-500 bg-indigo-600 hover:bg-indigo-500 text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+          <button
+            id="btn-mana-activate-effects"
+            class="text-xs font-bold px-3 py-1.5 rounded border border-indigo-500 bg-indigo-600 hover:bg-indigo-500 text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
             Aktywuj Efekt
           </button>
         </div>
@@ -238,18 +474,40 @@
     <hr class="border-gray-700" />
 
     <!-- Manual Adjustments Panel -->
-    <div class="bg-gray-900/50 p-4 rounded-lg border border-gray-700 flex flex-col gap-4">
-      <h4 class="text-sm font-bold text-gray-400 uppercase tracking-wider mb-1 flex items-center gap-2">
-        <span>⚙</span> Ręczne Modyfikacje (BHP / Pancerz)
+    <div
+      class="bg-gray-900/50 p-4 rounded-lg border border-gray-700 flex flex-col gap-4"
+    >
+      <h4
+        class="text-sm font-bold text-gray-400 uppercase tracking-wider mb-1 flex items-center gap-2"
+      >
+        <span>⚙</span> Ręczne Modyfikacje (HP / Pancerz)
       </h4>
 
       <!-- Base Health Adjust -->
       <div class="flex items-center justify-between gap-4">
-        <span class="text-xs font-bold text-emerald-400">Zdrowie (Tylko Bazowe)</span>
+        <span class="text-xs font-bold text-emerald-400"
+          >Zdrowie (Tylko Bazowe)</span
+        >
         <div class="flex items-center gap-2">
-          <input type="number" id="fight-manual-health-amount" value="1" min="1" class="w-16 bg-gray-800 text-white font-mono text-center text-sm p-2 rounded border border-gray-600 focus:border-emerald-500 focus:outline-none" />
-          <button id="btn-heal-health" class="w-8 h-8 rounded bg-gray-700 hover:bg-emerald-500/80 text-white font-bold transition-colors">+</button>
-          <button id="btn-damage-health" class="w-8 h-8 rounded bg-gray-700 hover:bg-rose-500/80 text-white font-bold transition-colors">-</button>
+          <input
+            type="number"
+            id="fight-manual-health-amount"
+            value="1"
+            min="1"
+            class="w-16 bg-gray-800 text-white font-mono text-center text-sm p-2 rounded border border-gray-600 focus:border-emerald-500 focus:outline-none"
+          />
+          <button
+            id="btn-heal-health"
+            class="w-8 h-8 rounded bg-gray-700 hover:bg-emerald-500/80 text-white font-bold transition-colors"
+          >
+            +
+          </button>
+          <button
+            id="btn-damage-health"
+            class="w-8 h-8 rounded bg-gray-700 hover:bg-rose-500/80 text-white font-bold transition-colors"
+          >
+            -
+          </button>
         </div>
       </div>
 
@@ -257,9 +515,25 @@
       <div class="flex items-center justify-between gap-4">
         <span class="text-xs font-bold text-slate-400">Pancerz</span>
         <div class="flex items-center gap-2">
-          <input type="number" id="fight-manual-armor-amount" value="1" min="1" class="w-16 bg-gray-800 text-white font-mono text-center text-sm p-2 rounded border border-gray-600 focus:border-slate-500 focus:outline-none" />
-          <button id="btn-heal-armor" class="w-8 h-8 rounded bg-gray-700 hover:bg-emerald-500/80 text-white font-bold transition-colors">+</button>
-          <button id="btn-damage-armor" class="w-8 h-8 rounded bg-gray-700 hover:bg-rose-500/80 text-white font-bold transition-colors">-</button>
+          <input
+            type="number"
+            id="fight-manual-armor-amount"
+            value="1"
+            min="1"
+            class="w-16 bg-gray-800 text-white font-mono text-center text-sm p-2 rounded border border-gray-600 focus:border-slate-500 focus:outline-none"
+          />
+          <button
+            id="btn-heal-armor"
+            class="w-8 h-8 rounded bg-gray-700 hover:bg-emerald-500/80 text-white font-bold transition-colors"
+          >
+            +
+          </button>
+          <button
+            id="btn-damage-armor"
+            class="w-8 h-8 rounded bg-gray-700 hover:bg-rose-500/80 text-white font-bold transition-colors"
+          >
+            -
+          </button>
         </div>
       </div>
     </div>

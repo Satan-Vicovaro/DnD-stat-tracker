@@ -853,6 +853,10 @@ class GameEngine:
             mitigation += intact * mit_per_frag
             mitigation += int(broken * (mit_per_frag * broken_mult))
 
+        # Add magic damage reduction
+        magic_dr = self.hero.mana_buffs.get("Redukcja obrażeń", 0)
+        mitigation += magic_dr
+
         return mitigation
 
     def reset_action_points(self) -> bool:

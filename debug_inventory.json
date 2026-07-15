@@ -102,5 +102,111 @@
     "is_active_container": true,
     "is_clothes": true,
     "granted_space": 10.0
+  },
+  {
+    "name": "Topór",
+    "description": "Ze sklepu.",
+    "space_taken": 10.0,
+    "location": "EQUIPPED",
+    "modifiers": [],
+    "item_type": "Weapon",
+    "consumable_effects": {},
+    "max_uses": 1,
+    "current_uses": 1,
+    "action_cost": "",
+    "properties": {},
+    "quantity": 1,
+    "is_equipped": false,
+    "item_id": "1fe769ca-5a5b-4b47-b3e0-df564e6e0d2c",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Cios",
+        "action_cost": "1",
+        "range_str": "",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d6+str",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Niszczysz drewnianą tarczę wroga || Dezaktywujesz do końca tury inne tarcze"
+      },
+      {
+        "card_value": "5",
+        "action_name": "Ogłuszacz",
+        "action_cost": "1",
+        "range_str": "",
+        "hit_roll": "d20+dex",
+        "damage_roll": "d8+str",
+        "targets": "1",
+        "turn_execution": "Gracza/Wroga",
+        "description": "Wróg twojego rozmiaru traci cały ruch || Cel tego ataku otrzymuje -4 do rzutów wszystkimi kostkami (save: d20+str>13+str)"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Rąbanie",
+        "action_cost": "1.5",
+        "range_str": "",
+        "hit_roll": "d12+2xdex",
+        "damage_roll": "d6+str",
+        "targets": "4",
+        "turn_execution": "Gracza",
+        "description": "Otrzymujesz 10ft ruchu (tylko raz)"
+      }
+    ],
+    "is_active_container": false,
+    "is_clothes": false
+  },
+  {
+    "name": "Buzdygan",
+    "description": "Ze sklepu.",
+    "space_taken": 7.5,
+    "location": "EQUIPPED",
+    "modifiers": [],
+    "item_type": "Weapon",
+    "consumable_effects": {},
+    "max_uses": 1,
+    "current_uses": 1,
+    "action_cost": "",
+    "properties": {},
+    "quantity": 1,
+    "is_equipped": false,
+    "item_id": "724f0194-931b-4216-8e1a-d66b1aa5da8e",
+    "actions": [
+      {
+        "card_value": "0",
+        "action_name": "Cios",
+        "action_cost": "1",
+        "range_str": "",
+        "hit_roll": "d20-2+dex",
+        "damage_roll": "2xstr",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Advantage na kolejny atak przeciwko trafionemu przeciwnikowi o mniejszym str od ciebie"
+      },
+      {
+        "card_value": "5",
+        "action_name": "Obuch",
+        "action_cost": "1",
+        "range_str": "",
+        "hit_roll": "d20-4+dex",
+        "damage_roll": "3xstr",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Odbierz turę przeciwnikowi o str mniejszym od ciebie"
+      },
+      {
+        "card_value": "10",
+        "action_name": "Łamacz",
+        "action_cost": "1",
+        "range_str": "",
+        "hit_roll": "d20-6+dex",
+        "damage_roll": "4xstr",
+        "targets": "1",
+        "turn_execution": "Gracza",
+        "description": "Advantage na wszystkie ataki przeciwko trafionemu przeciwnikowi o mniejszym str od ciebie || Jeżeli nie trafisz, przeciwnik zostaje trafiony \"Ciosem\""
+      }
+    ],
+    "is_active_container": false,
+    "is_clothes": false
   }
 ]

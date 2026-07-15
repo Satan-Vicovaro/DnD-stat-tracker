@@ -201,6 +201,48 @@ export class InventoryComponent {
             </div>
           </div>
         </div>
+
+        <!-- Full width bottom section for actions (ability cards) -->
+        ${(() => {
+          if (item.actions && item.actions.length > 0) {
+            return `
+            <details class="mt-3 group/actions border-t border-gray-700/60 pt-3">
+              <summary class="text-xs font-bold text-indigo-400 uppercase tracking-wider cursor-pointer select-none flex items-center gap-2 outline-none">
+                <svg class="w-3 h-3 transition-transform group-open/actions:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                Akcje (${item.actions.length})
+              </summary>
+              <div class="flex flex-wrap gap-2 mt-2">
+                ${item.actions.map(act => {
+                   let descHtml = "";
+                   if (act.description) {
+                     const parts = act.description.split("||").map(s => s.trim()).filter(s => s.length > 0);
+                     if (parts.length === 1) descHtml = parts[0];
+                     else descHtml = `<ul class="list-disc list-outside space-y-0.5 ml-4">${parts.map((p) => `<li>${p}</li>`).join("")}</ul>`;
+                   }
+                   return `
+                   <div class="bg-black/60 rounded-md p-2.5 border border-slate-600 flex-1 min-w-[200px] max-w-xs shadow-sm">
+                     <div class="flex justify-between items-center text-indigo-200 mb-2 pb-1 border-b border-slate-600/60">
+                       <span class="text-sm font-bold tracking-wide">${act.action_name}</span>
+                       <span class="text-emerald-400 font-bold text-[10px] bg-emerald-900/40 px-1.5 py-0.5 rounded border border-emerald-500/30">AP: ${act.action_cost}</span>
+                     </div>
+                     <div class="flex flex-wrap gap-1.5 mb-2">
+                       <span class="bg-slate-800/80 px-1.5 py-0.5 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[8px] font-bold mr-1">Odp:</span> <span class="font-bold text-white text-[10px]">${act.card_value}</span></span>
+                       <span class="bg-slate-800/80 px-1.5 py-0.5 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[8px] font-bold mr-1">Zas:</span> <span class="font-bold text-white text-[10px]">${act.range || act.range_str || "-"}</span></span>
+                       <span class="bg-slate-800/80 px-1.5 py-0.5 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[8px] font-bold mr-1">Hit:</span> <span class="font-bold text-amber-400 text-[10px]">${act.hit_roll || "-"}</span></span>
+                       <span class="bg-slate-800/80 px-1.5 py-0.5 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[8px] font-bold mr-1">Dmg:</span> <span class="font-bold text-rose-400 text-[10px]">${act.damage_roll || "-"}</span></span>
+                       ${act.targets ? `<span class="bg-slate-800/80 px-1.5 py-0.5 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[8px] font-bold mr-1">Cel:</span> <span class="font-bold text-indigo-300 text-[10px]">${act.targets}</span></span>` : ''}
+                       ${act.turn_execution ? `<span class="bg-slate-800/80 px-1.5 py-0.5 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[8px] font-bold mr-1">Tura:</span> <span class="font-bold text-teal-300 text-[10px]">${act.turn_execution}</span></span>` : ''}
+                     </div>
+                     <div class="text-slate-200 italic text-[10px] leading-relaxed border-t border-slate-600/40 pt-1.5 mt-0.5 font-medium">${descHtml}</div>
+                   </div>
+                   `;
+                }).join("")}
+              </div>
+            </details>
+            `;
+          }
+          return '';
+        })()}
       </div>
     `;
   }
