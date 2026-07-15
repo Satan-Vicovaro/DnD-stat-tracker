@@ -399,13 +399,6 @@ class GameEngine:
             }
             for se in self.hero.status_effects
         ]
-        try:
-            import json
-
-            with open("debug_inventory.json", "w", encoding="utf-8") as f:
-                json.dump(view_model["inventory"], f, ensure_ascii=False, indent=2)
-        except Exception:
-            pass
 
         return view_model
 
