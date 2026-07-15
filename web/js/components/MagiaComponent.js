@@ -26,19 +26,11 @@ export class MagiaComponent {
     const container = document.getElementById(this.containerId);
     if (!container) return;
 
-    this.maxInput = document.getElementById("magia-max-input");
+    this.maxDisplay = document.getElementById("magia-max-display");
     this.btnDec = document.getElementById("btn-magia-current-dec");
     this.btnInc = document.getElementById("btn-magia-current-inc");
     this.btnEndDay = document.getElementById("btn-end-day");
     this.btnHeal = document.getElementById("btn-heal-remaining");
-
-    if (this.maxInput) {
-      this.maxInput.addEventListener("change", async (e) => {
-        const val = parseInt(e.target.value) || 0;
-        this.characterData = await eel.set_mana_config(val, null)();
-        document.dispatchEvent(new CustomEvent('characterUpdated', { detail: this.characterData }));
-      });
-    }
 
     const adjustCurrent = async (delta) => {
       const current = this.characterData?.magia?.current_mana || 0;
@@ -75,8 +67,26 @@ export class MagiaComponent {
     const maxMana = this.characterData.magia.max_mana || 0;
     const currentMana = this.characterData.magia.current_mana || 0;
 
-    if (this.maxInput && document.activeElement !== this.maxInput) {
-      this.maxInput.value = maxMana;
+    if (this.maxDisplay) this.maxDisplay.innerText = maxMana;
+
+    const renderBreakdown = (containerId, breakdownArray) => {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      container.innerHTML = breakdownArray
+        .map((item) => {
+          const colorClass =
+            item.value >= 0 ? "text-emerald-400" : "text-rose-400";
+          const sign = item.value > 0 ? "+" : "";
+          return `<li class="flex justify-between">
+                          <span class="text-gray-400">${item.source}</span>
+                          <span class="${colorClass} font-semibold">${sign}${item.value}</span>
+                        </li>`;
+        })
+        .join("");
+    };
+
+    if (this.characterData.magia.max_mana_breakdown) {
+      renderBreakdown("breakdown-mana", this.characterData.magia.max_mana_breakdown.breakdown);
     }
 
     const curText = document.getElementById("magia-current-text");

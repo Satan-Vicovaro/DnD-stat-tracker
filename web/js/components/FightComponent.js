@@ -205,7 +205,7 @@ export class FightComponent {
     let cCount = 0;
 
     inventory.forEach((item, originalIndex) => {
-      if (item.item_type === 'Weapon') {
+      if (item.item_type === 'Weapon' && item.location === 'EQUIPPED') {
         wHtml += this.renderItemCard(item, originalIndex, false);
         wCount++;
       }

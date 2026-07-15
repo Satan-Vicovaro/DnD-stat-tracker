@@ -1,10 +1,10 @@
 import { CharacterComponent } from './components/CharacterComponent.js';
 import { ArmorComponent } from './components/ArmorComponent.js';
-import { ShopComponent } from './components/ShopComponent.js';
+import { ShopComponent } from './components/ShopComponent.js?v=3';
 import { EconomyComponent } from './components/EconomyComponent.js';
 import { PaymentModal } from './components/PaymentModal.js';
 import { ItemEditorModal } from './components/ItemEditorModal.js';
-import { InventoryComponent } from './components/InventoryComponent.js';
+import { InventoryComponent } from './components/InventoryComponent.js?v=2';
 import { SaveLoadModal } from './components/SaveLoadModal.js';
 import { FightComponent } from './components/FightComponent.js';
 import { StatusEffectsComponent } from './components/StatusEffectsComponent.js';

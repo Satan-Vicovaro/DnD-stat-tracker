@@ -56,14 +56,15 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
         item_dict.get("location", fallback.location.value if fallback else "BACKPACK")
     )
 
-    # Auto-place specific named containers into their natural slot
-    name_lower = item_dict.get("name", "").lower()
-    if name_lower in ("kołczan", "kolczan"):
-        location = ItemLocation.QUIVER
-    elif name_lower in ("plecak", "plecak podróżnika", "plecak podroznika"):
-        location = ItemLocation.BACKPACK
-    elif name_lower in ("ubranie z kieszeniami", "ubrania z kieszeniami", "pasek z mocowaniem"):
-        location = ItemLocation.EQUIPPED
+    # Auto-place specific named containers into their natural slot ONLY for new items
+    if fallback is None:
+        name_lower = item_dict.get("name", "").lower()
+        if name_lower in ("kołczan", "kolczan"):
+            location = ItemLocation.QUIVER
+        elif name_lower in ("plecak", "plecak podróżnika", "plecak podroznika"):
+            location = ItemLocation.BACKPACK
+        elif name_lower in ("ubranie z kieszeniami", "ubrania z kieszeniami", "pasek z mocowaniem"):
+            location = ItemLocation.EQUIPPED
 
     modifiers = [
         Modifier(
@@ -83,6 +84,7 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
     fb_current_uses = fallback.current_uses if fallback else 1
     fb_action_cost = fallback.action_cost if fallback else ""
     fb_properties = fallback.properties if fallback else {}
+    fb_is_equipped = fallback.is_equipped if fallback else False
     # Preserve the item's stable UUID; generate a new one only for brand-new items.
     fb_item_id = fallback.item_id if fallback else str(uuid.uuid4())
 
@@ -91,6 +93,7 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
     current_uses = item_dict.get("current_uses", fb_current_uses)
     action_cost = item_dict.get("action_cost", fb_action_cost)
     quantity = item_dict.get("quantity", fallback.quantity if fallback else 1)
+    is_equipped = item_dict.get("is_equipped", fb_is_equipped)
     item_id = item_dict.get("item_id", fb_item_id)
     
     # Collect arbitrary properties from the shop JSON
@@ -100,7 +103,7 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
     else:
         exclude_keys = {
             "name", "description", "space_taken", "location", "modifiers", "item_type",
-            "consumable_effects", "max_uses", "current_uses", "action_cost", "quantity", "item_id",
+            "consumable_effects", "max_uses", "current_uses", "action_cost", "quantity", "item_id", "is_equipped",
             "actions", "effect_value", "uses_durability", "cost_type",
             "weapon_name", "item_name", "tarcza", "zbroja", "cost_silver", "quantity_or_cost"
         }
@@ -135,6 +138,7 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
             action_cost=action_cost,
             properties=properties,
             quantity=quantity,
+            is_equipped=is_equipped,
             item_id=item_id,
             actions=actions,
         )
@@ -152,6 +156,7 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
             action_cost=action_cost,
             properties=properties,
             quantity=quantity,
+            is_equipped=is_equipped,
             item_id=item_id,
             effect_value=item_dict.get("effect_value", getattr(fallback, "effect_value", "")),
             uses_durability=item_dict.get(
@@ -173,6 +178,7 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
         action_cost=action_cost,
         properties=properties,
         quantity=quantity,
+        is_equipped=is_equipped,
         item_id=item_id,
     )
 
@@ -193,6 +199,7 @@ def serialize(hero: Character) -> dict:
             "description": item.description,
             "space_taken": item.space_taken,
             "location": item.location.value,  # enum → string
+            "is_equipped": item.is_equipped,
             "modifiers": [
                 {
                     "source": m.source,
@@ -319,8 +326,8 @@ def deserialize(data: dict) -> Character:
     hero.copper = data.get("copper", 0)
 
     # Magia (Mana)
-    hero.max_mana = data.get("max_mana", 0)
-    hero.current_mana = data.get("current_mana", 0)
+    if "current_mana" in data:
+        hero.current_mana = data["current_mana"]
     hero.mana_buffs = data.get("mana_buffs", {
         "Obrona": 0,
         "Akcje": 0,

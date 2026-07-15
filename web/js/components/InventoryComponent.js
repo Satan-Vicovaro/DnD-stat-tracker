@@ -96,6 +96,7 @@ export class InventoryComponent {
     const inventory = this.characterData.inventory || [];
 
     inventory.forEach((item, index) => {
+      console.log(`[Step 8] Rendering item ${index}: ${item.name}`, item);
       if (item.is_clothes) {
         hasClothesInInventory = true;
       }
@@ -156,6 +157,13 @@ export class InventoryComponent {
     const usesBadge = (hasConsumable && item.max_uses > 0) ? `<span class="bg-teal-900/80 text-teal-300 text-[9px] px-1.5 py-0.5 rounded border border-teal-500/50">Użycia: ${item.current_uses}/${item.max_uses}</span>` : "";
 
     const showQuiverOption = this.characterData.inventory_space?.quiver?.visible || item.location === "QUIVER" || nameLower === "kołczan" || nameLower === "kolczan";
+    
+    const providesSpace = item.modifiers && item.modifiers.some(m => {
+      const match = ['backpack_space', 'quick_space', 'quiver_space', 'back_space'].includes(m.stat_name);
+      console.log(`[Step 9.1] Checking modifier: ${m.stat_name}, match: ${match}`);
+      return match;
+    });
+    console.log(`[Step 9.2] Item ${item.name} providesSpace: ${providesSpace}`);
 
     return `
       <div class="bg-gray-800 rounded p-3 border ${borderClass} transition-colors">
@@ -183,6 +191,8 @@ export class InventoryComponent {
             
             ${hasConsumable ? `<button data-action="use" data-index="${index}" class="text-[10px] font-bold bg-teal-600 hover:bg-teal-500 text-white px-2 py-1.5 rounded w-full border border-teal-500 transition-colors shadow-sm">Użyj przedmiotu</button>` : ''}
             
+            ${providesSpace ? `<button data-action="toggle_equip" data-index="${index}" class="text-[10px] font-bold ${item.is_equipped ? 'bg-amber-600 hover:bg-amber-500 border-amber-500' : 'bg-gray-600 hover:bg-gray-500 border-gray-500'} text-white px-2 py-1.5 rounded w-full border transition-colors shadow-sm mt-1 mb-0.5">${item.is_equipped ? 'Zdejmij' : 'Załóż'}</button>` : ''}
+            
             <div class="flex gap-1 w-full justify-between mt-0.5 pt-1.5 border-t border-gray-700/50">
               <button data-action="edit" data-index="${index}" class="flex-1 text-[10px] font-bold bg-indigo-600 hover:bg-indigo-500 text-white px-1 py-1 rounded border border-indigo-500 transition-colors">Edytuj</button>
               <button data-action="drop" data-index="${index}" class="flex-1 text-[10px] font-bold bg-red-900/60 hover:bg-red-800 text-red-200 px-1 py-1 rounded border border-red-700 transition-colors">Wyrzuć</button>
@@ -200,6 +210,23 @@ export class InventoryComponent {
       select.addEventListener('change', (e) => {
         const index = parseInt(e.target.getAttribute('data-index'));
         this.setLocation(index, e.target.value);
+      });
+    });
+
+    container.querySelectorAll('button[data-action="toggle_equip"]').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        const idx = parseInt(e.currentTarget.dataset.index, 10);
+        try {
+          const res = await window.eel.toggle_equip_inventory_item(idx)();
+          if (!res.success) {
+            alert(res.message);
+          } else {
+            this.characterData = res.character;
+            this.render();
+          }
+        } catch(err) {
+          console.error("Failed to toggle equip", err);
+        }
       });
     });
 

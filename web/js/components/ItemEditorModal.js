@@ -174,9 +174,11 @@ export class ItemEditorModal {
           <option value="dex" ${mod.stat_name === 'dex' ? 'selected' : ''}>Zręczność</option>
           <option value="wis" ${mod.stat_name === 'wis' ? 'selected' : ''}>Wiedza</option>
           <option value="cha" ${mod.stat_name === 'cha' ? 'selected' : ''}>Charyzma</option>
+          <option value="max_mana" ${mod.stat_name === 'max_mana' ? 'selected' : ''}>Max Mana</option>
           <option value="backpack_space" ${mod.stat_name === 'backpack_space' ? 'selected' : ''}>Pojemność Plecaka</option>
-          <option value="quick_space" ${mod.stat_name === 'quick_space' ? 'selected' : ''}>Miejsce Podręczne</option>
+          <option value="quick_space" ${mod.stat_name === 'quick_space' ? 'selected' : ''}>Miejsce Podręczne (W rękach)</option>
           <option value="back_space" ${mod.stat_name === 'back_space' ? 'selected' : ''}>Miejsce na Plecach</option>
+          <option value="quiver_space" ${mod.stat_name === 'quiver_space' ? 'selected' : ''}>Pojemność Kołczanu</option>
         </select>
         <input type="number" class="mod-val w-20 bg-gray-700 text-white text-sm rounded px-2 py-1 outline-none text-center" data-idx="${i}" value="${mod.value}">
         <button class="mod-del text-red-400 hover:text-red-300 px-2" data-idx="${i}">✕</button>

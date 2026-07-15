@@ -354,6 +354,7 @@ class GameEngine:
             "inventory": [],
             "magia": {
                 "max_mana": getattr(self.hero, "max_mana", 0),
+                "max_mana_breakdown": self.hero.stat_manager.get_stat_breakdown("max_mana"),
                 "current_mana": getattr(self.hero, "current_mana", 0),
                 "mana_buffs": getattr(self.hero, "mana_buffs", {})
             }
@@ -363,8 +364,11 @@ class GameEngine:
         from models import get_game_rules
         clothes_ids = get_game_rules().get("inventory", {}).get("clothes_identifiers", ["ubrani"])
 
+        logger.info("[Step 7] Generating character view model inventory array...")
         for item in self.hero.inventory:
             item_dict = asdict(item)
+            if item.name.lower() in ("plecak", "kołczan", "kolczan"):
+                logger.info(f"[Step 7.1] asdict result for {item.name}: is_equipped={item_dict.get('is_equipped')}, modifiers={item_dict.get('modifiers')}")
             # active_containers is now keyed by item_id (stable UUID), not id()
             item_dict["is_active_container"] = item.item_id in active_containers
             item_dict["is_clothes"] = any(cid.lower() in item.name.lower() for cid in clothes_ids)
@@ -392,6 +396,13 @@ class GameEngine:
             }
             for se in self.hero.status_effects
         ]
+        try:
+            import json
+            with open("debug_inventory.json", "w", encoding="utf-8") as f:
+                json.dump(view_model["inventory"], f, ensure_ascii=False, indent=2)
+        except Exception:
+            pass
+
         return view_model
 
     # ------------------------------------------------------------------
@@ -400,9 +411,9 @@ class GameEngine:
 
     def set_mana_config(self, max_val: int, current_val: int = None) -> bool:
         self._snapshot()
-        self.hero.max_mana = max_val
+        # max_val is ignored as max_mana is dynamically calculated
         if current_val is not None:
-            self.hero.current_mana = current_val
+            self.hero.current_mana = min(current_val, self.hero.max_mana)
         return True
 
     def end_day(self) -> bool:
@@ -459,6 +470,7 @@ class GameEngine:
         return True
 
     def add_item_to_inventory(self, item_dict: dict, payment: dict, quantity: int = 1) -> bool:
+        logger.info(f"[Step 2] engine.add_item_to_inventory called with: {item_dict.get('name')}")
         """Validate payment, deduct it, and add the item to inventory."""
         gold_cost = int(payment.get("gold", 0))
         silver_cost = int(payment.get("silver", 0))
@@ -484,9 +496,12 @@ class GameEngine:
                 logger.info(f"Stacked {quantity} of {item.name} to existing stack.")
                 return True
 
+        logger.info(f"[Step 3] Calling build_item...")
         item = build_item(item_dict)
+        logger.info(f"[Step 4] Item built: {item.name}, is_equipped={item.is_equipped}, modifiers={item.modifiers}")
         item.quantity = quantity
         self.hero.inventory.append(item)
+        logger.info(f"[Step 5] Item appended to inventory")
         logger.info(f"Added item {item.name} (x{quantity}) to inventory at {item.location}.")
         return True
 
@@ -518,6 +533,9 @@ class GameEngine:
                         if i != index and (inv_item.location == "CLOTHES" or getattr(inv_item.location, "value", inv_item.location) == "CLOTHES"):
                             inv_item.location = ItemLocation.BACKPACK
                             logger.info(f"Auto-unequipped {inv_item.name} to backpack.")
+                
+                # Automatically unequip when moving to a new location
+                item_dict["is_equipped"] = False
 
         self._snapshot()
         old_item = self.hero.inventory.pop(index)
@@ -525,6 +543,34 @@ class GameEngine:
         self.hero.inventory.insert(index, item)
         logger.info(f"Edited item at index {index}.")
         return True
+
+    def toggle_equip_inventory_item(self, index: int) -> tuple[bool, str]:
+        if index < 0 or index >= len(self.hero.inventory):
+            return False, "Nieprawidłowy indeks przedmiotu."
+
+        item = self.hero.inventory[index]
+        
+        provides_space = any(mod.stat_name in ("backpack_space", "quick_space", "quiver_space", "back_space") for mod in item.modifiers)
+        if not provides_space:
+            return False, "Tego przedmiotu nie można założyć w ten sposób."
+
+        if item.is_equipped:
+            item.is_equipped = False
+            self.save()
+            return True, "Zdjęto przedmiot."
+
+        has_backpack = any(mod.stat_name == "backpack_space" for mod in item.modifiers)
+        for other in self.hero.inventory:
+            if other.is_equipped and other != item:
+                other_has_backpack = any(mod.stat_name == "backpack_space" for mod in other.modifiers)
+                
+                # Only backpacks are mutually exclusive. Other spaces (like quick_space) stack!
+                if has_backpack and other_has_backpack:
+                    other.is_equipped = False
+
+        item.is_equipped = True
+        self.save()
+        return True, "Założono przedmiot."
 
     def remove_inventory_item(self, index: int) -> bool:
         if index < 0 or index >= len(self.hero.inventory):

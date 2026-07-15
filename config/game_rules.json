@@ -11,6 +11,14 @@
         { "source": "total_str", "multiplier": 3.0, "offset": 0 }
       ]
     },
+    "max_mana": {
+      "base": 0,
+      "scaling": [
+        { "source": "total_wis", "multiplier": 2.0, "divisor": 3.0, "offset": 0 },
+        { "source": "total_cha", "multiplier": 1.0, "divisor": 3.0, "offset": 0 },
+        { "source": "level", "multiplier": 1.0, "offset": 0 }
+      ]
+    },
     "defense": {
       "base": 10,
       "scaling": [

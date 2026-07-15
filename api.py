@@ -86,6 +86,12 @@ def remove_inventory_item(index: int):
     return game_engine.get_character_view_model()
 
 @eel.expose
+def toggle_equip_inventory_item(index: int):
+    """API endpoint to toggle equip status of an inventory item."""
+    success, msg = game_engine.toggle_equip_inventory_item(index)
+    return {"success": success, "message": msg, "character": game_engine.get_character_view_model()}
+
+@eel.expose
 def use_inventory_item(index: int, override_value: int = None):
     """API endpoint to use an item from inventory."""
     if game_engine.use_inventory_item(index, override_value):

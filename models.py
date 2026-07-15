@@ -208,6 +208,7 @@ class Item:
     action_cost: str = ""
     properties: Dict[str, any] = field(default_factory=dict)
     quantity: int = 1
+    is_equipped: bool = False
     # Stable identifier that survives deep-copies and save/load cycles.
     # Must NOT be compared with Python's id() which is address-based.
     item_id: str = field(default_factory=lambda: str(uuid.uuid4()))
@@ -285,10 +286,11 @@ class CharacterBaseProvider(ModifierProvider):
             for scale in conf.get("scaling", []):
                 source = scale.get("source")
                 multiplier = scale.get("multiplier", 1.0)
+                divisor = scale.get("divisor", 1.0)
                 offset = scale.get("offset", 0.0)
                 
                 val = getattr(character, source, 0)
-                calc_val = (val + offset) * multiplier
+                calc_val = ((val + offset) * multiplier) / divisor
                 
                 if calc_val != 0:
                     mods.append(Modifier(name_map.get(source, source), stat, calc_val))
@@ -383,7 +385,7 @@ class Character:
         self.stat_manager.add_provider(self.status_provider)
 
         # Magia (Mana)
-        self.max_mana: int = 0
+
         self.current_mana: int = 0
         self.mana_buffs: Dict[str, int] = {
             "Obrona": 0,
@@ -444,6 +446,10 @@ class Character:
         return int(math.floor(self.stat_manager.get_stat_breakdown("cha", base_value=self.stats.cha)["total"] + 0.5))
 
     @property
+    def max_mana(self) -> int:
+        return int(math.floor(self.stat_manager.get_stat_breakdown("max_mana")["total"] + 0.5))
+
+    @property
     def max_hp(self) -> int:
         return int(math.floor(self.stat_manager.get_stat_breakdown("max_hp")["total"] + 0.5))
 
@@ -498,26 +504,28 @@ class Character:
 
             # 3. Apply bonuses and mark as active containers
             granted = 0.0
-            if item_quick > 0 and loc in (ItemLocation.EQUIPPED, ItemLocation.CLOTHES):
-                quick_bonus += item_quick
-                granted += item_quick
-            if item_back > 0 and loc == ItemLocation.BACK:
-                back_bonus += item_back
-                granted += item_back
-            if item_quiver > 0 and loc == ItemLocation.QUIVER:
-                has_quiver = True
-                quiver_bonus += item_quiver
-                granted += item_quiver
+            
+            if item.is_equipped:
+                if item_quick > 0:
+                    quick_bonus += item_quick
+                    granted += item_quick
+                if item_back > 0:
+                    back_bonus += item_back
+                    granted += item_back
+                if item_quiver > 0:
+                    has_quiver = True
+                    quiver_bonus += item_quiver
+                    granted += item_quiver
+                
+                # Backpacks take max so you can't infinitely nest them
+                if item_backpack > 0:
+                    if item_backpack > best_backpack_value:
+                        best_backpack_value = item_backpack
+                        best_backpack_item = item
 
             if granted > 0:
                 active_containers[item.item_id] = granted
                 exempt_ids.add(item.item_id)
-                
-            # Backpacks take max so you can't infinitely nest them
-            if item_backpack > 0 and loc == ItemLocation.BACKPACK:
-                if item_backpack > best_backpack_value:
-                    best_backpack_value = item_backpack
-                    best_backpack_item = item
 
         if best_backpack_item:
             active_containers[best_backpack_item.item_id] = best_backpack_value

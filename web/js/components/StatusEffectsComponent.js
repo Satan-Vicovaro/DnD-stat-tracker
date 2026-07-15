@@ -182,7 +182,7 @@ export class StatusEffectsComponent {
     }
     emptyP.style.display = 'none';
 
-    const STATS = ['max_hp', 'defense', 'ap', 'stamina', 'movement', 'str', 'dex', 'wis', 'cha'];
+    const STATS = ['max_hp', 'defense', 'ap', 'stamina', 'movement', 'str', 'dex', 'wis', 'cha', 'max_mana', 'backpack_space', 'quick_space', 'back_space', 'quiver_space'];
 
     this._modifiers.forEach((mod, idx) => {
       const li = document.createElement('li');
@@ -315,6 +315,11 @@ export class StatusEffectsComponent {
       dex: 'Zręczność',
       wis: 'Mądrość',
       cha: 'Charyzma',
+      max_mana: 'Max Mana',
+      backpack_space: 'Poj. Plecaka',
+      quick_space: 'Miej. Podręczne',
+      back_space: 'Miej. na Plecach',
+      quiver_space: 'Poj. Kołczanu',
     };
     return map[name] || name;
   }

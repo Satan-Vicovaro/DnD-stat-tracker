@@ -251,6 +251,8 @@ export class ShopComponent {
           max_uses: itemData.max_uses ?? 1,
           current_uses: itemData.current_uses ?? 1,
           action_cost: itemData.action_cost || "",
+          modifiers: itemData.modifiers || [],
+          properties: itemData.properties || {},
         };
 
         if (window.paymentModal) {
