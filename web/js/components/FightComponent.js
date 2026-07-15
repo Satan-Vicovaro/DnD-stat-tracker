@@ -646,7 +646,7 @@ export class FightComponent {
               <span class="text-emerald-400 font-bold text-xs bg-emerald-900/40 px-2 py-1 rounded border border-emerald-500/30">AP: ${act.action_cost}</span>
             </div>
             <div class="flex flex-wrap gap-2 mb-2">
-              <span class="bg-slate-800/80 px-2 py-1 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[9px] font-extrabold mr-1">Odp:</span> <span class="font-bold text-white text-xs">${act.card_value}</span></span>
+              <span class="bg-slate-800/80 px-2 py-1 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[9px] font-extrabold mr-1">Odp:</span> <span class="font-bold text-white text-xs">${act.card_value !== undefined ? act.card_value : "&nbsp;"}</span></span>
               <span class="bg-slate-800/80 px-2 py-1 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[9px] font-extrabold mr-1">Zas:</span> <span class="font-bold text-white text-xs">${act.range || act.range_str || "-"}</span></span>
               <span class="bg-slate-800/80 px-2 py-1 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[9px] font-extrabold mr-1">Hit:</span> <span class="font-bold text-amber-400 text-xs">${act.hit_roll || "-"}</span></span>
               <span class="bg-slate-800/80 px-2 py-1 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[9px] font-extrabold mr-1">Dmg:</span> <span class="font-bold text-rose-400 text-xs">${act.damage_roll || "-"}</span></span>
@@ -857,7 +857,7 @@ export class FightComponent {
             </div>
             <div class="flex flex-col gap-2 mb-2">
               <div class="flex gap-2">
-                <span class="bg-slate-800/80 px-2 py-1 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[9px] font-extrabold mr-1">Odp:</span> <span class="font-bold text-white text-xs">${act.card_value}</span></span>
+                <span class="bg-slate-800/80 px-2 py-1 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[9px] font-extrabold mr-1">Odp:</span> <span class="font-bold text-white text-xs">${act.card_value !== undefined ? act.card_value : "&nbsp;"}</span></span>
                 <span class="bg-slate-800/80 px-2 py-1 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[9px] font-extrabold mr-1">Hit:</span> <span class="font-bold text-amber-400 text-xs">${act.hit_roll || "-"}</span></span>
                 <span class="bg-slate-800/80 px-2 py-1 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[9px] font-extrabold mr-1">Dmg:</span> <span class="font-bold text-rose-400 text-xs">${act.damage_roll || "-"}</span></span>
               </div>

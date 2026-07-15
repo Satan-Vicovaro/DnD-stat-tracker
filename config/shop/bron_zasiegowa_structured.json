@@ -229,12 +229,21 @@
   {
     "name": "bełt ciężki",
     "cost_silver": "6",
-    "actions": []
+    "actions": [{
+        "card_value": "0",
+        "hit_roll": "-2",
+        "damage_roll": "d4/d4+4"
+    }]
   },
   {
     "name": "płonący bełt",
     "cost_silver": "4",
-    "actions": []
+    "description": "adv na ataki w płonącego przeciwnika (save: d20+str<13)",
+    "actions": [{
+        "card_value": "0",
+        "hit_roll": "-2",
+        "damage_roll": "d4/2xd4"
+    }]
   },
   {
     "name": "Łuk krótki",
@@ -324,12 +333,22 @@
   {
     "name": "strzała giętka",
     "cost_silver": "3",
-    "actions": []
+    "description":"ruch wroga zmniejszony zostaje o 10ft",
+    "actions": [{
+        "card_value": "0",
+        "hit_roll": "-1",
+        "damage_roll": "d4/d4 + str"
+    }]
   },
   {
     "name": "płonąca strzała",
     "cost_silver": "4",
-    "actions": []
+    "description":"adv na ataki w płonącego przeciwnika (save: d20+str<13)",
+    "actions": [{
+        "card_value": "0",
+        "hit_roll": "-1",
+        "damage_roll": "d4/2xd4"
+    }]
   },
   {
     "name": "Samopał",
@@ -408,11 +427,19 @@
   {
     "name": "amunicja rozbijająca",
     "cost_silver": "10",
-    "actions": []
+    "actions": [{
+        "card_value": "0",
+        "hit_roll": "-2",
+        "damage_roll": "d6+stała --> 2d4 + 0,5 stała"
+    }]
   },
   {
     "name": "amunicja przeciwpancerna",
     "cost_silver": "20",
-    "actions": []
+    "actions": [{
+        "card_value": "0",
+        "hit_roll": "1",
+        "damage_roll": "d6+stała --> d8 + 1,5 stała"
+    }]
   }
 ]
