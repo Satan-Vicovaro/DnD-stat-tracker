@@ -107,7 +107,7 @@
     "name": "Topór",
     "description": "Ze sklepu.",
     "space_taken": 10.0,
-    "location": "EQUIPPED",
+    "location": "BACKPACK",
     "modifiers": [],
     "item_type": "Weapon",
     "consumable_effects": {},

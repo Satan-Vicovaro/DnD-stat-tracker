@@ -3,6 +3,7 @@ export class FightComponent {
     this.containerId = containerId;
     this.characterData = null;
     this.weaponInputs = {};
+    this.usedSlots = new Set();
     this.openItemCards = new Set();
     this.plannedBuffs = {
       Obrona: 0,
@@ -126,6 +127,8 @@ export class FightComponent {
     document
       .getElementById("btn-reset-ap")
       .addEventListener("click", async () => {
+        this.weaponInputs = {};
+        this.usedSlots.clear();
         dispatchAP(await eel.reset_action_points()());
       });
 
@@ -265,12 +268,13 @@ export class FightComponent {
     }
 
     // 2. Render Weapons & Consumables
-    const weaponsList = document.getElementById("fight-weapons-list");
-    const weaponsEmpty = document.getElementById("fight-weapons-empty");
+    const weaponsList = document.getElementById("fight-weapons-list-fullwidth");
+    const weaponsEmpty = document.getElementById("fight-weapons-empty-fullwidth");
     const consList = document.getElementById("fight-consumables-list");
     const consEmpty = document.getElementById("fight-consumables-empty");
 
     const inventory = this.characterData.inventory || [];
+    const stamina = this.characterData.stamina?.total || 1;
 
     let wHtml = "";
     let wCount = 0;
@@ -279,7 +283,7 @@ export class FightComponent {
 
     inventory.forEach((item, originalIndex) => {
       if (item.item_type === "Weapon" && item.location === "EQUIPPED") {
-        wHtml += this.renderItemCard(item, originalIndex, false);
+        wHtml += this.renderWeaponRow(item, originalIndex, stamina);
         wCount++;
       }
 
@@ -387,14 +391,14 @@ export class FightComponent {
     // Bind weapon inputs
     container.querySelectorAll("input[data-weapon-input]").forEach((input) => {
       input.addEventListener("input", (e) => {
-        const index = e.currentTarget.getAttribute("data-weapon-input");
-        this.weaponInputs[index] = e.currentTarget.value;
+        const slotKey = e.currentTarget.getAttribute("data-weapon-input");
+        this.weaponInputs[slotKey] = e.currentTarget.value;
         this.render(); // Re-render to update the displayed action
 
         // After re-render, focus the input again and push cursor to the end
         requestAnimationFrame(() => {
           const el = document.querySelector(
-            `input[data-weapon-input="${index}"]`,
+            `input[data-weapon-input="${slotKey}"]`,
           );
           if (el) {
             el.focus();
@@ -412,12 +416,12 @@ export class FightComponent {
       .querySelectorAll('button[data-action="fight-weapon-use"]')
       .forEach((btn) => {
         btn.addEventListener("click", async (e) => {
-          const index = parseInt(e.currentTarget.getAttribute("data-index"));
+          const slotKey = e.currentTarget.getAttribute("data-slot-key");
           const actionCost =
             parseFloat(e.currentTarget.getAttribute("data-cost")) || 0;
 
           const curAP = this.characterData.current_action_points ?? 0;
-          const errEl = container.querySelector(`[data-weapon-err="${index}"]`);
+          const errEl = container.querySelector(`[data-weapon-err="${slotKey}"]`);
 
           if (actionCost > 0 && curAP < actionCost) {
             if (errEl) {
@@ -428,7 +432,7 @@ export class FightComponent {
           }
           if (errEl) errEl.classList.add("hidden");
 
-          // Drain AP
+          this.usedSlots.add(slotKey);
           this.characterData = await eel.set_action_points(
             Math.max(0, curAP - actionCost),
           )();
@@ -731,6 +735,181 @@ export class FightComponent {
           ${consHtml}
         </div>
       </details>
+    `;
+  }
+
+  renderWeaponRow(item, index, stamina) {
+    const locMap = {
+      EQUIPPED: "W Rękach",
+      BACKPACK: "Plecak (2 PA)",
+      BACK: "Plecy (1 PA)",
+      QUIVER: "Kołczan",
+      WAGON: "Wóz",
+    };
+    const locTag = locMap[item.location] || item.location;
+    const locBadge = `<span class="bg-indigo-900/50 text-indigo-300 text-[10px] px-1.5 py-0.5 rounded border border-indigo-500/50 uppercase tracking-wider">${locTag}</span>`;
+
+    const spaceText = `<span class="text-gray-500 text-[9px]">Masa: ${item.space_taken}</span>`;
+
+    let modsHtml = "";
+    if (item.modifiers && item.modifiers.length > 0) {
+      modsHtml =
+        `<div class="mt-1.5 flex flex-wrap gap-1">` +
+        item.modifiers
+          .map(
+            (m) =>
+              `<span class="bg-indigo-900/50 text-indigo-300 text-[9px] px-1.5 py-0.5 rounded border border-indigo-500/30">${m.stat_name}: ${m.value > 0 ? "+" + m.value : m.value}</span>`,
+          )
+          .join("") +
+        `</div>`;
+    }
+
+    let propsHtml = "";
+    if (item.properties && Object.keys(item.properties).length > 0) {
+      const propItems = Object.entries(item.properties)
+        .map(([k, v]) => {
+          let valHtml = v;
+          if (typeof v === "string" && v.includes("||")) {
+            const parts = v
+              .split("||")
+              .map((s) => s.trim())
+              .filter((s) => s.length > 0);
+            valHtml = `<ul class="list-disc list-outside ml-5 block w-full mt-1 font-medium">${parts.map((p) => `<li>${p}</li>`).join("")}</ul>`;
+          }
+          const formattedKey = k
+            .replace(/_/g, " ")
+            .replace(/\b\w/g, (l) => l.toUpperCase());
+          return `
+          <div class="bg-black/50 px-3 py-2 rounded-lg border border-slate-700 flex flex-col items-start shadow-sm flex-1 min-w-[120px]">
+            <span class="text-slate-400 text-[10px] font-extrabold uppercase tracking-wide mb-1">${formattedKey}:</span>
+            <span class="font-bold text-white text-xs w-full">${valHtml}</span>
+          </div>
+        `;
+        })
+        .join("");
+
+      propsHtml = `
+        <div class="mt-3">
+          <div class="flex flex-wrap gap-2 w-full">
+            ${propItems}
+          </div>
+        </div>
+      `;
+    }
+
+    // Slots
+    let slotsHtml = "";
+    for (let slotIndex = 0; slotIndex < stamina; slotIndex++) {
+      const slotKey = `${index}-${slotIndex}`;
+      const inputVal = this.weaponInputs[slotKey] !== undefined ? this.weaponInputs[slotKey] : "";
+
+      let selectedAction = null;
+      if (inputVal !== "") {
+        const numericVal = parseInt(inputVal);
+        if (!isNaN(numericVal) && item.actions) {
+          const sortedActions = [...item.actions].sort(
+            (a, b) => parseInt(a.card_value) - parseInt(b.card_value),
+          );
+          for (let i = sortedActions.length - 1; i >= 0; i--) {
+            if (numericVal >= parseInt(sortedActions[i].card_value)) {
+              selectedAction = sortedActions[i];
+              break;
+            }
+          }
+        }
+      }
+
+      let selectedActionHtml = "";
+      if (selectedAction) {
+        const act = selectedAction;
+        let descHtml = "";
+        if (act.description) {
+          const parts = act.description
+            .split("||")
+            .map((s) => s.trim())
+            .filter((s) => s.length > 0);
+          if (parts.length === 1) descHtml = parts[0];
+          else
+            descHtml = `<ul class="list-disc list-outside space-y-1 ml-5">${parts.map((p) => `<li>${p}</li>`).join("")}</ul>`;
+        }
+
+        const isUltimate = parseInt(act.card_value) >= 10;
+        const isUsed = this.usedSlots.has(slotKey);
+        const cardWrapperClasses = isUltimate
+          ? `bg-black/90 rounded-lg p-3 border-2 border-amber-500/80 mt-3 relative transition-all duration-300 flex-1 flex flex-col ${isUsed ? 'opacity-40 grayscale pointer-events-none' : 'shadow-[0_0_15px_rgba(245,158,11,0.5)]'}`
+          : `bg-black/80 rounded-lg p-3 border-2 border-slate-600 mt-3 relative transition-all duration-300 flex-1 flex flex-col ${isUsed ? 'opacity-40 grayscale pointer-events-none' : 'shadow-md'}`;
+
+        selectedActionHtml = `
+          <div class="${cardWrapperClasses}">
+            <div class="flex justify-between items-center text-indigo-200 mb-2 pb-2 border-b border-slate-600">
+              <span class="text-sm font-extrabold tracking-wide">${act.action_name}</span>
+              <span class="text-emerald-400 font-bold text-xs bg-emerald-900/40 px-2 py-1 rounded border border-emerald-500/30">AP: ${act.action_cost}</span>
+            </div>
+            <div class="flex flex-col gap-2 mb-2">
+              <div class="flex gap-2">
+                <span class="bg-slate-800/80 px-2 py-1 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[9px] font-extrabold mr-1">Odp:</span> <span class="font-bold text-white text-xs">${act.card_value}</span></span>
+                <span class="bg-slate-800/80 px-2 py-1 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[9px] font-extrabold mr-1">Hit:</span> <span class="font-bold text-amber-400 text-xs">${act.hit_roll || "-"}</span></span>
+                <span class="bg-slate-800/80 px-2 py-1 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[9px] font-extrabold mr-1">Dmg:</span> <span class="font-bold text-rose-400 text-xs">${act.damage_roll || "-"}</span></span>
+              </div>
+              <div class="flex gap-2">
+                <span class="bg-slate-800/80 px-2 py-1 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[9px] font-extrabold mr-1">Zas:</span> <span class="font-bold text-white text-xs">${act.range || act.range_str || "-"}</span></span>
+                ${act.targets ? `<span class="bg-slate-800/80 px-2 py-1 rounded border border-slate-700 flex items-center shadow-inner"><span class="text-slate-400 uppercase text-[9px] font-extrabold mr-1">Cel:</span> <span class="font-bold text-indigo-300 text-xs">${act.targets}</span></span>` : ""}
+              </div>
+            </div>
+            <div class="text-slate-200 italic text-xs leading-relaxed border-t border-slate-600/50 pt-2 mt-1 font-medium mb-3 flex-1">${descHtml}</div>
+            
+            <div class="mt-auto flex flex-col gap-1">
+              <button data-action="fight-weapon-use" data-slot-key="${slotKey}" data-cost="${act.action_cost}" class="w-full bg-rose-600 hover:bg-rose-500 text-white font-extrabold text-sm py-1.5 px-3 rounded shadow-md transition-colors border border-rose-500/50 flex items-center justify-center gap-2">
+                <span>⚔</span> Użyj
+              </button>
+              <span data-weapon-err="${slotKey}" class="hidden text-[10px] text-rose-400 font-semibold text-center mt-1"></span>
+            </div>
+          </div>
+        `;
+      } else if (inputVal !== "") {
+        selectedActionHtml = `<div class="text-xs text-rose-400 mt-2 font-semibold">Brak akcji dla tej wartości.</div>`;
+      }
+
+      slotsHtml += `
+        <div class="bg-gray-800/50 p-3 rounded-lg border border-gray-600 min-w-[250px] max-w-[320px] flex-none flex flex-col">
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <label class="text-[10px] text-amber-400 font-bold uppercase tracking-wide">🎲 Slot ${slotIndex + 1}</label>
+            <input type="number" min="0" data-weapon-input="${slotKey}" class="w-20 bg-gray-900 border border-amber-500/60 text-white text-sm text-center rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-amber-400 placeholder-gray-600 shadow-inner" value="${inputVal}" placeholder="Wartość">
+          </div>
+          ${selectedActionHtml}
+        </div>
+      `;
+    }
+
+    return `
+      <div class="bg-gray-800 rounded-xl border border-gray-700 shadow-sm overflow-hidden flex flex-col mb-4">
+        <!-- Weapon Header Info -->
+        <div class="p-4 bg-gray-700/30 border-b border-gray-700 flex flex-wrap lg:flex-nowrap gap-4 justify-between items-start">
+          <div class="flex-1">
+            <h4 class="font-black text-xl text-white leading-tight mb-1 flex items-center gap-2">
+              <span class="text-rose-400">⚔</span> ${item.name}
+              ${item.quantity > 1 ? `<span class="text-indigo-400 text-sm">(x${item.quantity})</span>` : ""}
+            </h4>
+            <div class="text-[10px] font-bold uppercase tracking-wider text-rose-400 mb-1 flex items-center flex-wrap gap-2 mt-0.5">
+                <span>${item.item_type}</span> <span class="text-gray-500">&bull;</span> ${spaceText}
+                ${locBadge}
+            </div>
+            ${modsHtml}
+            ${item.description ? `<p class="text-[11px] text-gray-400 italic mt-2 leading-snug">${item.description}</p>` : ""}
+            ${propsHtml}
+          </div>
+        </div>
+
+        <!-- Stamina Slots Grid -->
+        <div class="p-4 bg-gray-900/40">
+          <h5 class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+            <span>⚡</span> Sloty Wytrwałości (${stamina})
+          </h5>
+          <div class="flex flex-row flex-wrap gap-4 pb-2 items-stretch min-h-[250px]">
+            ${slotsHtml}
+          </div>
+        </div>
+      </div>
     `;
   }
 }

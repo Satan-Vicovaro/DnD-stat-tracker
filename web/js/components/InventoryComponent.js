@@ -266,6 +266,7 @@ export class InventoryComponent {
             alert(res.message);
           } else {
             this.characterData = res.character;
+            document.dispatchEvent(new CustomEvent('characterUpdated', { detail: this.characterData }));
             this.render();
           }
         } catch(err) {
