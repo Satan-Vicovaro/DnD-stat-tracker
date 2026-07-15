@@ -73,11 +73,9 @@ export class InventoryComponent {
       updateBar('back', spaces.back, 'blue-500');
       
       const quiverSection = document.getElementById('section-quiver');
-      if (spaces.quiver && spaces.quiver.visible) {
+      if (spaces.quiver) {
         quiverSection.classList.remove('hidden');
         updateBar('quiver', spaces.quiver, 'rose-500');
-      } else {
-        quiverSection.classList.add('hidden');
       }
     }
 
@@ -156,7 +154,7 @@ export class InventoryComponent {
     const hasConsumable = item.consumable_effects ? Object.keys(item.consumable_effects).length > 0 : false;
     const usesBadge = (hasConsumable && item.max_uses > 0) ? `<span class="bg-teal-900/80 text-teal-300 text-[9px] px-1.5 py-0.5 rounded border border-teal-500/50">Użycia: ${item.current_uses}/${item.max_uses}</span>` : "";
 
-    const showQuiverOption = this.characterData.inventory_space?.quiver?.visible || item.location === "QUIVER" || nameLower === "kołczan" || nameLower === "kolczan";
+    const showQuiverOption = true;
     
     const providesSpace = item.modifiers && item.modifiers.some(m => {
       const match = ['backpack_space', 'quick_space', 'quiver_space', 'back_space'].includes(m.stat_name);
@@ -174,7 +172,11 @@ export class InventoryComponent {
             <div class="text-[10px] font-bold uppercase tracking-wider ${typeColor} mb-1 flex items-center flex-wrap gap-1 mt-1">
                 <span>${item.item_type}</span> <span class="text-gray-500">&bull;</span> ${spaceText} ${activeBadge} ${usesBadge}
             </div>
-            ${item.description ? `<p class="text-[11px] text-gray-400 italic mt-1.5 leading-snug">${item.description}</p>` : ''}
+            ${item.description ? (
+              item.description.includes('||') 
+                ? `<ul class="list-disc list-outside ml-4 mt-1.5 text-[11px] text-gray-400 italic leading-snug">${item.description.split('||').map(p => `<li>${p.trim()}</li>`).join('')}</ul>`
+                : `<p class="text-[11px] text-gray-400 italic mt-1.5 leading-snug">${item.description}</p>`
+            ) : ''}
             ${modsHtml}
           </div>
           

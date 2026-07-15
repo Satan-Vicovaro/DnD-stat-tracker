@@ -61,10 +61,13 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
         name_lower = item_dict.get("name", "").lower()
         if name_lower in ("kołczan", "kolczan"):
             location = ItemLocation.QUIVER
+            item_dict["is_equipped"] = True
         elif name_lower in ("plecak", "plecak podróżnika", "plecak podroznika"):
             location = ItemLocation.BACKPACK
+            item_dict["is_equipped"] = True
         elif name_lower in ("ubranie z kieszeniami", "ubrania z kieszeniami", "pasek z mocowaniem"):
             location = ItemLocation.EQUIPPED
+            item_dict["is_equipped"] = True
 
     modifiers = [
         Modifier(
@@ -95,17 +98,36 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
     quantity = item_dict.get("quantity", fallback.quantity if fallback else 1)
     is_equipped = item_dict.get("is_equipped", fb_is_equipped)
     item_id = item_dict.get("item_id", fb_item_id)
-    
+
     # Collect arbitrary properties from the shop JSON
     properties = dict(fb_properties)
     if "properties" in item_dict:
         properties.update(item_dict["properties"])
     else:
         exclude_keys = {
-            "name", "description", "space_taken", "location", "modifiers", "item_type",
-            "consumable_effects", "max_uses", "current_uses", "action_cost", "quantity", "item_id", "is_equipped",
-            "actions", "effect_value", "uses_durability", "cost_type",
-            "weapon_name", "item_name", "tarcza", "zbroja", "cost_silver", "quantity_or_cost"
+            "name",
+            "description",
+            "space_taken",
+            "location",
+            "modifiers",
+            "item_type",
+            "consumable_effects",
+            "max_uses",
+            "current_uses",
+            "action_cost",
+            "quantity",
+            "item_id",
+            "is_equipped",
+            "actions",
+            "effect_value",
+            "uses_durability",
+            "cost_type",
+            "weapon_name",
+            "item_name",
+            "tarcza",
+            "zbroja",
+            "cost_silver",
+            "quantity_or_cost",
         }
         for k, v in item_dict.items():
             if k not in exclude_keys and v:
@@ -328,15 +350,18 @@ def deserialize(data: dict) -> Character:
     # Magia (Mana)
     if "current_mana" in data:
         hero.current_mana = data["current_mana"]
-    hero.mana_buffs = data.get("mana_buffs", {
-        "Obrona": 0,
-        "Akcje": 0,
-        "Wytrwałość": 0,
-        "Ruch": 0,
-        "Redukcja obrażeń": 0,
-        "Przerzucenie kostki": 0,
-        "Inne": 0
-    })
+    hero.mana_buffs = data.get(
+        "mana_buffs",
+        {
+            "Obrona": 0,
+            "Akcje": 0,
+            "Wytrwałość": 0,
+            "Ruch": 0,
+            "Redukcja obrażeń": 0,
+            "Przerzucenie kostki": 0,
+            "Inne": 0,
+        },
+    )
 
     # Armor quantities — types come from armor_config, only quantities saved
     for name, qty in data.get("armor_quantities", {}).items():

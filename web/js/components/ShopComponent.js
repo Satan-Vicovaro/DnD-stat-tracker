@@ -135,10 +135,34 @@ export class ShopComponent {
 
         for (const [key, value] of Object.entries(item)) {
           if (!excludeKeys.includes(key) && value) {
-            if (typeof value === "object") {
+            if (Array.isArray(value)) {
+              if (value.length > 0) {
+                const formattedArray = value.map(v => {
+                  if (typeof v === 'object' && v !== null) {
+                    if (v.stat_name !== undefined && v.value !== undefined) {
+                      return `${v.stat_name}: ${v.value > 0 ? '+' + v.value : v.value}`;
+                    }
+                    return Object.entries(v).map(([k, val]) => `${k}: ${val}`).join(', ');
+                  }
+                  return v;
+                }).join(' || ');
+                
+                const formattedKey = key
+                  .replace(/_/g, " ")
+                  .replace(/\b\w/g, (l) => l.toUpperCase());
+                otherProps.push({ k: formattedKey, v: formattedArray });
+              }
+            } else if (typeof value === "object") {
               // Nested object like effects
               for (const [subKey, subValue] of Object.entries(value)) {
-                otherProps.push({ k: subKey, v: subValue });
+                let finalVal = subValue;
+                if (typeof subValue === 'object' && subValue !== null) {
+                  finalVal = JSON.stringify(subValue);
+                }
+                const formattedSubKey = subKey
+                  .replace(/_/g, " ")
+                  .replace(/\b\w/g, (l) => l.toUpperCase());
+                otherProps.push({ k: formattedSubKey, v: finalVal });
               }
             } else {
               // Pretty format key

@@ -80,7 +80,7 @@
     ]
   },
   "combat": {
-    "broken_fragment_mitigation_multiplier": 0.5
+    "broken_fragment_mitigation_multiplier": 1.0
   },
   "engine": {
     "max_undo_history": 20

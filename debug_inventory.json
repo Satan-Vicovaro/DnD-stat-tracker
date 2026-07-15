@@ -1,13 +1,13 @@
 [
   {
-    "name": "Plecak",
-    "description": "dodaje 1 miesjce w ekwipuku || możesz nosić jeden bez kary do miesjca w eq",
-    "space_taken": 5.0,
-    "location": "BACKPACK",
+    "name": "Kołczan",
+    "description": "może utrzymać do 20 strzał/bełtów || możecie nosić jeden przy sobie i jednen w eq nie używając miejsca",
+    "space_taken": 1.0,
+    "location": "QUIVER",
     "modifiers": [
       {
-        "source": "Plecak",
-        "stat_name": "backpack_space",
+        "source": "Kołczan",
+        "stat_name": "quiver_space",
         "value": 10,
         "mod_type": "ADD"
       }
@@ -20,97 +20,9 @@
     "properties": {},
     "quantity": 1,
     "is_equipped": true,
-    "item_id": "1a7248b2-090a-4562-83b0-56854896ab9d",
+    "item_id": "747e61b5-146b-412c-98de-fe24cec9fe7d",
     "is_active_container": true,
     "is_clothes": false,
-    "granted_space": 10.0
-  },
-  {
-    "name": "Pasek z mocowaniem",
-    "description": "dodają +1/2 miesjca podręcznego || możesz nosić jeden zestaw bez kary do miesjca w eq",
-    "space_taken": 2.0,
-    "location": "EQUIPPED",
-    "modifiers": [
-      {
-        "source": "Pasek z mocowaniem",
-        "stat_name": "quick_space",
-        "value": 10,
-        "mod_type": "ADD"
-      }
-    ],
-    "item_type": "Misc",
-    "consumable_effects": {},
-    "max_uses": 1,
-    "current_uses": 1,
-    "action_cost": "",
-    "properties": {},
-    "quantity": 1,
-    "is_equipped": true,
-    "item_id": "575b3f85-b92a-44dd-a51b-c5c1f76ba722",
-    "is_active_container": true,
-    "is_clothes": false,
-    "granted_space": 10.0
-  },
-  {
-    "name": "Ubrania szlacheckie",
-    "description": "wyglądasz jak szlachcic || możesz nosić jeden zestaw bez kary do miesjca w eq",
-    "space_taken": 5.0,
-    "location": "WAGON",
-    "modifiers": [],
-    "item_type": "Misc",
-    "consumable_effects": {},
-    "max_uses": 1,
-    "current_uses": 1,
-    "action_cost": "",
-    "properties": {},
-    "quantity": 1,
-    "is_equipped": false,
-    "item_id": "aea0bd0f-f732-4845-b4a3-76a99f157ec6",
-    "is_active_container": false,
-    "is_clothes": true
-  },
-  {
-    "name": "Ubrania chłopskie",
-    "description": "wyglądasz jak chłop || możesz nosić jeden zestaw bez kary do miesjca w eq",
-    "space_taken": 5.0,
-    "location": "CLOTHES",
-    "modifiers": [],
-    "item_type": "Misc",
-    "consumable_effects": {},
-    "max_uses": 1,
-    "current_uses": 1,
-    "action_cost": "",
-    "properties": {},
-    "quantity": 1,
-    "is_equipped": false,
-    "item_id": "eaf457f6-c7ac-454a-bed2-7e20b48e17bd",
-    "is_active_container": false,
-    "is_clothes": true
-  },
-  {
-    "name": "Ubranie z kieszeniami",
-    "description": "dodają +1/2 miesjca w eq || miejsce staje się miejscem podręczym o ile nie nosisz zbroii || możesz nosić jeden zestaw bez kary do miesjca w eq",
-    "space_taken": 5.0,
-    "location": "EQUIPPED",
-    "modifiers": [
-      {
-        "source": "Ubranie z kieszeniami",
-        "stat_name": "quick_space",
-        "value": 10,
-        "mod_type": "ADD"
-      }
-    ],
-    "item_type": "Misc",
-    "consumable_effects": {},
-    "max_uses": 1,
-    "current_uses": 1,
-    "action_cost": "",
-    "properties": {},
-    "quantity": 1,
-    "is_equipped": true,
-    "item_id": "466e8a0d-2ffd-4725-8b24-2d25e614f46b",
-    "is_active_container": true,
-    "is_clothes": true,
     "granted_space": 10.0
   },
   {
@@ -133,126 +45,62 @@
     "action_cost": "",
     "properties": {},
     "quantity": 1,
-    "is_equipped": false,
-    "item_id": "8ad94a03-1157-42e9-8f91-83e6c5cce596",
-    "is_active_container": false,
-    "is_clothes": false
+    "is_equipped": true,
+    "item_id": "f3ddfdc5-68c7-4ccf-85c6-94bc20f58479",
+    "is_active_container": true,
+    "is_clothes": false,
+    "granted_space": 20.0
   },
   {
-    "name": "Miecz dwuręczny",
-    "description": "Ze sklepu.",
-    "space_taken": 20.0,
+    "name": "Pasek z mocowaniem",
+    "description": "dodają +1/2 miesjca podręcznego || możesz nosić jeden zestaw bez kary do miesjca w eq",
+    "space_taken": 2.0,
     "location": "EQUIPPED",
-    "modifiers": [],
-    "item_type": "Weapon",
+    "modifiers": [
+      {
+        "source": "Pasek z mocowaniem",
+        "stat_name": "quick_space",
+        "value": 10,
+        "mod_type": "ADD"
+      }
+    ],
+    "item_type": "Misc",
     "consumable_effects": {},
     "max_uses": 1,
     "current_uses": 1,
     "action_cost": "",
     "properties": {},
     "quantity": 1,
-    "is_equipped": false,
-    "item_id": "9cf011b5-5fba-4637-a44e-b26f27d24c90",
-    "actions": [
-      {
-        "card_value": "0",
-        "action_name": "Pchnięcie",
-        "action_cost": "2",
-        "range_str": "",
-        "hit_roll": "d20+dex",
-        "damage_roll": "2d6+(dex+str)",
-        "targets": "3 w rzędzie",
-        "turn_execution": "Gracza",
-        "description": "Potężny atak na wprost"
-      },
-      {
-        "card_value": "1",
-        "action_name": "Cięcie z zamachu",
-        "action_cost": "2",
-        "range_str": "",
-        "hit_roll": "d20+dex",
-        "damage_roll": "2d6+(dex+str)",
-        "targets": "3 w łuku",
-        "turn_execution": "Gracza",
-        "description": "Potężny atak w łuku"
-      },
-      {
-        "card_value": "2",
-        "action_name": "Bloki",
-        "action_cost": "1",
-        "range_str": "",
-        "hit_roll": "",
-        "damage_roll": "",
-        "targets": "3",
-        "turn_execution": "Wroga",
-        "description": "Zniwecz jedną akcję sonsiadującego przeciwnika (save: d20+2xdex>rzut na trafienie wroga) || Możliwe 3 użycia"
-      },
-      {
-        "card_value": "10",
-        "action_name": "Przygotowanie",
-        "action_cost": "1",
-        "range_str": "",
-        "hit_roll": "",
-        "damage_roll": "",
-        "targets": "",
-        "turn_execution": "Sojusznika/Wro",
-        "description": "Użyj dowolną kartę miecza dwóręcznego"
-      }
-    ],
-    "is_active_container": false,
-    "is_clothes": false
+    "is_equipped": true,
+    "item_id": "43049f89-2879-4032-a0c8-e4489eb15447",
+    "is_active_container": true,
+    "is_clothes": false,
+    "granted_space": 10.0
   },
   {
-    "name": "Topór",
-    "description": "Ze sklepu.",
-    "space_taken": 10.0,
-    "location": "BACKPACK",
-    "modifiers": [],
-    "item_type": "Weapon",
+    "name": "Ubranie z kieszeniami",
+    "description": "dodają +1/2 miesjca w eq || miejsce staje się miejscem podręczym o ile nie nosisz zbroii || możesz nosić jeden zestaw bez kary do miesjca w eq",
+    "space_taken": 5.0,
+    "location": "EQUIPPED",
+    "modifiers": [
+      {
+        "source": "Ubranie z kieszeniami",
+        "stat_name": "quick_space",
+        "value": 10,
+        "mod_type": "ADD"
+      }
+    ],
+    "item_type": "Misc",
     "consumable_effects": {},
     "max_uses": 1,
     "current_uses": 1,
     "action_cost": "",
     "properties": {},
     "quantity": 1,
-    "is_equipped": false,
-    "item_id": "e24578af-099e-4d82-8b43-a298f7cfd939",
-    "actions": [
-      {
-        "card_value": "0",
-        "action_name": "Cios",
-        "action_cost": "1",
-        "range_str": "",
-        "hit_roll": "d20+dex",
-        "damage_roll": "d6+str",
-        "targets": "1",
-        "turn_execution": "Gracza",
-        "description": "Niszczysz drewnianą tarczę wroga || Dezaktywujesz do końca tury inne tarcze"
-      },
-      {
-        "card_value": "5",
-        "action_name": "Ogłuszacz",
-        "action_cost": "1",
-        "range_str": "",
-        "hit_roll": "d20+dex",
-        "damage_roll": "d8+str",
-        "targets": "1",
-        "turn_execution": "Gracza/Wroga",
-        "description": "Wróg twojego rozmiaru traci cały ruch || Cel tego ataku otrzymuje -4 do rzutów wszystkimi kostkami (save: d20+str>13+str)"
-      },
-      {
-        "card_value": "10",
-        "action_name": "Rąbanie",
-        "action_cost": "1.5",
-        "range_str": "",
-        "hit_roll": "d12+2xdex",
-        "damage_roll": "d6+str",
-        "targets": "4",
-        "turn_execution": "Gracza",
-        "description": "Otrzymujesz 10ft ruchu (tylko raz)"
-      }
-    ],
-    "is_active_container": false,
-    "is_clothes": false
+    "is_equipped": true,
+    "item_id": "e4ce93a5-46f4-4aaa-8ad2-5e024eb4375e",
+    "is_active_container": true,
+    "is_clothes": true,
+    "granted_space": 10.0
   }
 ]
