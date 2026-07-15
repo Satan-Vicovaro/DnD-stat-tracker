@@ -209,6 +209,13 @@ export class FightComponent {
     if (char.magia) {
       const manaMax = char.magia.max_mana || 0;
       const currentMana = char.magia.current_mana || 0;
+      const manaPerTurn = char.magia.mana_per_turn || 0;
+      const manaSpentThisTurn = char.magia.mana_spent_this_turn || 0;
+
+      const turnManaMax = Math.min(manaPerTurn, currentMana + manaSpentThisTurn);
+      const turnManaCurrent = Math.max(0, turnManaMax - manaSpentThisTurn);
+      const turnManaAvailable = Math.min(currentMana, manaPerTurn - manaSpentThisTurn);
+
       const mCurEl = document.getElementById("fight-mana-current");
       const mMaxEl = document.getElementById("fight-mana-max");
       const mBarEl = document.getElementById("fight-mana-bar");
@@ -218,12 +225,20 @@ export class FightComponent {
       if (mBarEl)
         mBarEl.style.width = `${manaMax > 0 ? (currentMana / manaMax) * 100 : 0}%`;
 
+      const mtCurEl = document.getElementById("fight-mana-turn-current");
+      const mtMaxEl = document.getElementById("fight-mana-turn-max");
+      const mtBarEl = document.getElementById("fight-mana-turn-bar");
+
+      if (mtCurEl) mtCurEl.innerText = turnManaCurrent;
+      if (mtMaxEl) mtMaxEl.innerText = turnManaMax;
+      if (mtBarEl)
+        mtBarEl.style.width = `${turnManaMax > 0 ? (turnManaCurrent / turnManaMax) * 100 : 0}%`;
+
       const buffsContainer = document.getElementById(
         "fight-mana-buffs-container",
       );
       if (buffsContainer) {
         let buffsHtml = "";
-        let totalCost = 0;
         const stats = [
           "Obrona",
           "Akcje",
@@ -234,10 +249,15 @@ export class FightComponent {
           "Przerzucenie kostki",
           "Inne",
         ];
+
+        let totalCost = 0;
+        stats.forEach((stat) => {
+          totalCost += this.plannedBuffs[stat] || 0;
+        });
+
         stats.forEach((stat) => {
           const activeBuff = char.magia.mana_buffs[stat] || 0;
           const planned = this.plannedBuffs[stat] || 0;
-          totalCost += planned;
 
           buffsHtml += `
             <div class="flex items-center justify-between bg-indigo-900/40 p-3 rounded-lg border border-indigo-500/30">
@@ -247,7 +267,7 @@ export class FightComponent {
                 <div class="flex items-center gap-1">
                   <button data-action="fight-mana-buff-dec" data-stat="${stat}" class="w-6 h-6 rounded bg-gray-700 text-white flex items-center justify-center font-bold hover:bg-rose-500 transition-colors ${planned > 0 ? "" : "opacity-50 cursor-not-allowed"}" ${planned > 0 ? "" : "disabled"}>-</button>
                   <span class="text-sm font-mono font-bold w-6 text-center text-indigo-200">${planned}</span>
-                  <button data-action="fight-mana-buff-inc" data-stat="${stat}" class="w-6 h-6 rounded bg-gray-700 text-white flex items-center justify-center font-bold hover:bg-indigo-500 transition-colors ${currentMana - totalCost > 0 ? "" : "opacity-50 cursor-not-allowed"}" ${currentMana - totalCost > 0 ? "" : "disabled"}>+</button>
+                  <button data-action="fight-mana-buff-inc" data-stat="${stat}" class="w-6 h-6 rounded bg-gray-700 text-white flex items-center justify-center font-bold hover:bg-indigo-500 transition-colors ${turnManaAvailable - totalCost > 0 ? "" : "opacity-50 cursor-not-allowed"}" ${turnManaAvailable - totalCost > 0 ? "" : "disabled"}>+</button>
                 </div>
               </div>
             </div>
@@ -262,7 +282,7 @@ export class FightComponent {
           "btn-mana-activate-effects",
         );
         if (btnActivate) {
-          btnActivate.disabled = totalCost === 0 || totalCost > currentMana;
+          btnActivate.disabled = totalCost === 0 || totalCost > currentMana || totalCost > turnManaAvailable;
         }
       }
     }

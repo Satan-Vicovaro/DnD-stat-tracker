@@ -19,6 +19,13 @@
         { "source": "level", "multiplier": 1.0, "offset": 0 }
       ]
     },
+    "mana_per_turn": {
+      "base": 0,
+      "scaling": [
+        { "source": "total_str", "multiplier": 1.0, "divisor": 3.0, "offset": 0 },
+        { "source": "total_dex", "multiplier": 2.0, "divisor": 3.0, "offset": 0 }
+      ]
+    },
     "defense": {
       "base": 10,
       "scaling": [
@@ -30,7 +37,7 @@
       "base": 1,
       "scaling": [
         { "source": "level", "multiplier": 0.5, "offset": -1 },
-        { "source": "total_dex", "multiplier": 0.5, "offset": 0 }
+        { "source": "total_wis", "multiplier": 0.5, "offset": 0 }
       ]
     },
     "stamina": {

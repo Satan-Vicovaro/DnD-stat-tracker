@@ -387,6 +387,7 @@ class Character:
         # Magia (Mana)
 
         self.current_mana: int = 0
+        self.mana_spent_this_turn: int = 0
         self.mana_buffs: Dict[str, int] = {
             "Obrona": 0,
             "Akcje": 0,
@@ -448,6 +449,10 @@ class Character:
     @property
     def max_mana(self) -> int:
         return int(math.floor(self.stat_manager.get_stat_breakdown("max_mana")["total"] + 0.5))
+
+    @property
+    def mana_per_turn(self) -> int:
+        return int(math.floor(self.stat_manager.get_stat_breakdown("mana_per_turn")["total"] + 0.5))
 
     @property
     def max_hp(self) -> int:
@@ -538,10 +543,16 @@ class Character:
         used_quiver = 0.0
 
         for item in self.inventory:
+            quantity_to_weigh = item.quantity
             if item.item_id in exempt_ids:
+                # One instance of this item acts as the container and its weight is exempt.
+                # The rest of the stack still contributes to the used space.
+                quantity_to_weigh -= 1
+            
+            if quantity_to_weigh <= 0:
                 continue
 
-            item_total_space = item.space_taken * item.quantity
+            item_total_space = item.space_taken * quantity_to_weigh
 
             if item.location == ItemLocation.EQUIPPED:
                 used_quick += item_total_space

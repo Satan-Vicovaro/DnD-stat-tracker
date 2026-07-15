@@ -89,6 +89,13 @@ export class MagiaComponent {
       renderBreakdown("breakdown-mana", this.characterData.magia.max_mana_breakdown.breakdown);
     }
 
+    const turnDisplay = document.getElementById("magia-turn-display");
+    if (turnDisplay) turnDisplay.innerText = this.characterData.magia.mana_per_turn || 0;
+
+    if (this.characterData.magia.mana_per_turn_breakdown) {
+      renderBreakdown("breakdown-mana-turn", this.characterData.magia.mana_per_turn_breakdown.breakdown);
+    }
+
     const curText = document.getElementById("magia-current-text");
     const maxText = document.getElementById("magia-max-text");
     const curBar = document.getElementById("magia-current-bar");

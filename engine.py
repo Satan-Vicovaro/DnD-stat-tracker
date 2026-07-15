@@ -234,7 +234,7 @@ class GameEngine:
         # Compute broken fragments dynamically
         broken_fragments = 0
         damage_left_for_broken = self.hero.damage_taken_physical
-        
+
         order = ["Stalowa", "Płytowa", "Półpłytowa", "Skórzana"]
         all_types = self.hero.armor_state.types
         for name in order + [n for n in all_types.keys() if n not in order]:
@@ -355,20 +355,23 @@ class GameEngine:
             "magia": {
                 "max_mana": getattr(self.hero, "max_mana", 0),
                 "max_mana_breakdown": self.hero.stat_manager.get_stat_breakdown("max_mana"),
+                "mana_per_turn": getattr(self.hero, "mana_per_turn", 0),
+                "mana_per_turn_breakdown": self.hero.stat_manager.get_stat_breakdown(
+                    "mana_per_turn"
+                ),
                 "current_mana": getattr(self.hero, "current_mana", 0),
-                "mana_buffs": getattr(self.hero, "mana_buffs", {})
-            }
+                "mana_spent_this_turn": getattr(self.hero, "mana_spent_this_turn", 0),
+                "mana_buffs": getattr(self.hero, "mana_buffs", {}),
+            },
         }
 
         active_containers = view_model["inventory_space"].get("active_containers", {})
         from models import get_game_rules
+
         clothes_ids = get_game_rules().get("inventory", {}).get("clothes_identifiers", ["ubrani"])
 
-        logger.info("[Step 7] Generating character view model inventory array...")
         for item in self.hero.inventory:
             item_dict = asdict(item)
-            if item.name.lower() in ("plecak", "kołczan", "kolczan"):
-                logger.info(f"[Step 7.1] asdict result for {item.name}: is_equipped={item_dict.get('is_equipped')}, modifiers={item_dict.get('modifiers')}")
             # active_containers is now keyed by item_id (stable UUID), not id()
             item_dict["is_active_container"] = item.item_id in active_containers
             item_dict["is_clothes"] = any(cid.lower() in item.name.lower() for cid in clothes_ids)
@@ -398,6 +401,7 @@ class GameEngine:
         ]
         try:
             import json
+
             with open("debug_inventory.json", "w", encoding="utf-8") as f:
                 json.dump(view_model["inventory"], f, ensure_ascii=False, indent=2)
         except Exception:
@@ -432,14 +436,17 @@ class GameEngine:
             self._snapshot()
             mana_to_spend = char.current_mana
             char.current_mana = 0
-            
+
             from models import get_game_rules
+
             rules = get_game_rules()
             heal_per_point = rules.get("magia", {}).get("healing_per_mana_day", 1)
             total_heal = heal_per_point * mana_to_spend
-            
+
             # Heal physical then magical
-            while total_heal > 0 and (char.damage_taken_physical > 0 or char.damage_taken_magical > 0):
+            while total_heal > 0 and (
+                char.damage_taken_physical > 0 or char.damage_taken_magical > 0
+            ):
                 if char.damage_taken_physical > 0:
                     char.damage_taken_physical -= 1
                 elif char.damage_taken_magical > 0:
@@ -452,18 +459,28 @@ class GameEngine:
         """Spends mana and applies the planned buffs."""
         char = self.hero
         total_cost = sum(val for val in planned_buffs.values() if val > 0)
-        
-        if total_cost > 0 and char.current_mana >= total_cost:
+        mana_per_turn = char.mana_per_turn
+        mana_available_this_turn = min(char.current_mana, mana_per_turn - char.mana_spent_this_turn)
+
+        if (
+            total_cost > 0
+            and char.current_mana >= total_cost
+            and mana_available_this_turn >= total_cost
+        ):
             self._snapshot()
             char.current_mana -= total_cost
+            char.mana_spent_this_turn += total_cost
             for stat, val in planned_buffs.items():
                 if val > 0:
                     if stat == "Leczenie":
                         from models import get_game_rules
+
                         rules = get_game_rules()
                         heal_per_point = rules.get("magia", {}).get("healing_per_mana_day", 1)
                         total_heal = heal_per_point * val
-                        while total_heal > 0 and (char.damage_taken_physical > 0 or char.damage_taken_magical > 0):
+                        while total_heal > 0 and (
+                            char.damage_taken_physical > 0 or char.damage_taken_magical > 0
+                        ):
                             if char.damage_taken_physical > 0:
                                 char.damage_taken_physical -= 1
                             elif char.damage_taken_magical > 0:
@@ -482,7 +499,6 @@ class GameEngine:
         return True
 
     def add_item_to_inventory(self, item_dict: dict, payment: dict, quantity: int = 1) -> bool:
-        logger.info(f"[Step 2] engine.add_item_to_inventory called with: {item_dict.get('name')}")
         """Validate payment, deduct it, and add the item to inventory."""
         gold_cost = int(payment.get("gold", 0))
         silver_cost = int(payment.get("silver", 0))
@@ -508,12 +524,9 @@ class GameEngine:
                 logger.info(f"Stacked {quantity} of {item.name} to existing stack.")
                 return True
 
-        logger.info(f"[Step 3] Calling build_item...")
         item = build_item(item_dict)
-        logger.info(f"[Step 4] Item built: {item.name}, is_equipped={item.is_equipped}, modifiers={item.modifiers}")
         item.quantity = quantity
         self.hero.inventory.append(item)
-        logger.info(f"[Step 5] Item appended to inventory")
         logger.info(f"Added item {item.name} (x{quantity}) to inventory at {item.location}.")
         return True
 
@@ -530,6 +543,7 @@ class GameEngine:
             old_loc_str = old_loc.value if hasattr(old_loc, "value") else old_loc
             if new_loc != old_loc_str:
                 from models import get_game_rules
+
                 costs = get_game_rules().get("inventory", {}).get("action_costs", {})
                 ap_cost = costs.get(f"move_from_{old_loc_str}", 0)
 
@@ -541,11 +555,15 @@ class GameEngine:
 
                 if new_loc == "CLOTHES":
                     from models import ItemLocation
+
                     for i, inv_item in enumerate(self.hero.inventory):
-                        if i != index and (inv_item.location == "CLOTHES" or getattr(inv_item.location, "value", inv_item.location) == "CLOTHES"):
+                        if i != index and (
+                            inv_item.location == "CLOTHES"
+                            or getattr(inv_item.location, "value", inv_item.location) == "CLOTHES"
+                        ):
                             inv_item.location = ItemLocation.BACKPACK
                             logger.info(f"Auto-unequipped {inv_item.name} to backpack.")
-                
+
                 # Automatically unequip when moving to a new location
                 item_dict["is_equipped"] = False
 
@@ -561,8 +579,11 @@ class GameEngine:
             return False, "Nieprawidłowy indeks przedmiotu."
 
         item = self.hero.inventory[index]
-        
-        provides_space = any(mod.stat_name in ("backpack_space", "quick_space", "quiver_space", "back_space") for mod in item.modifiers)
+
+        provides_space = any(
+            mod.stat_name in ("backpack_space", "quick_space", "quiver_space", "back_space")
+            for mod in item.modifiers
+        )
         if not provides_space:
             return False, "Tego przedmiotu nie można założyć w ten sposób."
 
@@ -574,8 +595,10 @@ class GameEngine:
         has_backpack = any(mod.stat_name == "backpack_space" for mod in item.modifiers)
         for other in self.hero.inventory:
             if other.is_equipped and other != item:
-                other_has_backpack = any(mod.stat_name == "backpack_space" for mod in other.modifiers)
-                
+                other_has_backpack = any(
+                    mod.stat_name == "backpack_space" for mod in other.modifiers
+                )
+
                 # Only backpacks are mutually exclusive. Other spaces (like quick_space) stack!
                 if has_backpack and other_has_backpack:
                     other.is_equipped = False
@@ -602,6 +625,7 @@ class GameEngine:
             return False
 
         from models import get_game_rules
+
         costs = get_game_rules().get("inventory", {}).get("action_costs", {})
         loc_str = item.location.value if hasattr(item.location, "value") else item.location
         ap_cost = costs.get(f"use_from_{loc_str}", 0)
@@ -833,6 +857,7 @@ class GameEngine:
         changed.
         """
         from models import get_game_rules
+
         rules = get_game_rules().get("combat", {})
         broken_mult = rules.get("broken_fragment_mitigation_multiplier", 0.5)
 
@@ -875,6 +900,7 @@ class GameEngine:
         """Reset current AP to maximum (start-of-turn reset)."""
         self._snapshot()
         self.hero.current_action_points = self.hero.max_action_points
+        self.hero.mana_spent_this_turn = 0
         for k in self.hero.mana_buffs:
             self.hero.mana_buffs[k] = 0
         logger.info(f"AP reset to {self.hero.current_action_points}")

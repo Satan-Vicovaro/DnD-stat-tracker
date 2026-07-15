@@ -286,6 +286,7 @@ def serialize(hero: Character) -> dict:
         # Magia (Mana)
         "max_mana": hero.max_mana,
         "current_mana": hero.current_mana,
+        "mana_spent_this_turn": hero.mana_spent_this_turn,
         "mana_buffs": hero.mana_buffs,
         # Armor fragment quantities (armor types defined in armor_config.json)
         "armor_quantities": {
@@ -350,6 +351,8 @@ def deserialize(data: dict) -> Character:
     # Magia (Mana)
     if "current_mana" in data:
         hero.current_mana = data["current_mana"]
+    if "mana_spent_this_turn" in data:
+        hero.mana_spent_this_turn = data["mana_spent_this_turn"]
     hero.mana_buffs = data.get(
         "mana_buffs",
         {
