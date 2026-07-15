@@ -123,7 +123,7 @@
     "modifiers": [
       {
         "stat_name": "quick_space",
-        "value": 10.0,
+        "value": 5.0,
         "mod_type": "ADD"
       }
     ]
@@ -137,7 +137,7 @@
     "modifiers": [
       {
         "stat_name": "quick_space",
-        "value": 10.0,
+        "value": 5.0,
         "mod_type": "ADD"
       }
     ]

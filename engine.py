@@ -875,6 +875,8 @@ class GameEngine:
         """Reset current AP to maximum (start-of-turn reset)."""
         self._snapshot()
         self.hero.current_action_points = self.hero.max_action_points
+        for k in self.hero.mana_buffs:
+            self.hero.mana_buffs[k] = 0
         logger.info(f"AP reset to {self.hero.current_action_points}")
         return True
 

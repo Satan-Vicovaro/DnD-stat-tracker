@@ -366,16 +366,6 @@ export class FightComponent {
       };
     }
 
-    const btnCancel = document.getElementById("btn-mana-cancel-effects");
-    if (btnCancel) {
-      btnCancel.onclick = async () => {
-        this.characterData = await eel.cancel_mana_effects()();
-        document.dispatchEvent(
-          new CustomEvent("characterUpdated", { detail: this.characterData }),
-        );
-      };
-    }
-
     // Bind toggle events for accordions to persist open state
     container.querySelectorAll("details[data-card-index]").forEach((el) => {
       el.addEventListener("toggle", (e) => {

@@ -30,21 +30,5 @@
     "cost_type": "Ilość redukowanych obrażeń",
     "uses_durability": "8",
     "cost_silver": "6"
-  },
-  {
-    "name": "narzędzia lekkie zbroje",
-    "space_taken": "50",
-    "effect_value": "1h",
-    "cost_type": "naprawia 10 życia zbroii (posiada 4 użycia)",
-    "uses_durability": "użycia/10",
-    "cost_silver": ""
-  },
-  {
-    "name": "narzędzia ciężkie zbroje",
-    "space_taken": "100",
-    "effect_value": "1h",
-    "cost_type": "naprawia 10 życia zbroii (posiada 8 użyć)",
-    "uses_durability": "użycia/10",
-    "cost_silver": ""
   }
 ]
