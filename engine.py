@@ -457,8 +457,20 @@ class GameEngine:
             self._snapshot()
             char.current_mana -= total_cost
             for stat, val in planned_buffs.items():
-                if val > 0 and stat in char.mana_buffs:
-                    char.mana_buffs[stat] += val
+                if val > 0:
+                    if stat == "Leczenie":
+                        from models import get_game_rules
+                        rules = get_game_rules()
+                        heal_per_point = rules.get("magia", {}).get("healing_per_mana_day", 1)
+                        total_heal = heal_per_point * val
+                        while total_heal > 0 and (char.damage_taken_physical > 0 or char.damage_taken_magical > 0):
+                            if char.damage_taken_physical > 0:
+                                char.damage_taken_physical -= 1
+                            elif char.damage_taken_magical > 0:
+                                char.damage_taken_magical -= 1
+                            total_heal -= 1
+                    elif stat in char.mana_buffs:
+                        char.mana_buffs[stat] += val
             return True
         return False
 
