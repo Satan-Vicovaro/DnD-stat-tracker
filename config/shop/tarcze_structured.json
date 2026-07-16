@@ -34,7 +34,7 @@
         "damage_roll": "d6+2xstr",
         "targets": "1",
         "turn_execution": "Gracza",
-        "description": "Otrzymuejsz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera"
+        "description": "Otrzymujesz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera"
       }
     ],
     "space_taken": "7,5",
@@ -75,7 +75,7 @@
         "damage_roll": "d4+2xstr",
         "targets": "1",
         "turn_execution": "Gracza",
-        "description": "Otrzymuejsz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera"
+        "description": "Otrzymujesz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera"
       }
     ],
     "space_taken": "10",
@@ -105,7 +105,7 @@
         "damage_roll": "",
         "targets": "",
         "turn_execution": "Gracza",
-        "description": "Do końca walki otrzymuejsz +2ac"
+        "description": "Do końca walki otrzymujesz +2ac"
       }
     ],
     "space_taken": "5",
@@ -146,7 +146,7 @@
         "damage_roll": "",
         "targets": "",
         "turn_execution": "Gracza",
-        "description": "Możesz zablokować wszystke ataki wroga wymierzone w ciebie (d20+8<dmg wroga --> tarcza zostaje niszczona) || Wróg nie może wyjść z twojej strefy kontrolii"
+        "description": "Możesz zablokować wszystkie ataki wroga wymierzone w ciebie (d20+8<dmg wroga --> tarcza zostaje niszczona) || Wróg nie może wyjść z twojej strefy kontroli"
       }
     ],
     "space_taken": "10",
@@ -187,7 +187,7 @@
         "damage_roll": "d6+2xstr",
         "targets": "1",
         "turn_execution": "Gracza",
-        "description": "Otrzymuejsz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera"
+        "description": "Otrzymujesz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera"
       }
     ],
     "space_taken": "7,5",
@@ -228,7 +228,7 @@
         "damage_roll": "d4+2xstr",
         "targets": "1",
         "turn_execution": "Gracza",
-        "description": "Otrzymuejsz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera"
+        "description": "Otrzymujesz 15ft ruchu (raz na turę) || Przeciwnik w którego uderzysz zostaje wyrzucony na koniec turn ordera"
       }
     ],
     "space_taken": "10",
@@ -258,7 +258,7 @@
         "damage_roll": "",
         "targets": "",
         "turn_execution": "Gracza",
-        "description": "Do końca walki otrzymuejsz +2ac"
+        "description": "Do końca walki otrzymujesz +2ac"
       }
     ],
     "space_taken": "5",
@@ -299,7 +299,7 @@
         "damage_roll": "",
         "targets": "",
         "turn_execution": "Gracza",
-        "description": "Możesz zablokować wszystke ataki wroga wymierzone w ciebie (d20+12<dmg wroga --> tarcza zostaje niszczona) || Wróg nie może wyjść z twojej strefy kontrolii"
+        "description": "Możesz zablokować wszystkie ataki wroga wymierzone w ciebie (d20+12<dmg wroga --> tarcza zostaje niszczona) || Wróg nie może wyjść z twojej strefy kontroli"
       }
     ],
     "space_taken": "10",

@@ -171,10 +171,10 @@ export class ItemEditorModal {
           <option value="stamina" ${mod.stat_name === 'stamina' ? 'selected' : ''}>Wytrwałość</option>
           <option value="movement" ${mod.stat_name === 'movement' ? 'selected' : ''}>Ruch (ft)</option>
           <option value="str" ${mod.stat_name === 'str' ? 'selected' : ''}>Siła</option>
-          <option value="dex" ${mod.stat_name === 'dex' ? 'selected' : ''}>Zręczność</option>
+          <option value="dex" ${mod.stat_name === 'dex' ? 'selected' : ''}>Zwinność</option>
           <option value="wis" ${mod.stat_name === 'wis' ? 'selected' : ''}>Wiedza</option>
           <option value="cha" ${mod.stat_name === 'cha' ? 'selected' : ''}>Charyzma</option>
-          <option value="max_mana" ${mod.stat_name === 'max_mana' ? 'selected' : ''}>Max Mana</option>
+          <option value="max_mana" ${mod.stat_name === 'max_mana' ? 'selected' : ''}>Maks. Mana</option>
           <option value="backpack_space" ${mod.stat_name === 'backpack_space' ? 'selected' : ''}>Pojemność Plecaka</option>
           <option value="quick_space" ${mod.stat_name === 'quick_space' ? 'selected' : ''}>Miejsce Podręczne (W rękach)</option>
           <option value="back_space" ${mod.stat_name === 'back_space' ? 'selected' : ''}>Miejsce na Plecach</option>

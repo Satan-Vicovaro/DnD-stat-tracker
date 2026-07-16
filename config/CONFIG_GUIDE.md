@@ -21,8 +21,8 @@ Najbardziej użyteczne, wbudowane zmienne to:
   * `"level"` (Poziom postaci)
 * **Atrybuty (po uwzględnieniu bonusów)**:
   * `"total_str"` (Siła)
-  * `"total_dex"` (Zręczność)
-  * `"total_wis"` (Mądrość)
+  * `"total_dex"` (Zwinność)
+  * `"total_wis"` (Wiedza)
   * `"total_cha"` (Charyzma)
 * **Zasoby i inne statystyki**:
   * `"max_hp"` (Maksymalne punkty zdrowia)

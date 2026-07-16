@@ -273,8 +273,8 @@ class CharacterBaseProvider(ModifierProvider):
         name_map = {
             "level": "Poziom",
             "total_str": "Siła",
-            "total_dex": "Zręczność",
-            "total_wis": "Mądrość",
+            "total_dex": "Zwinność",
+            "total_wis": "Wiedza",
             "total_cha": "Charyzma"
         }
         
@@ -305,12 +305,12 @@ class CharacterBaseProvider(ModifierProvider):
         # defense
         mods.append(Modifier("Baza", "defense", 10))
         mods.append(Modifier("Poziom", "defense", (character.level - 1) * 0.8))
-        mods.append(Modifier("Zręczność", "defense", character.total_dex))
+        mods.append(Modifier("Zwinność", "defense", character.total_dex))
 
         # ap
         mods.append(Modifier("Baza", "ap", 1))
         mods.append(Modifier("Poziom", "ap", character.level * 0.5 - 0.5))
-        mods.append(Modifier("Zręczność", "ap", character.total_dex * 0.5))
+        mods.append(Modifier("Zwinność", "ap", character.total_dex * 0.5))
 
         # stamina
         mods.append(Modifier("Baza", "stamina", 1))

@@ -125,7 +125,7 @@
         "damage_roll": "d6+1/2(dex+str)",
         "targets": "1",
         "turn_execution": "Sojusznika",
-        "description": "Zaatakuj sonsiadującego przeciwnika, po atakau sojusznika"
+        "description": "Zaatakuj sąsiadującego przeciwnika, po atakau sojusznika"
       },
       {
         "card_value": "7",
@@ -147,7 +147,7 @@
         "damage_roll": "X",
         "targets": "1",
         "turn_execution": "Sojusznka/Wro",
-        "description": "Zniwecz jedną akcje przeciniwka || Rozbrój wroga (save: d20+dex>d20+dex wroga)"
+        "description": "Zniwecz jedną akcję przeciwnika || Rozbrój wroga (save: d20+dex>d20+dex wroga)"
       }
     ],
     "space_taken": "7,5"
@@ -205,7 +205,7 @@
         "damage_roll": "d4+str",
         "targets": "3",
         "turn_execution": "Gracza/Wroga",
-        "description": "W trakcie swojej tury możesz wykonac tylko jeden atak || Możesz wykonać tylko jeden atak na przeciwnika pozostajacego w twojej strefie kontrolii || Odpychasz wroga o 5ft (d20+str>13+str)"
+        "description": "W trakcie swojej tury możesz wykonac tylko jeden atak || Możesz wykonać tylko jeden atak na przeciwnika pozostającego w twojej strefie kontroli || Odpychasz wroga o 5ft (d20+str>13+str)"
       },
       {
         "card_value": "5",
@@ -216,7 +216,7 @@
         "damage_roll": "d4+str",
         "targets": "3",
         "turn_execution": "Sojusznika",
-        "description": "Aktywój \"Pchnięcia\" po tym jak twój sojusznik aktywóje \"Pchnięcia\""
+        "description": "Aktywuj \"Pchnięcia\" po tym jak twój sojusznik aktywuje \"Pchnięcia\""
       },
       {
         "card_value": "10",
@@ -245,7 +245,7 @@
         "damage_roll": "d6+dex+str",
         "targets": "1",
         "turn_execution": "Gracza",
-        "description": "Nie możesz używać innej broni jednoręcznej||zadaje 50% dmg potworą (jeśli rzut ponirzej 16)"
+        "description": "Nie możesz używać innej broni jednoręcznej||zadaje 50% dmg potworom (jeśli rzut poniżej 16)"
       },
       {
         "card_value": "5",
@@ -285,7 +285,7 @@
         "damage_roll": "d12+2xstr",
         "targets": "1",
         "turn_execution": "Gracza",
-        "description": "Jeżeli po tym gdy zadasz obrażenia przeciwnikowi, gdy zostanie mu mniej niż 8 życia, ten zostaje zabity || Niszczysz drewnianą tarczę wroga || Dezaktywujesz do końca tury inne tarcz"
+        "description": "Jeżeli po tym gdy zadasz obrażenia przeciwnikowi, gdy zostanie mu mniej niż 8 życia, ten zostaje zabity || Niszczysz drewnianą tarczę wroga || Dezaktywujesz do końca tury inne tarcze"
       },
       {
         "card_value": "5",
@@ -347,7 +347,7 @@
         "damage_roll": "",
         "targets": "3",
         "turn_execution": "Wroga",
-        "description": "Zniwecz jedną akcję sonsiadującego przeciwnika (save: d20+2xdex>rzut na trafienie wroga) || Możliwe 3 użycia"
+        "description": "Zniwecz jedną akcję sąsiadującego przeciwnika (save: d20+2xdex>rzut na trafienie wroga) || Możliwe 3 użycia"
       },
       {
         "card_value": "10",
@@ -358,7 +358,7 @@
         "damage_roll": "",
         "targets": "",
         "turn_execution": "Sojusznika/Wro",
-        "description": "Użyj dowolną kartę miecza dwóręcznego"
+        "description": "Użyj dowolną kartę miecza dwuręcznego"
       }
     ],
     "space_taken": "20"
@@ -380,14 +380,14 @@
       },
       {
         "card_value": "6",
-        "action_name": "Trzęsienei ziemi",
+        "action_name": "Trzęsienie ziemi",
         "action_cost": "3",
         "range": "5ft",
         "hit_roll": "d20",
         "damage_roll": "d12+2xstr",
         "targets": "1",
         "turn_execution": "Gracz",
-        "description": "Zniwecz akcję istot sonsiadujących z polem ataku (save: d20+str>15+2xstr) || Istoty na sonsiadujących polach otrzymuja d4+str dmg"
+        "description": "Zniwecz akcję istot sąsiadujących z polem ataku (save: d20+str>15+2xstr) || Istoty na sąsiadujących polach otrzymuja d4+str dmg"
       },
       {
         "card_value": "10",
@@ -416,7 +416,7 @@
         "damage_roll": "d8+2xstr",
         "targets": "3",
         "turn_execution": "Gracza/Wroga",
-        "description": "W trakcie swojej tury możesz wykonac tylko jeden atak || Możesz wykonać tylko jeden atak na przeciwnika pozostajacego w twojej strefie kontrolii || Odpychasz wroga o 5ft (d20+str>13+str)"
+        "description": "W trakcie swojej tury możesz wykonac tylko jeden atak || Możesz wykonać tylko jeden atak na przeciwnika pozostającego w twojej strefie kontroli || Odpychasz wroga o 5ft (d20+str>13+str)"
       },
       {
         "card_value": "5",
@@ -427,7 +427,7 @@
         "damage_roll": "d8+2xstr",
         "targets": "3",
         "turn_execution": "Sojusznika",
-        "description": "Aktywój \"Pchnięcia\" po tym jak twój sojusznik aktywóje \"Pchnięcia\""
+        "description": "Aktywuj \"Pchnięcia\" po tym jak twój sojusznik aktywuje \"Pchnięcia\""
       },
       {
         "card_value": "10",
@@ -522,7 +522,7 @@
       },
       {
         "card_value": "2",
-        "action_name": "Przycągnięcie",
+        "action_name": "Przyciągnięcie",
         "action_cost": "2",
         "range": "10ft",
         "hit_roll": "d20+1/2dex",

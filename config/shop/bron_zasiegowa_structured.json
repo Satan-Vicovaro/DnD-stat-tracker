@@ -114,7 +114,7 @@
         "damage_roll": "d4",
         "targets": "X",
         "turn_execution": "Gracza",
-        "description": "Możesz wykonać rzuty wszsytkimi wyjętymi przez ciebie nożami"
+        "description": "Możesz wykonać rzuty wszystkimi wyjętymi przez ciebie nożami"
       }
     ],
     "space_taken": "2,5"
@@ -280,7 +280,7 @@
         "damage_roll": "d4+1/2str",
         "targets": "5 pól",
         "turn_execution": "Gracza",
-        "description": "Istoty na wybranych pięciu sonsiadujących plach jeżeli nie uda im się save throw, otrzymują obrażenia krytyczne (save: d20+dex>14+dex) (8 strzał)"
+        "description": "Istoty na wybranych pięciu sąsiadujących polach jeżeli nie uda im się save throw, otrzymują obrażenia krytyczne (save: d20+dex>14+dex) (8 strzał)"
       }
     ],
     "space_taken": "7,5"
