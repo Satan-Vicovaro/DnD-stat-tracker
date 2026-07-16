@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Master Dashboard</title>
+    <!-- Use Tailwind CSS via CDN for rapid styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #1a202c; color: #e2e8f0; }
+        .player-card { background-color: #2d3748; }
+    </style>
+</head>
+<body class="p-6">
+    <div class="max-w-7xl mx-auto">
+        <header class="flex justify-between items-center mb-8 border-b border-gray-700 pb-4">
+            <h1 class="text-3xl font-bold text-blue-400">GM Dashboard</h1>
+            <div class="text-gray-400">Logged in as: <span class="text-white font-semibold">{{ gm_name }}</span></div>
+        </header>
+
+        <div id="players-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Player cards will be injected here by JS -->
+            <div class="text-gray-500 italic">Loading players data...</div>
+        </div>
+    </div>
+
+    <script>
+        async function fetchPlayers() {
+            try {
+                // Fetch player data. The browser will automatically handle Basic Auth if the user logged in.
+                const response = await fetch('/api/players');
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+                renderPlayers(data);
+            } catch (error) {
+                console.error('Error fetching players:', error);
+            }
+        }
+
+        function renderPlayers(players) {
+            const container = document.getElementById('players-container');
+            container.innerHTML = ''; // Clear current loading text
+            
+            const playerNames = Object.keys(players);
+            if (playerNames.length === 0) {
+                container.innerHTML = '<div class="text-gray-500 italic">No players have synced yet.</div>';
+                return;
+            }
+
+            playerNames.forEach(name => {
+                const p = players[name];
+                
+                // Construct HTML for the player
+                const card = document.createElement('div');
+                card.className = 'player-card rounded-lg shadow-lg p-5 border border-gray-600 flex flex-col h-full';
+                
+                // Very basic rendering of some properties, assuming standard Hero structure
+                const level = p.level || 1;
+                const hp = p.stats && p.stats.health ? p.stats.health : '?';
+                const mana = p.stats && p.stats.mana ? p.stats.mana : '?';
+                
+                let eqHtml = '<ul class="text-sm text-gray-400 list-disc list-inside mt-2 space-y-1">';
+                if (p.inventory && p.inventory.items && Array.isArray(p.inventory.items)) {
+                    p.inventory.items.forEach(item => {
+                        eqHtml += `<li>${item.name || 'Unknown Item'} <span class="text-xs text-gray-500">x${item.quantity || 1}</span></li>`;
+                    });
+                } else {
+                    eqHtml += '<li><i>Empty inventory</i></li>';
+                }
+                eqHtml += '</ul>';
+
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-3">
+                        <h2 class="text-xl font-bold text-green-400">${name}</h2>
+                        <span class="bg-blue-900 text-blue-200 text-xs font-bold px-2 py-1 rounded">Lvl ${level}</span>
+                    </div>
+                    <div class="flex space-x-4 mb-4 text-sm">
+                        <div class="flex flex-col">
+                            <span class="text-gray-400 text-xs uppercase">HP</span>
+                            <span class="font-bold text-red-400">${hp}</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-gray-400 text-xs uppercase">Mana</span>
+                            <span class="font-bold text-blue-400">${mana}</span>
+                        </div>
+                    </div>
+                    <div class="mt-auto">
+                        <h3 class="text-sm font-semibold text-gray-300 border-b border-gray-600 pb-1 mb-2">Inventory</h3>
+                        <div class="max-h-48 overflow-y-auto pr-2">
+                            ${eqHtml}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Poll every 3 seconds for updates
+        fetchPlayers();
+        setInterval(fetchPlayers, 3000);
+    </script>
+</body>
+</html>

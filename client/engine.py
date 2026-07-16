@@ -3,6 +3,8 @@ import json
 import logging
 import os
 import sys
+import threading
+import urllib.request
 from pathlib import Path
 
 from models import Character
@@ -134,12 +136,27 @@ class GameEngine:
     # ------------------------------------------------------------------
 
     def save(self):
-        """Auto-save current hero to data/autosave.json."""
+        """Auto-save current hero to data/autosave.json and sync to server."""
         os.makedirs(os.path.dirname(_AUTOSAVE_PATH), exist_ok=True)
         try:
+            payload = serialize(self.hero)
             with open(_AUTOSAVE_PATH, "w", encoding="utf-8") as f:
-                json.dump(serialize(self.hero), f, ensure_ascii=False, indent=2)
+                json.dump(payload, f, ensure_ascii=False, indent=2)
             logger.debug("Auto-saved.")
+            
+            # Sync to GM server in the background
+            def sync():
+                try:
+                    url = os.environ.get("SYNC_SERVER_URL", "http://localhost:8000/api/sync")
+                    data = json.dumps(payload).encode("utf-8")
+                    req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json'})
+                    with urllib.request.urlopen(req, timeout=3) as response:
+                        logger.debug("Successfully synced to GM server")
+                except Exception as e:
+                    logger.debug(f"Failed to sync to GM server: {e}")
+            
+            threading.Thread(target=sync, daemon=True).start()
+
         except OSError as e:
             logger.error(f"Auto-save failed: {e}")
 
