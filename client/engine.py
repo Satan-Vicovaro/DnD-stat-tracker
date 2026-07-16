@@ -220,6 +220,14 @@ class GameEngine:
     # View model
     # ------------------------------------------------------------------
 
+    def get_view_model_for_data(self, raw_state: dict) -> dict:
+        """Creates a view model from raw state without mutating the main engine."""
+        import copy
+        temp_engine = copy.copy(self)
+        temp_engine.hero = deserialize(raw_state)
+        temp_engine._patch_item_consumables()
+        return temp_engine.get_character_view_model()
+
     def get_character_view_model(self) -> dict:
         """Returns the character data formatted for the frontend."""
         from dataclasses import asdict

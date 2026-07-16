@@ -53,8 +53,8 @@ def main():
     eel.init("web")
 
     try:
-        logger.info("Starting UI window...")
-        eel.start("index.html", size=(1920, 1080))
+        logger.info("Starting UI window on a random available port...")
+        eel.start("index.html", size=(1920, 1080), port=0)
     except (SystemExit, KeyboardInterrupt):
         logger.info("Application closing gracefully.")
         sys.exit(0)

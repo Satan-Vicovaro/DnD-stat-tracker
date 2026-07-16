@@ -69,6 +69,8 @@ async def sync_player_state(request: Request):
             else:
                 current_state = {}
                 
+            import time
+            data["_last_sync"] = time.time()
             current_state[player_name] = data
             save_state(current_state)
         

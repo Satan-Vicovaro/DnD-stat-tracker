@@ -3,6 +3,8 @@ import logging
 import os
 import json
 import urllib.request
+import base64
+import time
 from engine import GameEngine
 
 logger = logging.getLogger(__name__)
@@ -277,3 +279,52 @@ def test_sync_connection(url: str):
     if hasattr(game_engine, "sync_service") and game_engine.sync_service is not None:
         return game_engine.sync_service.test_connection(url)
     return False
+
+def _get_auth_header():
+    return b"Basic " + base64.b64encode(b"gm:password123")
+
+@eel.expose
+def get_remote_players_list():
+    """Fetches summary of all players from the GM server."""
+    if not hasattr(game_engine, "sync_service") or not game_engine.sync_service:
+        return []
+    
+    # Derive the players endpoint from the sync url
+    url = game_engine.sync_service.url.replace("/api/sync", "/api/players")
+    try:
+        req = urllib.request.Request(url, headers={'Authorization': _get_auth_header()})
+        with urllib.request.urlopen(req, timeout=3) as response:
+            players_data = json.loads(response.read().decode('utf-8'))
+            now = time.time()
+            summary = []
+            for name, pdata in players_data.items():
+                last_sync = pdata.get("_last_sync", 0)
+                is_online = (now - last_sync) < 15 # Consider online if synced in last 15s
+                summary.append({
+                    "name": pdata.get("name", name),
+                    "level": pdata.get("level", "?"),
+                    "hp": pdata.get("current_hp", "?"),
+                    "is_online": is_online
+                })
+            return summary
+    except Exception as e:
+        logger.error(f"Failed to fetch remote players: {e}")
+        return []
+
+@eel.expose
+def get_remote_player_view(player_name: str):
+    """Fetches a specific remote player and returns their formatted view model."""
+    if not hasattr(game_engine, "sync_service") or not game_engine.sync_service:
+        return None
+    
+    url = game_engine.sync_service.url.replace("/api/sync", "/api/players")
+    try:
+        req = urllib.request.Request(url, headers={'Authorization': _get_auth_header()})
+        with urllib.request.urlopen(req, timeout=3) as response:
+            players_data = json.loads(response.read().decode('utf-8'))
+            if player_name in players_data:
+                return game_engine.get_view_model_for_data(players_data[player_name])
+            return None
+    except Exception as e:
+        logger.error(f"Failed to fetch remote player view: {e}")
+        return None

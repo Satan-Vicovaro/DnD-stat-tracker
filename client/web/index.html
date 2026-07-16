@@ -11,10 +11,92 @@
     <!-- Include EasyMDE -->
     <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
     <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+    <style>
+      .gm-readonly #app-character button,
+      .gm-readonly #app-character input,
+      .gm-readonly #app-character select,
+      .gm-readonly #app-character textarea {
+          pointer-events: none;
+          opacity: 0.7;
+      }
+      /* But keep the main tabs clickable so GM can switch tabs */
+      .gm-readonly #main-tabs button {
+          pointer-events: auto;
+          opacity: 1;
+      }
+      /* Keep the GM "Back" and "Refresh" buttons clickable */
+      .gm-readonly #gm-top-bar button {
+          pointer-events: auto;
+          opacity: 1;
+      }
+    </style>
   </head>
-  <body
-    class="bg-gray-900 text-gray-100 min-h-screen p-8 font-sans selection:bg-indigo-500/30"
-  >
+  <body class="bg-gray-900 text-gray-100 min-h-screen font-sans selection:bg-indigo-500/30 m-0">
+
+    <!-- ─── Initial Selection Screen ─────────────────────────────────────────────────── -->
+    <div id="app-selection" class="flex flex-col items-center justify-center min-h-screen w-full relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-indigo-950">
+        <!-- background decorations -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+           <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl"></div>
+           <div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-emerald-600/20 rounded-full blur-3xl"></div>
+        </div>
+        
+        <h1 class="text-6xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-emerald-400 drop-shadow-lg z-10 text-center tracking-tight">Kajzer RPG</h1>
+        <p class="text-gray-400 mb-12 z-10 text-xl font-light">Wybierz moduł do uruchomienia</p>
+        
+        <div class="flex gap-8 z-10">
+            <!-- Character Button -->
+            <button id="btn-select-character" class="group relative flex flex-col items-center justify-center w-64 h-64 bg-gray-800/60 backdrop-blur-md border border-gray-700/50 rounded-3xl shadow-xl hover:shadow-indigo-500/20 hover:border-indigo-500/50 transition-all duration-300 hover:-translate-y-2 overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-t from-indigo-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <svg class="w-16 h-16 text-indigo-400 mb-4 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>
+                <span class="text-2xl font-bold text-gray-200 group-hover:text-white transition-colors">Postać</span>
+                <span class="text-sm text-gray-500 mt-2">Karta Postaci i Ekwipunek</span>
+            </button>
+            
+            <!-- GM Button -->
+            <button id="btn-select-gm" class="group relative flex flex-col items-center justify-center w-64 h-64 bg-gray-800/60 backdrop-blur-md border border-gray-700/50 rounded-3xl shadow-xl hover:shadow-emerald-500/20 hover:border-emerald-500/50 transition-all duration-300 hover:-translate-y-2 overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-t from-emerald-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <svg class="w-16 h-16 text-emerald-400 mb-4 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.315 48.315 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z"/></svg>
+                <span class="text-2xl font-bold text-gray-200 group-hover:text-white transition-colors">Mistrz Gry</span>
+                <span class="text-sm text-gray-500 mt-2">Panel Sterowania Grą</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ─── GM Panel Placeholder ─────────────────────────────────────────────────── -->
+    <div id="app-gm" class="hidden min-h-screen flex-col items-center bg-gray-900 w-full relative p-8">
+        <div class="flex items-center justify-between w-full max-w-5xl mb-12">
+            <h1 class="text-4xl font-bold text-emerald-400">Panel Mistrza Gry</h1>
+            <div class="flex gap-4">
+                <button id="btn-gm-refresh-list" class="px-6 py-3 bg-emerald-800/50 hover:bg-emerald-700 border border-emerald-600 rounded-xl text-white font-semibold transition-all">Odśwież listę</button>
+                <button id="btn-gm-back" class="px-6 py-3 bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded-xl text-white font-semibold transition-all shadow-lg hover:shadow-gray-500/20 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"/></svg>
+                    Powrót
+                </button>
+            </div>
+        </div>
+        <div id="gm-players-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 w-full max-w-5xl">
+            <div class="text-gray-500 text-center col-span-full py-20 animate-pulse">Ładowanie graczy...</div>
+        </div>
+    </div>
+
+    <!-- ─── Character Dashboard ─────────────────────────────────────────────────── -->
+    <div id="app-character" class="hidden w-full p-8 relative">
+
+    <div id="gm-top-bar" class="hidden absolute top-4 left-8 flex gap-4 z-50">
+        <button id="btn-gm-exit-view" class="px-4 py-2 bg-red-900/60 hover:bg-red-800 text-white border border-red-700 rounded-lg shadow-lg flex items-center gap-2 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"/></svg>
+            Wyjdź z podglądu
+        </button>
+        <button id="btn-gm-refresh" class="px-4 py-2 bg-emerald-900/60 hover:bg-emerald-800 text-white border border-emerald-700 rounded-lg shadow-lg flex items-center gap-2 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
+            Odśwież
+        </button>
+        <div id="gm-view-status" class="flex items-center px-4 py-2 text-emerald-400 bg-gray-900 rounded-lg border border-gray-700 shadow-lg select-none">
+            Oglądasz gracza: <span id="gm-view-player-name" class="font-bold ml-2"></span>
+        </div>
+    </div>
+
     <!-- ─── Toolbar ─────────────────────────────────────────────────── -->
     <div class="sticky top-0 z-50 mb-6 w-3/4 mx-auto">
       <div
@@ -244,6 +326,8 @@
         <!-- Server component will be loaded here -->
       </div>
     </div>
+
+    </div> <!-- End of app-character -->
 
     <!-- Modals -->
     <div id="payment-modal-container"></div>

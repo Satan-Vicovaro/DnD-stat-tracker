@@ -85,9 +85,115 @@ class UndoManager {
 // ─── Application initialization ──────────────────────────────────────────────
 
 window.onload = async () => {
+    // ─── Initial Routing ───────────────────────────────────────────────────────
+    const appSelection = document.getElementById("app-selection");
+    const appCharacter = document.getElementById("app-character");
+    const appGm = document.getElementById("app-gm");
+
+    document.getElementById("btn-select-character").addEventListener("click", () => {
+        appSelection.classList.add("hidden");
+        appSelection.classList.remove("flex");
+        appCharacter.classList.remove("hidden");
+    });
+
+    document.getElementById("btn-select-gm").addEventListener("click", () => {
+        appSelection.classList.add("hidden");
+        appSelection.classList.remove("flex");
+        appGm.classList.remove("hidden");
+        appGm.classList.add("flex");
+        if (typeof fetchAndRenderPlayers === 'function') fetchAndRenderPlayers();
+    });
+
+    document.getElementById("btn-gm-back").addEventListener("click", () => {
+        appGm.classList.add("hidden");
+        appGm.classList.remove("flex");
+        appSelection.classList.remove("hidden");
+        appSelection.classList.add("flex");
+    });
+
     // Initialize Modals
     window.paymentModal = new PaymentModal("payment-modal-container");
     await window.paymentModal.init();
+
+    // ─── GM Panel Logic ────────────────────────────────────────────────────────
+    const gmPlayersGrid = document.getElementById("gm-players-grid");
+    const gmTopBar = document.getElementById("gm-top-bar");
+    let currentGmPlayerView = null;
+    let gmAutoRefreshInterval = null;
+
+    window.fetchAndRenderPlayers = async function() {
+        gmPlayersGrid.innerHTML = '<div class="text-gray-500 text-center col-span-full py-20 animate-pulse">Ładowanie graczy...</div>';
+        const players = await eel.get_remote_players_list()();
+        if (!players || players.length === 0) {
+            gmPlayersGrid.innerHTML = '<div class="text-gray-500 text-center col-span-full py-20">Brak graczy na serwerze.</div>';
+            return;
+        }
+        gmPlayersGrid.innerHTML = '';
+        players.forEach(p => {
+            const card = document.createElement("div");
+            card.className = "bg-gray-800 border border-gray-700 p-6 rounded-2xl shadow-lg hover:border-emerald-500 cursor-pointer transition-colors relative";
+            const statusDot = p.is_online ? "bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]" : "bg-red-500";
+            const statusText = p.is_online ? "Online" : "Offline";
+            card.innerHTML = `
+                <div class="absolute top-4 right-4 flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full ${statusDot}"></div>
+                    <span class="text-xs text-gray-400 font-semibold">${statusText}</span>
+                </div>
+                <h2 class="text-2xl font-bold text-emerald-400 mb-2">${p.name}</h2>
+                <p class="text-gray-400">Poziom: <span class="text-white font-semibold">${p.level}</span></p>
+                <p class="text-gray-400">HP: <span class="text-white font-semibold">${p.hp}</span></p>
+            `;
+            card.addEventListener("click", () => openGmPlayerView(p.name));
+            gmPlayersGrid.appendChild(card);
+        });
+    };
+
+    document.getElementById("btn-gm-refresh-list").addEventListener("click", fetchAndRenderPlayers);
+
+    async function refreshGmPlayerView() {
+        if (!currentGmPlayerView) return;
+        const data = await eel.get_remote_player_view(currentGmPlayerView)();
+        if (data) {
+            document.dispatchEvent(new CustomEvent('characterUpdated', { detail: data }));
+        }
+    }
+
+    async function openGmPlayerView(playerName) {
+        currentGmPlayerView = playerName;
+        document.body.classList.add("gm-readonly");
+        appGm.classList.add("hidden");
+        appGm.classList.remove("flex");
+        appCharacter.classList.remove("hidden");
+        gmTopBar.classList.remove("hidden");
+        document.getElementById("gm-view-player-name").textContent = playerName;
+        
+        // Disable regular save shortcuts etc
+        document.getElementById('btn-undo').disabled = true;
+        document.getElementById('btn-redo').disabled = true;
+        document.getElementById('btn-load-saves').disabled = true;
+        
+        await refreshGmPlayerView();
+        
+        if (gmAutoRefreshInterval) clearInterval(gmAutoRefreshInterval);
+        gmAutoRefreshInterval = setInterval(refreshGmPlayerView, 5000);
+    }
+
+    document.getElementById("btn-gm-refresh").addEventListener("click", refreshGmPlayerView);
+
+    document.getElementById("btn-gm-exit-view").addEventListener("click", async () => {
+        currentGmPlayerView = null;
+        if (gmAutoRefreshInterval) clearInterval(gmAutoRefreshInterval);
+        document.body.classList.remove("gm-readonly");
+        gmTopBar.classList.add("hidden");
+        appCharacter.classList.add("hidden");
+        appGm.classList.remove("hidden");
+        appGm.classList.add("flex");
+        
+        // Restore local character to UI
+        const initData = await eel.get_character()();
+        document.dispatchEvent(new CustomEvent('characterUpdated', { detail: initData }));
+    });
+
 
     window.itemEditorModal = new ItemEditorModal("item-editor-modal-container");
     await window.itemEditorModal.init();
