@@ -511,11 +511,20 @@ class GameEngine:
         self.hero.copper -= copper_cost
 
         # Try to stack with an existing item of the same name
-        for item in self.hero.inventory:
-            if item.name == item_dict.get("name"):
-                item.quantity += quantity
-                logger.info(f"Stacked {quantity} of {item.name} to existing stack.")
-                return True
+        # Do not stack weapons or shields (they can only be stacked via explicit edits)
+        item_type = item_dict.get("item_type", "Misc")
+        item_name = item_dict.get("name", "").lower()
+        
+        can_stack = True
+        if item_type == "Weapon" or "tarcza" in item_name:
+            can_stack = False
+
+        if can_stack:
+            for item in self.hero.inventory:
+                if item.name == item_dict.get("name"):
+                    item.quantity += quantity
+                    logger.info(f"Stacked {quantity} of {item.name} to existing stack.")
+                    return True
 
         item = build_item(item_dict)
         item.quantity = quantity
