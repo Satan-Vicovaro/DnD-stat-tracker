@@ -77,6 +77,15 @@ def edit_inventory_item(index: int, item_data: dict):
     return game_engine.get_character_view_model()
 
 @eel.expose
+def update_item_card_input(index: int, slot_index: int, value: str):
+    """API endpoint to update the card input value for an item without undo history."""
+    if game_engine.update_item_card_input(index, slot_index, value):
+        game_engine.save()
+    # Note: We do NOT return the view model here because the frontend
+    # immediately updates its own state to avoid input stuttering.
+    return True
+
+@eel.expose
 def modify_item_quantity(index: int, delta: int):
     """API endpoint to adjust the quantity of an inventory item."""
     if game_engine.modify_item_quantity(index, delta):

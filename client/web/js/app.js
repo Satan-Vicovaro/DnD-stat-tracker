@@ -10,7 +10,6 @@ import { FightComponent } from './components/FightComponent.js';
 import { StatusEffectsComponent } from './components/StatusEffectsComponent.js';
 import { NotesComponent } from './components/NotesComponent.js';
 import { MagiaComponent } from './components/MagiaComponent.js';
-import { ServerComponent } from './components/ServerComponent.js';
 
 // ─── Global Sync Status Helper ───────────────────────────────────────────────
 window.updateSyncStatus = (isSuccess, textMsg = null) => {
@@ -240,9 +239,102 @@ window.onload = async () => {
     const notesView = new NotesComponent("notes-view-container");
     notesView.init();
 
-    // Initialize the Server Component
-    const serverView = new ServerComponent("server-view-container");
-    serverView.init();
+    // ─── Connection Panel Logic ────────────────────────────────────────────────
+    const appConnection = document.getElementById("app-connection");
+    
+    document.getElementById("btn-select-connection").addEventListener("click", () => {
+        appSelection.classList.add("hidden");
+        appSelection.classList.remove("flex");
+        appConnection.classList.remove("hidden");
+        appConnection.classList.add("flex");
+    });
+
+    document.getElementById("btn-conn-back").addEventListener("click", () => {
+        appConnection.classList.add("hidden");
+        appConnection.classList.remove("flex");
+        appSelection.classList.remove("hidden");
+        appSelection.classList.add("flex");
+    });
+
+    const inputConnUrl = document.getElementById("conn-input-url");
+    const toggleConnSync = document.getElementById("conn-toggle-sync");
+    const btnConnSave = document.getElementById("btn-conn-save");
+    const btnConnTest = document.getElementById("btn-conn-test");
+    const connTestResult = document.getElementById("conn-test-result");
+
+    const savedDomain = localStorage.getItem("syncDomain") || "localhost:8000";
+    const savedEnabled = localStorage.getItem("syncEnabled") !== "false";
+    
+    inputConnUrl.value = savedDomain;
+    toggleConnSync.checked = savedEnabled;
+
+    function formatUrl(domain) {
+        domain = domain.trim();
+        if (!domain) return "";
+        domain = domain.replace(/^https?:\/\//i, "");
+        domain = domain.split('/')[0];
+        return `http://${domain}/api/sync`;
+    }
+
+    if (savedDomain) {
+        eel.set_sync_config(formatUrl(savedDomain), savedEnabled)();
+    }
+
+    btnConnSave.addEventListener("click", async () => {
+        const domain = inputConnUrl.value.trim();
+        const enabled = toggleConnSync.checked;
+
+        localStorage.setItem("syncDomain", domain);
+        localStorage.setItem("syncEnabled", enabled);
+
+        const fullUrl = formatUrl(domain);
+        await eel.set_sync_config(fullUrl, enabled)();
+        
+        btnConnSave.classList.replace("bg-blue-600", "bg-emerald-600");
+        btnConnSave.classList.replace("hover:bg-blue-700", "hover:bg-emerald-700");
+        setTimeout(() => {
+            btnConnSave.classList.replace("bg-emerald-600", "bg-blue-600");
+            btnConnSave.classList.replace("hover:bg-emerald-700", "hover:bg-blue-700");
+        }, 1000);
+
+        if (!enabled) {
+            window.updateSyncStatus(false, "Wyłączona");
+        } else {
+            window.updateSyncStatus(null, "Oczekuje...");
+        }
+    });
+
+    btnConnTest.addEventListener("click", async () => {
+        btnConnTest.disabled = true;
+        btnConnTest.textContent = "Testowanie...";
+        connTestResult.classList.add("hidden");
+
+        try {
+            const fullUrl = formatUrl(inputConnUrl.value);
+            if (!fullUrl) throw new Error("Invalid address");
+            
+            const success = await eel.test_sync_connection(fullUrl)();
+            
+            connTestResult.classList.remove("hidden");
+            if (success) {
+                connTestResult.textContent = "Połączenie udane!";
+                connTestResult.className = "text-center text-sm font-semibold text-emerald-400 mt-2 block";
+                window.updateSyncStatus(true, "Połączony");
+            } else {
+                connTestResult.textContent = "Błąd połączenia. Sprawdź serwer.";
+                connTestResult.className = "text-center text-sm font-semibold text-red-400 mt-2 block";
+                window.updateSyncStatus(false, "Błąd");
+            }
+        } catch (err) {
+            connTestResult.classList.remove("hidden");
+            connTestResult.textContent = "Wystąpił błąd komunikacji.";
+            connTestResult.className = "text-center text-sm font-semibold text-red-400 mt-2 block";
+            window.updateSyncStatus(false, "Błąd");
+        } finally {
+            btnConnTest.disabled = false;
+            btnConnTest.textContent = "Testuj połączenie";
+        }
+    });
 
     // ─── Undo / Redo wiring ───────────────────────────────────────────────────
     const undoManager = new UndoManager();

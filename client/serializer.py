@@ -88,6 +88,7 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
     fb_action_cost = fallback.action_cost if fallback else ""
     fb_properties = fallback.properties if fallback else {}
     fb_is_equipped = fallback.is_equipped if fallback else False
+    fb_card_inputs = fallback.card_inputs if fallback else []
     # Preserve the item's stable UUID; generate a new one only for brand-new items.
     fb_item_id = fallback.item_id if fallback else str(uuid.uuid4())
 
@@ -97,6 +98,7 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
     action_cost = item_dict.get("action_cost", fb_action_cost)
     quantity = item_dict.get("quantity", fallback.quantity if fallback else 1)
     is_equipped = item_dict.get("is_equipped", fb_is_equipped)
+    card_inputs = item_dict.get("card_inputs", fb_card_inputs)
     item_id = item_dict.get("item_id", fb_item_id)
 
     # Collect arbitrary properties from the shop JSON
@@ -118,6 +120,7 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
             "quantity",
             "item_id",
             "is_equipped",
+            "card_inputs",
             "actions",
             "effect_value",
             "uses_durability",
@@ -161,6 +164,7 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
             properties=properties,
             quantity=quantity,
             is_equipped=is_equipped,
+            card_inputs=card_inputs,
             item_id=item_id,
             actions=actions,
         )
@@ -179,6 +183,7 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
             properties=properties,
             quantity=quantity,
             is_equipped=is_equipped,
+            card_inputs=card_inputs,
             item_id=item_id,
             effect_value=item_dict.get("effect_value", getattr(fallback, "effect_value", "")),
             uses_durability=item_dict.get(
@@ -201,6 +206,7 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
         properties=properties,
         quantity=quantity,
         is_equipped=is_equipped,
+        card_inputs=card_inputs,
         item_id=item_id,
     )
 
@@ -222,6 +228,7 @@ def serialize(hero: Character) -> dict:
             "space_taken": item.space_taken,
             "location": item.location.value,  # enum → string
             "is_equipped": item.is_equipped,
+            "card_inputs": item.card_inputs,
             "modifiers": [
                 {
                     "source": m.source,

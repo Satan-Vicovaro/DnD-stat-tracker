@@ -2,7 +2,6 @@ export class FightComponent {
   constructor(containerId) {
     this.containerId = containerId;
     this.characterData = null;
-    this.weaponInputs = {};
     this.usedSlots = new Set();
     this.openItemCards = new Set();
     this.plannedBuffs = {
@@ -127,7 +126,16 @@ export class FightComponent {
     document
       .getElementById("btn-reset-ap")
       .addEventListener("click", async () => {
-        this.weaponInputs = {};
+        if (this.characterData && this.characterData.inventory) {
+          this.characterData.inventory.forEach((item, index) => {
+            if (item.item_type === "Weapon" && item.card_inputs) {
+              for (let i = 0; i < item.card_inputs.length; i++) {
+                item.card_inputs[i] = "";
+                eel.update_item_card_input(index, i, "")();
+              }
+            }
+          });
+        }
         this.usedSlots.clear();
         dispatchAP(await eel.reset_action_points()());
       });
@@ -402,7 +410,15 @@ export class FightComponent {
     container.querySelectorAll("input[data-weapon-input]").forEach((input) => {
       input.addEventListener("input", (e) => {
         const slotKey = e.currentTarget.getAttribute("data-weapon-input");
-        this.weaponInputs[slotKey] = e.currentTarget.value;
+        const [itemIndexStr, slotIndexStr] = slotKey.split("-");
+        const itemIndex = parseInt(itemIndexStr);
+        const slotIndex = parseInt(slotIndexStr);
+        const val = e.currentTarget.value;
+        if (!this.characterData.inventory[itemIndex].card_inputs) {
+            this.characterData.inventory[itemIndex].card_inputs = [];
+        }
+        this.characterData.inventory[itemIndex].card_inputs[slotIndex] = val;
+        eel.update_item_card_input(itemIndex, slotIndex, val)();
         this.render(); // Re-render to update the displayed action
 
         // After re-render, focus the input again and push cursor to the end
@@ -601,7 +617,7 @@ export class FightComponent {
       item.actions.length > 0
     ) {
       const inputVal =
-        this.weaponInputs[index] !== undefined ? this.weaponInputs[index] : "";
+        item.card_inputs && item.card_inputs[0] !== undefined && item.card_inputs[0] !== null ? item.card_inputs[0] : "";
 
       let selectedAction = null;
       if (inputVal !== "") {
@@ -811,7 +827,7 @@ export class FightComponent {
     let slotsHtml = "";
     for (let slotIndex = 0; slotIndex < stamina; slotIndex++) {
       const slotKey = `${index}-${slotIndex}`;
-      const inputVal = this.weaponInputs[slotKey] !== undefined ? this.weaponInputs[slotKey] : "";
+      const inputVal = (item.card_inputs && item.card_inputs[slotIndex] !== undefined && item.card_inputs[slotIndex] !== null) ? item.card_inputs[slotIndex] : "";
 
       let selectedAction = null;
       if (inputVal !== "") {

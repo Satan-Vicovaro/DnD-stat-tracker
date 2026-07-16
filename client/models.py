@@ -209,6 +209,7 @@ class Item:
     properties: Dict[str, any] = field(default_factory=dict)
     quantity: int = 1
     is_equipped: bool = False
+    card_inputs: List[str] = field(default_factory=list)
     # Stable identifier that survives deep-copies and save/load cycles.
     # Must NOT be compared with Python's id() which is address-based.
     item_id: str = field(default_factory=lambda: str(uuid.uuid4()))

@@ -592,6 +592,18 @@ class GameEngine:
         logger.info(f"Edited item at index {index}.")
         return True
 
+    def update_item_card_input(self, index: int, slot_index: int, value: str) -> bool:
+        if index < 0 or index >= len(self.hero.inventory):
+            return False
+        # Do not take a snapshot here to avoid undo-spam while typing
+        item = self.hero.inventory[index]
+        if not hasattr(item, "card_inputs"):
+            item.card_inputs = []
+        while len(item.card_inputs) <= slot_index:
+            item.card_inputs.append("")
+        item.card_inputs[slot_index] = value
+        return True
+
     def toggle_equip_inventory_item(self, index: int) -> tuple[bool, str]:
         if index < 0 or index >= len(self.hero.inventory):
             return False, "Nieprawidłowy indeks przedmiotu."
