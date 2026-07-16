@@ -1,5 +1,8 @@
 import eel
 import logging
+import os
+import json
+import urllib.request
 from engine import GameEngine
 
 logger = logging.getLogger(__name__)
@@ -257,3 +260,26 @@ def cancel_mana_effects():
     if game_engine.cancel_mana_effects():
         game_engine.save()
     return game_engine.get_character_view_model()
+
+
+@eel.expose
+def set_sync_config(url: str, enabled: bool):
+    """API endpoint to set background sync configuration."""
+    os.environ["SYNC_SERVER_URL"] = url
+    os.environ["SYNC_ENABLED"] = str(enabled)
+    # Give UI a quick response
+    return True
+
+
+@eel.expose
+def test_sync_connection(url: str):
+    """API endpoint to test connection to GM server."""
+    try:
+        # A dummy payload just to check if the server is reachable
+        data = json.dumps({"name": "test_ping"}).encode("utf-8")
+        req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json'})
+        with urllib.request.urlopen(req, timeout=3) as response:
+            return response.status == 200
+    except Exception as e:
+        logger.error(f"Test sync connection failed: {e}")
+        return False

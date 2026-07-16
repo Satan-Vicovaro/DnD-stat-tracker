@@ -10,6 +10,30 @@ import { FightComponent } from './components/FightComponent.js';
 import { StatusEffectsComponent } from './components/StatusEffectsComponent.js';
 import { NotesComponent } from './components/NotesComponent.js';
 import { MagiaComponent } from './components/MagiaComponent.js';
+import { ServerComponent } from './components/ServerComponent.js';
+
+// ─── Global Sync Status Helper ───────────────────────────────────────────────
+window.updateSyncStatus = (isSuccess, textMsg = null) => {
+  const indicator = document.getElementById("sync-indicator");
+  const dot = document.getElementById("sync-dot");
+  const text = document.getElementById("sync-text");
+  
+  if (!indicator) return;
+  indicator.classList.remove("hidden");
+  
+  if (isSuccess === true) {
+    dot.className = "w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]";
+    text.textContent = textMsg || "Zsynchronizowano";
+  } else if (isSuccess === false) {
+    dot.className = "w-2 h-2 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]";
+    text.textContent = textMsg || "Błąd synchronizacji";
+  } else {
+    dot.className = "w-2 h-2 rounded-full bg-gray-500";
+    text.textContent = textMsg || "Oczekuje...";
+  }
+};
+// Expose to Eel
+eel.expose(window.updateSyncStatus, "updateSyncStatus");
 
 // ─── Undo / Redo Manager ─────────────────────────────────────────────────────
 
@@ -109,6 +133,10 @@ window.onload = async () => {
     // Initialize the Notes View Component
     const notesView = new NotesComponent("notes-view-container");
     notesView.init();
+
+    // Initialize the Server Component
+    const serverView = new ServerComponent("server-view-container");
+    serverView.init();
 
     // ─── Undo / Redo wiring ───────────────────────────────────────────────────
     const undoManager = new UndoManager();
