@@ -22,16 +22,22 @@ templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
 
 DATA_FILE = os.path.join(BASE_DIR, "data", "players.json")
 
+import threading
+
+state_lock = threading.Lock()
+
 def load_state() -> Dict[str, Any]:
-    if os.path.exists(DATA_FILE):
-        try:
-            with open(DATA_FILE, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception as e:
-            logger.error(f"Error loading state: {e}")
-    return {}
+    with state_lock:
+        if os.path.exists(DATA_FILE):
+            try:
+                with open(DATA_FILE, "r", encoding="utf-8") as f:
+                    return json.load(f)
+            except Exception as e:
+                logger.error(f"Error loading state: {e}")
+        return {}
 
 def save_state(state: Dict[str, Any]):
+    # Note: caller should hold state_lock if doing read-modify-write
     os.makedirs(os.path.dirname(DATA_FILE), exist_ok=True)
     try:
         with open(DATA_FILE, "w", encoding="utf-8") as f:
@@ -52,9 +58,19 @@ async def sync_player_state(request: Request):
         if not player_name:
             raise HTTPException(status_code=400, detail="Missing 'name' in payload")
             
-        current_state = load_state()
-        current_state[player_name] = data
-        save_state(current_state)
+        with state_lock:
+            # We must load, modify, and save within the same lock to prevent race conditions
+            if os.path.exists(DATA_FILE):
+                try:
+                    with open(DATA_FILE, "r", encoding="utf-8") as f:
+                        current_state = json.load(f)
+                except Exception:
+                    current_state = {}
+            else:
+                current_state = {}
+                
+            current_state[player_name] = data
+            save_state(current_state)
         
         logger.info(f"Successfully synced state for player: {player_name}")
         return {"status": "success", "message": f"State updated for {player_name}"}

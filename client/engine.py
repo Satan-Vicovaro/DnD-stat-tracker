@@ -144,32 +144,9 @@ class GameEngine:
                 json.dump(payload, f, ensure_ascii=False, indent=2)
             logger.debug("Auto-saved.")
             
-            # Sync to GM server in the background
-            def sync():
-                import eel
-                try:
-                    sync_enabled = os.environ.get("SYNC_ENABLED", "true").lower() == "true"
-                    if not sync_enabled:
-                        return
-
-                    url = os.environ.get("SYNC_SERVER_URL", "http://localhost:8000/api/sync")
-                    data = json.dumps(payload).encode("utf-8")
-                    req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json'})
-                    with urllib.request.urlopen(req, timeout=3) as response:
-                        logger.debug("Successfully synced to GM server")
-                        try:
-                            eel.updateSyncStatus(True, "Zsynchronizowano")()
-                        except Exception:
-                            pass
-                except Exception as e:
-                    logger.debug(f"Failed to sync to GM server: {e}")
-                    try:
-                        eel.updateSyncStatus(False, "Błąd serwera")()
-                    except Exception:
-                        pass
-            
-            threading.Thread(target=sync, daemon=True).start()
-
+            # Sync to GM server using the dedicated sync service
+            if hasattr(self, "sync_service") and self.sync_service is not None:
+                self.sync_service.queue_sync(payload)
 
         except OSError as e:
             logger.error(f"Auto-save failed: {e}")

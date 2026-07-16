@@ -1,0 +1,8 @@
+services:
+  server:
+    image: giera-kajzera-server
+    container_name: gm-server
+    ports:
+      - "2137:8000"
+    volumes:
+      - "./data:/app/data"

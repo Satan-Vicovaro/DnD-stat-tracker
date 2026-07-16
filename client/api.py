@@ -265,8 +265,8 @@ def cancel_mana_effects():
 @eel.expose
 def set_sync_config(url: str, enabled: bool):
     """API endpoint to set background sync configuration."""
-    os.environ["SYNC_SERVER_URL"] = url
-    os.environ["SYNC_ENABLED"] = str(enabled)
+    if hasattr(game_engine, "sync_service") and game_engine.sync_service is not None:
+        game_engine.sync_service.set_config(url, enabled)
     # Give UI a quick response
     return True
 
@@ -274,12 +274,6 @@ def set_sync_config(url: str, enabled: bool):
 @eel.expose
 def test_sync_connection(url: str):
     """API endpoint to test connection to GM server."""
-    try:
-        # A dummy payload just to check if the server is reachable
-        data = json.dumps({"name": "test_ping"}).encode("utf-8")
-        req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json'})
-        with urllib.request.urlopen(req, timeout=3) as response:
-            return response.status == 200
-    except Exception as e:
-        logger.error(f"Test sync connection failed: {e}")
-        return False
+    if hasattr(game_engine, "sync_service") and game_engine.sync_service is not None:
+        return game_engine.sync_service.test_connection(url)
+    return False
