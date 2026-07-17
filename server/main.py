@@ -20,30 +20,39 @@ app = FastAPI(title="Game Master Sync Server")
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
 
-DATA_FILE = os.path.join(BASE_DIR, "data", "players.json")
+PLAYERS_DATA_DIR = os.path.join(BASE_DIR, "data", "players")
 
 import threading
+import time
+import shutil
 
 state_lock = threading.Lock()
 
 def load_state() -> Dict[str, Any]:
+    state = {}
     with state_lock:
-        if os.path.exists(DATA_FILE):
-            try:
-                with open(DATA_FILE, "r", encoding="utf-8") as f:
-                    return json.load(f)
-            except Exception as e:
-                logger.error(f"Error loading state: {e}")
-        return {}
+        if os.path.exists(PLAYERS_DATA_DIR):
+            for player_name in os.listdir(PLAYERS_DATA_DIR):
+                player_dir = os.path.join(PLAYERS_DATA_DIR, player_name)
+                state_file = os.path.join(player_dir, "state.json")
+                if os.path.isdir(player_dir) and os.path.exists(state_file):
+                    try:
+                        with open(state_file, "r", encoding="utf-8") as f:
+                            state[player_name] = json.load(f)
+                    except Exception as e:
+                        logger.error(f"Error loading state for {player_name}: {e}")
+    return state
 
-def save_state(state: Dict[str, Any]):
+def save_player_state(player_name: str, data: Dict[str, Any]):
     # Note: caller should hold state_lock if doing read-modify-write
-    os.makedirs(os.path.dirname(DATA_FILE), exist_ok=True)
+    player_dir = os.path.join(PLAYERS_DATA_DIR, player_name)
+    os.makedirs(player_dir, exist_ok=True)
+    state_file = os.path.join(player_dir, "state.json")
     try:
-        with open(DATA_FILE, "w", encoding="utf-8") as f:
-            json.dump(state, f, ensure_ascii=False, indent=2)
+        with open(state_file, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
     except Exception as e:
-        logger.error(f"Error saving state: {e}")
+        logger.error(f"Error saving state for {player_name}: {e}")
 
 
 @app.post("/api/sync")
@@ -58,27 +67,37 @@ async def sync_player_state(request: Request):
         if not player_name:
             raise HTTPException(status_code=400, detail="Missing 'name' in payload")
             
+        if player_name == "test_ping":
+            return {"status": "success", "message": "Pong!"}
+            
         with state_lock:
-            # We must load, modify, and save within the same lock to prevent race conditions
-            if os.path.exists(DATA_FILE):
-                try:
-                    with open(DATA_FILE, "r", encoding="utf-8") as f:
-                        current_state = json.load(f)
-                except Exception:
-                    current_state = {}
-            else:
-                current_state = {}
-                
-            import time
             data["_last_sync"] = time.time()
-            current_state[player_name] = data
-            save_state(current_state)
+            save_player_state(player_name, data)
         
         logger.info(f"Successfully synced state for player: {player_name}")
         return {"status": "success", "message": f"State updated for {player_name}"}
     except Exception as e:
         logger.error(f"Sync failed: {e}")
         raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.delete("/api/players/{player_name}")
+async def delete_player(player_name: str, username: str = Depends(get_current_user)):
+    """
+    Deletes the data for a specific player. Protected by auth.
+    """
+    with state_lock:
+        player_dir = os.path.join(PLAYERS_DATA_DIR, player_name)
+        if os.path.exists(player_dir):
+            try:
+                shutil.rmtree(player_dir)
+                logger.info(f"Deleted data for player: {player_name}")
+                return {"status": "success", "message": f"Deleted player {player_name}"}
+            except Exception as e:
+                logger.error(f"Failed to delete player {player_name}: {e}")
+                raise HTTPException(status_code=500, detail=f"Failed to delete player: {e}")
+        else:
+            raise HTTPException(status_code=404, detail="Player not found")
 
 
 @app.get("/api/players")

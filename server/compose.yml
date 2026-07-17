@@ -1,5 +1,6 @@
 services:
   server:
+    build: .
     image: giera-kajzera-server
     container_name: gm-server
     ports:

@@ -1,0 +1,611 @@
+{
+  "timestamp": "2026-07-17T16:51:46",
+  "name": "Eluwina",
+  "level": 20,
+  "notes": "",
+  "base_str": 10,
+  "base_dex": 10,
+  "base_wis": 6,
+  "base_cha": 3,
+  "mod_str": 0,
+  "mod_dex": 0,
+  "mod_wis": 0,
+  "mod_cha": 0,
+  "damage_taken_physical": 0,
+  "damage_taken_magical": 23,
+  "current_action_points": 11,
+  "gold": 0,
+  "silver": 0,
+  "copper": 0,
+  "max_mana": 25,
+  "current_mana": 0,
+  "mana_spent_this_turn": 0,
+  "mana_buffs": {
+    "Obrona": 0,
+    "Akcje": 0,
+    "Wytrwałość": 0,
+    "Ruch": 0,
+    "Redukcja obrażeń": 0,
+    "Przerzucenie kostki": 0,
+    "Inne": 0
+  },
+  "armor_quantities": {
+    "Skórzana": 0,
+    "Półpłytowa": 0,
+    "Płytowa": 0,
+    "Stalowa": 0
+  },
+  "status_effects": [],
+  "inventory": [
+    {
+      "item_type": "Weapon",
+      "item_id": "f0dd2da9-1e44-470f-90ab-89bb70ae002b",
+      "name": "Młot dwuręczny",
+      "description": "Ze sklepu.",
+      "space_taken": 20.0,
+      "location": "EQUIPPED",
+      "is_equipped": false,
+      "card_inputs": [],
+      "modifiers": [],
+      "consumable_effects": {},
+      "max_uses": 1,
+      "current_uses": 1,
+      "action_cost": "",
+      "quantity": 1,
+      "properties": {},
+      "actions": [
+        {
+          "card_value": "0",
+          "action_name": "Uderzenie",
+          "action_cost": "2",
+          "range_str": "",
+          "hit_roll": "d20+1/2dex",
+          "damage_roll": "d12+2xstr",
+          "targets": "1",
+          "turn_execution": "Gracza",
+          "description": "Przeciwnik zostaje przesunięty na koniec turn ordera (save: d20+str>15+2xstr)"
+        },
+        {
+          "card_value": "6",
+          "action_name": "Trzęsienie ziemi",
+          "action_cost": "3",
+          "range_str": "",
+          "hit_roll": "d20",
+          "damage_roll": "d12+2xstr",
+          "targets": "1",
+          "turn_execution": "Gracz",
+          "description": "Zniwecz akcję istot sąsiadujących z polem ataku (save: d20+str>15+2xstr) || Istoty na sąsiadujących polach otrzymuja d4+str dmg"
+        },
+        {
+          "card_value": "10",
+          "action_name": "Miażdżący cios",
+          "action_cost": "2",
+          "range_str": "",
+          "hit_roll": "d20",
+          "damage_roll": "2d12+4xstr",
+          "targets": "1",
+          "turn_execution": "Gracz",
+          "description": "Spraw, że sąsiedzi przeciwnika mogą go raz zaatakować za darmo (save: d20+str>15+2xstr)"
+        }
+      ]
+    },
+    {
+      "item_type": "Weapon",
+      "item_id": "41f21953-f94f-4103-bddc-09348828a680",
+      "name": "Miecz dwuręczny",
+      "description": "Ze sklepu.",
+      "space_taken": 20.0,
+      "location": "EQUIPPED",
+      "is_equipped": false,
+      "card_inputs": [],
+      "modifiers": [],
+      "consumable_effects": {},
+      "max_uses": 1,
+      "current_uses": 1,
+      "action_cost": "",
+      "quantity": 1,
+      "properties": {},
+      "actions": [
+        {
+          "card_value": "0",
+          "action_name": "Pchnięcie",
+          "action_cost": "2",
+          "range_str": "",
+          "hit_roll": "d20+dex",
+          "damage_roll": "2d6+(dex+str)",
+          "targets": "3 w rzędzie",
+          "turn_execution": "Gracza",
+          "description": "Potężny atak na wprost"
+        },
+        {
+          "card_value": "1",
+          "action_name": "Cięcie z zamachu",
+          "action_cost": "2",
+          "range_str": "",
+          "hit_roll": "d20+dex",
+          "damage_roll": "2d6+(dex+str)",
+          "targets": "3 w łuku",
+          "turn_execution": "Gracza",
+          "description": "Potężny atak w łuku"
+        },
+        {
+          "card_value": "2",
+          "action_name": "Bloki",
+          "action_cost": "1",
+          "range_str": "",
+          "hit_roll": "",
+          "damage_roll": "",
+          "targets": "3",
+          "turn_execution": "Wroga",
+          "description": "Zniwecz jedną akcję sąsiadującego przeciwnika (save: d20+2xdex>rzut na trafienie wroga) || Możliwe 3 użycia"
+        },
+        {
+          "card_value": "10",
+          "action_name": "Przygotowanie",
+          "action_cost": "1",
+          "range_str": "",
+          "hit_roll": "",
+          "damage_roll": "",
+          "targets": "",
+          "turn_execution": "Sojusznika/Wro",
+          "description": "Użyj dowolną kartę miecza dwuręcznego"
+        }
+      ]
+    },
+    {
+      "item_type": "Weapon",
+      "item_id": "5a47a5b1-71c7-4354-a0cc-9a9704d8070b",
+      "name": "Topór dwuręczny",
+      "description": "Ze sklepu.",
+      "space_taken": 20.0,
+      "location": "EQUIPPED",
+      "is_equipped": false,
+      "card_inputs": [],
+      "modifiers": [],
+      "consumable_effects": {},
+      "max_uses": 1,
+      "current_uses": 1,
+      "action_cost": "",
+      "quantity": 1,
+      "properties": {},
+      "actions": [
+        {
+          "card_value": "0",
+          "action_name": "Ścięcie",
+          "action_cost": "2",
+          "range_str": "",
+          "hit_roll": "d20+dex",
+          "damage_roll": "d12+2xstr",
+          "targets": "1",
+          "turn_execution": "Gracza",
+          "description": "Jeżeli po tym gdy zadasz obrażenia przeciwnikowi, gdy zostanie mu mniej niż 8 życia, ten zostaje zabity || Niszczysz drewnianą tarczę wroga || Dezaktywujesz do końca tury inne tarcze"
+        },
+        {
+          "card_value": "5",
+          "action_name": "Siekacz",
+          "action_cost": "3",
+          "range_str": "",
+          "hit_roll": "d12+2xdex",
+          "damage_roll": "d6+2str",
+          "targets": "sąsiedzi",
+          "turn_execution": "Gracza",
+          "description": "Jeżeli po tym gdy zadasz obrażenia przeciwnikowi, gdy zostanie mu mniej niż 6 życia, ten zostanie zabity"
+        },
+        {
+          "card_value": "10",
+          "action_name": "Gilotyna",
+          "action_cost": "2",
+          "range_str": "",
+          "hit_roll": "d20+dex",
+          "damage_roll": "d12+2xstr",
+          "targets": "1",
+          "turn_execution": "Gracza",
+          "description": "Ataku nie można zablokować || Jeżeli po tym gdy zadasz obrażenia przeciwnikowi, gdy zostanie mu mniej niż 20 życia, ten zostaje zabity"
+        }
+      ]
+    }
+  ],
+  "_view_model": {
+    "name": "Eluwina",
+    "level": 20,
+    "notes": "",
+    "unspent_stat_points": 12,
+    "hp": 55,
+    "health_split": {
+      "armor_max_hp": 0,
+      "armor_current_hp": 0,
+      "base_max_hp": 78,
+      "base_current_hp": 55,
+      "total_max_hp": 78,
+      "total_current_hp": 55,
+      "current_mitigation": 0,
+      "broken_fragments": 0
+    },
+    "max_hp": {
+      "total": 78,
+      "breakdown": [
+        {
+          "source": "Baza",
+          "value": 10.0
+        },
+        {
+          "source": "Poziom",
+          "value": 38.0
+        },
+        {
+          "source": "Siła",
+          "value": 30.0
+        }
+      ]
+    },
+    "defense": {
+      "total": 35,
+      "breakdown": [
+        {
+          "source": "Baza",
+          "value": 10.0
+        },
+        {
+          "source": "Poziom",
+          "value": 15.2
+        },
+        {
+          "source": "Zwinność",
+          "value": 10.0
+        }
+      ]
+    },
+    "ap": {
+      "total": 14,
+      "breakdown": [
+        {
+          "source": "Baza",
+          "value": 1.0
+        },
+        {
+          "source": "Poziom",
+          "value": 9.5
+        },
+        {
+          "source": "Wiedza",
+          "value": 3.0
+        }
+      ]
+    },
+    "current_action_points": 11,
+    "stamina": {
+      "total": 7,
+      "breakdown": [
+        {
+          "source": "Baza",
+          "value": 1.0
+        },
+        {
+          "source": "Poziom",
+          "value": 4.75
+        },
+        {
+          "source": "Charyzma",
+          "value": 0.75
+        }
+      ]
+    },
+    "movement": {
+      "total": 30,
+      "breakdown": [
+        {
+          "source": "Baza",
+          "value": 30.0
+        }
+      ]
+    },
+    "stats": {
+      "str": {
+        "total": 10,
+        "breakdown": []
+      },
+      "dex": {
+        "total": 10,
+        "breakdown": []
+      },
+      "wis": {
+        "total": 6,
+        "breakdown": []
+      },
+      "cha": {
+        "total": 3,
+        "breakdown": []
+      }
+    },
+    "armor": {
+      "max_space": 24,
+      "total_used_space": 0,
+      "remaining_space": 24,
+      "damaged_space": 0,
+      "intact_space": 0,
+      "types": [
+        {
+          "name": "Stalowa",
+          "quantity": 0,
+          "space_per_fragment": 4,
+          "used_space": 0,
+          "max_hp": 0,
+          "current_hp": 0
+        },
+        {
+          "name": "Płytowa",
+          "quantity": 0,
+          "space_per_fragment": 4,
+          "used_space": 0,
+          "max_hp": 0,
+          "current_hp": 0
+        },
+        {
+          "name": "Półpłytowa",
+          "quantity": 0,
+          "space_per_fragment": 6,
+          "used_space": 0,
+          "max_hp": 0,
+          "current_hp": 0
+        },
+        {
+          "name": "Skórzana",
+          "quantity": 0,
+          "space_per_fragment": 8,
+          "used_space": 0,
+          "max_hp": 0,
+          "current_hp": 0
+        }
+      ]
+    },
+    "economy": {
+      "gold": 0,
+      "silver": 0,
+      "copper": 0
+    },
+    "inventory_space": {
+      "quick": {
+        "used": 60.0,
+        "max": 40.0
+      },
+      "backpack": {
+        "used": 0.0,
+        "max": 38.0
+      },
+      "back": {
+        "used": 0.0,
+        "max": 20.0
+      },
+      "quiver": {
+        "used": 0.0,
+        "max": 0.0,
+        "visible": false
+      },
+      "active_containers": {}
+    },
+    "inventory": [
+      {
+        "name": "Młot dwuręczny",
+        "description": "Ze sklepu.",
+        "space_taken": 20.0,
+        "location": "EQUIPPED",
+        "modifiers": [],
+        "item_type": "Weapon",
+        "consumable_effects": {},
+        "max_uses": 1,
+        "current_uses": 1,
+        "action_cost": "",
+        "properties": {},
+        "quantity": 1,
+        "is_equipped": false,
+        "card_inputs": [],
+        "item_id": "f0dd2da9-1e44-470f-90ab-89bb70ae002b",
+        "actions": [
+          {
+            "card_value": "0",
+            "action_name": "Uderzenie",
+            "action_cost": "2",
+            "range_str": "",
+            "hit_roll": "d20+1/2dex",
+            "damage_roll": "d12+2xstr",
+            "targets": "1",
+            "turn_execution": "Gracza",
+            "description": "Przeciwnik zostaje przesunięty na koniec turn ordera (save: d20+str>15+2xstr)"
+          },
+          {
+            "card_value": "6",
+            "action_name": "Trzęsienie ziemi",
+            "action_cost": "3",
+            "range_str": "",
+            "hit_roll": "d20",
+            "damage_roll": "d12+2xstr",
+            "targets": "1",
+            "turn_execution": "Gracz",
+            "description": "Zniwecz akcję istot sąsiadujących z polem ataku (save: d20+str>15+2xstr) || Istoty na sąsiadujących polach otrzymuja d4+str dmg"
+          },
+          {
+            "card_value": "10",
+            "action_name": "Miażdżący cios",
+            "action_cost": "2",
+            "range_str": "",
+            "hit_roll": "d20",
+            "damage_roll": "2d12+4xstr",
+            "targets": "1",
+            "turn_execution": "Gracz",
+            "description": "Spraw, że sąsiedzi przeciwnika mogą go raz zaatakować za darmo (save: d20+str>15+2xstr)"
+          }
+        ],
+        "is_active_container": false,
+        "is_clothes": false
+      },
+      {
+        "name": "Miecz dwuręczny",
+        "description": "Ze sklepu.",
+        "space_taken": 20.0,
+        "location": "EQUIPPED",
+        "modifiers": [],
+        "item_type": "Weapon",
+        "consumable_effects": {},
+        "max_uses": 1,
+        "current_uses": 1,
+        "action_cost": "",
+        "properties": {},
+        "quantity": 1,
+        "is_equipped": false,
+        "card_inputs": [],
+        "item_id": "41f21953-f94f-4103-bddc-09348828a680",
+        "actions": [
+          {
+            "card_value": "0",
+            "action_name": "Pchnięcie",
+            "action_cost": "2",
+            "range_str": "",
+            "hit_roll": "d20+dex",
+            "damage_roll": "2d6+(dex+str)",
+            "targets": "3 w rzędzie",
+            "turn_execution": "Gracza",
+            "description": "Potężny atak na wprost"
+          },
+          {
+            "card_value": "1",
+            "action_name": "Cięcie z zamachu",
+            "action_cost": "2",
+            "range_str": "",
+            "hit_roll": "d20+dex",
+            "damage_roll": "2d6+(dex+str)",
+            "targets": "3 w łuku",
+            "turn_execution": "Gracza",
+            "description": "Potężny atak w łuku"
+          },
+          {
+            "card_value": "2",
+            "action_name": "Bloki",
+            "action_cost": "1",
+            "range_str": "",
+            "hit_roll": "",
+            "damage_roll": "",
+            "targets": "3",
+            "turn_execution": "Wroga",
+            "description": "Zniwecz jedną akcję sąsiadującego przeciwnika (save: d20+2xdex>rzut na trafienie wroga) || Możliwe 3 użycia"
+          },
+          {
+            "card_value": "10",
+            "action_name": "Przygotowanie",
+            "action_cost": "1",
+            "range_str": "",
+            "hit_roll": "",
+            "damage_roll": "",
+            "targets": "",
+            "turn_execution": "Sojusznika/Wro",
+            "description": "Użyj dowolną kartę miecza dwuręcznego"
+          }
+        ],
+        "is_active_container": false,
+        "is_clothes": false
+      },
+      {
+        "name": "Topór dwuręczny",
+        "description": "Ze sklepu.",
+        "space_taken": 20.0,
+        "location": "EQUIPPED",
+        "modifiers": [],
+        "item_type": "Weapon",
+        "consumable_effects": {},
+        "max_uses": 1,
+        "current_uses": 1,
+        "action_cost": "",
+        "properties": {},
+        "quantity": 1,
+        "is_equipped": false,
+        "card_inputs": [],
+        "item_id": "5a47a5b1-71c7-4354-a0cc-9a9704d8070b",
+        "actions": [
+          {
+            "card_value": "0",
+            "action_name": "Ścięcie",
+            "action_cost": "2",
+            "range_str": "",
+            "hit_roll": "d20+dex",
+            "damage_roll": "d12+2xstr",
+            "targets": "1",
+            "turn_execution": "Gracza",
+            "description": "Jeżeli po tym gdy zadasz obrażenia przeciwnikowi, gdy zostanie mu mniej niż 8 życia, ten zostaje zabity || Niszczysz drewnianą tarczę wroga || Dezaktywujesz do końca tury inne tarcze"
+          },
+          {
+            "card_value": "5",
+            "action_name": "Siekacz",
+            "action_cost": "3",
+            "range_str": "",
+            "hit_roll": "d12+2xdex",
+            "damage_roll": "d6+2str",
+            "targets": "sąsiedzi",
+            "turn_execution": "Gracza",
+            "description": "Jeżeli po tym gdy zadasz obrażenia przeciwnikowi, gdy zostanie mu mniej niż 6 życia, ten zostanie zabity"
+          },
+          {
+            "card_value": "10",
+            "action_name": "Gilotyna",
+            "action_cost": "2",
+            "range_str": "",
+            "hit_roll": "d20+dex",
+            "damage_roll": "d12+2xstr",
+            "targets": "1",
+            "turn_execution": "Gracza",
+            "description": "Ataku nie można zablokować || Jeżeli po tym gdy zadasz obrażenia przeciwnikowi, gdy zostanie mu mniej niż 20 życia, ten zostaje zabity"
+          }
+        ],
+        "is_active_container": false,
+        "is_clothes": false
+      }
+    ],
+    "magia": {
+      "max_mana": 25,
+      "max_mana_breakdown": {
+        "total": 25,
+        "breakdown": [
+          {
+            "source": "Wiedza",
+            "value": 4.0
+          },
+          {
+            "source": "Charyzma",
+            "value": 1.0
+          },
+          {
+            "source": "Poziom",
+            "value": 20.0
+          }
+        ]
+      },
+      "mana_per_turn": 10,
+      "mana_per_turn_breakdown": {
+        "total": 10,
+        "breakdown": [
+          {
+            "source": "Siła",
+            "value": 3.33
+          },
+          {
+            "source": "Zwinność",
+            "value": 6.67
+          }
+        ]
+      },
+      "current_mana": 0,
+      "mana_spent_this_turn": 0,
+      "mana_buffs": {
+        "Obrona": 0,
+        "Akcje": 0,
+        "Wytrwałość": 0,
+        "Ruch": 0,
+        "Redukcja obrażeń": 0,
+        "Przerzucenie kostki": 0,
+        "Inne": 0
+      }
+    },
+    "can_undo": true,
+    "can_redo": false,
+    "status_effects": []
+  },
+  "_last_sync": 1784299910.9268434
+}

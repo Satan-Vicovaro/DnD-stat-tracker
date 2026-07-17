@@ -1,87 +1,192 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Game Master Dashboard</title>
     <!-- Use Tailwind CSS via CDN for rapid styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #1a202c; color: #e2e8f0; }
-        .player-card { background-color: #2d3748; }
+      body {
+        background-color: #1a202c;
+        color: #e2e8f0;
+      }
+      .player-card {
+        background-color: #2d3748;
+      }
     </style>
-</head>
-<body class="p-6">
+  </head>
+  <body class="p-6">
     <div class="max-w-7xl mx-auto">
-        <header class="flex justify-between items-center mb-8 border-b border-gray-700 pb-4">
-            <h1 class="text-3xl font-bold text-blue-400">GM Dashboard</h1>
-            <div class="text-gray-400">Logged in as: <span class="text-white font-semibold">{{ gm_name }}</span></div>
-        </header>
-
-        <div id="players-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Player cards will be injected here by JS -->
-            <div class="text-gray-500 italic">Loading players data...</div>
+      <header
+        class="flex justify-between items-center mb-8 border-b border-gray-700 pb-4"
+      >
+        <h1 class="text-3xl font-bold text-blue-400">GM Dashboard</h1>
+        <div class="text-gray-400">
+          Logged in as:
+          <span class="text-white font-semibold">{{ gm_name }}</span>
         </div>
+      </header>
+
+      <div
+        id="players-container"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        <!-- Player cards will be injected here by JS -->
+        <div class="text-gray-500 italic">Loading players data...</div>
+      </div>
     </div>
 
     <script>
-        async function fetchPlayers() {
-            try {
-                // Fetch player data. The browser will automatically handle Basic Auth if the user logged in.
-                const response = await fetch('/api/players');
-                if (!response.ok) throw new Error('Network response was not ok');
-                const data = await response.json();
-                renderPlayers(data);
-            } catch (error) {
-                console.error('Error fetching players:', error);
-            }
+      async function fetchPlayers() {
+        try {
+          // Fetch player data. The browser will automatically handle Basic Auth if the user logged in.
+          const response = await fetch("/api/players");
+          if (!response.ok) throw new Error("Network response was not ok");
+          const data = await response.json();
+          renderPlayers(data);
+        } catch (error) {
+          console.error("Error fetching players:", error);
+        }
+      }
+
+      function renderPlayers(players) {
+        const container = document.getElementById("players-container");
+        container.innerHTML = ""; // Clear current loading text
+
+        const playerNames = Object.keys(players);
+        if (playerNames.length === 0) {
+          container.innerHTML =
+            '<div class="text-gray-500 italic">No players have synced yet.</div>';
+          return;
         }
 
-        function renderPlayers(players) {
-            const container = document.getElementById('players-container');
-            container.innerHTML = ''; // Clear current loading text
-            
-            const playerNames = Object.keys(players);
-            if (playerNames.length === 0) {
-                container.innerHTML = '<div class="text-gray-500 italic">No players have synced yet.</div>';
-                return;
-            }
+        playerNames.forEach((name) => {
+          const p = players[name];
 
-            playerNames.forEach(name => {
-                const p = players[name];
-                
-                // Construct HTML for the player
-                const card = document.createElement('div');
-                card.className = 'player-card rounded-lg shadow-lg p-5 border border-gray-600 flex flex-col h-full';
-                
-                // Very basic rendering of some properties, assuming standard Hero structure
-                const level = p.level || 1;
-                const hp = p.stats && p.stats.health ? p.stats.health : '?';
-                const mana = p.stats && p.stats.mana ? p.stats.mana : '?';
-                
-                let eqHtml = '<ul class="text-sm text-gray-400 list-disc list-inside mt-2 space-y-1">';
-                if (p.inventory && p.inventory.items && Array.isArray(p.inventory.items)) {
-                    p.inventory.items.forEach(item => {
-                        eqHtml += `<li>${item.name || 'Unknown Item'} <span class="text-xs text-gray-500">x${item.quantity || 1}</span></li>`;
-                    });
-                } else {
-                    eqHtml += '<li><i>Empty inventory</i></li>';
-                }
-                eqHtml += '</ul>';
+          // We now prefer _view_model for accurate rendering if the client synced it
+          const vm = p._view_model;
 
-                card.innerHTML = `
+          // Construct HTML for the player
+          const card = document.createElement("div");
+          card.className = vm
+            ? "player-card rounded-lg shadow-lg p-5 border border-gray-600 flex flex-col h-full"
+            : "player-card rounded-lg shadow-lg p-5 border-2 border-yellow-500 bg-gray-800 flex flex-col h-full relative overflow-hidden";
+
+          const level = p.level || 1;
+
+          // Fallback calculations for legacy clients that don't send _view_model
+          const f_str = (p.base_str || 0) + (p.mod_str || 0);
+          const f_dex = (p.base_dex || 0) + (p.mod_dex || 0);
+          const f_wis = (p.base_wis || 0) + (p.mod_wis || 0);
+          const f_cha = (p.base_cha || 0) + (p.mod_cha || 0);
+          const f_defense = Math.floor(10 + (level - 1) * 0.8 + f_dex + 0.5);
+          const f_stamina = Math.floor(
+            1 + (level - 1) * 0.25 + f_cha * 0.25 + 0.5,
+          );
+          const f_ap_total = Math.floor(
+            1 + (level - 1) * 0.5 + f_dex * 0.5 + 0.5,
+          );
+          const f_base_hp = Math.floor(
+            10 + (level - 1) * 2 + f_str * 3 + f_wis * 0.5 + 0.5,
+          );
+          const f_current_hp = Math.max(
+            0,
+            f_base_hp -
+              (p.damage_taken_magical || 0) -
+              (p.damage_taken_physical || 0),
+          );
+
+          const hp = vm
+            ? `${vm.hp} / ${vm.health_split.total_max_hp}`
+            : `${f_current_hp} / ${f_base_hp}`;
+          const mana = vm
+            ? `${vm.magia.current_mana} / ${vm.magia.max_mana}`
+            : p.current_mana !== undefined
+              ? `${p.current_mana} / ${p.max_mana}`
+              : "?";
+          const ap = vm
+            ? `${vm.current_action_points} / ${vm.ap.total}`
+            : p.current_action_points !== undefined
+              ? `${p.current_action_points} / ${f_ap_total}`
+              : `? / ${f_ap_total}`;
+          const defense = vm ? vm.defense.total : f_defense;
+          const stamina = vm ? vm.stamina.total : f_stamina;
+          const movement = vm ? vm.movement.total : 30;
+          const str = vm ? vm.stats.str.total : f_str;
+          const dex = vm ? vm.stats.dex.total : f_dex;
+          const wis = vm ? vm.stats.wis.total : f_wis;
+          const cha = vm ? vm.stats.cha.total : f_cha;
+
+          let eqHtml =
+            '<ul class="text-sm text-gray-400 list-disc list-inside mt-2 space-y-1">';
+          const inv = vm
+            ? vm.inventory
+            : p.inventory && Array.isArray(p.inventory)
+              ? p.inventory
+              : p.inventory && p.inventory.items
+                ? p.inventory.items
+                : [];
+
+          if (inv && inv.length > 0) {
+            inv.forEach((item) => {
+              eqHtml += `<li>${item.name || "Unknown Item"} <span class="text-xs text-gray-500">x${item.quantity || 1}</span></li>`;
+            });
+          } else {
+            eqHtml += "<li><i>Empty inventory</i></li>";
+          }
+          eqHtml += "</ul>";
+
+          card.innerHTML = `
+                    ${!vm ? '<div class="absolute top-0 left-0 w-full bg-yellow-500 text-yellow-900 text-center text-[10px] font-bold py-1 uppercase tracking-wider">Tryb Awaryjny - Ograniczone dane</div><div class="mt-4"></div>' : ""}
                     <div class="flex justify-between items-start mb-3">
-                        <h2 class="text-xl font-bold text-green-400">${name}</h2>
+                        <div class="flex flex-col">
+                            <h2 class="text-xl font-bold text-green-400">${name}</h2>
+                            <button onclick="deletePlayer('${name}')" class="text-left text-xs text-red-500 hover:text-red-400 mt-1 focus:outline-none">Delete Player</button>
+                            ${!vm ? '<span class="text-xs text-yellow-500 mt-1">Brakuje pełnych statystyk. Stary klient gry?</span>' : ""}
+                        </div>
                         <span class="bg-blue-900 text-blue-200 text-xs font-bold px-2 py-1 rounded">Lvl ${level}</span>
                     </div>
-                    <div class="flex space-x-4 mb-4 text-sm">
+                    <div class="grid grid-cols-3 gap-2 mb-4 text-sm bg-gray-800 p-2 rounded">
                         <div class="flex flex-col">
-                            <span class="text-gray-400 text-xs uppercase">HP</span>
+                            <span class="text-gray-400 text-xs uppercase">Zdrowie</span>
                             <span class="font-bold text-red-400">${hp}</span>
                         </div>
                         <div class="flex flex-col">
-                            <span class="text-gray-400 text-xs uppercase">Mana</span>
+                            <span class="text-gray-400 text-xs uppercase">Magia</span>
                             <span class="font-bold text-blue-400">${mana}</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-gray-400 text-xs uppercase">Punkty akcji</span>
+                            <span class="font-bold text-yellow-400">${ap}</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-gray-400 text-xs uppercase">Obrona</span>
+                            <span class="font-bold text-gray-300">${defense}</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-gray-400 text-xs uppercase">Wytrwałość</span>
+                            <span class="font-bold text-gray-300">${stamina}</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-gray-400 text-xs uppercase">Ruch</span>
+                            <span class="font-bold text-gray-300">${movement}</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-gray-400 text-xs uppercase">Siła</span>
+                            <span class="font-bold text-orange-400">${str}</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-gray-400 text-xs uppercase">Zwinność</span>
+                            <span class="font-bold text-emerald-400">${dex}</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-gray-400 text-xs uppercase">Wiedza</span>
+                            <span class="font-bold text-purple-400">${wis}</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-gray-400 text-xs uppercase">Charyzma</span>
+                            <span class="font-bold text-pink-400">${cha}</span>
                         </div>
                     </div>
                     <div class="mt-auto">
@@ -91,13 +196,36 @@
                         </div>
                     </div>
                 `;
-                container.appendChild(card);
-            });
-        }
+          container.appendChild(card);
+        });
+      }
 
-        // Poll every 3 seconds for updates
-        fetchPlayers();
-        setInterval(fetchPlayers, 3000);
+      async function deletePlayer(playerName) {
+        if (
+          !confirm(
+            `Are you sure you want to delete all data for ${playerName}? This action cannot be undone.`,
+          )
+        ) {
+          return;
+        }
+        try {
+          const response = await fetch(
+            `/api/players/${encodeURIComponent(playerName)}`,
+            {
+              method: "DELETE",
+            },
+          );
+          if (!response.ok) throw new Error("Failed to delete player");
+          fetchPlayers(); // refresh list
+        } catch (error) {
+          console.error("Error deleting player:", error);
+          alert("Failed to delete player data.");
+        }
+      }
+
+      // Poll every 3 seconds for updates
+      fetchPlayers();
+      setInterval(fetchPlayers, 3000);
     </script>
-</body>
+  </body>
 </html>

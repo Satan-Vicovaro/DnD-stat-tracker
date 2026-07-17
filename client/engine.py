@@ -146,7 +146,12 @@ class GameEngine:
             
             # Sync to GM server using the dedicated sync service
             if hasattr(self, "sync_service") and self.sync_service is not None:
-                self.sync_service.queue_sync(payload)
+                sync_payload = payload.copy()
+                try:
+                    sync_payload["_view_model"] = self.get_character_view_model()
+                except Exception as e:
+                    logger.error(f"Failed to generate view model for sync: {e}")
+                self.sync_service.queue_sync(sync_payload)
 
         except OSError as e:
             logger.error(f"Auto-save failed: {e}")
