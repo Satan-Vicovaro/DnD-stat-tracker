@@ -2,7 +2,8 @@ export class ServerComponent {
   constructor(containerId) {
     this.containerId = containerId;
     this.container = document.getElementById(this.containerId);
-    this.syncUrl = localStorage.getItem("syncServerUrl") || "http://localhost:8000/api/sync";
+    this.syncUrl =
+      localStorage.getItem("syncServerUrl") || "http://localhost:8000/api/sync";
     this.syncEnabled = localStorage.getItem("syncEnabled") !== "false"; // Default true
   }
 
@@ -39,7 +40,7 @@ export class ServerComponent {
           <!-- URL Input -->
           <div>
             <label class="block text-sm font-medium text-gray-300 mb-2">Adres serwera</label>
-            <input type="text" id="sync-url" value="${this.syncUrl}" class="w-full bg-gray-900 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors" placeholder="http://localhost:8000/api/sync">
+            <input type="text" id="sync-url" value="${this.syncUrl}" class="w-full bg-gray-900 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors" placeholder="http://localhost:2137/api/sync">
           </div>
 
           <!-- Actions -->
@@ -73,13 +74,16 @@ export class ServerComponent {
       localStorage.setItem("syncEnabled", this.syncEnabled);
 
       await eel.set_sync_config(this.syncUrl, this.syncEnabled)();
-      
+
       // Update local UI
       btnSave.classList.replace("bg-indigo-600", "bg-emerald-600");
       btnSave.classList.replace("hover:bg-indigo-700", "hover:bg-emerald-700");
       setTimeout(() => {
         btnSave.classList.replace("bg-emerald-600", "bg-indigo-600");
-        btnSave.classList.replace("hover:bg-emerald-700", "hover:bg-indigo-700");
+        btnSave.classList.replace(
+          "hover:bg-emerald-700",
+          "hover:bg-indigo-700",
+        );
       }, 1000);
 
       if (!this.syncEnabled) {
@@ -97,15 +101,17 @@ export class ServerComponent {
       try {
         const url = inputUrl.value.trim();
         const success = await eel.test_sync_connection(url)();
-        
+
         testResult.classList.remove("hidden");
         if (success) {
           testResult.textContent = "Połączenie udane!";
-          testResult.className = "text-sm font-semibold text-emerald-400 mt-2 block";
+          testResult.className =
+            "text-sm font-semibold text-emerald-400 mt-2 block";
           window.updateSyncStatus(true, "Połączony");
         } else {
           testResult.textContent = "Błąd połączenia. Sprawdź serwer.";
-          testResult.className = "text-sm font-semibold text-red-400 mt-2 block";
+          testResult.className =
+            "text-sm font-semibold text-red-400 mt-2 block";
           window.updateSyncStatus(false, "Błąd");
         }
       } catch (err) {

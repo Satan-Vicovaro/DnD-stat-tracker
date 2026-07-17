@@ -1,8 +1,8 @@
 import json
 import os
 import logging
-from typing import Dict, Any
-from fastapi import FastAPI, Request, Depends, HTTPException
+from typing import Dict, Any, List
+from fastapi import FastAPI, Request, Depends, HTTPException, WebSocket, WebSocketDisconnect
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -54,6 +54,36 @@ def save_player_state(player_name: str, data: Dict[str, Any]):
     except Exception as e:
         logger.error(f"Error saving state for {player_name}: {e}")
 
+class ConnectionManager:
+    def __init__(self):
+        self.active_connections: Dict[str, List[WebSocket]] = {}
+        self.gm_connections: List[WebSocket] = []
+
+    async def connect(self, websocket: WebSocket, player_name: str = None):
+        await websocket.accept()
+        if player_name:
+            if player_name not in self.active_connections:
+                self.active_connections[player_name] = []
+            self.active_connections[player_name].append(websocket)
+        else:
+            self.gm_connections.append(websocket)
+
+    def disconnect(self, websocket: WebSocket, player_name: str = None):
+        if player_name and player_name in self.active_connections:
+            if websocket in self.active_connections[player_name]:
+                self.active_connections[player_name].remove(websocket)
+        elif websocket in self.gm_connections:
+            self.gm_connections.remove(websocket)
+
+    async def broadcast_to_gms(self, message: dict):
+        for connection in self.gm_connections:
+            try:
+                await connection.send_json(message)
+            except Exception:
+                pass
+
+manager = ConnectionManager()
+
 
 @app.post("/api/sync")
 async def sync_player_state(request: Request):
@@ -79,6 +109,47 @@ async def sync_player_state(request: Request):
     except Exception as e:
         logger.error(f"Sync failed: {e}")
         raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.websocket("/ws/sync/{player_name}")
+async def websocket_sync(websocket: WebSocket, player_name: str):
+    await manager.connect(websocket, player_name)
+    try:
+        while True:
+            data = await websocket.receive_json()
+            if player_name == "test_ping":
+                await websocket.send_json({"status": "success", "message": "Pong!"})
+                continue
+            
+            with state_lock:
+                data["_last_sync"] = time.time()
+                save_player_state(player_name, data)
+            
+            # Broadcast to GMs that this player updated
+            await manager.broadcast_to_gms({
+                "type": "player_update",
+                "player": player_name,
+                "data": data
+            })
+    except WebSocketDisconnect:
+        manager.disconnect(websocket, player_name)
+    except Exception as e:
+        logger.error(f"WebSocket error for {player_name}: {e}")
+        manager.disconnect(websocket, player_name)
+
+
+@app.websocket("/ws/gm")
+async def websocket_gm(websocket: WebSocket):
+    await manager.connect(websocket, player_name=None)
+    try:
+        while True:
+            data = await websocket.receive_json()
+            # Handle messages from GM if necessary
+    except WebSocketDisconnect:
+        manager.disconnect(websocket, player_name=None)
+    except Exception as e:
+        logger.error(f"GM WebSocket error: {e}")
+        manager.disconnect(websocket, player_name=None)
 
 
 @app.delete("/api/players/{player_name}")

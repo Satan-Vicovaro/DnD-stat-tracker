@@ -9,363 +9,570 @@
     <!-- Include Eel JS bridge -->
     <script type="text/javascript" src="/eel.js"></script>
     <!-- Include EasyMDE -->
-    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/easymde/dist/easymde.min.css"
+    />
     <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
     <style>
       .gm-readonly #app-character button,
       .gm-readonly #app-character input,
       .gm-readonly #app-character select,
       .gm-readonly #app-character textarea {
-          pointer-events: none;
-          opacity: 0.7;
+        pointer-events: none;
+        opacity: 0.7;
       }
       /* But keep the main tabs clickable so GM can switch tabs */
       .gm-readonly #main-tabs button {
-          pointer-events: auto;
-          opacity: 1;
+        pointer-events: auto;
+        opacity: 1;
       }
-      /* Keep the GM "Back" and "Refresh" buttons clickable */
-      .gm-readonly #gm-top-bar button {
-          pointer-events: auto;
-          opacity: 1;
+      /* GM Mode visibility overrides */
+      .gm-readonly #btn-undo,
+      .gm-readonly #btn-redo,
+      .gm-readonly #shortcut-hints {
+        display: none !important;
+      }
+      body:not(.gm-readonly) #btn-gm-exit-view,
+      body:not(.gm-readonly) #btn-gm-refresh,
+      body:not(.gm-readonly) #gm-view-status {
+        display: none !important;
+      }
+      /* Keep the GM buttons clickable */
+      .gm-readonly #btn-gm-exit-view,
+      .gm-readonly #btn-gm-refresh {
+        pointer-events: auto !important;
+        opacity: 1 !important;
       }
     </style>
   </head>
-  <body class="bg-gray-900 text-gray-100 min-h-screen font-sans selection:bg-indigo-500/30 m-0">
-
+  <body
+    class="bg-gray-900 text-gray-100 min-h-screen font-sans selection:bg-indigo-500/30 m-0"
+  >
     <!-- ─── Initial Selection Screen ─────────────────────────────────────────────────── -->
-    <div id="app-selection" class="flex flex-col items-center justify-center min-h-screen w-full relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-indigo-950">
-        <!-- background decorations -->
-        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-           <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl"></div>
-           <div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-emerald-600/20 rounded-full blur-3xl"></div>
-        </div>
-        
-        <h1 class="text-6xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-emerald-400 drop-shadow-lg z-10 text-center tracking-tight">Kajzer RPG</h1>
-        <p class="text-gray-400 mb-12 z-10 text-xl font-light">Wybierz moduł do uruchomienia</p>
-        
-        <div class="flex gap-8 z-10">
-            <!-- Character Button -->
-            <button id="btn-select-character" class="group relative flex flex-col items-center justify-center w-64 h-64 bg-gray-800/60 backdrop-blur-md border border-gray-700/50 rounded-3xl shadow-xl hover:shadow-indigo-500/20 hover:border-indigo-500/50 transition-all duration-300 hover:-translate-y-2 overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-t from-indigo-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <svg class="w-16 h-16 text-indigo-400 mb-4 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>
-                <span class="text-2xl font-bold text-gray-200 group-hover:text-white transition-colors">Postać</span>
-                <span class="text-sm text-gray-500 mt-2">Karta Postaci i Ekwipunek</span>
-            </button>
-            
-            <!-- GM Button -->
-            <button id="btn-select-gm" class="group relative flex flex-col items-center justify-center w-64 h-64 bg-gray-800/60 backdrop-blur-md border border-gray-700/50 rounded-3xl shadow-xl hover:shadow-emerald-500/20 hover:border-emerald-500/50 transition-all duration-300 hover:-translate-y-2 overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-t from-emerald-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <svg class="w-16 h-16 text-emerald-400 mb-4 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.315 48.315 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z"/></svg>
-                <span class="text-2xl font-bold text-gray-200 group-hover:text-white transition-colors">Mistrz Gry</span>
-                <span class="text-sm text-gray-500 mt-2">Panel Sterowania Grą</span>
-            </button>
+    <div
+      id="app-selection"
+      class="flex flex-col items-center justify-center min-h-screen w-full relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-indigo-950"
+    >
+      <!-- background decorations -->
+      <div
+        class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none"
+      >
+        <div
+          class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl"
+        ></div>
+        <div
+          class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-emerald-600/20 rounded-full blur-3xl"
+        ></div>
+      </div>
 
-            <!-- Connection Button -->
-            <button id="btn-select-connection" class="group relative flex flex-col items-center justify-center w-64 h-64 bg-gray-800/60 backdrop-blur-md border border-gray-700/50 rounded-3xl shadow-xl hover:shadow-blue-500/20 hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-2 overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <svg class="w-16 h-16 text-blue-400 mb-4 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/></svg>
-                <span class="text-2xl font-bold text-gray-200 group-hover:text-white transition-colors">Sieć</span>
-                <span class="text-sm text-gray-500 mt-2">Ustawienia Połączenia</span>
-            </button>
-        </div>
+      <h1
+        class="text-6xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-emerald-400 drop-shadow-lg z-10 text-center tracking-tight"
+      >
+        Kajzer RPG
+      </h1>
+      <p class="text-gray-400 mb-12 z-10 text-xl font-light">
+        Wybierz moduł do uruchomienia
+      </p>
+
+      <div class="flex gap-8 z-10">
+        <!-- Character Button -->
+        <button
+          id="btn-select-character"
+          class="group relative flex flex-col items-center justify-center w-64 h-64 bg-gray-800/60 backdrop-blur-md border border-gray-700/50 rounded-3xl shadow-xl hover:shadow-indigo-500/20 hover:border-indigo-500/50 transition-all duration-300 hover:-translate-y-2 overflow-hidden"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-indigo-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          ></div>
+          <svg
+            class="w-16 h-16 text-indigo-400 mb-4 group-hover:scale-110 transition-transform duration-300"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+            />
+          </svg>
+          <span
+            class="text-2xl font-bold text-gray-200 group-hover:text-white transition-colors"
+            >Postać</span
+          >
+          <span class="text-sm text-gray-500 mt-2"
+            >Karta Postaci i Ekwipunek</span
+          >
+        </button>
+
+        <!-- GM Button -->
+        <button
+          id="btn-select-gm"
+          class="group relative flex flex-col items-center justify-center w-64 h-64 bg-gray-800/60 backdrop-blur-md border border-gray-700/50 rounded-3xl shadow-xl hover:shadow-emerald-500/20 hover:border-emerald-500/50 transition-all duration-300 hover:-translate-y-2 overflow-hidden"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-emerald-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          ></div>
+          <svg
+            class="w-16 h-16 text-emerald-400 mb-4 group-hover:scale-110 transition-transform duration-300"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.315 48.315 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z"
+            />
+          </svg>
+          <span
+            class="text-2xl font-bold text-gray-200 group-hover:text-white transition-colors"
+            >Mistrz Gry</span
+          >
+          <span class="text-sm text-gray-500 mt-2">Panel Sterowania Grą</span>
+        </button>
+
+        <!-- Connection Button -->
+        <button
+          id="btn-select-connection"
+          class="group relative flex flex-col items-center justify-center w-64 h-64 bg-gray-800/60 backdrop-blur-md border border-gray-700/50 rounded-3xl shadow-xl hover:shadow-blue-500/20 hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-2 overflow-hidden"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          ></div>
+          <svg
+            class="w-16 h-16 text-blue-400 mb-4 group-hover:scale-110 transition-transform duration-300"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"
+            />
+          </svg>
+          <span
+            class="text-2xl font-bold text-gray-200 group-hover:text-white transition-colors"
+            >Sieć</span
+          >
+          <span class="text-sm text-gray-500 mt-2">Ustawienia Połączenia</span>
+        </button>
+      </div>
     </div>
 
     <!-- ─── Connection Panel ─────────────────────────────────────────────────── -->
-    <div id="app-connection" class="hidden min-h-screen flex-col items-center justify-center bg-gray-900 w-full relative p-8">
-        <div class="bg-gray-800 rounded-xl p-8 border border-gray-700 shadow-2xl w-full max-w-lg">
-            <h2 class="text-2xl font-bold text-white mb-8 flex items-center gap-3">
-                <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/></svg>
-                Ustawienia Sieci
-            </h2>
-            
-            <div class="space-y-8">
-                <!-- URL Input -->
-                <div>
-                    <label class="block text-sm font-semibold text-gray-300 mb-2">Adres Serwera (np. 192.168.1.5:8000 lub domena)</label>
-                    <input type="text" id="conn-input-url" class="w-full bg-gray-900 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors" placeholder="localhost:8000">
-                </div>
-                
-                <!-- Toggle -->
-                <div class="flex items-center justify-between bg-gray-900/50 p-4 rounded-lg border border-gray-700/50">
-                    <div>
-                        <h3 class="text-white font-semibold">Synchronizacja w tle</h3>
-                        <p class="text-sm text-gray-400 mt-1">Wysyłaj stan gry automatycznie</p>
-                    </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" id="conn-toggle-sync" class="sr-only peer" checked>
-                        <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"></div>
-                    </label>
-                </div>
+    <div
+      id="app-connection"
+      class="hidden min-h-screen flex-col items-center justify-center bg-gray-900 w-full relative p-8"
+    >
+      <div
+        class="bg-gray-800 rounded-xl p-8 border border-gray-700 shadow-2xl w-full max-w-lg"
+      >
+        <h2 class="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+          <svg
+            class="w-8 h-8 text-blue-400"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"
+            />
+          </svg>
+          Ustawienia Sieci
+        </h2>
 
-                <!-- Actions -->
-                <div class="pt-4 flex flex-col gap-4">
-                    <button id="btn-conn-save" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-bold transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-blue-500/20">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-                        Zapisz i Połącz
-                    </button>
-                    <div class="flex gap-4">
-                        <button id="btn-conn-test" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-semibold transition-colors disabled:opacity-50">Testuj połączenie</button>
-                        <button id="btn-conn-back" class="flex-1 bg-gray-800 hover:bg-gray-700 border border-gray-600 text-white px-4 py-2 rounded-lg font-semibold transition-colors">Powrót</button>
-                    </div>
-                </div>
-                <div id="conn-test-result" class="text-center text-sm font-semibold hidden mt-2"></div>
+        <div class="space-y-8">
+          <!-- URL Input -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-300 mb-2"
+              >Adres Serwera (np. 192.168.1.5:8000 lub domena)</label
+            >
+            <input
+              type="text"
+              id="conn-input-url"
+              class="w-full bg-gray-900 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+              placeholder="localhost:2137"
+            />
+          </div>
+
+          <!-- Toggle -->
+          <div
+            class="flex items-center justify-between bg-gray-900/50 p-4 rounded-lg border border-gray-700/50"
+          >
+            <div>
+              <h3 class="text-white font-semibold">Synchronizacja w tle</h3>
+              <p class="text-sm text-gray-400 mt-1">
+                Wysyłaj stan gry automatycznie
+              </p>
             </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                id="conn-toggle-sync"
+                class="sr-only peer"
+                checked
+              />
+              <div
+                class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"
+              ></div>
+            </label>
+          </div>
+
+          <!-- Actions -->
+          <div class="pt-4 flex flex-col gap-4">
+            <button
+              id="btn-conn-save"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-bold transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-blue-500/20"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4.5 12.75l6 6 9-13.5"
+                />
+              </svg>
+              Zapisz i Połącz
+            </button>
+            <div class="flex gap-4">
+              <button
+                id="btn-conn-test"
+                class="flex-1 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-semibold transition-colors disabled:opacity-50"
+              >
+                Testuj połączenie
+              </button>
+              <button
+                id="btn-conn-back"
+                class="flex-1 bg-gray-800 hover:bg-gray-700 border border-gray-600 text-white px-4 py-2 rounded-lg font-semibold transition-colors"
+              >
+                Powrót
+              </button>
+            </div>
+          </div>
+          <div
+            id="conn-test-result"
+            class="text-center text-sm font-semibold hidden mt-2"
+          ></div>
         </div>
+      </div>
     </div>
 
     <!-- ─── GM Panel Placeholder ─────────────────────────────────────────────────── -->
-    <div id="app-gm" class="hidden min-h-screen flex-col items-center bg-gray-900 w-full relative p-8">
-        <div class="flex items-center justify-between w-full max-w-5xl mb-12">
-            <h1 class="text-4xl font-bold text-emerald-400">Panel Mistrza Gry</h1>
-            <div class="flex gap-4">
-                <button id="btn-gm-refresh-list" class="px-6 py-3 bg-emerald-800/50 hover:bg-emerald-700 border border-emerald-600 rounded-xl text-white font-semibold transition-all">Odśwież listę</button>
-                <button id="btn-gm-back" class="px-6 py-3 bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded-xl text-white font-semibold transition-all shadow-lg hover:shadow-gray-500/20 flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"/></svg>
-                    Powrót
-                </button>
-            </div>
+    <div
+      id="app-gm"
+      class="hidden min-h-screen flex-col items-center bg-gray-900 w-full relative p-8"
+    >
+      <div class="flex items-center justify-between w-full max-w-5xl mb-12">
+        <h1 class="text-4xl font-bold text-emerald-400">Panel Mistrza Gry</h1>
+        <div class="flex gap-4">
+          <button
+            id="btn-gm-refresh-list"
+            class="px-6 py-3 bg-emerald-800/50 hover:bg-emerald-700 border border-emerald-600 rounded-xl text-white font-semibold transition-all"
+          >
+            Odśwież listę
+          </button>
+          <button
+            id="btn-gm-back"
+            class="px-6 py-3 bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded-xl text-white font-semibold transition-all shadow-lg hover:shadow-gray-500/20 flex items-center gap-2"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
+              />
+            </svg>
+            Powrót
+          </button>
         </div>
-        <div id="gm-players-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 w-full max-w-5xl">
-            <div class="text-gray-500 text-center col-span-full py-20 animate-pulse">Ładowanie graczy...</div>
+      </div>
+      <div
+        id="gm-players-grid"
+        class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 w-full max-w-5xl"
+      >
+        <div
+          class="text-gray-500 text-center col-span-full py-20 animate-pulse"
+        >
+          Ładowanie graczy...
         </div>
+      </div>
     </div>
 
     <!-- ─── Character Dashboard ─────────────────────────────────────────────────── -->
     <div id="app-character" class="hidden w-full p-8 relative">
+      <!-- ─── Toolbar ─────────────────────────────────────────────────── -->
+      <div class="sticky top-0 z-50 mb-6 w-3/4 mx-auto">
+        <div
+          class="bg-gray-800/80 backdrop-blur border border-gray-700 rounded-xl px-4 py-2.5 flex items-center gap-3 shadow-lg"
+        >
+          <!-- GM Exit View button -->
+          <button
+            id="btn-gm-exit-view"
+            title="Wyjdź z podglądu"
+            class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold bg-red-900/40 text-red-300 border border-red-500/50 transition-all duration-150 select-none cursor-pointer hover:bg-red-800/60 hover:text-white active:scale-95"
+          >
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"/></svg>
+            Wyjdź
+          </button>
 
-    <div id="gm-top-bar" class="hidden absolute top-4 left-8 flex gap-4 z-50">
-        <button id="btn-gm-exit-view" class="px-4 py-2 bg-red-900/60 hover:bg-red-800 text-white border border-red-700 rounded-lg shadow-lg flex items-center gap-2 transition-colors">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"/></svg>
-            Wyjdź z podglądu
-        </button>
-        <button id="btn-gm-refresh" class="px-4 py-2 bg-emerald-900/60 hover:bg-emerald-800 text-white border border-emerald-700 rounded-lg shadow-lg flex items-center gap-2 transition-colors">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
+          <!-- Undo button -->
+          <button
+            id="btn-undo"
+            disabled
+            title="Cofnij ostatnią akcję (Ctrl+Z)"
+            class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold bg-gray-700 text-gray-500 border border-gray-600 transition-all duration-150 select-none cursor-not-allowed enabled:cursor-pointer enabled:text-indigo-300 enabled:border-indigo-500/50 enabled:bg-indigo-900/40 enabled:hover:bg-indigo-800/60 enabled:hover:text-white active:scale-95"
+          >
+            <svg
+              class="w-4 h-4 shrink-0"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
+              />
+            </svg>
+            Cofnij
+          </button>
+
+          <!-- Load Saves button -->
+          <button
+            id="btn-load-saves"
+            title="Wczytaj zapisaną grę"
+            class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold bg-indigo-900/40 text-indigo-300 border border-indigo-500/50 transition-all duration-150 select-none cursor-pointer hover:bg-indigo-800/60 hover:text-white active:scale-95 ml-2"
+          >
+            <svg
+              class="w-4 h-4 shrink-0"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
+              />
+            </svg>
+            Wczytaj
+          </button>
+
+          <!-- Redo button -->
+          <button
+            id="btn-redo"
+            disabled
+            title="Ponów akcję (Ctrl+Y)"
+            class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold bg-gray-700 text-gray-500 border border-gray-600 transition-all duration-150 select-none cursor-not-allowed enabled:cursor-pointer enabled:text-emerald-300 enabled:border-emerald-500/50 enabled:bg-emerald-900/40 enabled:hover:bg-emerald-800/60 enabled:hover:text-white active:scale-95"
+          >
+            <svg
+              class="w-4 h-4 shrink-0"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15 15l6-6m0 0-6-6m6 6H9a6 6 0 0 0 0 12h3"
+              />
+            </svg>
+            Ponów
+          </button>
+
+          <!-- GM Refresh Button -->
+          <button
+            id="btn-gm-refresh"
+            title="Odśwież"
+            class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold bg-emerald-900/40 text-emerald-300 border border-emerald-500/50 transition-all duration-150 select-none cursor-pointer hover:bg-emerald-800/60 hover:text-white active:scale-95"
+          >
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
             Odśwież
-        </button>
-        <div id="gm-view-status" class="flex items-center px-4 py-2 text-emerald-400 bg-gray-900 rounded-lg border border-gray-700 shadow-lg select-none">
-            Oglądasz gracza: <span id="gm-view-player-name" class="font-bold ml-2"></span>
-        </div>
-    </div>
+          </button>
 
-    <!-- ─── Toolbar ─────────────────────────────────────────────────── -->
-    <div class="sticky top-0 z-50 mb-6 w-3/4 mx-auto">
-      <div
-        class="bg-gray-800/80 backdrop-blur border border-gray-700 rounded-xl px-4 py-2.5 flex items-center gap-3 shadow-lg"
-      >
-        <!-- Undo button -->
-        <button
-          id="btn-undo"
-          disabled
-          title="Cofnij ostatnią akcję (Ctrl+Z)"
-          class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold bg-gray-700 text-gray-500 border border-gray-600 transition-all duration-150 select-none cursor-not-allowed enabled:cursor-pointer enabled:text-indigo-300 enabled:border-indigo-500/50 enabled:bg-indigo-900/40 enabled:hover:bg-indigo-800/60 enabled:hover:text-white active:scale-95"
-        >
-          <svg
-            class="w-4 h-4 shrink-0"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            viewBox="0 0 24 24"
+          <!-- Shortcut hints -->
+          <span class="text-gray-600 text-xs font-mono select-none" id="shortcut-hints"
+            >Ctrl+Z / Ctrl+Y | Ctrl+S Zapisz</span
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
-            />
-          </svg>
-          Cofnij
-        </button>
 
-        <!-- Load Saves button -->
-        <button
-          id="btn-load-saves"
-          title="Wczytaj zapisaną grę"
-          class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold bg-indigo-900/40 text-indigo-300 border border-indigo-500/50 transition-all duration-150 select-none cursor-pointer hover:bg-indigo-800/60 hover:text-white active:scale-95 ml-2"
-        >
-          <svg
-            class="w-4 h-4 shrink-0"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            viewBox="0 0 24 24"
+          <div class="flex-1"></div>
+
+          <!-- GM View Status -->
+          <div
+            id="gm-view-status"
+            class="flex items-center gap-2 px-2 py-1 mr-2 rounded-lg text-xs font-semibold text-emerald-400 bg-emerald-900/20 border border-emerald-800/50 select-none"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
-            />
-          </svg>
-          Wczytaj
-        </button>
-
-        <!-- Redo button -->
-        <button
-          id="btn-redo"
-          disabled
-          title="Ponów akcję (Ctrl+Y)"
-          class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold bg-gray-700 text-gray-500 border border-gray-600 transition-all duration-150 select-none cursor-not-allowed enabled:cursor-pointer enabled:text-emerald-300 enabled:border-emerald-500/50 enabled:bg-emerald-900/40 enabled:hover:bg-emerald-800/60 enabled:hover:text-white active:scale-95"
-        >
-          <svg
-            class="w-4 h-4 shrink-0"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M15 15l6-6m0 0-6-6m6 6H9a6 6 0 0 0 0 12h3"
-            />
-          </svg>
-          Ponów
-        </button>
-
-        <!-- Shortcut hints -->
-        <span class="text-gray-600 text-xs font-mono select-none"
-          >Ctrl+Z / Ctrl+Y | Ctrl+S Zapisz</span
-        >
-
-        <div class="flex-1"></div>
-
-        <!-- Sync indicator -->
-        <div id="sync-indicator" class="flex items-center gap-2 px-2 py-1 mr-2 rounded-lg text-xs font-semibold text-gray-500 bg-gray-800/50 border border-gray-700/50 select-none hidden" title="Status połączenia z serwerem">
-          <div class="w-2 h-2 rounded-full bg-gray-500 transition-colors duration-300" id="sync-dot"></div>
-          <span id="sync-text">Brak synchronizacji</span>
-        </div>
-
-        <!-- Flash message -->
-        <span
-          id="undo-toast"
-          class="text-xs font-semibold opacity-0 transition-opacity duration-300 pointer-events-none"
-        ></span>
-      </div>
-    </div>
-
-    <!-- ─── Tabs Navigation ─────────────────────────────────────────────────── -->
-    <div class="w-3/4 mx-auto mb-8">
-      <nav
-        class="flex space-x-4 border-b border-gray-700"
-        aria-label="Tabs"
-        id="main-tabs"
-      >
-        <button
-          data-target="tab-content-character"
-          class="tab-btn bg-gray-800 text-white px-4 py-2 rounded-t-lg border-t border-l border-r border-gray-700 font-bold focus:outline-none transition-colors"
-        >
-          Postać
-        </button>
-        <button
-          data-target="tab-content-items"
-          class="tab-btn bg-transparent text-gray-400 hover:text-gray-300 hover:bg-gray-800/50 px-4 py-2 rounded-t-lg font-semibold focus:outline-none transition-colors"
-        >
-          Przedmioty
-        </button>
-        <button
-          data-target="tab-content-shop"
-          class="tab-btn bg-transparent text-gray-400 hover:text-gray-300 hover:bg-gray-800/50 px-4 py-2 rounded-t-lg font-semibold focus:outline-none transition-colors"
-        >
-          Sklep
-        </button>
-        <button
-          data-target="tab-content-fight"
-          class="tab-btn bg-transparent text-gray-400 hover:text-gray-300 hover:bg-gray-800/50 px-4 py-2 rounded-t-lg font-semibold focus:outline-none transition-colors flex items-center gap-2"
-        >
-          Walka
-        </button>
-        <button
-          data-target="tab-content-notes"
-          class="tab-btn bg-transparent text-gray-400 hover:text-gray-300 hover:bg-gray-800/50 px-4 py-2 rounded-t-lg font-semibold focus:outline-none transition-colors flex items-center gap-2"
-        >
-          Notatki
-        </button>
-      </nav>
-    </div>
-
-    <!-- ─── Tab Content ─────────────────────────────────────────────────────── -->
-    <div id="tab-content-character" class="tab-pane w-3/4 mx-auto block">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start mb-8">
-        <!-- Character View Component -->
-        <div id="character-view-container">
-          <div class="text-center text-gray-500 mt-20 animate-pulse">
-            Ładowanie postaci...
+            Oglądasz gracza:
+            <span id="gm-view-player-name" class="font-bold"></span>
           </div>
-        </div>
 
-        <!-- Armor and Magia Column -->
-        <div class="flex flex-col gap-6">
-          <!-- Armor View Component -->
-          <div id="armor-view-container">
+          <!-- Sync indicator -->
+          <div
+            id="sync-indicator"
+            class="flex items-center gap-2 px-2 py-1 mr-2 rounded-lg text-xs font-semibold text-gray-500 bg-gray-800/50 border border-gray-700/50 select-none hidden"
+            title="Status połączenia z serwerem"
+          >
+            <div
+              class="w-2 h-2 rounded-full bg-gray-500 transition-colors duration-300"
+              id="sync-dot"
+            ></div>
+            <span id="sync-text">Brak synchronizacji</span>
+          </div>
+
+          <!-- Flash message -->
+          <span
+            id="undo-toast"
+            class="text-xs font-semibold opacity-0 transition-opacity duration-300 pointer-events-none"
+          ></span>
+        </div>
+      </div>
+
+      <!-- ─── Tabs Navigation ─────────────────────────────────────────────────── -->
+      <div class="w-3/4 mx-auto mb-8">
+        <nav
+          class="flex space-x-4 border-b border-gray-700"
+          aria-label="Tabs"
+          id="main-tabs"
+        >
+          <button
+            data-target="tab-content-character"
+            class="tab-btn bg-gray-800 text-white px-4 py-2 rounded-t-lg border-t border-l border-r border-gray-700 font-bold focus:outline-none transition-colors"
+          >
+            Postać
+          </button>
+          <button
+            data-target="tab-content-items"
+            class="tab-btn bg-transparent text-gray-400 hover:text-gray-300 hover:bg-gray-800/50 px-4 py-2 rounded-t-lg font-semibold focus:outline-none transition-colors"
+          >
+            Przedmioty
+          </button>
+          <button
+            data-target="tab-content-shop"
+            class="tab-btn bg-transparent text-gray-400 hover:text-gray-300 hover:bg-gray-800/50 px-4 py-2 rounded-t-lg font-semibold focus:outline-none transition-colors"
+          >
+            Sklep
+          </button>
+          <button
+            data-target="tab-content-fight"
+            class="tab-btn bg-transparent text-gray-400 hover:text-gray-300 hover:bg-gray-800/50 px-4 py-2 rounded-t-lg font-semibold focus:outline-none transition-colors flex items-center gap-2"
+          >
+            Walka
+          </button>
+          <button
+            data-target="tab-content-notes"
+            class="tab-btn bg-transparent text-gray-400 hover:text-gray-300 hover:bg-gray-800/50 px-4 py-2 rounded-t-lg font-semibold focus:outline-none transition-colors flex items-center gap-2"
+          >
+            Notatki
+          </button>
+        </nav>
+      </div>
+
+      <!-- ─── Tab Content ─────────────────────────────────────────────────────── -->
+      <div id="tab-content-character" class="tab-pane w-3/4 mx-auto block">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start mb-8">
+          <!-- Character View Component -->
+          <div id="character-view-container">
             <div class="text-center text-gray-500 mt-20 animate-pulse">
-              Ładowanie pancerza...
+              Ładowanie postaci...
             </div>
           </div>
-          <!-- Magia View Component -->
-          <div id="magia-view-container"></div>
-        </div>
 
-        <!-- Status Effects Panel -->
-        <div id="status-effects-view-container">
+          <!-- Armor and Magia Column -->
+          <div class="flex flex-col gap-6">
+            <!-- Armor View Component -->
+            <div id="armor-view-container">
+              <div class="text-center text-gray-500 mt-20 animate-pulse">
+                Ładowanie pancerza...
+              </div>
+            </div>
+            <!-- Magia View Component -->
+            <div id="magia-view-container"></div>
+          </div>
+
+          <!-- Status Effects Panel -->
+          <div id="status-effects-view-container">
+            <div class="text-center text-gray-500 mt-20 animate-pulse">
+              Ładowanie statusów...
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-content-items" class="tab-pane w-3/4 mx-auto hidden">
+        <!-- Economy View Component (Items) -->
+        <div class="w-full mx-auto mb-8">
+          <div id="economy-view-container-items">
+            <div class="text-center text-gray-500 mt-10 animate-pulse">
+              Ładowanie finansów...
+            </div>
+          </div>
+        </div>
+        <!-- Inventory View Component -->
+        <div>
+          <div id="inventory-view-container">
+            <div class="text-center text-gray-500 mt-20 animate-pulse">
+              Ładowanie ekwipunku...
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-content-shop" class="tab-pane w-3/4 mx-auto hidden">
+        <!-- Economy View Component (Shop) -->
+        <div class="w-full mx-auto mb-8">
+          <div id="economy-view-container-shop">
+            <div class="text-center text-gray-500 mt-10 animate-pulse">
+              Ładowanie finansów...
+            </div>
+          </div>
+        </div>
+        <!-- Shop View Component -->
+        <div>
+          <div id="shop-view-container">
+            <div class="text-center text-gray-500 mt-20 animate-pulse">
+              Ładowanie sklepu...
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-content-fight" class="tab-pane w-3/4 mx-auto hidden">
+        <div id="fight-view-container">
           <div class="text-center text-gray-500 mt-20 animate-pulse">
-            Ładowanie statusów...
+            Ładowanie walki...
           </div>
         </div>
       </div>
-    </div>
 
-    <div id="tab-content-items" class="tab-pane w-3/4 mx-auto hidden">
-      <!-- Economy View Component (Items) -->
-      <div class="w-full mx-auto mb-8">
-        <div id="economy-view-container-items">
-          <div class="text-center text-gray-500 mt-10 animate-pulse">
-            Ładowanie finansów...
-          </div>
-        </div>
-      </div>
-      <!-- Inventory View Component -->
-      <div>
-        <div id="inventory-view-container">
-          <div class="text-center text-gray-500 mt-20 animate-pulse">
-            Ładowanie ekwipunku...
-          </div>
+      <div id="tab-content-notes" class="tab-pane w-3/4 mx-auto hidden">
+        <div id="notes-view-container">
+          <!-- Notes component will be loaded here -->
         </div>
       </div>
     </div>
-
-    <div id="tab-content-shop" class="tab-pane w-3/4 mx-auto hidden">
-      <!-- Economy View Component (Shop) -->
-      <div class="w-full mx-auto mb-8">
-        <div id="economy-view-container-shop">
-          <div class="text-center text-gray-500 mt-10 animate-pulse">
-            Ładowanie finansów...
-          </div>
-        </div>
-      </div>
-      <!-- Shop View Component -->
-      <div>
-        <div id="shop-view-container">
-          <div class="text-center text-gray-500 mt-20 animate-pulse">
-            Ładowanie sklepu...
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="tab-content-fight" class="tab-pane w-3/4 mx-auto hidden">
-      <div id="fight-view-container">
-        <div class="text-center text-gray-500 mt-20 animate-pulse">
-          Ładowanie walki...
-        </div>
-      </div>
-    </div>
-
-    <div id="tab-content-notes" class="tab-pane w-3/4 mx-auto hidden">
-      <div id="notes-view-container">
-        <!-- Notes component will be loaded here -->
-      </div>
-    </div>
-
-    </div> <!-- End of app-character -->
+    <!-- End of app-character -->
 
     <!-- Modals -->
     <div id="payment-modal-container"></div>

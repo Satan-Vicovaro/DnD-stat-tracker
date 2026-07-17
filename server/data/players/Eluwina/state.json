@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-07-17T16:51:46",
+  "timestamp": "2026-07-17T17:50:17",
   "name": "Eluwina",
-  "level": 20,
+  "level": 19,
   "notes": "",
-  "base_str": 10,
-  "base_dex": 10,
+  "base_str": 12,
+  "base_dex": 12,
   "base_wis": 6,
   "base_cha": 3,
   "mod_str": 0,
@@ -13,11 +13,11 @@
   "mod_cha": 0,
   "damage_taken_physical": 0,
   "damage_taken_magical": 23,
-  "current_action_points": 11,
+  "current_action_points": 13,
   "gold": 0,
   "silver": 0,
   "copper": 0,
-  "max_mana": 25,
+  "max_mana": 24,
   "current_mana": 0,
   "mana_spent_this_turn": 0,
   "mana_buffs": {
@@ -42,7 +42,7 @@
       "item_id": "f0dd2da9-1e44-470f-90ab-89bb70ae002b",
       "name": "Młot dwuręczny",
       "description": "Ze sklepu.",
-      "space_taken": 20.0,
+      "space_taken": 20,
       "location": "EQUIPPED",
       "is_equipped": false,
       "card_inputs": [],
@@ -94,10 +94,17 @@
       "item_id": "41f21953-f94f-4103-bddc-09348828a680",
       "name": "Miecz dwuręczny",
       "description": "Ze sklepu.",
-      "space_taken": 20.0,
+      "space_taken": 20,
       "location": "EQUIPPED",
       "is_equipped": false,
-      "card_inputs": [],
+      "card_inputs": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
       "modifiers": [],
       "consumable_effects": {},
       "max_uses": 1,
@@ -157,7 +164,7 @@
       "item_id": "5a47a5b1-71c7-4354-a0cc-9a9704d8070b",
       "name": "Topór dwuręczny",
       "description": "Ze sklepu.",
-      "space_taken": 20.0,
+      "space_taken": 20,
       "location": "EQUIPPED",
       "is_equipped": false,
       "card_inputs": [],
@@ -207,82 +214,82 @@
   ],
   "_view_model": {
     "name": "Eluwina",
-    "level": 20,
+    "level": 19,
     "notes": "",
-    "unspent_stat_points": 12,
-    "hp": 55,
+    "unspent_stat_points": 6,
+    "hp": 59,
     "health_split": {
       "armor_max_hp": 0,
       "armor_current_hp": 0,
-      "base_max_hp": 78,
-      "base_current_hp": 55,
-      "total_max_hp": 78,
-      "total_current_hp": 55,
+      "base_max_hp": 82,
+      "base_current_hp": 59,
+      "total_max_hp": 82,
+      "total_current_hp": 59,
       "current_mitigation": 0,
       "broken_fragments": 0
     },
     "max_hp": {
-      "total": 78,
+      "total": 82,
       "breakdown": [
         {
           "source": "Baza",
-          "value": 10.0
+          "value": 10
         },
         {
           "source": "Poziom",
-          "value": 38.0
+          "value": 36
         },
         {
           "source": "Siła",
-          "value": 30.0
+          "value": 36
         }
       ]
     },
     "defense": {
-      "total": 35,
+      "total": 36,
       "breakdown": [
         {
           "source": "Baza",
-          "value": 10.0
+          "value": 10
         },
         {
           "source": "Poziom",
-          "value": 15.2
+          "value": 14.4
         },
         {
           "source": "Zwinność",
-          "value": 10.0
+          "value": 12
         }
       ]
     },
     "ap": {
-      "total": 14,
+      "total": 13,
       "breakdown": [
         {
           "source": "Baza",
-          "value": 1.0
+          "value": 1
         },
         {
           "source": "Poziom",
-          "value": 9.5
+          "value": 9
         },
         {
           "source": "Wiedza",
-          "value": 3.0
+          "value": 3
         }
       ]
     },
-    "current_action_points": 11,
+    "current_action_points": 13,
     "stamina": {
-      "total": 7,
+      "total": 6,
       "breakdown": [
         {
           "source": "Baza",
-          "value": 1.0
+          "value": 1
         },
         {
           "source": "Poziom",
-          "value": 4.75
+          "value": 4.5
         },
         {
           "source": "Charyzma",
@@ -295,17 +302,17 @@
       "breakdown": [
         {
           "source": "Baza",
-          "value": 30.0
+          "value": 30
         }
       ]
     },
     "stats": {
       "str": {
-        "total": 10,
+        "total": 12,
         "breakdown": []
       },
       "dex": {
-        "total": 10,
+        "total": 12,
         "breakdown": []
       },
       "wis": {
@@ -365,20 +372,20 @@
     },
     "inventory_space": {
       "quick": {
-        "used": 60.0,
-        "max": 40.0
+        "used": 60,
+        "max": 44
       },
       "backpack": {
-        "used": 0.0,
-        "max": 38.0
+        "used": 0,
+        "max": 34
       },
       "back": {
-        "used": 0.0,
-        "max": 20.0
+        "used": 0,
+        "max": 20
       },
       "quiver": {
-        "used": 0.0,
-        "max": 0.0,
+        "used": 0,
+        "max": 0,
         "visible": false
       },
       "active_containers": {}
@@ -387,7 +394,7 @@
       {
         "name": "Młot dwuręczny",
         "description": "Ze sklepu.",
-        "space_taken": 20.0,
+        "space_taken": 20,
         "location": "EQUIPPED",
         "modifiers": [],
         "item_type": "Weapon",
@@ -441,7 +448,7 @@
       {
         "name": "Miecz dwuręczny",
         "description": "Ze sklepu.",
-        "space_taken": 20.0,
+        "space_taken": 20,
         "location": "EQUIPPED",
         "modifiers": [],
         "item_type": "Weapon",
@@ -452,7 +459,14 @@
         "properties": {},
         "quantity": 1,
         "is_equipped": false,
-        "card_inputs": [],
+        "card_inputs": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
         "item_id": "41f21953-f94f-4103-bddc-09348828a680",
         "actions": [
           {
@@ -506,7 +520,7 @@
       {
         "name": "Topór dwuręczny",
         "description": "Ze sklepu.",
-        "space_taken": 20.0,
+        "space_taken": 20,
         "location": "EQUIPPED",
         "modifiers": [],
         "item_type": "Weapon",
@@ -559,35 +573,35 @@
       }
     ],
     "magia": {
-      "max_mana": 25,
+      "max_mana": 24,
       "max_mana_breakdown": {
-        "total": 25,
+        "total": 24,
         "breakdown": [
           {
             "source": "Wiedza",
-            "value": 4.0
+            "value": 4
           },
           {
             "source": "Charyzma",
-            "value": 1.0
+            "value": 1
           },
           {
             "source": "Poziom",
-            "value": 20.0
+            "value": 19
           }
         ]
       },
-      "mana_per_turn": 10,
+      "mana_per_turn": 12,
       "mana_per_turn_breakdown": {
-        "total": 10,
+        "total": 12,
         "breakdown": [
           {
             "source": "Siła",
-            "value": 3.33
+            "value": 4
           },
           {
             "source": "Zwinność",
-            "value": 6.67
+            "value": 8
           }
         ]
       },
@@ -604,8 +618,8 @@
       }
     },
     "can_undo": true,
-    "can_redo": false,
+    "can_redo": true,
     "status_effects": []
   },
-  "_last_sync": 1784299910.9268434
+  "_last_sync": 1784303417.660449
 }
