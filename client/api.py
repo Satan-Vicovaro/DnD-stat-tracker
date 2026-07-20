@@ -70,6 +70,13 @@ def add_item_to_inventory(item_data: dict, payment: dict, quantity: int = 1):
     return game_engine.get_character_view_model()
 
 @eel.expose
+def add_item_to_inventory_raw(item_data: dict):
+    """API endpoint to add a raw item (e.g. from shared wagon) without payment."""
+    if game_engine.add_item_to_inventory_raw(item_data):
+        game_engine.save()
+    return game_engine.get_character_view_model()
+
+@eel.expose
 def edit_inventory_item(index: int, item_data: dict):
     """API endpoint to edit an existing inventory item."""
     if game_engine.edit_inventory_item(index, item_data):

@@ -270,7 +270,7 @@
       </div>
     </div>
 
-    <!-- Wagon / Stashed -->
+    <!-- Stash (Schowek) -->
     <div
       class="bg-gray-900/50 rounded-xl border border-amber-900/50 p-4 min-h-[150px]"
     >
@@ -290,7 +290,35 @@
             d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
           ></path>
         </svg>
-        W wozie / Schowek
+        Schowek
+      </h3>
+      <div id="inventory-list-stash" class="space-y-3">
+        <!-- Items go here -->
+      </div>
+      <div
+        id="inventory-empty-stash"
+        class="text-center text-gray-500 text-sm mt-4 hidden italic"
+      >
+        Schowek jest pusty
+      </div>
+    </div>
+
+    <!-- Shared Wagon (Wóz) -->
+    <div
+      class="bg-gray-900/50 rounded-xl border border-yellow-900/50 p-4 min-h-[150px]"
+    >
+      <h3
+        class="text-yellow-400 font-bold uppercase tracking-wider mb-4 border-b border-yellow-900/50 pb-2 flex items-center"
+      >
+        <svg
+          class="w-5 h-5 mr-2"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+        </svg>
+        Wóz (Współdzielony)
       </h3>
       <div id="inventory-list-wagon" class="space-y-3">
         <!-- Items go here -->
@@ -299,7 +327,7 @@
         id="inventory-empty-wagon"
         class="text-center text-gray-500 text-sm mt-4 hidden italic"
       >
-        Schowek jest pusty
+        Wóz jest pusty
       </div>
     </div>
   </div>

@@ -52,9 +52,10 @@ def build_item(item_dict: dict, fallback: Item = None) -> Item:
                    a key is absent from ``item_dict`` (used during edits).
     """
     item_type = item_dict.get("item_type", fallback.item_type if fallback else "Misc")
-    location = ItemLocation(
-        item_dict.get("location", fallback.location.value if fallback else "BACKPACK")
-    )
+    location_str = item_dict.get("location", fallback.location.value if fallback else "BACKPACK")
+    if location_str == "WAGON":
+        location_str = "STASH"
+    location = ItemLocation(location_str)
 
     # Auto-place specific named containers into their natural slot ONLY for new items
     if fallback is None:

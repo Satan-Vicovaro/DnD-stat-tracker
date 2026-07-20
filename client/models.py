@@ -191,6 +191,7 @@ class ItemLocation(str, Enum):
     BACK = "BACK"
     QUIVER = "QUIVER"
     WAGON = "WAGON"
+    STASH = "STASH"
     CLOTHES = "CLOTHES"
 
 

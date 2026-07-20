@@ -6,3 +6,6 @@ saves
 build
 dist
 .wine-env
+players
+wagon.json
+players.json

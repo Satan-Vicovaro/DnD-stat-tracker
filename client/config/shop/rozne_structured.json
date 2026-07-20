@@ -6,7 +6,7 @@
     "description": "leczy max hp po krótkim odpoczynku",
     "space_taken": "2/10",
     "consumable_effects": {
-      "heal_health": 9999
+      "dynamic_heal": true
     },
     "max_uses": 1,
     "current_uses": 1
@@ -18,7 +18,7 @@
     "description": "można go użyć raz po każdej walce, leczy d4 dmg za każde 10 życia postaci+wis (działa tylko na obrażenia zadane w walce po której zostanie użyte)",
     "space_taken": "1/10",
     "consumable_effects": {
-      "dynamic_heal": true
+      "heal_health": 5
     },
     "max_uses": 1,
     "current_uses": 1

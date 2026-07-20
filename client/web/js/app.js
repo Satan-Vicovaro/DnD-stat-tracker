@@ -177,6 +177,7 @@ window.onload = async () => {
       document.dispatchEvent(
         new CustomEvent("characterUpdated", { detail: data }),
       );
+      document.dispatchEvent(new CustomEvent("forceWagonRefresh"));
     }
   }
 
@@ -420,6 +421,21 @@ window.onload = async () => {
   // Seed initial button state from backend
   const initData = await eel.get_character()();
   undoManager.sync(initData);
+  if (initData && initData.name) {
+    window.connectSyncWebSocket(initData.name);
+  }
+
+  document.getElementById("btn-reconnect-sync").addEventListener("click", async () => {
+    if (clientWebSocket) {
+      clientWebSocket.close();
+    }
+    const data = await eel.get_character()();
+    if (data && data.name) {
+      window.connectSyncWebSocket(data.name);
+    }
+    // Wymuś odświeżenie wozu
+    document.dispatchEvent(new CustomEvent("forceWagonRefresh"));
+  });
 
   // ─── Tab Switching Logic ──────────────────────────────────────────────────
   const tabBtns = document.querySelectorAll(".tab-btn");
@@ -466,12 +482,12 @@ window.onload = async () => {
 let clientWebSocket = null;
 let wsPlayerName = null;
 
-window.trigger_js_sync = function (payload) {
+window.connectSyncWebSocket = function (playerName) {
   let domain = localStorage.getItem("syncDomain");
   if (!domain) domain = "localhost:8000";
 
-  if (!clientWebSocket || clientWebSocket.readyState === WebSocket.CLOSED || wsPlayerName !== payload.name) {
-    wsPlayerName = payload.name;
+  if (!clientWebSocket || clientWebSocket.readyState === WebSocket.CLOSED || wsPlayerName !== playerName) {
+    wsPlayerName = playerName;
     const cleanDomain = domain.trim().replace(/^https?:\/\//i, "").replace(/^wss?:\/\//i, "").split("/")[0];
     const protocol = (window.location.protocol === "https:" || domain.includes("https")) ? "wss:" : "ws:";
     const wsUrl = `${protocol}//${cleanDomain}/ws/sync/${encodeURIComponent(wsPlayerName)}`;
@@ -481,7 +497,17 @@ window.trigger_js_sync = function (payload) {
 
     clientWebSocket.onopen = () => {
       window.updateSyncStatus(true, "Połączony");
-      clientWebSocket.send(JSON.stringify(payload));
+    };
+
+    clientWebSocket.onmessage = (event) => {
+      try {
+        const msg = JSON.parse(event.data);
+        if (msg.type === "wagon_update") {
+          document.dispatchEvent(new CustomEvent("wagonUpdated", { detail: msg.items }));
+        }
+      } catch (err) {
+        console.error("Failed to parse websocket message", err);
+      }
     };
 
     clientWebSocket.onclose = () => {
@@ -492,12 +518,29 @@ window.trigger_js_sync = function (payload) {
     clientWebSocket.onerror = (err) => {
       window.updateSyncStatus(false, "Błąd WS");
     };
-  } else if (clientWebSocket.readyState === WebSocket.OPEN) {
+  }
+};
+
+window.trigger_js_sync = function (payload) {
+  window.connectSyncWebSocket(payload.name);
+
+  if (clientWebSocket && clientWebSocket.readyState === WebSocket.OPEN) {
     clientWebSocket.send(JSON.stringify(payload));
     window.updateSyncStatus(true, "Zsynchronizowano");
     setTimeout(() => window.updateSyncStatus(true, "Połączony"), 1500);
+  } else if (clientWebSocket && clientWebSocket.readyState === WebSocket.CONNECTING) {
+    // If still connecting, wait for open
+    const oldOnOpen = clientWebSocket.onopen;
+    clientWebSocket.onopen = () => {
+      if (oldOnOpen) oldOnOpen();
+      clientWebSocket.send(JSON.stringify(payload));
+      window.updateSyncStatus(true, "Zsynchronizowano");
+      setTimeout(() => window.updateSyncStatus(true, "Połączony"), 1500);
+    };
   }
 };
+
+
 
 eel.expose(window.trigger_js_sync, "trigger_js_sync");
 

@@ -2,6 +2,7 @@ export class InventoryComponent {
   constructor(containerId) {
     this.containerId = containerId;
     this.characterData = null;
+    this.wagonItems = [];
   }
 
   async init() {
@@ -14,6 +15,15 @@ export class InventoryComponent {
       this.render();
     });
 
+    document.addEventListener("wagonUpdated", (e) => {
+      this.wagonItems = e.detail || [];
+      this.render();
+    });
+
+    document.addEventListener("forceWagonRefresh", () => {
+      this.fetchWagon();
+    });
+
     document
       .getElementById("btn-add-custom-item")
       .addEventListener("click", () => {
@@ -23,12 +33,61 @@ export class InventoryComponent {
       });
 
     this.characterData = await eel.get_character()();
+    this.fetchWagon();
     this.render();
+  }
+
+  async fetchWagon() {
+    try {
+      let domain = localStorage.getItem("syncDomain") || "localhost:8000";
+      domain = domain.trim().replace(/^https?:\/\//i, "").replace(/^wss?:\/\//i, "").split("/")[0];
+      const protocol = (window.location.protocol === "https:" || domain.includes("https")) ? "https:" : "http:";
+      const url = `${protocol}//${domain}/api/wagon`;
+      
+      const res = await fetch(url);
+      if (res.ok) {
+        this.wagonItems = await res.json();
+        this.render();
+      }
+    } catch (e) {
+      console.warn("Failed to fetch initial wagon state:", e);
+    }
   }
 
   async setLocation(index, newLocation) {
     const item = this.characterData.inventory[index];
     if (item.location === newLocation) return;
+
+    if (newLocation === "WAGON") {
+      try {
+        let domain = localStorage.getItem("syncDomain") || "localhost:8000";
+        domain = domain.trim().replace(/^https?:\/\//i, "").replace(/^wss?:\/\//i, "").split("/")[0];
+        const protocol = (window.location.protocol === "https:" || domain.includes("https")) ? "https:" : "http:";
+        const url = `${protocol}//${domain}/api/wagon/add`;
+        
+        const res = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(item)
+        });
+        
+        if (res.ok) {
+          // Remove from local inventory
+          this.characterData = await eel.remove_inventory_item(index)();
+          document.dispatchEvent(
+            new CustomEvent("characterUpdated", { detail: this.characterData }),
+          );
+        } else {
+          alert("Nie udało się dodać przedmiotu do wozu.");
+          this.render(); // Reset the select dropdown
+        }
+      } catch (e) {
+        console.error("Failed to move item to wagon", e);
+        alert("Błąd połączenia z serwerem.");
+        this.render(); // Reset the select dropdown
+      }
+      return;
+    }
 
     item.location = newLocation;
     this.characterData = await eel.edit_inventory_item(index, item)();
@@ -97,21 +156,24 @@ export class InventoryComponent {
     const bpList = document.getElementById("inventory-list-backpack");
     const backList = document.getElementById("inventory-list-back");
     const quiverList = document.getElementById("inventory-list-quiver");
-    const wgList = document.getElementById("inventory-list-wagon");
+    const stashList = document.getElementById("inventory-list-stash");
     const clothesList = document.getElementById("inventory-list-clothes");
+    const wgList = document.getElementById("inventory-list-wagon");
 
     let eqHtml = "",
       bpHtml = "",
       backHtml = "",
       quiverHtml = "",
-      wgHtml = "",
-      clothesHtml = "";
+      stashHtml = "",
+      clothesHtml = "",
+      wgHtml = "";
     let eqCount = 0,
       bpCount = 0,
       backCount = 0,
       quiverCount = 0,
-      wgCount = 0,
-      clothesCount = 0;
+      stashCount = 0,
+      clothesCount = 0,
+      wgCount = 0;
     let hasClothesInInventory = false;
 
     const inventory = this.characterData.inventory || [];
@@ -136,10 +198,15 @@ export class InventoryComponent {
       } else if (item.location === "CLOTHES") {
         clothesHtml += itemHtml;
         clothesCount++;
-      } else if (item.location === "WAGON") {
-        wgHtml += itemHtml;
-        wgCount++;
+      } else if (item.location === "STASH") {
+        stashHtml += itemHtml;
+        stashCount++;
       }
+    });
+
+    (this.wagonItems || []).forEach((item) => {
+      wgHtml += this.renderWagonItemCard(item);
+      wgCount++;
     });
 
     if (eqList) eqList.innerHTML = eqHtml;
@@ -147,6 +214,7 @@ export class InventoryComponent {
     if (backList) backList.innerHTML = backHtml;
     if (quiverList) quiverList.innerHTML = quiverHtml;
     if (clothesList) clothesList.innerHTML = clothesHtml;
+    if (stashList) stashList.innerHTML = stashHtml;
     if (wgList) wgList.innerHTML = wgHtml;
 
     document
@@ -164,6 +232,9 @@ export class InventoryComponent {
     document
       .getElementById("inventory-empty-clothes")
       ?.classList.toggle("hidden", clothesCount > 0);
+    document
+      .getElementById("inventory-empty-stash")
+      ?.classList.toggle("hidden", stashCount > 0);
     document
       .getElementById("inventory-empty-wagon")
       ?.classList.toggle("hidden", wgCount > 0);
@@ -267,7 +338,8 @@ export class InventoryComponent {
               <option value="BACK" ${item.location === "BACK" ? "selected" : ""}>Plecy</option>
               ${showQuiverOption ? `<option value="QUIVER" ${item.location === "QUIVER" ? "selected" : ""}>Kołczan</option>` : ""}
               ${item.is_clothes ? `<option value="CLOTHES" ${item.location === "CLOTHES" ? "selected" : ""}>Założone (Ubranie)</option>` : ""}
-              <option value="WAGON" ${item.location === "WAGON" ? "selected" : ""}>Wóz</option>
+              <option value="STASH" ${item.location === "STASH" ? "selected" : ""}>Schowek</option>
+              <option value="WAGON" class="text-yellow-400 font-bold">Do Wozu (Wspólny)</option>
             </select>
             
             ${hasConsumable ? `<button data-action="use" data-index="${index}" class="text-[10px] font-bold bg-teal-600 hover:bg-teal-500 text-white px-2 py-1.5 rounded w-full border border-teal-500 transition-colors shadow-sm">Użyj przedmiotu</button>` : ""}
@@ -328,6 +400,41 @@ export class InventoryComponent {
           }
           return "";
         })()}
+      </div>
+    `;
+  }
+
+  renderWagonItemCard(item) {
+    const typeColor =
+      item.item_type === "Weapon"
+        ? "text-rose-400"
+        : item.item_type === "Armor"
+          ? "text-emerald-400"
+          : "text-gray-400";
+
+    return `
+      <div class="bg-gray-800 rounded p-3 border border-yellow-700/50 shadow-sm transition-colors opacity-90">
+        <div class="flex justify-between items-start gap-4">
+          <div class="flex-1 min-w-0 pr-2">
+            <h4 class="font-bold text-white leading-tight">${item.name}${item.quantity > 1 ? ` <span class="text-indigo-400 font-bold ml-1 text-sm">(x${item.quantity})</span>` : ""}</h4>
+            <div class="text-[10px] font-bold uppercase tracking-wider ${typeColor} mb-1 flex items-center flex-wrap gap-1 mt-1">
+                <span>${item.item_type}</span> <span class="text-gray-500">&bull;</span> <span class="text-gray-500">Masa: ${item.space_taken}</span>
+            </div>
+            ${
+              item.description
+                ? item.description.includes("||")
+                  ? `<ul class="list-disc list-outside ml-4 mt-1.5 text-[11px] text-gray-400 italic leading-snug">${item.description
+                      .split("||")
+                      .map((p) => `<li>${p.trim()}</li>`)
+                      .join("")}</ul>`
+                  : `<p class="text-[11px] text-gray-400 italic mt-1.5 leading-snug">${item.description}</p>`
+                : ""
+            }
+          </div>
+          <div class="flex flex-col items-stretch justify-start gap-2 shrink-0 w-[100px]">
+            <button data-action="take_from_wagon" data-id="${item.item_id}" class="text-[10px] font-bold bg-yellow-600 hover:bg-yellow-500 text-white px-2 py-2 rounded border border-yellow-500 transition-colors shadow-sm">Zabierz z wozu</button>
+          </div>
+        </div>
       </div>
     `;
   }
@@ -411,6 +518,40 @@ export class InventoryComponent {
         document.dispatchEvent(
           new CustomEvent("characterUpdated", { detail: this.characterData }),
         );
+      });
+    });
+
+    container.querySelectorAll('button[data-action="take_from_wagon"]').forEach((btn) => {
+      btn.addEventListener("click", async (e) => {
+        const itemId = e.currentTarget.getAttribute("data-id");
+        try {
+          let domain = localStorage.getItem("syncDomain") || "localhost:8000";
+          domain = domain.trim().replace(/^https?:\/\//i, "").replace(/^wss?:\/\//i, "").split("/")[0];
+          const protocol = (window.location.protocol === "https:" || domain.includes("https")) ? "https:" : "http:";
+          const url = `${protocol}//${domain}/api/wagon/remove`;
+          
+          const res = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ item_id: itemId })
+          });
+          
+          if (res.ok) {
+            const data = await res.json();
+            const item = data.item;
+            if (item) {
+              this.characterData = await eel.add_item_to_inventory_raw(item)();
+              document.dispatchEvent(
+                new CustomEvent("characterUpdated", { detail: this.characterData }),
+              );
+            }
+          } else {
+            alert("Przedmiot nie istnieje lub został już zabrany.");
+          }
+        } catch (err) {
+          console.error("Failed to take item from wagon", err);
+          alert("Błąd połączenia z serwerem.");
+        }
       });
     });
   }

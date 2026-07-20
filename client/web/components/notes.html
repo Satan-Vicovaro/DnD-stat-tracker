@@ -1,35 +1,58 @@
 <style>
-  /* EasyMDE Dark Mode Overrides */
-  .editor-toolbar {
-    border-color: #374151 !important;
+  /* Toast UI Editor Custom Dark Theme Overrides to match Tailwind bg-gray-900 / bg-gray-800 */
+  .toastui-editor-dark .toastui-editor-defaultUI {
+    border: none !important;
+  }
+  .toastui-editor-dark .toastui-editor-toolbar {
+    background-color: #1f2937 !important; /* bg-gray-800 */
+    border-bottom: 1px solid #374151 !important; /* border-gray-700 */
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+  }
+  .toastui-editor-dark .toastui-editor-defaultUI-toolbar {
     background-color: #1f2937 !important;
-    border-top-left-radius: 0.5rem !important;
-    border-top-right-radius: 0.5rem !important;
   }
-  .editor-toolbar button {
+  .toastui-editor-dark .toastui-editor-main-container {
+    background-color: #111827 !important; /* bg-gray-900 */
+    border: none !important;
+  }
+  .toastui-editor-dark .toastui-editor-ww-container {
+    background-color: #111827 !important;
+  }
+  .toastui-editor-dark .toastui-editor-mode-switch {
+    background-color: #1f2937 !important;
+    border-top: 1px solid #374151 !important;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+  }
+  .toastui-editor-dark .toastui-editor-mode-switch .tab-item {
+    background-color: #1f2937 !important;
+    color: #9ca3af !important; /* text-gray-400 */
+    border-color: #374151 !important;
+  }
+  .toastui-editor-dark .toastui-editor-mode-switch .tab-item.active {
+    background-color: #374151 !important; /* bg-gray-700 */
+    color: #f3f4f6 !important; /* text-gray-100 */
+  }
+  .toastui-editor-dark .toastui-editor-md-tab-container {
+    background-color: #1f2937 !important;
+    border-bottom: 1px solid #374151 !important;
+  }
+  .toastui-editor-dark .toastui-editor-md-tab-style .tab-item {
+    background-color: #1f2937 !important;
     color: #9ca3af !important;
+    border-color: transparent !important;
   }
-  .editor-toolbar button:hover, .editor-toolbar button.active {
+  .toastui-editor-dark .toastui-editor-md-tab-style .tab-item.active {
     background-color: #374151 !important;
     color: #f3f4f6 !important;
-  }
-  .editor-toolbar i.separator {
-    border-left-color: #374151 !important;
-    border-right-color: #374151 !important;
-  }
-  .CodeMirror {
-    background-color: #111827 !important;
-    color: #f3f4f6 !important;
     border-color: #374151 !important;
-    border-bottom-left-radius: 0.5rem !important;
-    border-bottom-right-radius: 0.5rem !important;
+  }
+  .toastui-editor-dark .toastui-editor-contents {
+    color: #f3f4f6 !important; /* text-gray-100 */
     font-family: inherit !important;
   }
-  .CodeMirror-cursor {
-    border-left-color: #f3f4f6 !important;
-  }
-  .editor-preview {
-    background-color: #111827 !important;
+  .toastui-editor-dark .ProseMirror {
     color: #f3f4f6 !important;
   }
 </style>
@@ -42,7 +65,7 @@
     <span id="notes-save-status" class="text-sm text-gray-400 opacity-0 transition-opacity duration-300">Zapisano</span>
   </div>
 
-  <div class="bg-gray-900 rounded-lg p-2 border border-gray-700">
-    <textarea id="notes-editor"></textarea>
+  <div class="bg-gray-900 rounded-lg p-0 border border-gray-700">
+    <div id="notes-editor"></div>
   </div>
 </div>

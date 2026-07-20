@@ -7,7 +7,7 @@ import threading
 import urllib.request
 from pathlib import Path
 
-from models import Character
+from models import Character, ItemLocation
 from serializer import build_item, serialize, deserialize
 
 logger = logging.getLogger(__name__)
@@ -551,6 +551,33 @@ class GameEngine:
         item.quantity = quantity
         self.hero.inventory.append(item)
         logger.info(f"Added item {item.name} (x{quantity}) to inventory at {item.location}.")
+        return True
+
+    def add_item_to_inventory_raw(self, item_dict: dict) -> bool:
+        """Add an item directly without checking payment, used for taking from Wagon."""
+        self._snapshot()
+        item_type = item_dict.get("item_type", "Misc")
+        item_name = item_dict.get("name", "").lower()
+        
+        can_stack = True
+        if item_type == "Weapon" or "tarcza" in item_name:
+            can_stack = False
+
+        quantity = item_dict.get("quantity", 1)
+        if can_stack:
+            for item in self.hero.inventory:
+                if item.name == item_dict.get("name"):
+                    item.quantity += quantity
+                    logger.info(f"Stacked {quantity} of {item.name} from Wagon to existing stack.")
+                    return True
+
+        item = build_item(item_dict)
+        # Ensure it goes to stash by default when taken from wagon
+        item.location = ItemLocation.STASH
+        item.is_equipped = False
+        item.quantity = quantity
+        self.hero.inventory.append(item)
+        logger.info(f"Added item {item.name} from Wagon to inventory.")
         return True
 
     def edit_inventory_item(self, index: int, item_dict: dict) -> bool:

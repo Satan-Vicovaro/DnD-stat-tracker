@@ -6,11 +6,11 @@ with open('data/quick_save.json', 'r') as f:
 for item in data.get('inventory', []):
     name = item.get('name')
     if name == 'Leki':
-        item['consumable_effects'] = { "dynamic_heal": True }
+        item['consumable_effects'] = { "heal_health": 5 }
         item['max_uses'] = 1
         item['current_uses'] = 1
     elif name == 'Opatrunek':
-        item['consumable_effects'] = { "heal_health": 9999 }
+        item['consumable_effects'] = { "dynamic_heal": True }
         item['max_uses'] = 1
         item['current_uses'] = 1
     elif name == 'Narzędzia lekkie zbroje':

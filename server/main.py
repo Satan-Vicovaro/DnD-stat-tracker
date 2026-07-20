@@ -15,6 +15,16 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Game Master Sync Server")
 
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Set up templates
 # Assuming this file is run from the `server` directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -54,6 +64,27 @@ def save_player_state(player_name: str, data: Dict[str, Any]):
     except Exception as e:
         logger.error(f"Error saving state for {player_name}: {e}")
 
+WAGON_FILE = os.path.join(BASE_DIR, "data", "wagon.json")
+
+def load_wagon() -> List[Dict[str, Any]]:
+    with state_lock:
+        if os.path.exists(WAGON_FILE):
+            try:
+                with open(WAGON_FILE, "r", encoding="utf-8") as f:
+                    return json.load(f)
+            except Exception as e:
+                logger.error(f"Error loading wagon state: {e}")
+    return []
+
+def save_wagon(data: List[Dict[str, Any]]):
+    with state_lock:
+        os.makedirs(os.path.join(BASE_DIR, "data"), exist_ok=True)
+        try:
+            with open(WAGON_FILE, "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=2)
+        except Exception as e:
+            logger.error(f"Error saving wagon state: {e}")
+
 class ConnectionManager:
     def __init__(self):
         self.active_connections: Dict[str, List[WebSocket]] = {}
@@ -77,6 +108,16 @@ class ConnectionManager:
 
     async def broadcast_to_gms(self, message: dict):
         for connection in self.gm_connections:
+            try:
+                await connection.send_json(message)
+            except Exception:
+                pass
+
+    async def broadcast_to_all(self, message: dict):
+        all_connections = self.gm_connections.copy()
+        for conns in self.active_connections.values():
+            all_connections.extend(conns)
+        for connection in all_connections:
             try:
                 await connection.send_json(message)
             except Exception:
@@ -108,6 +149,73 @@ async def sync_player_state(request: Request):
         return {"status": "success", "message": f"State updated for {player_name}"}
     except Exception as e:
         logger.error(f"Sync failed: {e}")
+        raise HTTPException(status_code=400, detail=str(e))
+
+import uuid
+
+@app.get("/api/wagon")
+async def get_wagon_state():
+    return load_wagon()
+
+@app.post("/api/wagon/add")
+async def add_to_wagon(request: Request):
+    try:
+        item = await request.json()
+        if "item_id" not in item:
+            item["item_id"] = str(uuid.uuid4())
+            
+        wagon = load_wagon()
+        wagon.append(item)
+        save_wagon(wagon)
+        
+        await manager.broadcast_to_all({
+            "type": "wagon_update",
+            "items": wagon
+        })
+        return {"status": "success"}
+    except Exception as e:
+        logger.error(f"Add to wagon failed: {e}")
+        raise HTTPException(status_code=400, detail=str(e))
+
+@app.post("/api/wagon/remove")
+async def remove_from_wagon(request: Request):
+    try:
+        data = await request.json()
+        item_id = data.get("item_id")
+        
+        with state_lock:
+            # We must load, modify, and save within the same lock to prevent cloning
+            wagon = []
+            if os.path.exists(WAGON_FILE):
+                try:
+                    with open(WAGON_FILE, "r", encoding="utf-8") as f:
+                        wagon = json.load(f)
+                except Exception:
+                    pass
+            
+            found_item = None
+            for i, item in enumerate(wagon):
+                if item.get("item_id") == item_id:
+                    found_item = wagon.pop(i)
+                    break
+                    
+            if not found_item:
+                raise HTTPException(status_code=404, detail="Item not found or already taken")
+                
+            os.makedirs(os.path.join(BASE_DIR, "data"), exist_ok=True)
+            with open(WAGON_FILE, "w", encoding="utf-8") as f:
+                json.dump(wagon, f, ensure_ascii=False, indent=2)
+                
+        await manager.broadcast_to_all({
+            "type": "wagon_update",
+            "items": wagon
+        })
+        
+        return {"status": "success", "item": found_item}
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Remove from wagon failed: {e}")
         raise HTTPException(status_code=400, detail=str(e))
 
 
