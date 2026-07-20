@@ -44,6 +44,73 @@
         pointer-events: auto !important;
         opacity: 1 !important;
       }
+
+        /* --- Print Styles --- */
+      @media print {
+        @page {
+          margin: 0; /* Removes default browser white margins & headers/footers */
+          size: auto; 
+        }
+
+        /* Hide all the UI we don't want to print */
+        #app-selection,
+        #app-connection,
+        #app-gm,
+        .sticky.top-0, /* toolbar ribbon */
+        #main-tabs, /* tab buttons */
+        #undo-toast {
+          display: none !important;
+        }
+
+        /* Ensure the main app container shows up and uses full width */
+        #app-character {
+          display: block !important;
+          padding: 0 !important;
+          margin: 0 !important;
+          width: 100% !important;
+        }
+
+        /* Show only necessary tabs (Character, Items) */
+        #tab-content-character,
+        #tab-content-items {
+          display: block !important;
+          width: 100% !important;
+          page-break-after: always;
+          margin-bottom: 0;
+          padding: 0 !important;
+          box-sizing: border-box;
+        }
+        #tab-content-items {
+          page-break-after: auto; /* Last printed tab */
+        }
+
+        #tab-content-shop,
+        #tab-content-fight,
+        #tab-content-notes {
+          display: none !important;
+        }
+
+        /* Unravel details inside item cards */
+        details {
+          display: block !important;
+        }
+        details > *:not(summary) {
+          display: block !important;
+        }
+
+        /* Make item cards take full width or stack nicely instead of inline shrinking */
+        #inventory-view-container > div {
+          display: block !important;
+        }
+        
+        /* Keep background colors exactly as they are on screen */
+        
+        * {
+          -webkit-print-color-adjust: exact !important;
+          color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+      }
     </style>
   </head>
   <body
@@ -388,6 +455,28 @@
               />
             </svg>
             Ponów
+          </button>
+
+          <!-- Export PDF button -->
+          <button
+            id="btn-export-pdf"
+            title="Eksportuj wszystkie zakładki do PDF"
+            class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold bg-gray-700 text-gray-300 border border-gray-600 transition-all duration-150 select-none cursor-pointer hover:bg-gray-600 hover:text-white active:scale-95 ml-2"
+          >
+            <svg
+              class="w-4 h-4 shrink-0"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
+              />
+            </svg>
+            Eksport PDF
           </button>
 
           <!-- GM Refresh Button -->

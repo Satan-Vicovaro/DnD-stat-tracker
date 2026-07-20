@@ -384,6 +384,24 @@ window.onload = async () => {
     window.saveLoadModal.open();
   });
 
+  document.getElementById("btn-export-pdf").addEventListener("click", () => {
+    const details = document.querySelectorAll("details");
+    const previouslyClosed = [];
+    details.forEach(d => {
+      if (!d.hasAttribute("open")) {
+        previouslyClosed.push(d);
+        d.setAttribute("open", "");
+      }
+    });
+
+    window.print();
+
+    // Try to revert them back after the print dialog closes
+    setTimeout(() => {
+      previouslyClosed.forEach(d => d.removeAttribute("open"));
+    }, 1000); // Small delay to ensure print dialog captures it
+  });
+
   // Keyboard shortcuts
   document.addEventListener("keydown", (e) => {
     // Ctrl+S → Save
