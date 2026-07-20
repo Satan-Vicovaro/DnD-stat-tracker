@@ -104,6 +104,12 @@ window.onload = async () => {
       appCharacter.classList.remove("hidden");
     });
 
+  document.getElementById("btn-player-exit-view").addEventListener("click", () => {
+    appCharacter.classList.add("hidden");
+    appSelection.classList.remove("hidden");
+    appSelection.classList.add("flex");
+  });
+
   document.getElementById("btn-select-gm").addEventListener("click", () => {
     appSelection.classList.add("hidden");
     appSelection.classList.remove("flex");
@@ -281,16 +287,13 @@ window.onload = async () => {
   });
 
   const inputConnUrl = document.getElementById("conn-input-url");
-  const toggleConnSync = document.getElementById("conn-toggle-sync");
   const btnConnSave = document.getElementById("btn-conn-save");
   const btnConnTest = document.getElementById("btn-conn-test");
   const connTestResult = document.getElementById("conn-test-result");
 
   const savedDomain = localStorage.getItem("syncDomain") || "localhost:2137";
-  const savedEnabled = localStorage.getItem("syncEnabled") !== "false";
 
   inputConnUrl.value = savedDomain;
-  toggleConnSync.checked = savedEnabled;
 
   function formatUrl(domain) {
     domain = domain.trim();
@@ -301,18 +304,16 @@ window.onload = async () => {
   }
 
   if (savedDomain) {
-    eel.set_sync_config(formatUrl(savedDomain), savedEnabled)();
+    eel.set_sync_config(formatUrl(savedDomain), true)();
   }
 
   btnConnSave.addEventListener("click", async () => {
     const domain = inputConnUrl.value.trim();
-    const enabled = toggleConnSync.checked;
 
     localStorage.setItem("syncDomain", domain);
-    localStorage.setItem("syncEnabled", enabled);
 
     const fullUrl = formatUrl(domain);
-    await eel.set_sync_config(fullUrl, enabled)();
+    await eel.set_sync_config(fullUrl, true)();
 
     btnConnSave.classList.replace("bg-blue-600", "bg-emerald-600");
     btnConnSave.classList.replace("hover:bg-blue-700", "hover:bg-emerald-700");
@@ -324,11 +325,7 @@ window.onload = async () => {
       );
     }, 1000);
 
-    if (!enabled) {
-      window.updateSyncStatus(false, "Wyłączona");
-    } else {
-      window.updateSyncStatus(null, "Oczekuje...");
-    }
+    window.updateSyncStatus(null, "Oczekuje...");
   });
 
   btnConnTest.addEventListener("click", async () => {
@@ -470,10 +467,6 @@ let clientWebSocket = null;
 let wsPlayerName = null;
 
 window.trigger_js_sync = function (payload) {
-  let syncEnabled = localStorage.getItem("syncEnabled");
-  if (syncEnabled === null) syncEnabled = "true";
-  if (syncEnabled === "false") return;
-
   let domain = localStorage.getItem("syncDomain");
   if (!domain) domain = "localhost:8000";
 
