@@ -152,7 +152,7 @@ async def sync_player_state(payload: PlayerSyncPayload):
 
 import uuid
 
-@app.get("/api/wagon")
+@app.get("/api/wagon", response_model=List[WagonItem])
 async def get_wagon_state():
     return load_wagon()
 
@@ -258,7 +258,7 @@ async def websocket_gm(websocket: WebSocket):
         manager.disconnect(websocket, player_name=None)
 
 
-@app.delete("/api/players/{player_name}")
+@app.delete("/api/players/{player_name}", response_model=GenericResponse)
 async def delete_player(player_name: str, username: str = Depends(get_current_user)):
     """
     Deletes the data for a specific player. Protected by auth.
@@ -269,7 +269,7 @@ async def delete_player(player_name: str, username: str = Depends(get_current_us
             try:
                 shutil.rmtree(player_dir)
                 logger.info(f"Deleted data for player: {player_name}")
-                return {"status": "success", "message": f"Deleted player {player_name}"}
+                return GenericResponse(status="success", message=f"Deleted player {player_name}")
             except Exception as e:
                 logger.error(f"Failed to delete player {player_name}: {e}")
                 raise HTTPException(status_code=500, detail=f"Failed to delete player: {e}")
@@ -277,7 +277,7 @@ async def delete_player(player_name: str, username: str = Depends(get_current_us
             raise HTTPException(status_code=404, detail="Player not found")
 
 
-@app.get("/api/players")
+@app.get("/api/players", response_model=Dict[str, PlayerSyncPayload])
 async def get_all_players(username: str = Depends(get_current_user)):
     """
     Returns the current state of all players. Protected by auth.

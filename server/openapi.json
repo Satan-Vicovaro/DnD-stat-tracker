@@ -14,7 +14,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PlayerSyncPayload"
+                "$ref": "#/components/schemas/PlayerSyncPayload-Input"
               }
             }
           },
@@ -53,7 +53,13 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/WagonItem"
+                  },
+                  "type": "array",
+                  "title": "Response Get Wagon State Api Wagon Get"
+                }
               }
             }
           }
@@ -162,7 +168,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                }
               }
             }
           },
@@ -189,7 +197,13 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/PlayerSyncPayload-Output"
+                  },
+                  "type": "object",
+                  "title": "Response Get All Players Api Players Get"
+                }
               }
             }
           }
@@ -374,7 +388,54 @@
         ],
         "title": "Modifier"
       },
-      "PlayerSyncPayload": {
+      "PlayerSyncPayload-Input": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The unique name of the player"
+          },
+          "level": {
+            "type": "integer",
+            "title": "Level",
+            "description": "Character level",
+            "default": 1
+          },
+          "stats": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CharacterStats"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "inventory": {
+            "items": {
+              "$ref": "#/components/schemas/Item"
+            },
+            "type": "array",
+            "title": "Inventory",
+            "default": []
+          },
+          "status_effects": {
+            "items": {
+              "$ref": "#/components/schemas/StatusEffect"
+            },
+            "type": "array",
+            "title": "Status Effects",
+            "default": []
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "PlayerSyncPayload"
+      },
+      "PlayerSyncPayload-Output": {
         "properties": {
           "name": {
             "type": "string",
