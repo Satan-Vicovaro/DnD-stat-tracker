@@ -8,6 +8,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from auth import get_current_user
+from models import PlayerSyncPayload, WagonItem, RemoveWagonItemRequest, GenericResponse
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -126,27 +127,25 @@ class ConnectionManager:
 manager = ConnectionManager()
 
 
-@app.post("/api/sync")
-async def sync_player_state(request: Request):
+@app.post("/api/sync", response_model=GenericResponse)
+async def sync_player_state(payload: PlayerSyncPayload):
     """
     Receives JSON payload from the game client and updates the player state.
     Note: We aren't requiring auth for sync yet, so clients can easily push data.
     """
     try:
-        data = await request.json()
-        player_name = data.get("name")
-        if not player_name:
-            raise HTTPException(status_code=400, detail="Missing 'name' in payload")
+        data = payload.model_dump()
+        player_name = payload.name
             
         if player_name == "test_ping":
-            return {"status": "success", "message": "Pong!"}
+            return GenericResponse(status="success", message="Pong!")
             
         with state_lock:
             data["_last_sync"] = time.time()
             save_player_state(player_name, data)
         
         logger.info(f"Successfully synced state for player: {player_name}")
-        return {"status": "success", "message": f"State updated for {player_name}"}
+        return GenericResponse(status="success", message=f"State updated for {player_name}")
     except Exception as e:
         logger.error(f"Sync failed: {e}")
         raise HTTPException(status_code=400, detail=str(e))
@@ -157,31 +156,30 @@ import uuid
 async def get_wagon_state():
     return load_wagon()
 
-@app.post("/api/wagon/add")
-async def add_to_wagon(request: Request):
+@app.post("/api/wagon/add", response_model=GenericResponse)
+async def add_to_wagon(item: WagonItem):
     try:
-        item = await request.json()
-        if "item_id" not in item:
-            item["item_id"] = str(uuid.uuid4())
+        item_dict = item.model_dump()
+        if not item_dict.get("item_id"):
+            item_dict["item_id"] = str(uuid.uuid4())
             
         wagon = load_wagon()
-        wagon.append(item)
+        wagon.append(item_dict)
         save_wagon(wagon)
         
         await manager.broadcast_to_all({
             "type": "wagon_update",
             "items": wagon
         })
-        return {"status": "success"}
+        return GenericResponse(status="success")
     except Exception as e:
         logger.error(f"Add to wagon failed: {e}")
         raise HTTPException(status_code=400, detail=str(e))
 
-@app.post("/api/wagon/remove")
-async def remove_from_wagon(request: Request):
+@app.post("/api/wagon/remove", response_model=GenericResponse)
+async def remove_from_wagon(request_data: RemoveWagonItemRequest):
     try:
-        data = await request.json()
-        item_id = data.get("item_id")
+        item_id = request_data.item_id
         
         with state_lock:
             # We must load, modify, and save within the same lock to prevent cloning
@@ -211,7 +209,7 @@ async def remove_from_wagon(request: Request):
             "items": wagon
         })
         
-        return {"status": "success", "item": found_item}
+        return GenericResponse(status="success", item=found_item)
     except HTTPException:
         raise
     except Exception as e:
