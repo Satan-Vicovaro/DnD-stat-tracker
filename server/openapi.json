@@ -1,0 +1,557 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Game Master Sync Server",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/sync": {
+      "post": {
+        "summary": "Sync Player State",
+        "description": "Receives JSON payload from the game client and updates the player state.\nNote: We aren't requiring auth for sync yet, so clients can easily push data.",
+        "operationId": "sync_player_state_api_sync_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlayerSyncPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wagon": {
+      "get": {
+        "summary": "Get Wagon State",
+        "operationId": "get_wagon_state_api_wagon_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wagon/add": {
+      "post": {
+        "summary": "Add To Wagon",
+        "operationId": "add_to_wagon_api_wagon_add_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WagonItem"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wagon/remove": {
+      "post": {
+        "summary": "Remove From Wagon",
+        "operationId": "remove_from_wagon_api_wagon_remove_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemoveWagonItemRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/players/{player_name}": {
+      "delete": {
+        "summary": "Delete Player",
+        "description": "Deletes the data for a specific player. Protected by auth.",
+        "operationId": "delete_player_api_players__player_name__delete",
+        "security": [
+          {
+            "HTTPBasic": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "player_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Player Name"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/players": {
+      "get": {
+        "summary": "Get All Players",
+        "description": "Returns the current state of all players. Protected by auth.",
+        "operationId": "get_all_players_api_players_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBasic": []
+          }
+        ]
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Dashboard",
+        "description": "Game Master Dashboard View. Protected by auth.",
+        "operationId": "dashboard__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBasic": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CharacterStats": {
+        "properties": {
+          "base_str": {
+            "type": "integer",
+            "title": "Base Str",
+            "default": 0
+          },
+          "base_dex": {
+            "type": "integer",
+            "title": "Base Dex",
+            "default": 0
+          },
+          "base_wis": {
+            "type": "integer",
+            "title": "Base Wis",
+            "default": 0
+          },
+          "base_cha": {
+            "type": "integer",
+            "title": "Base Cha",
+            "default": 0
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "title": "CharacterStats"
+      },
+      "GenericResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message"
+          },
+          "item": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Item"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "GenericResponse"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "Item": {
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "title": "Item Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "item_type": {
+            "type": "string",
+            "title": "Item Type",
+            "default": "Misc"
+          },
+          "location": {
+            "type": "string",
+            "title": "Location",
+            "default": "BACKPACK"
+          },
+          "quantity": {
+            "type": "integer",
+            "title": "Quantity",
+            "default": 1
+          },
+          "modifiers": {
+            "items": {
+              "$ref": "#/components/schemas/Modifier"
+            },
+            "type": "array",
+            "title": "Modifiers",
+            "default": []
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "item_id",
+          "name"
+        ],
+        "title": "Item"
+      },
+      "Modifier": {
+        "properties": {
+          "source": {
+            "type": "string",
+            "title": "Source"
+          },
+          "stat_name": {
+            "type": "string",
+            "title": "Stat Name"
+          },
+          "value": {
+            "type": "number",
+            "title": "Value"
+          },
+          "mod_type": {
+            "type": "string",
+            "title": "Mod Type",
+            "default": "ADD"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "source",
+          "stat_name",
+          "value"
+        ],
+        "title": "Modifier"
+      },
+      "PlayerSyncPayload": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The unique name of the player"
+          },
+          "level": {
+            "type": "integer",
+            "title": "Level",
+            "description": "Character level",
+            "default": 1
+          },
+          "stats": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CharacterStats"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "inventory": {
+            "items": {
+              "$ref": "#/components/schemas/Item"
+            },
+            "type": "array",
+            "title": "Inventory",
+            "default": []
+          },
+          "status_effects": {
+            "items": {
+              "$ref": "#/components/schemas/StatusEffect"
+            },
+            "type": "array",
+            "title": "Status Effects",
+            "default": []
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "PlayerSyncPayload"
+      },
+      "RemoveWagonItemRequest": {
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "title": "Item Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "item_id"
+        ],
+        "title": "RemoveWagonItemRequest"
+      },
+      "StatusEffect": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "default": ""
+          },
+          "active": {
+            "type": "boolean",
+            "title": "Active",
+            "default": true
+          },
+          "modifiers": {
+            "items": {
+              "$ref": "#/components/schemas/Modifier"
+            },
+            "type": "array",
+            "title": "Modifiers",
+            "default": []
+          },
+          "status_id": {
+            "type": "string",
+            "title": "Status Id"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "title",
+          "status_id"
+        ],
+        "title": "StatusEffect"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "WagonItem": {
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "title": "Item Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "item_type": {
+            "type": "string",
+            "title": "Item Type",
+            "default": "Misc"
+          },
+          "location": {
+            "type": "string",
+            "title": "Location",
+            "default": "BACKPACK"
+          },
+          "quantity": {
+            "type": "integer",
+            "title": "Quantity",
+            "default": 1
+          },
+          "modifiers": {
+            "items": {
+              "$ref": "#/components/schemas/Modifier"
+            },
+            "type": "array",
+            "title": "Modifiers",
+            "default": []
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "item_id",
+          "name"
+        ],
+        "title": "WagonItem"
+      }
+    },
+    "securitySchemes": {
+      "HTTPBasic": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  }
+}
